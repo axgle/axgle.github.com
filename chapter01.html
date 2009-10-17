@@ -1,0 +1,1522 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="zh-CH">
+  <link rel="stylesheet" type="text/css" href="rhg.css">
+  <title>第一章：Ruby语言最小化</title>
+</head>
+<body>
+<h1>第一章：Ruby语言最小化</h1>
+
+
+	<p>谈到Ruby语言，这里只是简单解释了理解第一部分所需的知识。这里并没有完全指出编程中需要注意的地方，
+本章的目的在于阅读，而非编写Ruby程序。有Ruby经验的人可以放心的跳过这一章。</p>
+
+
+	<p>关于语法，在第二部分中，我们会一直谈到令人厌倦，所以，本章就不做详尽的讨论了。
+只有那些用得最多的，比如hash字面量，会谈到一些变化。原则上，不省略那些可能省略的东西。
+因为这样会让语法规则变得简单，不必到处去写“此处省略”。</p>
+
+
+	<h2>对象</h2>
+
+
+	<h3>字符串</h3>
+
+
+	<p>Ruby程序中可操作的东西都是对象，没有像Java的<code>int</code>和<code>long</code>这样的基本类型（primitive）。
+比如，下面这样写就是一个内容为“content”的字符串对象（<code>String</code>对象）。</p>
+
+
+<pre class="emlist">
+"content" 
+</pre>
+
+	<p>简单的说，这里调用了一个字符串对象，更准确的说法是，这是一个产生字符串对象的“表达式”。
+因此，如果你写了多次，那么每次都会生成一个字符串对象。</p>
+
+
+<pre class="emlist">
+"content" 
+"content" 
+"content" 
+</pre>
+
+	<p>这里生成了三个内容同为“content”的对象。</p>
+
+
+	<p>对了，仅仅这样，程序员是无法看到对象的。下面是在终端上显示对象的方法。</p>
+
+
+<pre class="emlist">
+p("content")   # 显示"content" 
+</pre>
+
+	<p>“#”之后是注释。今后，结果都会以注释的形式给出。</p>
+
+
+	<p>“p(……)”表示调用函数<code>p</code>，任何对象都可以显示出来，基本上，它就是一个调试函数。</p>
+
+
+	<p>严格说来，Ruby没有函数，不过，可以把它认为是函数。这个“函数”可以用在任何地方。</p>
+
+
+	<h3>各种各样的字面量（literal）</h3>
+
+
+	<p>接下来，稍微说明一下可以直接生成对象的表达式（字面量）。先来看一下整数和小数。</p>
+
+
+<pre class="emlist">
+# 整数
+1
+2
+100
+9999999999999999999999999   # 多大的数都能用
+
+# 小数
+1.0
+99.999
+1.3e4     # 1.3×10^4
+</pre>
+
+	<p>不要忘了，这些都是生成对象的表达式。重复一下，Ruby中没有“基本类型”。</p>
+
+
+	<p>下面的表达式生成数组对象。</p>
+
+
+<pre class="emlist">
+[1, 2, 3]
+</pre>
+
+	<p>这段程序生成了一个数组，它按顺序包含1、2、3三个整数作为其元素。
+数组元素可以使用任意对象，这样也可以。</p>
+
+
+<pre class="emlist">
+[1, "string", 2, ["nested", "array"]]
+</pre>
+
+	<p>下面的表达式生成hash表。</p>
+
+
+<pre class="emlist">
+{"key"=&gt;"value", "key2"=&gt;"value2", "key3"=&gt;"value3"}
+</pre>
+
+	<p>hash表是一种在任意对象间建立一一对应关系的结构。上面表达的是一个如下关系的表。</p>
+
+
+<pre class="emlist">
+"key"   →  "value" 
+"key2"  →  "value2" 
+"key3"  →  "value3" 
+</pre>
+
+	<p>对这样创建出的一个hash表对象，这样问，“什么与‘key’对应？”，如果它能够听到的话，“是‘value’。”
+怎么听？使用方法。</p>
+
+
+	<h3>方法调用</h3>
+
+
+	<p>方法可以通过对象调用。C++术语称之为成员函数。没有必要深入解释什么是方法，    这里只简单解释一下记法。</p>
+
+
+<pre class="emlist">
+"content".upcase()
+</pre>
+
+	<p>这表示对字符串对象（其内容为“content”）调用<code>upcase</code>方法。<code>upcase</code>是这样一个方法，
+它返回一个新的字符串对象，将小写字母转换为大写字母，其结果如下：</p>
+
+
+<pre class="emlist">
+p("content".upcase())   # 显示"CONTENT" 
+</pre>
+
+	<p>方法可以连续调用。</p>
+
+
+<pre class="emlist">
+"content".upcase().downcase()
+</pre>
+
+	<p>这里对<code>"content".upcase()</code>的返回值对象调用<code>downcase</code>方法。</p>
+
+
+	<p>另外，不同于Java或C++拥有公有的字段（成员变量），Ruby对象的接口只有方法。</p>
+
+
+	<h2>程序</h2>
+
+
+	<h3>顶层（top level）</h3>
+
+
+	<p>直接写出Ruby表达式就是程序，不必像Java或C++那样定义<code>main()</code>。</p>
+
+
+<pre class="emlist">
+p("content")
+</pre>
+
+	<p>这就是一个完整的程序了。把这段代码放到一个名为first.rb的文件中，就可以在命令行下执行了：</p>
+
+
+<pre class="screen">
+% ruby first.rb
+"content" 
+</pre>
+
+	<p>如果使用<code>ruby</code>的-e选项，连创建文件都省了。</p>
+
+
+<pre class="screen">
+% ruby -e 'p("content")'
+"content" 
+</pre>
+
+	<p>对了，p所写的地方在程序的嵌套层次上是最低的，也就是说，它位于程序的最上层，称为“顶层”。
+拥有顶层是Ruby作为脚本语言的一大特征。</p>
+
+
+	<p>在Ruby中，基本上一行就是一条语句，最后面无需分号。因此，下面的程序可以解释为三条语句。</p>
+
+
+<pre class="emlist">
+p("content")
+p("content".upcase())
+p("CONTENT".downcase())
+</pre>
+
+	<p>如果执行的话，结果是这样。</p>
+
+
+<pre class="screen">
+% ruby second.rb
+"content" 
+"CONTENT" 
+"content" 
+</pre>
+
+	<h3>局部变量</h3>
+
+
+	<p>在Ruby中，无论是变量还是常量，全都保持着引用（reference）。因此，将一个变量赋值给另一个变量时，
+不会发生复制。可以考虑一下Java的对象类型变量、C++的对象指针。然而，指针自身的值是无法修改的。</p>
+
+
+	<p>Ruby变量的首字符表示变量的类型（作用域）。以小写字母或下划线开头的表示局部变量。
+“=”表示赋值。</p>
+
+
+<pre class="emlist">
+str = "content" 
+arr = [1,2,3]
+</pre>
+
+	<p>最初的赋值兼做变量声明，无需额外声明。变量是无类型的，因此，无论何种类型，都可以无差别的赋值。
+下面的程序完全合法。</p>
+
+
+<pre class="emlist">
+lvar = "content" 
+lvar = [1,2,3]
+lvar = 1
+</pre>
+
+	<p>虽说可以，不过没有必要。把不同类型的变量赋值给一个变量通常只能增加阅读的难度。
+实际的Ruby程序中很少这样做。这里的做法完全是为了举例。</p>
+
+
+	<p>访问变量是一种常见的记法。</p>
+
+
+<pre class="emlist">
+str = "content" 
+p(str)           # 显示"content" 
+</pre>
+
+	<p>随后是一个变量保持引用的例子。</p>
+
+
+<pre class="emlist">
+a = "content" 
+b = a
+c = b
+</pre>
+
+	<p>程序执行后，<code>a</code>、<code>b</code>、<code>c</code>三个局部变量指向同一个对象——第一行生成的字符串对象“content”，如图1所示。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_reference.png" title="Ruby变量保持对象引用" alt="Ruby变量保持对象引用" /><br>图1: Ruby变量保持对象引用</p>
+
+
+	<p>对了，这里的“局部”是某种程度上的局部，暂且还无法解释它的范围。先要说一下，顶层只是一种“局部”作用域。</p>
+
+
+	<h3>常量</h3>
+
+
+	<p>变量名以大写字母开头的是常量。因为是常量，只能对它进行一次（第一次）赋值。</p>
+
+
+<pre class="emlist">
+Const = "content" 
+PI = 3.1415926535
+
+p(Const)   # 显示"content" 
+</pre>
+
+	<p>再次赋值会造成错误。说实话，只是警告，不是错误。这么做是为了让一些操作Ruby程序本身的应用程序，
+比如开发环境，在加载两次文件的时候，不会报错。也就是说，这是为实用而做的妥协，本来应该报错。
+实际上，直到1.1版本都会报错。</p>
+
+
+<pre class="emlist">
+C = 1
+C = 2   # 实际中只是给出警告，理论上应该报错
+</pre>
+
+	<p>很多人为“常量”这个词所欺骗，认为常量就是“所指对象一旦被记住，便不再改变”。
+实际上，并不是常量所指的对象不再改变。如果用英语表达的话，read only比constant更能表现其意图（图2）。
+顺便说一下，另有一个名为freeze的方法用于让对象本身不变。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_const.png" title="常量read only的含义" alt="常量read only的含义" /><br>图2: 常量read only的含义</p>
+
+
+	<p>实际上，常量的作用域还没有谈到。在下一节中，我们会结合类来谈一下。</p>
+
+
+	<h3>控制结构</h3>
+
+
+	<p>Ruby的控制结构很丰富，单单罗列出来就很困难了。先来谈谈if和while。</p>
+
+
+<pre class="emlist">
+if i &lt; 10 then
+  # 主体
+end
+
+while i &lt; 10 do
+  # 主体
+end
+</pre>
+
+	<p>对于条件表达式，只有两个对象——<code>false</code>和<code>nil</code>——为假，其余所有对象都是真。0和空字符串也是真。</p>
+
+
+	<p>顺便说一下，当然不会只有<code>false</code>，还有<code>true</code>。它当然是真。</p>
+
+
+	<h2>类与方法</h2>
+
+
+	<h3>类</h3>
+
+
+	<p>本来在面向对象系统中，方法属于对象。但那完全是理想世界的事。
+在普通的程序中，会有大量拥有相同方法集合的程序，
+坦率的说，以对象为单位去记忆其所拥有的方法并不是件容易的事。
+通常是用类或多方法（multi method）这样的结构来减少方法的重复定义。</p>
+
+
+	<p>在Ruby中，将对象与方法连在一起的机制采用了传统的”类”的概念。
+也就是说，所有对象都属于某个类，由类决定可以调用的方法。
+这时，就称对象是“某某类的实例（instance）”。</p>
+
+
+	<p>比如，字符串“str”是<code>String</code>类的一个实例。
+并且，String类定义了<code>upcase</code>、<code>downcase</code>、<code>strip</code>，以及其它一些方法，
+所有字符串对象都可以响应这些方法。</p>
+
+
+<pre class="emlist">
+# 因为全都属于字符串类，所以定义了同样的方法
+       "content".upcase()
+"This is a pen.".upcase()
+    "chapter II".upcase()
+
+       "content".length()
+"This is a pen.".length()
+    "chapter II".length()
+</pre>
+
+	<p>不过，如果调用的方法没有定义怎么办？静态语言的话，会造成编译错误，
+而Ruby则会成为运行时异常。实际试一下。这种长度的程序还是用-e运行比较方便。</p>
+
+
+<pre class="screen">
+% ruby -e '"str".bad_method()'
+-e:1: undefined method `bad_method' for "str":String (NoMethodError)
+</pre>
+
+	<p>如果找不到方法，就会抛出一个名为<code>NoMethodError</code>的错误。</p>
+
+
+	<p>最后，为那个一遍遍说的令人厌烦的“<code>String</code>的<code>upcase</code>方法”准备了一个专用的记法。
+“<code>String#upcase</code>”表示“定义在<code>String</code>类中的<code>upcase</code>方法”。</p>
+
+
+	<p>顺便说一下，写成“<code>String.upcase</code>”在Ruby世界里有完全不同的意思。至于是什么意思？
+下节分解。</p>
+
+
+	<h3>类的定义</h3>
+
+
+	<p>迄今为止，都是已经定义的类。当然，还可以定义自己的类。类可以用class语句定义。</p>
+
+
+<pre class="emlist">
+class C
+end
+</pre>
+
+	<p>这里定义了一个新的类<code>C</code>。定义后，可以如下这样用。</p>
+
+
+<pre class="emlist">
+class C
+end
+c = C.new()   # 生成C的实例，赋值给变量c
+</pre>
+
+	<p>请注意，生成实例用的不是new C。
+敏锐的读者可能注意到了，C.new()的记法像是一个方法调用。
+在Ruby中，生成对象的表达式只是一个方法调用。</p>
+
+
+	<p>首先，Ruby的类名与常量名是等价的。那么，与类名同名的常量是什么呢？
+实际上，就是这个类。在Ruby中，所有能操作的东西都是对象。类自然也是对象。
+这种对象称为类对象。所有的类对象都是<code>Class</code>类的实例。</p>
+
+
+	<p>也就是说，创建新类对象的<code>class</code>语句，其动作是将类对象赋值给一个与类同名的常量。
+另一方面，生成实例的操作是，访问这个常量，通过该对象调用方法（通常是<code>new</code>）。
+看看下面的例子就可以知道，实例生成同普通的方法调用没有区别。</p>
+
+
+<pre class="emlist">
+S = "content" 
+class C
+end
+
+S.upcase()  # 得到常量S表示的对象，调用upcase方法
+C.new()     # 得到常量C表示的对象，调用new方法
+</pre>
+
+	<p>正是因为这样，Ruby中没有<code>new</code>这个保留字。</p>
+
+
+	<p>接下来，可以用<code>p</code>将生成的类实例显示出来。</p>
+
+
+<pre class="emlist">
+class C
+end
+
+c = C.new()
+p(c)       # #&lt;C:0x2acbd7e4&gt;
+</pre>
+
+	<p>不过，它到底无法像字符串和整数那样表示得那么漂亮，显示的是类名和所属的内部ID。
+这个ID表示的是指向该对象指针的值。</p>
+
+
+	<p>是的是的，可能你已经完全忘了方法名的记法。
+“<code>Object.new</code>”表示通过类对象<code>Object</code>本身调用<code>new</code>方法。
+因此，“<code>Object#new</code>”和“<code>Object.new</code>”完全是两码事，需要严格区分。</p>
+
+
+<pre class="emlist">
+obj = Object.new()   # Object.new
+obj.new()            # Object#new
+</pre>
+
+	<p>实际上，<code>Object#new</code>并没有定义，像这个程序的第二行会造成错误。
+希望你只把它当作一个例子。</p>
+
+
+	<h3>方法的定义</h3>
+
+
+	<p>即便定义了类，没有定义方法也是没有意义的。
+让我们试着在类<code>C</code>中定义方法。</p>
+
+
+<pre class="emlist">
+class C
+  def myupcase( str )
+    return str.upcase()
+  end
+end
+</pre>
+
+	<p>定义方法用<code>def</code>语句。这个例子中定义了<code>myupcase</code>方法。有一个名为<code>str</code>的参数。
+同变量一样，参数和返回值都不需要写类型。而且可以有多个参数。</p>
+
+
+	<p>试着用一下定义的方法。缺省情况下，方法可以在外部调用。</p>
+
+
+<pre class="emlist">
+c = C.new()
+result = c.myupcase("content")
+p(result)   # 显示"CONTENT" 
+</pre>
+
+	<p>当然，习惯之后便无需一个个的赋值了。下面的写法也是一样的。</p>
+
+
+<pre class="emlist">
+p(C.new().myupcase("content"))   # 同样显示"CONTENT" 
+</pre>
+
+	<h3><code>self</code></h3>
+
+
+	<p>在方法执行过程中，通常会保留自己（方法调用的实例）是谁的信息，这个信息可以通过<code>self</code>得到。
+类似于C++或Java中的<code>this</code>。我们来确认一下。</p>
+
+
+<pre class="emlist">
+class C
+  def get_self()
+    return self
+  end
+end
+
+c = C.new()
+p(c)              # #&lt;C:0x40274e44&gt;
+p(c.get_self())   # #&lt;C:0x40274e44&gt;
+</pre>
+
+	<p>如你所见，两个表达式返回的是同样的对象。
+可以确认，对<code>c</code>调用方法，其<code>self</code>就是<code>c</code>。</p>
+
+
+	<p>那么，通过自身调用方法该怎么做才好呢？首先要考虑通过<code>self</code>进行调用。</p>
+
+
+<pre class="emlist">
+class C
+  def my_p( obj )
+    self.real_my_p(obj)   # 通过自身调用方法
+  end
+
+  def real_my_p( obj )
+    p(obj)
+  end
+end
+
+C.new().my_p(1)   # 显示1
+</pre>
+
+	<p>不过，调用“自己的”方法还要特意指定，太麻烦。
+因此，对<code>self</code>的调用可以省略调用方法的目标对象（接收者，receiver）。</p>
+
+
+<pre class="emlist">
+class C
+  def my_p( obj )
+    real_my_p(obj)   # 可以不指定调用的接收者
+  end
+
+  def real_my_p( obj )
+    p(obj)
+  end
+end
+
+C.new().my_p(1)   # 显示1
+</pre>
+
+	<h3>实例变量</h3>
+
+
+	<p>还有一种说法，对象是数据 + 代码，所以，仅仅定义方法还是没什么用。
+有必要以对象为单位来记住数据，也就是实例变量，在C++中称为成员变量。</p>
+
+
+	<p>根据Ruby的变量命名规则，第一个字母决定类型。实例变量是“<code>@</code>”。</p>
+
+
+<pre class="emlist">
+class C
+  def set_i(value)
+    @i = value
+  end
+
+  def get_i()
+    return @i
+  end
+end
+
+c = C.new()
+c.set_i("ok")
+p(c.get_i())   # 显示"ok" 
+</pre>
+
+	<p>实例变量不同于前面介绍的变量，即便不赋值（甚至不定义）也一样可以访问。
+这种情况下会变成怎样呢……接着前面的代码继续尝试。</p>
+
+
+<pre class="emlist">
+c = C.new()
+p(c.get_i())   # 显示nil
+</pre>
+
+	<p>没有<code>set</code>就<code>get</code>，结果显示<code>nil</code>。<code>nil</code>表示一个“没有”的对象。
+存在对象却“没有”，很不可思议，没办法，它就是这样。</p>
+
+
+	<p><code>nil</code>也可以作为一个字面量使用。</p>
+
+
+<pre class="emlist">
+p(nil)   # 显示nil
+</pre>
+
+	<h3><code>initialize</code></h3>
+
+
+	<p>正如我们看到的，即便是刚刚定义的类也可以调用<code>new</code>方法创建实例。
+的确如此，不过，有时需要对一个类进行特定的初始化。
+这时要修改的不是<code>new</code>方法，而是一个名为<code>initialize</code>的方法。
+它会在<code>new</code>的过程中调用。</p>
+
+
+<pre class="emlist">
+class C
+  def initialize()
+    @i = "ok" 
+  end
+  def get_i()
+    return @i
+  end
+end
+c = C.new()
+p(c.get_i())   # 显示"ok" 
+</pre>
+
+	<p>严格说来，这只是<code>new</code>方法的设计，而非语言的设计。</p>
+
+
+	<h3>继承</h3>
+
+
+	<p>类可以继承自其它类。比如，<code>String</code>类继承自<code>Object</code>类。
+在本书中，用图3那样的纵向箭头表示这种关系。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_supersub.png" title="继承" alt="继承" /><br>图3: 继承</p>
+
+
+	<p>在这副图中，被继承类（<code>Object</code>）称为超类，继承类（<code>String</code>)称为子类。
+请注意，这里的术语不同于C++，而与Java相同。</p>
+
+
+	<p>总之，先试试。我们创建的类也可以继承自其它类。创建继承类（指定超类）要这样写。</p>
+
+
+<pre class="emlist">
+class C &lt; SuperClassName
+end
+</pre>
+
+	<p>像迄今为止这样省略超类的写法，隐含着<code>Object</code>就是超类。</p>
+
+
+	<p>为什么需要继承呢？当然是为了继承方法。
+继承的运作方式就像在子类中重复定义超类中的方法。
+让我们来试试看。</p>
+
+
+<pre class="emlist">
+class C
+  def hello()
+    return "hello" 
+  end
+end
+
+class Sub &lt; C
+end
+
+sub = Sub.new()
+p(sub.hello())   # 显示"hello" 
+</pre>
+
+	<p><code>hello</code>是定义在类<code>C</code>中的方法，<code>Sub</code>的实例也可以调用它。
+当然，这里也没有必要赋值给一个变量。
+下面这样写也是一样的。</p>
+
+
+<pre class="emlist">
+p(Sub.new().hello())
+</pre>
+
+	<p>如果定义了同名的方法，就会发生“改写（override）”。C++和Object Pascal（Delphi）通过保留字virtual指明方法改写，
+但在Ruby中，所有方法都可以无条件改写。</p>
+
+
+<pre class="emlist">
+class C
+  def hello()
+    return "Hello" 
+  end
+end
+
+class Sub &lt; C
+  def hello()
+    return "Hello from Sub" 
+  end
+end
+
+p(Sub.new().hello())   # 显示"Hello from Sub" 
+p(C.new().hello())     # 显示"Hello" 
+</pre>
+
+	<p>类可以有许多级继承。比如，像图4那样。在这种情况下，
+<code>Fixnum</code>继承了<code>Object</code>、<code>Numeric</code>和<code>Integer</code>的全部方法。
+方法同名时，优先考虑更近的类的方法。
+由于没有根据类型进行重载（overload）之类的东西，一切的条件都变得非常简单。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_multiinherit.png" title="多级继承" alt="多级继承" /><br>图4: 多级继承</p>
+
+
+	<p>在C++中，可以有什么都不继承的类。而在Ruby中，必然是直接或间接的继承自<code>Object</code>。
+总之，如果画出继承关系图，就是一棵以<code>Object</code>为顶点的一棵树。
+比如，把内建程序库中重要类的继承关系画成一棵树的话，就像图5的感觉。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_classtree.png" title="Ruby的类树" alt="Ruby的类树" /><br>图5: Ruby的类树</p>
+
+
+	<p>超类一旦（定义的时候）确定，之后就无法改变。
+也就是说，在类树中增加新的类，其位置是不会改变或删除的。</p>
+
+
+	<h3>变量的继承……？</h3>
+
+
+	<p>在Ruby中，变量（实例变量）是不能继承的。
+即便可以继承，类中也不会包含这个变量的使用信息。</p>
+
+
+	<p>只有方法可以继承，只要调用继承方法（通过子类实例），就会发生实例变量赋值，
+也就是说，将它定义出来。
+这样的话，实例变量的命名空间就完全变平，哪个类的方法都可以访问。</p>
+
+
+<pre class="emlist">
+class A
+  def initialize()   # 在new的过程中调用
+    @i = "ok" 
+  end
+end
+
+class B &lt; A
+  def print_i()
+    p(@i)
+  end
+end
+
+B.new().print_i()   # 显示"ok" 
+</pre>
+
+	<p>如果不能理解这个行为的话，抛开类和继承来考虑就好了。
+如果有一个类<code>C</code>的实例<code>obj</code>，首先，类<code>C</code>超类的方法都定义在<code>C</code>中。
+当然，要适当考虑一下改写规则。这样，<code>C</code>的方法就附着在<code>obj</code>上了（图6）。
+强烈的“实体感”是Ruby面向对象的特征。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_objimage.png" title="Ruby对象图" alt="Ruby对象图" /><br>图6: Ruby对象图</p>
+
+
+	<h3>模块</h3>
+
+
+	<p>只能指定一个超类。看起来Ruby似乎是单一继承。
+但是，因为模块的存在让它拥有了与多重继承同等的能力。
+下面就来讨论一下模块。</p>
+
+
+	<p>一言以蔽之，模块就是“无法指定超类，无法生成实例”的类。
+定义可以这样写。</p>
+
+
+<pre class="emlist">
+module M
+end
+</pre>
+
+	<p>这样就定义了模块<code>M</code>。方法定义与类完全相同。</p>
+
+
+<pre class="emlist">
+module M
+  def myupcase( str )
+    return str.upcase()
+  end
+end
+</pre>
+
+	<p>然而它无法直接调用，因此不能创建实例。
+那么该怎么用呢？应该由其它类“include”这个模块。
+这样一来，就好像类继承自这个模块一样。</p>
+
+
+<pre class="emlist">
+module M
+  def myupcase( str )
+    return str.upcase()
+  end
+end
+
+class C
+  include M
+end
+
+p(C.new().myupcase("content"))  # 显示"CONTENT" 
+</pre>
+
+	<p>即便类<code>C</code>没有定义<code>myupcase</code>方法也一样可以调用。也就是说，“继承”了模块的方法。
+在功能上，include与继承完全相同。方法定义和实例变量的访问也不受什么限制。</p>
+
+
+	<p>前面说过，模块不能指定超类，不过，它可以包含其它模块。</p>
+
+
+<pre class="emlist">
+module M
+end
+
+module M2
+  include M
+end
+</pre>
+
+	<p>也就是说，这在功能上与指定超类相同。只是哪个类在上面并不确定。
+只是模块之上只能是模块。</p>
+
+
+	<p>下面是一个包含方法继承的例子。</p>
+
+
+<pre class="emlist">
+module OneMore
+  def method_OneMore()
+    p("OneMore")
+  end
+end
+
+module M
+  include OneMore
+
+  def method_M()
+    p("M")
+  end
+end
+
+class C
+  include M
+end
+
+C.new().method_M()         # 显示"M" 
+C.new().method_OneMore()   # 显示"OneMore" 
+</pre>
+
+	<p>如果以类继承的方式来表现的话，就是图7这样。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_modinherit.png" title="多重包含" alt="多重包含" /><br>图7: 多重包含</p>
+
+
+	<p>如果类有超类，那么它与模块的关系又是怎样的呢？考虑下面的情况。</p>
+
+
+<pre class="emlist">
+# modcls.rb
+
+class Cls
+  def test()
+    return "class" 
+  end
+end
+
+module Mod
+  def test()
+    return "module" 
+  end
+end
+
+class C &lt; Cls
+  include Mod
+end
+
+p(C.new().test())   # “class”? “module”?
+</pre>
+
+	<p><code>C</code>继承自<code>Cls</code>，包含了<code>Mod</code>。在这种情况下，究竟是显示<code>"class"</code>还是<code>"module"</code>呢？
+也就是说，模块和类哪边更“近”呢？Ruby的事要听Ruby的看法，执行一下。</p>
+
+
+<pre class="screen">
+% ruby modcls.rb
+"module" 
+</pre>
+
+	<p>模块似乎比超类的优先级更高。</p>
+
+
+	<p>一般说来，在Ruby中，如果包含了模块的话，就像夹在类和超类“之间”那样的继承。
+画出来的话，就像图8一样。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_modclass.png" title="类与模块的相互关系" alt="类与模块的相互关系" /><br>图8: 类与模块的相互关系</p>
+
+
+	<p>如果考虑模块包含模块的情况，就如图9所示。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_modclass2.png" title="类与模块的相互关系(2)" alt="类与模块的相互关系(2)" /><br>图9: 类与模块的相互关系(2)</p>
+
+
+	<h2>程序(II)</h2>
+
+
+	<p>注意。这一节非常重要，而且，提到了一些只熟悉静态语言的程序很少接触的元素。
+其它的可以随便翻翻，但这里希望你可以仔细阅读。因此，本节也比较详尽。</p>
+
+
+	<h3>常量的嵌套</h3>
+
+
+	<p>首先复习一下常量。常量以大写字母开头，可以像下面这样定义。</p>
+
+
+<pre class="emlist">
+Const = 3
+</pre>
+
+	<p>访问常量可以这样做。</p>
+
+
+<pre class="emlist">
+p(Const)   # 显示3
+</pre>
+
+	<p>实际上，也可以这样写。</p>
+
+
+<pre class="emlist">
+p(::Const)   # 同样显示3
+</pre>
+
+	<p>开头加上<code>::</code>，表示“这是一个定义在顶层的常量”。就像文件系统的路径一样。
+假设根目录下有个叫<code>vmunix</code>的文件。在<code>/</code>下只写<code>vmunix</code>就可以访问它。
+而在全路径下就要写<code>/vmunix</code>。<code>Const</code>和<code>::Const</code>也是同样的关系。
+在顶层下，可以只写<code>Const</code>，也可以按照全路径写<code>::Const</code>。</p>
+
+
+	<p>那么文件系统中的目录在Ruby中相当于什么呢？答案是类定义语句和模块定义语句。
+因为分别说两个显得冗长而麻烦，以后都归结为类定义。
+如果是在类定义中，那么常量的层次就要会提升（进入目录）。</p>
+
+
+<pre class="emlist">
+class SomeClass
+  Const = 3
+end
+
+p(::SomeClass::Const)   # 显示3
+p(  SomeClass::Const)   # 同样显示3
+</pre>
+
+	<p><code>SomeClass</code>是定义在顶层的类，所以，常量仅仅写成<code>SomeClass</code>也可以，写成<code>::SomeClass</code>也可以。
+嵌套在类定义中的常量<code>Const</code>是“<code>SomeClass</code>中的常量”，它变成了<code>::SomeClass::Const</code>。</p>
+
+
+	<p>如同在目录中可以创建新目录一样，类中同样可以定义新类。比如这样：</p>
+
+
+<pre class="emlist">
+class C        # ::C
+  class C2     # ::C::C2
+    class C3   # ::C::C2::C3
+    end
+  end
+end
+</pre>
+
+	<p>在类定义中定义的常量必须写全路径吗？当然没有这种事。
+等同于文件系统的比喻，在同级的类定义语句“中”，可以不用<code>::</code>。
+也就是这样：</p>
+
+
+<pre class="emlist">
+class SomeClass
+  Const = 3
+  p(Const)   # 显示3
+end
+</pre>
+
+	<p>没想到这样吧！在类定义语句中写可执行的程序。
+我想，这对于只熟悉静态语言的人来说，相当意外。
+我第一次见的时候，也是大吃一惊。</p>
+
+
+	<p>多说几句，当然在方法定义中常量也是可见的。访问规则等同于类定义语句。</p>
+
+
+<pre class="emlist">
+class C
+  Const = "ok" 
+  def test()
+    p(Const)
+  end
+end
+
+C.new().test()   # 显示"ok" 
+</pre>
+
+	<h3>全部执行</h3>
+
+
+	<p>盯住这里所写的全部。在Ruby中，程序的大部分都是“可执行的”。
+常量定义、类定义语句、方法定义语句，几乎看到的所有东西都是按顺序执行。</p>
+
+
+	<p>比如，看看下面的代码。迄今为止的结构在这里都用到了。</p>
+
+
+<pre class="emlist">
+ 1:  p("first")
+ 2:
+ 3:  class C &lt; Object
+ 4:    Const = "in C" 
+ 5:
+ 6:    p(Const)
+ 7:
+ 8:    def myupcase(str)
+ 9:       return str.upcase()
+10:    end
+11:  end
+12:
+13:  p(C.new().myupcase("content"))
+</pre>
+
+	<p>这个程序按以下顺序执行。</p>
+
+
+	<table>
+		<tr>
+			<td><code>1:  p("first")</code></td>
+			<td>显示<code>"first"</code>。</td>
+		</tr>
+		<tr>
+			<td><code>3:  &lt; Object</code></td>
+			<td>访问常量<code>Object</code>，得到类对象<code>Object</code></td>
+		</tr>
+		<tr>
+			<td><code>3:  class C</code></td>
+			<td>以<code>Object</code>为超类生成一个新的类，带入常量<code>C</code>中</td>
+		</tr>
+		<tr>
+			<td><code>4:  Const = "in C"</code></td>
+			<td>定义<code>::C::Const</code>。其值为<code>"in C"</code></td>
+		</tr>
+		<tr>
+			<td><code>6:  p(Const)</code></td>
+			<td>显示<code>::C::Const</code>。显示为<code>"in C"</code>。</td>
+		</tr>
+		<tr>
+			<td><code>8:  def myupcase(...)...end</code></td>
+			<td>定义方法<code>C#myupcase</code>。</td>
+		</tr>
+		<tr>
+			<td><code>13:  C.new().myupcase(...)</code></td>
+			<td>访问常量<code>C</code>，调用其<code>new</code>，进而调用<code>myupcase</code>。</td>
+		</tr>
+		<tr>
+			<td><code>9:  return str.upcase()</code></td>
+			<td>返回<code>"CONTENT"</code>。</td>
+		</tr>
+		<tr>
+			<td><code>13:  p(...)</code></td>
+			<td>显示<code>"CONTENT"</code>。</td>
+		</tr>
+	</table>
+
+
+
+
+	<h3>局部变量的作用域</h3>
+
+
+	<p>终于要来讨论局部变量的作用域了。</p>
+
+
+	<p>顶层、类定义语句内、模块定义语句内、方法体内，都有各自完全独立的局部变量作用域。
+也就是说，下面程序中的<code>Ivar</code>互不相同，互不冲突。</p>
+
+
+<pre class="emlist">
+lvar = 'toplevel'
+
+class C
+  lvar = 'in C'
+  def method()
+    lvar = 'in C#method'
+  end
+end
+
+p(lvar)   # 显示"toplevel" 
+
+module M
+  lvar = 'in M'
+end
+
+p(lvar)   # 显示"toplevel" 
+</pre>
+
+	<h3>作为上下文的<code>self</code></h3>
+
+
+	<p>之前说过，在方法执行中，可以通过<code>self</code>调用自己（调用方法的对象）。
+这话对，但只是一半。其实，Ruby程序执行过程中，到处都设置了<code>self</code>。
+就连顶层和类定义语句中都有<code>self</code>。</p>
+
+
+	<p>比如，顶层甚至也有<code>self</code>。顶层的<code>self</code>称为<code>main</code>。
+没什么奇怪的，它就是<code>Object</code>的实例。
+<code>main</code>仅仅是为了设置self而准备的，没有什么更深层的含义。</p>
+
+
+	<p>因为顶层的<code>self</code>，也就是<code>main</code>，是<code>Object</code>的实例，
+所以，即便是在顶层也可以调用<code>Object</code>的方法。
+而且<code>Object</code>包含了一个称为<code>Kernel</code>模块，其中定义了“函数风格的方法”，像<code>p</code>、<code>puts</code>。（图10）。
+因此，即便在顶层也可以调用<code>p</code>和<code>puts</code>。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_Kernel.png" title="main、Object和Kernel" alt="main、Object和Kernel" /><br>图10: <code>main</code>、<code>Object</code>和<code>Kernel</code></p>
+
+
+	<p>其实，<code>p</code>不是一个函数，而是一个方法。
+只是因为它定义在<code>Kernel</code>中，无论<code>self</code>的类是什么，都就可以像“自己的”方法一样调用。
+Ruby中并不存在真正意义的“函数”。有的只是方法。</p>
+
+
+	<p>顺便说一下，函数风格的方法除了<code>p</code>、<code>puts</code>之外，
+还有<code>print</code>、<code>puts</code>、<code>printf</code>、<code>sprintf</code>、<code>gets</code>、<code>fork</code>、<code>exec</code>等等，很多名称似曾相似的方法。
+看到这里选择的名称，Ruby的性格就不难想象了。</p>
+
+
+	<p>不管在哪里，<code>self</code>都会设置，即便在类定义语句中，这一事实也不会改变。
+类定义中的<code>self</code>就那个是类（类对象）。因此会变成这样。</p>
+
+
+<pre class="emlist">
+class C
+  p(self)   # C
+end
+</pre>
+
+	<p>这个到底有什么用呢？其实这个例子非常有用。是这样。</p>
+
+
+<pre class="emlist">
+module M
+end
+class C
+  include M
+end
+</pre>
+
+	<p>其实，<code>include</code>是调用对象<code>C</code>的方法。还没有说到，Ruby的方法调用可以省略括号。
+类定义的话题还没有结束，为了让它看上去不那么像方法调用，所以，这里去掉了括号。</p>
+
+
+	<h3>加载</h3>
+
+
+	<p>Ruby对于程序库的加载也全都是在执行时进行的。通常这样写。</p>
+
+
+<pre class="emlist">
+require("library_name")
+</pre>
+
+	<p>同看到的一样，<code>require</code>是一个方法。根本没有保留字。
+这样写的话，就在其所写的地方执行加载，执行就转移到那个程序库（的代码）。
+因为Ruby中没有Java中包的概念，如果希望划分程序库名称的名字空间，就将文件分开放置到目录里。</p>
+
+
+<pre class="emlist">
+require("somelib/file1")
+require("somelib/file2")
+</pre>
+
+	<p>程序库中也是使用普通的<code>class</code>语句和<code>module</code>语句定义类和模块。
+顶层的常量其作用域是平的，与文件无关，最初在一个文件里定义的类在另一个文件里也可以看见。
+为了划分类名的名字空间，可以像下面这样明确的嵌套在模块中。</p>
+
+
+<pre class="emlist">
+# net程序库的名字空间划分的例子
+module Net
+  class SMTP
+    # ...
+  end
+  class POP
+    # ...
+  end
+  class HTTP
+    # ...
+  end
+end
+</pre>
+
+	<h2>类的进阶</h2>
+
+
+	<h3>继续探讨常量</h3>
+
+
+	<p>之前，我们以文件系统比喻常量的作用域，不过，希望你从这里开始完全忘记这个比喻。</p>
+
+
+	<p>常量还有很多结构。首先，“外部”的类可以看到常量。</p>
+
+
+<pre class="emlist">
+Const = "ok" 
+class C
+  p(Const)   # 显示"ok" 
+end
+</pre>
+
+	<p>为什么是这样呢？这是为了便于使用模块作为名字空间。怎么回事呢？
+用前面的net程序库作为例子追加说明一下。</p>
+
+
+<pre class="emlist">
+module Net
+  class SMTP
+    # 使用Net::SMTPHelper的方法
+  end
+  class SMTPHelper   # Net::SMTP的辅助类
+  end
+end
+</pre>
+
+	<p>在这种情况下，<code>SMTP</code>能访问<code>SMTPHelper</code>的话就方便多了。
+于是便可以得到“外部类可以访问会很方便”的结论。</p>
+
+
+	<p>无论嵌套多少层，“外部”类都可以访问。
+如果多个嵌套层次中都定义了相同的常量名，访问的就是从内向外按顺序找到的第一个。</p>
+
+
+<pre class="emlist">
+Const = "far" 
+class C
+  Const = "near" # 这个Const比上一个近
+  class C2
+    class C3
+      p(Const)   # 显示"near" 
+    end
+  end
+end
+</pre>
+
+	<p>此外，常量还有一个查找路径。
+一直往外层的类查找常量，如果直到顶层还没找到，就会进一步搜索自己超类的常量。</p>
+
+
+<pre class="emlist">
+class A
+  Const = "ok" 
+end
+class B &lt; A
+  p(Const)   # 显示"ok" 
+end
+</pre>
+
+	<p>完全没有那么复杂。</p>
+
+
+	<p>总结一下。查找常量的时候，先搜外部类，然后是超类。
+比如，虽然另类，但假设有下面这个类层次结构。</p>
+
+
+<pre class="emlist">
+class A1
+end
+class A2 &lt; A1
+end
+class A3 &lt; A2
+  class B1
+  end
+  class B2 &lt; B1
+  end
+  class B3 &lt; B2
+    class C1
+    end
+    class C2 &lt; C1
+    end
+    class C3 &lt; C2
+      p(Const)
+    end
+  end
+end
+</pre>
+
+	<p>在<code>C3</code>中访问常量<code>Const</code>，按照图11的顺序进行查找。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_constref.png" title="常量的查找顺序" alt="常量的查找顺序" /><br>图11: 常量的查找顺序</p>
+
+
+	<p>有一点要注意。完全不会查找外部类的超类，比如<code>A1</code>和<code>B2</code>。
+如果向外查找，就是彻底向外的方向，如果查找超类，就纯粹的超类方向。
+如果不这样，就会有多条的类查找路径，行为会复杂到难以预测。</p>
+
+
+	<h3>元类（Meta Class）</h3>
+
+
+	<p>之前说过，如果是对象的话，就可以调用其方法。
+也说过，对象的类决定了能够调用的方法。那么类对象是否也有个“类”呢？（图12）</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_classclass.png" title="类的类是？" alt="类的类是？" /><br>图12: 类的类是？</p>
+
+
+	<p>这样的时候，最好在Ruby中实际确认一下。
+有一个<code>Object#class</code>方法，它是一个“返回自己所属类（类对象）的方法”。</p>
+
+
+<pre class="emlist">
+p("string".class())   # 显示String
+p(String.class())     # 显示Class
+p(Object.class())     # 显示Class
+</pre>
+
+	<p>看来，<code>String</code>属于<code>Class</code>类。那么进一步，<code>Class</code>的类是什么呢？</p>
+
+
+<pre class="emlist">
+p(Class.class())      # Class显示
+</pre>
+
+	<p>看来还是<code>Class</code>。也就是说，不管什么对象，只要<code>.class().class().class()</code>……，
+这样一路下去，一定会得到<code>Class</code>，最后就是一个环（图13）。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_ccc.png" title="类的类的类的……" alt="类的类的类的……" /><br>图13: 类的类的类的……</p>
+
+
+	<p><code>Class</code>是类的类。这种有“某某的某某”的递归结构的东西称为“元（meta）某某”，
+<code>Class</code>就是“元类”。</p>
+
+
+	<h3>元对象（Meta Object）</h3>
+
+
+	<p>这次的目标变为对象，考虑一下模块。模块也是对象，和类一样，它也应该有个“类”。
+试一下。</p>
+
+
+<pre class="emlist">
+module M
+end
+p(M.class())   # 显示Module
+</pre>
+
+	<p>看来，模块对象的类是<code>Module</code>。那么<code>Module</code>的类是什么呢？</p>
+
+
+<pre class="emlist">
+p(Module.class())   # Class
+</pre>
+
+	<p>还是<code>Class</code>。</p>
+
+
+	<p>这次改变一下方向，调查一下继承关系。<code>Class</code>和<code>Module</code>的超类都是什么呢？
+在Ruby中，可以用<code>Class#superclass</code>来检查。</p>
+
+
+<pre class="emlist">
+p(Class.superclass())    # Module
+p(Module.superclass())   # Object
+p(Object.superclass())   # nil
+</pre>
+
+	<p>哎呀！<code>Class</code>居然是<code>Module</code>的子类。根据这些事实，画出Ruby几个重要类之间的关系，
+如图14所示。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_minimum_metaobjects.png" title="Ruby的重要类之间的关系" alt="Ruby的重要类之间的关系" /><br>图14: Ruby的重要类之间的关系</p>
+
+
+	<p>迄今位置，没有对用了多次的<code>new</code>和<code>include</code>进行说明，这里终于可以解释一下了。
+<code>new</code>实际上是<code>Class</code>类定义的方法。因此，任何类（都是<code>Class</code>的实例）都可以直接使用<code>new</code>。
+<code>Module</code>中没有定义<code>new</code>方法，所以，无法创建它的实例。
+而<code>Module</code>定义了<code>include</code>方法，所以，模块和类都可以调用<code>include</code>。</p>
+
+
+	<p><code>Object</code>、<code>Module</code>、<code>Class</code>是支撑Ruby的根基。
+这三个对象就可以将Ruby的对象世界本身描述出来。
+换句话说，它们是描述对象的对象。所以，<code>Object Module Class</code>是Ruby的“元对象”。</p>
+
+
+	<h3>singleton方法（singleton method）</h3>
+
+
+	<p>对象可以调用方法。可以调用的方法由对象的类决定。但是理想情况下，方法是属于对象的。
+至于类，它的存在是为了省去多次同样方法的时间。</p>
+
+
+	<p>实际上，Ruby有一种机制，可以为对象（实例）单独定义方法，无论它们的类是什么。
+这样写。</p>
+
+
+<pre class="emlist">
+obj = Object.new()
+def obj.my_first()
+  puts("My first singleton method")
+end
+obj.my_first()   # 显示My first singleton method
+</pre>
+
+	<p>众所周知，<code>Object</code>是所有类的超类。
+在这么重要的类中，不可能定义一个像<code>my_first</code>名称这样怪异的方法。
+<code>obj</code>是<code>Object</code>的实例。但是，<code>obj</code>却可以调用<code>my_first</code>方法。
+也就是说，肯定在哪定义了这个与所属类完全没有关系的方法。
+这样为某个对象定义的方法称为singleton方法（singleton method）。</p>
+
+
+	<p>什么时候会用到singleton方法呢？首先是定义类似于Java和C++静态方法的时候。
+也就是不生成实例也可以调用的方法。
+这样的方法在Ruby中表现为类对象的singleton方法。</p>
+
+
+	<p>比如，UNIX中有一个名为<code>unlink</code>的系统调用。它可以从文件系统中删掉一个文件。
+在Ruby中，可以通过<code>File</code>类的singleton方法<code>unlink</code>来使用。尝试用一下。</p>
+
+
+<pre class="emlist">
+File.unlink("core")  # 删除core文件
+</pre>
+
+	<p>每次都说“File对象的singleton方法unlink”很麻烦，以后把它写作“<code>File.unlink</code>。
+别写成“<code>File#unlink</code>”了，“<code>File.write</code>”表示“<code>File</code>类定义的<code>write</code>方法”。</p>
+
+
+	<p>▼ 方法记法总结</p>
+
+
+	<table>
+		<tr>
+			<td>记法</td>
+			<td>调用对象</td>
+			<td>调用示例</td>
+		</tr>
+		<tr>
+			<td><code>File.unlink</code></td>
+			<td><code>File</code>类本身</td>
+			<td><code>File.unlink("core")</code></td>
+		</tr>
+		<tr>
+			<td><code>File#write</code></td>
+			<td><code>File</code>的实例</td>
+			<td><code>f.write("str")</code></td>
+		</tr>
+	</table>
+
+
+
+
+	<h3>类变量</h3>
+
+
+	<p>类变量是<code>ruby</code> 1.6加入的，是一项比较新的功能。它同常量一样，都属于某个类，
+它可以在类和实例中赋值和访问。看看下面的例子。变量名以<code>@@</code>开头的就是类变量。</p>
+
+
+<pre class="emlist">
+class C
+  @@cvar = "ok" 
+  p(@@cvar)      # 显示"ok" 
+
+  def print_cvar()
+    p(@@cvar)
+  end
+end
+
+C.new().print_cvar()  # 显示"ok" 
+</pre>
+
+	<p>类变量最初的赋值兼有定义的作用，像下面这样在赋值前访问就会造成运行时错误。
+虽然前面都有<code>@</code>，但其行为与实例变量完全不同。</p>
+
+
+<pre class="screen">
+% ruby -e '
+class C
+  @@cvar
+end
+'
+-e:3: uninitialized class variable @@cvar in C (NameError)
+</pre>
+
+	<p>这里稍微偷了下懒，给了程序一个<code>-e</code>选项。<code>'</code>和<code>'</code>之间的三行是程序。</p>
+
+
+	<p>再有，类变量是可继承的。子类方法可以对超类的类变量进行赋值和访问。</p>
+
+
+<pre class="emlist">
+class A
+  @@cvar = "ok" 
+end
+
+class B &lt; A
+  p(@@cvar)            # 显示"ok" 
+  def print_cvar()
+    p(@@cvar)
+  end
+end
+
+B.new().print_cvar()   # 显示"ok" 
+</pre>
+
+	<h2>全局变量</h2>
+
+
+	<p>最后，还有全局变量。在程序的任何位置都可以对全局变量进行赋值和访问。
+变量名的第一个字符为<code>$</code>的就是全局变量。</p>
+
+
+<pre class="emlist">
+$gvar = "global variable" 
+p($gvar)   # 显示"global variable" 
+</pre>
+
+	<p>可以把全局变量看作是实例变量，所有的名称在访问之前就已经定义好了。
+也就是说，赋值前的访问会返回<code>nil</code>而不是造成错误。</p><hr>
+
+The original work is Copyright &copy; 2002 - 2004 Minero AOKI.<br>
+Translated by RK, Ye Zheng<br>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/"><img alt="Creative Commons License" border="0" src="images/somerights20.png"/></a><br/>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/">Creative Commons Attribution-NonCommercial-ShareAlike2.5 License</a>.
+
+</body>
+</html>

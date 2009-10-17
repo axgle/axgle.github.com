@@ -1,0 +1,1145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="zh-CH">
+  <link rel="stylesheet" type="text/css" href="rhg.css">
+  <title>第二章：对象</title>
+</head>
+<body>
+<h1>第二章：对象</h1>
+
+
+	<h2>Ruby对象结构</h2>
+
+
+	<h3>提纲</h3>
+
+
+	<p>从本章起，我们开始<code>ruby</code>源代码的探索之旅，首先研究的是对象结构体的声明。</p>
+
+
+	<p>对象存在的必要条件是什么呢？我们可以给出许多解释，但事实上，有三个条件必须遵守：</p>
+
+
+	<ol>
+	<li>能够区分自身与其它（拥有标识）</li>
+		<li>能够响应请求（方法）</li>
+		<li>保持内部状态（实例变量）</li>
+	</ol>
+
+
+	<p>在本章，我们将逐个确认这三个特性。</p>
+
+
+	<p>这次探索中最值得关注的文件是<code>ruby.h</code>，不过，我们也会简要的看一下其它文件，比如<code>object.c</code>, <code>class.c</code>或<code>variable.c</code>。</p>
+
+
+	<h3><code>VALUE</code>和对象结构体</h3>
+
+
+	<p>在<code>ruby</code>中，对象的内容表示为<code>C</code>的结构体，通常是以指针对其操作。每个类用一个不同的结构体表示，
+但指针的类型都是<code>VALUE</code>（图1）。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_object_value.png" title="VALUE和结构体" alt="VALUE和结构体" /><br>图1: <code>VALUE</code>和结构体</p>
+
+
+	<p>这是<code>VALUE</code>的定义：</p>
+
+
+▼ <code>VALUE</code>
+<pre class="longlist">
+  71  typedef unsigned long VALUE;
+
+(ruby.h)
+</pre>
+
+	<p>在实践中，<code>VALUE</code>必须转型为不同结构体类型的指针。 因此，如果<code>unsigned long</code>和指针大小不同，<code>ruby</code>会出现问题。
+严格说来，在指针类型的大小大于<code>sizeof(unsigned long)</code>时才会出问题。
+幸运的是，最近的机器没有这种问题，即便从前存在过相当多这样的机器。</p>
+
+
+	<p>下面几个结构体是对象类：</p>
+
+
+	<table>
+		<tr>
+			<td> <code>struct RObject</code>        </td>
+			<td> 下面之外的所有东西 </td>
+		</tr>
+		<tr>
+			<td> <code>struct RClass</code>        </td>
+			<td> 类对象 </td>
+		</tr>
+		<tr>
+			<td> <code>struct RFloat</code>        </td>
+			<td> 小数 </td>
+		</tr>
+		<tr>
+			<td> <code>struct RString</code>        </td>
+			<td> 字符串 </td>
+		</tr>
+		<tr>
+			<td> <code>struct RArray</code>        </td>
+			<td> 数组 </td>
+		</tr>
+		<tr>
+			<td> <code>struct RRegexp</code>        </td>
+			<td> 正则表达式 </td>
+		</tr>
+		<tr>
+			<td> <code>struct RHash</code>        </td>
+			<td> hash表 </td>
+		</tr>
+		<tr>
+			<td> <code>struct RFile</code>        </td>
+			<td> <code>IO</code>, <code>File</code>, <code>Socket</code>等等 </td>
+		</tr>
+		<tr>
+			<td> <code>struct RData</code>        </td>
+			<td> 所有定义在C层次上的类，除了上面提到的。 </td>
+		</tr>
+		<tr>
+			<td> <code>struct RStruct</code>        </td>
+			<td> Ruby的<code>Struct</code>类 </td>
+		</tr>
+		<tr>
+			<td> <code>struct RBignum</code>        </td>
+			<td> 大的整数 </td>
+		</tr>
+	</table>
+
+
+
+
+	<p>比如，对于string对象，使用<code>struct RString</code>。所以，我们有类似于下面的东西。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_object_string.png" title="字符串对象" alt="字符串对象" /><br>图2: 字符串对象</p>
+
+
+	<p>让我们来看几个对象结构体的定义。</p>
+
+
+▼ 对象结构体的例子
+<pre class="longlist">
+      /* 普通对象的结构体 */
+ 295  struct RObject {
+ 296      struct RBasic basic;
+ 297      struct st_table *iv_tbl;
+ 298  };
+
+      /* 字符串（String的实例）的结构体 */
+ 314  struct RString {
+ 315      struct RBasic basic;
+ 316      long len;
+ 317      char *ptr;
+ 318      union {
+ 319          long capa;
+ 320          VALUE shared;
+ 321      } aux;
+ 322  };
+
+      /* 数组（Array的实例）的结构体 */
+ 324  struct RArray {
+ 325      struct RBasic basic;
+ 326      long len;
+ 327      union {
+ 328          long capa;
+ 329          VALUE shared;
+ 330      } aux;
+ 331      VALUE *ptr;
+ 332  };
+
+(ruby.h)
+</pre>
+
+	<p>在详细探讨它们之前，我们先来看一些更通用的话题。</p>
+
+
+	<p>首先，<code>VALUE</code>定义为<code>unsigned long</code>，在使用之前必须进行转型。为此每个对象结构体都需要有个<code>Rxxxx()</code>宏。
+比如说, 对<code>struct RString</code>来说是<code>RSTRING()</code>, 对<code>struct RArray</code>来说是<code>RARRAY()</code>，等等。这些宏的使用方式如下：</p>
+
+
+<pre class="emlist">
+VALUE str = ....;
+VALUE arr = ....;
+RSTRING(str)-&gt;len;   /* ((struct RString*)str)-&gt;len */
+RARRAY(arr)-&gt;len;    /* ((struct RArray*)arr)-&gt;len */
+</pre>
+
+	<p>还有一点需要提及，所有的对象结构体中都是以<code>basic</code>成员开头，其类型是类型为<code>struct RBasic</code>。这样做的结果是，
+无论<code>VALUE</code>指向何种类型的结构体，只要你将<code>VALUE</code>转型为<code>struct RBasic*</code>，你都可以访问到<code>basic</code>的内容。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_object_rbasic.png" title="struct RBasic" alt="struct RBasic" /><br>图3: <code>struct RBasic</code></p>
+
+
+	<p>你可能已经猜到了，<code>struct RBasic</code>的设计是为了包含由所有对象结构体共享的一些重要信息的。<code>struct RBasic</code>的定义如下：</p>
+
+
+▼ <code>struct RBasic</code>
+<pre class="longlist">
+ 290  struct RBasic {
+ 291      unsigned long flags;
+ 292      VALUE klass;
+ 293  };
+
+(ruby.h)
+</pre>
+
+	<p><code>flags</code> 是个多目的的标记，大多用以记录结构体类型(比如，<code>struct RObject</code>)。
+类型标记命名为 <code>T_xxxx</code>，可以使用宏 <code>TYPE()</code> 从 <code>VALUE</code>中获得。这是一个例子：</p>
+
+
+<pre class="emlist">
+VALUE str;
+str = rb_str_new();    /* 创建Ruby字符串（其结构体是RString） */
+TYPE(str);             /* 返回值是T_STRING */
+</pre>
+
+	<p>这些<code>T_xxxx</code> 标记的名字直接与其对应的类型名相关，如<code>T_STRING</code> 表示 <code>struct RString</code>、
+<code>T_ARRAY</code> 表示 <code>struct RArray</code>。</p>
+
+
+	<p><code>struct RBasic</code>的另一个成员，<code>klass</code>，包含了这个对象归属的类。
+因为<code>klass</code>成员是<code>VALUE</code>类型, 它存储的是（一个指针指向）一个Ruby对象。
+简言之，它是一个类对象。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_object_class.png" title="对象和类" alt="对象和类" /><br>图4: 对象和类</p>
+
+
+	<p>对象与其类之间的关系将在本章的《方法》一节详述。</p>
+
+
+	<p>顺便说一下，这个成员的名字不是 <code>class</code> ，这是为了保证文件由C++编译器处理不会造成冲突，
+因为它是一个保留字。</p>
+
+
+	<h4>关于结构体类型</h4>
+
+
+	<p>我说过，结构体类型存储在<code>struct Basic</code>的<code>flags</code>成员里。但是，为什么我们要存储结构体的类型呢？
+这样就可以通过 <code>VALUE</code>处理所有不同类型的结构。如果把结构体指针转型为<code>VALUE</code>，类型信息无法保留，
+编译器无法提供任何帮助。因此我们不得不自己管理类型。这就是统一处理所有结构体类型的结果。</p>
+
+
+	<p>OK, 但是用到的结构体已经由类定义了，那么为什么结构体类型和类单独存储？
+能够从类中找到结构体类型应该就够了。有两个原因不这么做。</p>
+
+
+	<p>第一个原因是(很抱歉，与我之前所说内容有些矛盾)，实际上，
+有的结构体中不包含<code>struct RBasic</code>（也就是说，它们没有<code>klass</code>成员）。
+比如说，<code>struct RNode</code>，它会出现在本书的第二部分。    然而，即便是这样的特殊结构体，
+<code>flags</code>也保证出现在起始成员的位置上。因此，如果你把结构体的类型放在<code>flags</code>中，
+所有的对象结构体就可以用统一的方式进行区分了。</p>
+
+
+	<h4><code>basic.flags</code>的使用</h4>
+
+
+	<p>正如要限制我自己说，<code>basic.flags</code>用于不同的东西——包括结构体的类型——让我感觉很不好，
+这是一个对它通用的阐述（图5）没有必要立刻理解所有的东西，我只是想展示一下它的使用，
+虽然它让我很烦心。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_object_flags.png" title="flags的使用" alt="flags的使用" /><br>图5: <code>flags</code>的使用</p>
+
+
+	<p>图中可以看出，好像在32位机器上有21位没有使用。对于这些额外的位，<code>FL_USER0</code>到<code>FL_USER8</code>已经定义，
+用于每个结构体的不同目的。作为例子，我在图中设置了<code>FL_USER0</code> (<code>FL_SINGLETON</code>) 。</p>
+
+
+	<h3>嵌在<code>VALUE</code>中的对象</h3>
+
+
+	<p>如我所说，<code>VALUE</code> 是 <code>unsigned long</code>。因为<code>VALUE</code>是一个指针，看上去<code>void*</code>可能会好一些，
+但是有一个不这么做的理由。实际上，<code>VALUE</code>也可能不是指针。在下面6个情况，<code>VALUE</code>就是不是指针：</p>
+
+
+	<ol>
+	<li>小的整数</li>
+		<li>符号</li>
+		<li><code>true</code></li>
+		<li><code>false</code></li>
+		<li><code>nil</code></li>
+		<li><code>Qundef</code></li>
+	</ol>
+
+
+	<p>我来一个个解释一下。</p>
+
+
+	<h4>小的整数</h4>
+
+
+	<p>因为在Ruby中，所有数据都是对象，所以，整数也是对象。然而，存在许多不同的整数实例，
+把它们表示为结构体会冒减慢执行速度的的风险。比如说，从0递增到50000，仅仅如此就创建50000个对象，
+这让我们感到犹豫。</p>
+
+
+	<p>这就是为什么在<code>ruby</code>中——某种程度上——小的整数要特殊对待，直接嵌入到<code>VALUE</code>中。
+“小”意味着有符号整数，可以存放在<code>sizeof(VALUE)*8-1</code>位中。换句话说，在32位机器上，
+整数有1位用于符号，30位用于整数部分。在这个范围内的整数都属于<code>Fixnum</code>类，其它的整数属于<code>Bignum</code>类</p>
+
+
+	<p>那么，让我们实际的看看<code>INT2FIX()</code>宏，它可以从C的<code>int</code>转换为<code>Fixnum</code>，
+确保<code>Fixnum</code>直接嵌在<code>VALUE</code>中。</p>
+
+
+▼ <code>INT2FIX</code>
+<pre class="longlist">
+ 123  #define INT2FIX(i) ((VALUE)(((long)(i))&lt;&lt;1 | FIXNUM_FLAG))
+ 122  #define FIXNUM_FLAG 0x01
+
+(ruby.h)
+</pre>
+
+	<p>简而言之，左移一位，按位与1或。</p>
+
+
+	<table>
+		<tr>
+			<td> <code>0110100001000</code> </td>
+			<td> 转换前 </td>
+		</tr>
+		<tr>
+			<td> <code>1101000010001</code> </td>
+			<td> 转换后 </td>
+		</tr>
+	</table>
+
+
+
+
+	<p>也就是说作为<code>VALUE</code>的<code>Fixnum</code>总是一个奇数。另一方面，因为Ruby对象结构体是以<code>malloc()</code>分配，
+它们通常是安排在4的倍数的地址上，因此它们不会与作为<code>VALUE</code>的<code>Fixnum</code>的值重叠。</p>
+
+
+	<p>另外，为了将<code>int</code>或<code>long</code>转换为<code>VALUE</code>，我们可以使用宏，比如，<code>INT2NUM()</code>或<code>LONG2NUM()</code>。
+任何转换宏<code>XXXX2XXXX</code>，若名字中包含<code>NUM</code>都可以管理<code>Fixnum</code> 和<code>Bignum</code>。
+比如，如果<code>INT2NUM()</code>不能把整数转换为<code>Fixnum</code>，它会自动转换为<code>Bignum</code>。
+<code>NUM2INT()</code>可以将<code>Fixnum</code>和<code>Bignum</code>转换为<code>int</code>。如果数字无法放入<code>int</code>，就会产生异常，
+因此，不需要检查值的范围。</p>
+
+
+	<h4>符号</h4>
+
+
+	<p>符号是什么？</p>
+
+
+	<p>这个问题回答起来很麻烦，还是让我们从符号存在的必要性开始吧！首先，我们先来看看用于<code>ruby</code>内部的<code>ID</code>。
+它是这个样子：</p>
+
+
+▼ <code>ID</code>
+<pre class="longlist">
+  72  typedef unsigned long ID;
+
+(ruby.h)
+</pre>
+
+	<p>这个<code>ID</code>是一个数字，与字符串有一对一的关联。然而，不可能为这个世界上的所有字符串和数字值之间建立关联。
+因此将它们的关系限定为在Ruby进程内一对一。在下一章《名称与名称表》中，我会谈到查找<code>ID</code>的方法。</p>
+
+
+	<p>在语言实现中，有许多名称需要处理。方法名或变量名、常量名、类名中的文件名……把它们都当作字符串（<code>char*</code>）处理很麻烦。
+因为内存管理和内存管理和内存管理……还有，肯定需要大量的比较，但是一个字符一个字符的比较字符串会降低执行速度。
+这就是为什么不直接处理字符串，而用某些东西与其关联，作为替代。通常来说，“某些东西”就是整数，因为它们处理起来最简单。</p>
+
+
+	<p>在Ruby世界中，这些<code>ID</code>是作为符号使用的。直到<code>ruby 1.4</code>，这些<code>ID</code>都是被转换为<code>Fixnum</code>，却是作为符号使用。
+时至今日，这些值仍可以使用<code>Symbol#to_i</code>获得。然而，随着实际使用逐渐增多，
+越发认识到，<code>Fixnum</code>和<code>Symbol</code>相同并不是个好主意，因此，从1.6开始，创建一个独立的<code>Symbol</code>类。</p>
+
+
+	<p><code>Symbol</code>对象用途很多，特别是作为hash表的键值。这就是为什么同<code>Fixnum</code>一样，<code>Symbol</code>存储在<code>VALUE</code>中。
+让我们看看<code>ID2SYM()</code>这个宏，它将<code>ID</code>转换为<code>Symbol</code>对象。</p>
+
+
+▼ <code>ID2SYM</code>
+<pre class="longlist">
+ 158  #define SYMBOL_FLAG 0x0e
+ 160  #define ID2SYM(x) ((VALUE)(((long)(x))&lt;&lt;8|SYMBOL_FLAG))
+
+(ruby.h)
+</pre>
+
+	<p>左移8位，<code>x</code>乘了256，也就是4的倍数。然后，同<code>0x0e</code>（10进制的14）按位或（在这个情况下，它等同于加），
+表示符号的<code>VALUE</code>不是4的倍数，也不是奇数。因此，它并不会与任何其它的<code>VALUE</code>的范围有重叠。相当聪明的技巧。</p>
+
+
+	<p>最后，让我们看看<code>ID2SYM()</code>的相反转换，<code>SYM2ID()</code>。</p>
+
+
+▼ <code>SYM2ID()</code>
+<pre class="longlist">
+ 161  #define SYM2ID(x) RSHIFT((long)x,8)
+
+(ruby.h)
+</pre>
+
+	<p><code>RSHIFT</code>是向右位移。因为根据平台不同，右移可能对符号保持或取反，因此它做成一个宏。</p>
+
+
+	<h4><code>true false nil</code></h4>
+
+
+	<p>有三个特殊的Ruby对象：<code>true</code> and <code>false</code> 代表boolean值，<code>nil</code>是一个用来表示“没有对象”的对象。
+它们的值在C的层次上定义如下：</p>
+
+
+▼ <code>true false nil</code>
+<pre class="longlist">
+ 164  #define Qfalse 0        /* Ruby's false */
+ 165  #define Qtrue  2        /* Ruby's true */
+ 166  #define Qnil   4        /* Ruby's nil */
+
+(ruby.h)
+</pre>
+
+	<p>这次它是偶数，但是0或2不能由指针使用，所以，它们不会和其它<code>VALUE</code>重叠。因为通常虚拟内存的第一个块是不分配的，
+这样保证了程序不会因为反引用一个<code>NULL</code>指针而导致崩溃。</p>
+
+
+	<p>因为<code>Qfalse</code>是0，它可以在C层次上作为false使用。实际上，在<code>ruby</code>中，当函数需要返回一个boolean值时，
+经常返回<code>int</code>或<code>VALUE</code>，或是返回<code>Qtrue</code>/<code>Qfalse</code>。</p>
+
+
+	<p>对于<code>Qnil</code>，有一个宏负责检查<code>VALUE</code>是否为<code>Qnil</code>，<code>NIL_P()</code>。</p>
+
+
+▼ <code>NIL_P()</code>
+<pre>
+ 170  #define NIL_P(v) ((VALUE)(v) == Qnil)
+
+(ruby.h)
+</pre>
+
+	<p>名称以<code>p</code>结尾是一个来自Lisp的记法，它表示这是一个函数，返回boolean值。换句话说，
+<code>NIL_P</code>表示“实参是否为<code>nil</code>”。看上去，“<code>p</code>”字符来自断言（“predicate”）。
+这个命名规则在<code>ruby</code>中用到了许多不同的地方。</p>
+
+
+此外，在Ruby中，<code>false</code>和<code>nil</code>都是false，所有其它对象都是true。然而，在C中，<code>nil</code> (<code>Qnil</code>)代表
+    true.。这就是为什么在C中创建了一个Ruby风格的宏，<code>RTEST()</code>。
+▼ <code>RTEST()</code>
+<pre class="longlist">
+ 169  #define RTEST(v) (((VALUE)(v) &#38; ~Qnil) != 0)
+
+(ruby.h)
+</pre>
+
+	<p>因为在<code>Qnil</code>中，只有第三低位为1，在<code>~Qnil</code>中，只有第三低位为0。
+然后，只有<code>Qfalse</code> and <code>Qnil</code>按位与后为0。</p>
+
+
+	<p>加上<code>!=0</code>确保只有0或1，以满足glib库只要0或1的需求
+(<a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/11049">[ruby-dev:11049]</a>) 。</p>
+
+
+	<p>顺便说一下，<code>Qnil</code>“<code>Q</code>”是什么？“R”我可以理解，但为什么是“<code>Q</code>”
+当我问了这个问题，答案是“因为Emacs是那样”。我没有得到我预期的有趣的答案……</p>
+
+
+	<h4><code>Qundef</code></h4>
+
+
+▼ <code>Qundef</code>
+<pre class="longlist">
+ 167  #define Qundef 6                /* undefined value for placeholder */
+
+(ruby.h)
+</pre>
+
+	<p>这个值用以在解释器中表示未定义的值。在Ruby的层次上，根本找不到它。</p>
+
+
+	<h2>方法</h2>
+
+
+	<p>我已经总结过Ruby对象的三个重点：拥有标识，能够调用方法，持有每个实例的数据。
+在本节中，我会以简单的方式解释一下同对象和方法相连的结构体。</p>
+
+
+	<h3><code>struct RClass</code></h3>
+
+
+	<p>在Ruby中，执行期间类以对象的方式存在。当然，必须有一个类对象的结构体。这个结构体就是<code>struct RClass</code>。
+它的结构体类型标志是<code>T_CLASS</code>。</p>
+
+
+	<p>因为类和模块极其相似，没有必要区分它们的内容。因此，模块也使用<code>struct RClass</code>结构体，通过<code>T_MODULE</code>结构体标志进行区分。</p>
+
+
+▼ <code>struct RClass</code>
+<pre class="longlist">
+ 300  struct RClass {
+ 301      struct RBasic basic;
+ 302      struct st_table *iv_tbl;
+ 303      struct st_table *m_tbl;
+ 304      VALUE super;
+ 305  };
+
+(ruby.h)
+</pre>
+
+	<p>首先，让我们关注一下<code>m_tbl</code> (方法表，Method TaBLe) 成员。<code>struct st_table</code>是一个在<code>ruby</code>中到处使用的hash表。
+在下一章《名称与名称表》中，将会解释它的细节。但基本上，它就是一个将名字映射为对象的表。
+在<code>m_tbl</code>中，持有这个类所拥有方法的名称（<code>ID</code>）与方法实体本身之间的对应关系。</p>
+
+
+	<p>如其名称所示，第四个成员<code>super</code>持有的是其超类。因为它是一个<code>VALUE</code>，它就是（一个指针，指向) 超类的类对象。
+在Ruby中，只有一个类没有超类（根类）：<code>Object</code>。</p>
+
+
+	<p>然而，我已经说过，<code>Object</code>的所有方法都定义在<code>Kernel</code>模块中，<code>Object</code>只是包含了它。因为模块在功能类似与多重继承，
+也许看上去拥有<code>super</code>好像有问题，但是在<code>ruby</code>中，做了一些聪明的变化，使它看上去像个单继承。
+这个过程将在第四章《类和模块》中详细解释。</p>
+
+
+	<p>因为如此，<code>Object</code>结构体的<code>super</code>指向<code>Kernel</code>对象的<code>struct RClass</code>。只有<code>Kernel</code>的<code>super</code>才是NULL。
+因此，与我说过的矛盾，如果 <code>super</code>是NULL，这个<code>RClass</code>是<code>Kernel</code>对象（图6）。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_object_classtree.png" title="C层次的类树" alt="C层次的类树" /><br>图6: C层次的类树</p>
+
+
+	<h3>方法搜索</h3>
+
+
+	<p>了解类结构体，你就可以轻松想出方法调用过程。搜索对象类的<code>m_tbl</code>，如果方法没有找到，就搜索<code>super</code>的<code>m_tbl</code>，等等。
+如果不再有<code>super</code>，也就是说甚至在<code>Object</code>中都没有找到，那么一定是方法没有定义。</p>
+
+
+	<p>在<code>m_tbl</code>中进行顺序搜索过程由<code>search_method()</code>完成。</p>
+
+
+▼ <code>search_method()</code>
+<pre class="longlist">
+ 256  static NODE*
+ 257  search_method(klass, id, origin)
+ 258      VALUE klass, *origin;
+ 259      ID id;
+ 260  {
+ 261      NODE *body;
+ 262
+ 263      if (!klass) return 0;
+ 264      while (!st_lookup(RCLASS(klass)-&gt;m_tbl, id, &#38;body)) {
+ 265          klass = RCLASS(klass)-&gt;super;
+ 266          if (!klass) return 0;
+ 267      }
+ 268
+ 269      if (origin) *origin = klass;
+ 270      return body;
+ 271  }
+
+(eval.c)
+</pre>
+
+	<p>这个函数在<code>klass</code>中搜索命名为<code>id</code>的方法。</p>
+
+
+	<p><code>RCLASS(value)</code>是一个宏，如下：</p>
+
+
+<pre class="emlist">
+((struct RClass*)(value))
+</pre>
+
+	<p><code>st_lookup()</code>是一个函数，它在<code>st_table</code>中搜索对应于一个键值的值。如果值找到了，函数返回true，
+把找到的值放在由第三个参数（<code>&#38;body</code>）指定的地址。</p>
+
+
+	<p>然而，无论在何种情况下，做这种搜索都太慢，所以实际中一旦方法调用就会缓存起来。因此从第二次开始，
+它不会一个一个<code>super</code>的去找。这个cache及其搜索会在第15章《方法》中讲到。</p>
+
+
+	<h2>实例变量</h2>
+
+
+	<p>在本节中，我会解释第三个本质条件的实现：实例变量。</p>
+
+
+	<h3><code>rb_ivar_set()</code></h3>
+
+
+	<p>实例变量允许每个对象存储它特有的数据。把它存储在对象本身（也就是对象结构体中）看上去不错，
+但是实际如何呢？让我们看一下函数<code>rb_ivar_set()</code>，它将对象放入实例变量中。</p>
+
+
+▼ <code>rb_ivar_set()</code>
+<pre class="longlist">
+      /* write val in the id instance of obj */
+ 984  VALUE
+ 985  rb_ivar_set(obj, id, val)
+ 986      VALUE obj;
+ 987      ID id;
+ 988      VALUE val;
+ 989  {
+ 990      if (!OBJ_TAINTED(obj) &#38;&#38; rb_safe_level() &gt;= 4)
+ 991          rb_raise(rb_eSecurityError,
+                       "Insecure: can't modify instance variable");
+ 992      if (OBJ_FROZEN(obj)) rb_error_frozen("object");
+ 993      switch (TYPE(obj)) {
+ 994        case T_OBJECT:
+ 995        case T_CLASS:
+ 996        case T_MODULE:
+ 997          if (!ROBJECT(obj)-&gt;iv_tbl)
+                  ROBJECT(obj)-&gt;iv_tbl = st_init_numtable();
+ 998          st_insert(ROBJECT(obj)-&gt;iv_tbl, id, val);
+ 999          break;
+1000        default:
+1001          generic_ivar_set(obj, id, val);
+1002          break;
+1003      }
+1004      return val;
+1005  }
+
+(variable.c)
+</pre>
+
+	<p><code>rb_raise()</code>和<code>rb_error_frozen()</code>都用于错误检查。错误检查是必须的，但是它并非这个处理的主要部分，
+因此你应该在第一次阅读中忽略它。</p>
+
+
+	<p>移除错误处理，就只剩下<code>switch</code>，但是这个</p>
+
+
+<pre class="emlist">
+switch (TYPE(obj)) {
+  case T_aaaa:
+  case T_bbbb:
+     ...
+}
+</pre>
+
+	<p>形式是<code>ruby</code>特色。<code>TYPE()</code>是一个宏，返回对象的结构体的类型标志（<code>T_OBJECT</code>，<code>T_STRING</code>，等等）。
+换句话说，因为类型标志是一个整形常量，我们可以用一个<code>switch</code>依赖它进行分支处理。<code>Fixnum</code>和<code>Symbol</code>没有结构体，
+但是在<code>TYPE()</code>内部，做了特殊处理，可以恰当的返回<code>T_FIXNUM</code>和<code>T_SYMBOL</code>，因此没有必要担心。</p>
+
+
+	<p>好了，让我们返回<code>rb_ivar_set()</code>。好像只是对<code>T_OBJECT</code>，<code>T_CLASS</code>和<code>T_MODULE</code>处理不同。
+选中它们3个是因为它们的第二个参数是<code>iv_tbl</code>。让我们实际确认一下。</p>
+
+
+▼ 第二个成员为<code>iv_tbl</code>的结构体：
+<pre class="longlist">
+      /* TYPE(val) == T_OBJECT */
+ 295  struct RObject {
+ 296      struct RBasic basic;
+ 297      struct st_table *iv_tbl;
+ 298  };
+
+      /* TYPE(val) == T_CLASS or T_MODULE */
+ 300  struct RClass {
+ 301      struct RBasic basic;
+ 302      struct st_table *iv_tbl;
+ 303      struct st_table *m_tbl;
+ 304      VALUE super;
+ 305  };
+
+(ruby.h)
+</pre>
+
+	<p><code>iv_tbl</code>是一个实例变量表（Instance Variable TaBLe）。它存储着实例变量及其对应的值。</p>
+
+
+	<p>在<code>rb_ivar_set()</code>中，让我们在看一下有<code>iv_tbl</code>的结构体的代码。</p>
+
+
+<pre class="emlist">
+if (!ROBJECT(obj)-&gt;iv_tbl)
+    ROBJECT(obj)-&gt;iv_tbl = st_init_numtable();
+st_insert(ROBJECT(obj)-&gt;iv_tbl, id, val);
+break;
+</pre>
+
+	<p><code>ROBJECT()</code>是一个宏，它将<code>VALUE</code>转型为<code>struct RObject*</code>。
+<code>obj</code>有可能指向<code>struct RClass</code>，但是因为我们只是要访问第二个成员，这么做没什么问题。</p>
+
+
+	<p><code>st_init_numtable()</code>是创建<code>st_table</code>。<code>st_insert()</code>完成在<code>st_table</code>中的关联。</p>
+
+
+	<p>总结一下，这段代码完成下面这些事：如果<code>iv_tbl</code>不存在，则创建它，然后存储一个[变量名 → 对象]的关联。</p>
+
+
+	<p>警告：因为<code>struct RClass</code>是一个类对象，这个实例变量表是用于类对象本身。在Ruby程序中，它对应于如下代码：</p>
+
+
+<pre class="emlist">
+class C
+  @ivar = "content" 
+end
+</pre>
+
+	<h3><code>generic_ivar_set()</code></h3>
+
+
+	<p>对于结构体不是<code>T_OBJECT</code>，<code>T_MODULE</code>或<code>T_CLASS</code>的对象而言，修改实例变量会发生什么呢？</p>
+
+
+▼ <code>rb_ivar_set()</code>：没有<code>iv_tbl</code>情况
+<pre class="longlist">
+1000  default:
+1001    generic_ivar_set(obj, id, val);
+1002    break;
+
+(variable.c)
+</pre>
+
+	<p>控制交给了<code>generic_ivar_set()</code>。在看这个函数之前，让我们先解释其通用的想法。</p>
+
+
+	<p>非<code>T_OBJECT</code>，<code>T_MODULE</code>或<code>T_CLASS</code>的结构体没有<code>iv_tbl</code>成员（为何没有，稍后解释）。
+然而，将实例同<code>struct st_table</code>连接起来的方法允许实例拥有实例变量。在<code>ruby</code>中，通过使用全局<code>st_table</code>解决这个问题。
+<code>generic_iv_table</code>（图7）就是为这种关联准备的。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_object_givtable.png" title="generic_iv_table" alt="generic_iv_table" /><br>图7: <code>generic_iv_table</code></p>
+
+
+	<p>让我们实际的看一下。</p>
+
+
+▼ <code>generic_ivar_set()</code>
+<pre class="longlist">
+ 801  static st_table *generic_iv_tbl;
+
+ 830  static void
+ 831  generic_ivar_set(obj, id, val)
+ 832      VALUE obj;
+ 833      ID id;
+ 834      VALUE val;
+ 835  {
+ 836      st_table *tbl;
+ 837
+          /* for the time being you should ignore this */
+ 838      if (rb_special_const_p(obj)) {
+ 839          special_generic_ivar = 1;
+ 840      }
+          /* initialize generic_iv_tbl if it does not exist */
+ 841      if (!generic_iv_tbl) {
+ 842          generic_iv_tbl = st_init_numtable();
+ 843      }
+ 844
+          /* the treatment itself */
+ 845      if (!st_lookup(generic_iv_tbl, obj, &#38;tbl)) {
+ 846          FL_SET(obj, FL_EXIVAR);
+ 847          tbl = st_init_numtable();
+ 848          st_add_direct(generic_iv_tbl, obj, tbl);
+ 849          st_add_direct(tbl, id, val);
+ 850          return;
+ 851      }
+ 852      st_insert(tbl, id, val);
+ 853  }
+
+(variable.c)
+</pre>
+
+	<p>当其参数不是指针时，<code>rb_special_const_p()</code>为true。然而，正因为如此，<code>if</code>部分需要垃圾搜集器的知识，
+我们先跳过它。我想让你在读过了第五章《垃圾搜集》之后再来看它。</p>
+
+
+	<p><code>st_init_numtable()</code>已经前面出现过了。它创建了一个新的hash表。</p>
+
+
+	<p><code>st_lookup()</code>搜索与键值对应的值。在这里，它搜索附着在<code>obj</code>上的键值。如果所附的值找到了，整个函数返回true，
+把值存储在第三个参数（<code>&#38;tbl</code>）给定的地址中。简而言之，<code>!st_lookup(...)</code>可以读作“如果值没有找到”。</p>
+
+
+	<p><code>st_insert()</code>也已经解释过了。它将一个新的关联存储到表中。</p>
+
+
+	<p><code>st_add_direct()</code>类似于<code>st_insert()</code>，添加关联之前的部分有些不同，它要检查键值保存与否。换句话说，
+对于<code>st_add_direct()</code>，如果注册的键值已经用到，那么连接到相同键值的两个关联都会保存。完成存在性检查后，
+可以使用<code>st_add_direct()</code>，比如这里的例子，或是一个新表刚刚创建的时候。</p>
+
+
+	<p><code>FL_SET(obj, FL_EXIVAR)</code>是个宏，它将<code>obj</code>的<code>basic.flags</code>设置为<code>FL_EXIVAR</code>。
+<code>basic.flags</code>标志都是以<code>FL_xxxx</code>命名，可以使用<code>FL_SET()</code>进行设置。这些标志也可以使用<code>FL_UNSET()</code>取消。
+<code>FL_EXIVAR</code>中的<code>EXIVAR</code>像是外部实例变量（EXternal Instance VARiable）缩写。</p>
+
+
+	<p>这样设置这些标志可以加速读实例变量的过程。如果没有设置<code>FL_EXIVAR</code>，即便不搜索<code>generic_iv_tbl</code>，
+我们也直接知道是否对象拥有实例变量。当然，位检查是比搜索<code>struct st_table</code>要快。</p>
+
+
+	<h3>结构体中的缺口</h3>
+
+
+	<p>现在，你该理解了实例变量是如何存储的，但是为什么有些没有<code>iv_tbl</code>？
+为什么<code>struct RString</code>或<code>struct RArray</code>中没有<code>iv_tbl</code>呢？
+难道<code>iv_tbl</code>不能是<code>RBasic</code>的一部分吗？</p>
+
+
+	<p>好的，可以这么做，但是有一些很好的理由不这么做。实际上，这个问题同<code>ruby</code>管理对象的方式紧密相连。</p>
+
+
+	<p>在<code>ruby</code>中，内存——比如字符串数据（char[]）用到的——可以直接使用<code>malloc()</code>分配。然而，对象结构体要以一种特殊的方式进行处理。
+<code>ruby</code>以簇进行分配，然后从这些簇中将它们分配出来。因为在分配时结构体的类型（和大小）差异难于处理，所以，声明了一个组合了所有结构体的类型（<code>union</code>）<code>RVALUE</code>，
+管理的是这个类型的数组。因为这个类型的大小等于其成员的最大一个，如果只要有一个大的结构体，就会有很多未用的空间。
+这就是为什么要尽可能把结构体重新组织为类似大小。<code>RVALUE</code>的细节会在第五章《垃圾搜集》中解释。</p>
+
+
+	<p>通常，用的最多的结构体是<code>struct RString</code>。之后，在程序中，是<code>struct RArray</code> （数组），<code>RHash</code> （hash），
+<code>RObject</code> （用户定义对象）等等。然而，这个<code>struct RObject</code>只使用<code>struct RBasic</code> + 1个指针的空间。另一方面，
+<code>struct RString</code>，<code>RArray</code>和<code>RHash</code>占用<code>struct RBasic</code> + 3个指针的空间。换句话说，
+当把<code>struct RObject</code>放入共享实体中，两个指针的空间没有用到。此外，如果<code>RString</code>有4个指针，
+<code>RObject</code>使用的大小少于共享实体一半。如你预期，浪费。</p>
+
+
+	<p>因此，公认的<code>iv_tbl</code>价值在于或多或少节省内存并且加速。此外，我们不知道它是否常用。事实上，<code>ruby</code> 1.2
+之前并没有<code>generic_iv_tbl</code>，因此，那时不可能在<code>String</code>或<code>Array</code>中使用实例变量。然而，这并不是什么问题。
+只是为了功能让大量内存处于无用状态看上去有些愚蠢。</p>
+
+
+	<p>如果你把这些都考虑了，你就可以推断，增加对象结构体的大小不会有任何好处。</p>
+
+
+	<h3><code>rb_ivar_get()</code></h3>
+
+
+	<p>我们看过了设置变量的<code>rb_ivar_set()</code>函数，那我们在快速看看如何得到它们。</p>
+
+
+▼ <code>rb_ivar_get()</code>
+<pre class="longlist">
+ 960  VALUE
+ 961  rb_ivar_get(obj, id)
+ 962      VALUE obj;
+ 963      ID id;
+ 964  {
+ 965      VALUE val;
+ 966
+ 967      switch (TYPE(obj)) {
+      /* (A) */
+ 968        case T_OBJECT:
+ 969        case T_CLASS:
+ 970        case T_MODULE:
+ 971          if (ROBJECT(obj)-&gt;iv_tbl &#38;&#38;
+                  st_lookup(ROBJECT(obj)-&gt;iv_tbl, id, &#38;val))
+ 972              return val;
+ 973          break;
+      /* (B) */
+ 974        default:
+ 975          if (FL_TEST(obj, FL_EXIVAR) || rb_special_const_p(obj))
+ 976              return generic_ivar_get(obj, id);
+ 977          break;
+ 978      }
+      /* (C) */
+ 979      rb_warning("instance variable %s not initialized", rb_id2name(id));
+ 980
+ 981      return Qnil;
+ 982  }
+
+(variable.c)
+</pre>
+
+	<p>结构完全相同。</p>
+
+
+	<p>（A）对于<code>struct RObject</code>或<code>RClass</code>，我们在<code>iv_tbl</code>中搜索变量。因为<code>iv_tbl</code>也可能为<code>NULL</code>，
+在使用之前必须检查。然后，如果<code>st_lookup()</code>找到关系，它返回true，因此整个<code>if</code>可以读作“如果设置了实例变量，返回其值”。</p>
+
+
+	<p>（C）如果没有对应，换句话说，如果我们读一个没有设置的实例变量，我们先离开<code>if</code>，然后是<code>switch</code>。
+<code>rb_warning()</code>提出警告，返回<code>nil</code>。这是因为在Ruby中你可以读取未设置的实例变量。</p>
+
+
+	<p>（B）另一方面，如果结构体既不是<code>struct RObject</code>也不是<code>RClass</code>，在<code>generic_iv_tbl</code>中，搜索实例变量表。
+<code>generic_ivar_get()</code>做什么应该可以很容易猜出来，因此我就不解释它了。我更愿意让你关注<code>if</code>。</p>
+
+
+	<p>我已经告诉你了，<code>generic_ivar_set()</code>设置<code>FL_EXIVAR</code>标志可以让检查更快。</p>
+
+
+	<p><code>rb_special_const_p()</code>是什么呢？当其参数<code>obj</code>不指向结构体时，这个函数返回true。
+因为没有结构体意味着没有<code>basic.flags</code>，没有可以设置的标志，<code>FL_xxxx()</code>总会返回false。
+所以，这些对象需要特殊对待。</p>
+
+
+	<h2>对象的结构体</h2>
+
+
+	<p>在本节中，我们会简单看一下对象结构体中几个重要的结构体的内容及其处理。</p>
+
+
+	<h3><code>struct RString</code></h3>
+
+
+	<p><code>struct RString</code>是<code>String</code>及其子类实例的结构体。</p>
+
+
+▼ <code>struct RString</code>
+<pre class="longlist">
+ 314  struct RString {
+ 315      struct RBasic basic;
+ 316      long len;
+ 317      char *ptr;
+ 318      union {
+ 319          long capa;
+ 320          VALUE shared;
+ 321      } aux;
+ 322  };
+
+(ruby.h)
+</pre>
+
+	<p><code>ptr</code>是一个字符串指针，<code>len</code>是字符串的长度。非常直接。</p>
+
+
+	<p>同通常的字符串相比，Ruby的字符串更像一个字节数组，其中可以容纳任何字节，包括<code>NUL</code>。
+因此在Ruby的层次思考时，以<code>NUL</code> 结尾的字符串并不代表任何东西。因为C函数需要<code>NUL</code>，为方便就有了结尾<code>NUL</code>，
+然而，它并不包括<code>len</code>。</p>
+
+
+	<p>在解释器或扩展库中处理字符串时，你可以写<code>RSTRING(str)-&amp;gt;ptr</code>或<code>RSTRING(str)-&amp;gt;len</code>，
+以访问<code>ptr</code>和<code>len</code>。但是有一些需要注意的点。</p>
+
+
+	<ol>
+	<li>在使用之前，你需要检查是否<code>str</code>真的指向一个<code>struct RString</code></li>
+		<li>你可以读取成员，但是你不可以修改它们</li>
+		<li>你不能把<code>RSTRING(str)-&amp;gt;ptr</code>存储在类似于局部变量的东西中以待后续使用。</li>
+	</ol>
+
+
+	<p>为何如此？首先，有一个重要的软件工程原则：不要乱动别人的数据。接口函数就为这个原因而存在的。然而，在<code>ruby</code>的设计中，
+还有其它一些具体的原因不能去查询或存储一个指针，这与第四个成员<code>aux</code>相关。为了解释如何恰当使用<code>aux</code>，
+我们先要就Ruby字符串的一些特征多说两句。</p>
+
+
+	<p>Ruby的字符串可以修改（可变的）。我说的可变是下面这样：</p>
+
+
+<pre class="emlist">
+s = "str"        # 创建一个字符串，赋值给s
+s.concat("ing")  # 给这个字符串对象添加“ing”
+p(s)             # 显示这个字符串
+</pre>
+
+	<p><code>s</code>指向对象的内容会变成&#8220;<code>string</code>&#8221;。它不同于Java或Python的字符串对象，和Java的<code>StringBuffer</code>更接近一些。</p>
+
+
+	<p>这是什么关系？首先，可变意味着字符串的长度（<code>len</code>）可以改变。我们需要每次根据长度的变换增减已分配的内存。
+我们当然可以用<code>realloc()</code>来实现，但通常<code>malloc()</code>和<code>realloc()</code>都是重量级的操作。
+每当字符串变化就<code>realloc()</code>会是一个沉重的负担。</p>
+
+
+	<p>这就是为什么<code>ptr</code>指向的内存大小要略大于<code>len</code>。因为如此，如果添加的部分如何能放到剩余的内存中，
+无需调用<code>realloc()</code>便能得到处理，这会更快一些。结构体成员<code>aux.capa</code>是一个长度，它包括额外的内存。</p>
+
+
+	<p>那么另一个<code>aux.shared</code>是什么？它用以加速文本字符串的创建。看看下面的Ruby程序。</p>
+
+
+<pre class="emlist">
+while true do  # 无限重复
+  a = "str"        # 以“str”为内容创建字符串，赋值给a
+  a.concat("ing")  # 为a所指向的对象添加“ing”
+  p(a)             # 显示“string”
+end
+</pre>
+
+	<p>无论你循环多少次，第四行的<code>p</code>都会显示<code>"string"</code>。所以，代码<code>"str"</code>需要每次创建一个字符串对象以持有一个不同的<code>char[]</code>。
+然而，如果有大量相同的字符串，创建多次<code>char[]</code>的拷贝是没有意义的。最好共享一个通用的<code>char[]</code>。</p>
+
+
+	<p>这个技巧运用的根源就在<code>aux.shared</code>。以文本常量创建的字符串会使用一个共享的<code>char[]</code>。当发生变化时，
+将字符串复制到一个非共享的内存中，变化针对对这个新拷贝进行。这一技术成为“写时拷贝”。当使用共享<code>char[]</code>时，
+对象结构体的<code>basic.flags</code>设置为<code>ELTS_SHARED</code>，<code>aux.shared</code>包含原有的对象。<code>ELTS</code>好像是<code>ELemenTS</code>的缩写。</p>
+
+
+	<p>好的，但是，让我们回到<code>RSTRING(str)-&amp;gt;ptr</code>的话题上。即便可以访问指针，你也不该修改它，首先，
+这会导致<code>len</code>或<code>capa</code>的值会与内容不一致，再有，当修改的字符串是通过文本常量创建的话，<code>aux.shared</code>需要分离出来。</p>
+
+
+	<p>为了结束这个关于<code>RString</code>章节，让我们写几个如何使用它的例子。<code>str</code>是一个<code>VALUE</code>，它指向<code>RString</code>。</p>
+
+
+<pre class="emlist">
+RSTRING(str)-&gt;len;               /* 长度 */
+RSTRING(str)-&gt;ptr[0];            /* 第一个字符 */
+str = rb_str_new("content", 7);  /* 创建一个以“content”为内容的字符串
+                                    第二个参数是长度 */
+str = rb_str_new2("content");    /* 创建一个以“content”为内容的字符串
+                                    其长度由strlen()计算 */
+rb_str_cat2(str, "end");         /* 连接C字符串到Ruby字符串上 */
+</pre>
+
+	<h3><code>struct RArray</code></h3>
+
+
+	<p><code>struct RArray</code>是Ruby数组类<code>Array</code>的结构体。</p>
+
+
+▼ <code>struct RArray</code>
+<pre class="longlist">
+ 324  struct RArray {
+ 325      struct RBasic basic;
+ 326      long len;
+ 327      union {
+ 328          long capa;
+ 329          VALUE shared;
+ 330      } aux;
+ 331      VALUE *ptr;
+ 332  };
+
+(ruby.h)
+</pre>
+
+	<p>除了<code>ptr</code>的类型，这个结构体几乎等同于<code>struct RString</code>。<code>ptr</code>指向数组的内容，<code>len</code>是其长度。
+<code>aux</code>的用途等同于<code>struct RString</code>。<code>aux.capa</code>是<code>ptr</code>所指向内存的真正长度。
+如果<code>ptr</code>是共享的，<code>aux.shared</code>存储着共享的原数组对象。</p>
+
+
+	<p>从这个结构体可以清楚的看出，Ruby的<code>Array</code>是一个数组，而非列表。因此，当元素数目发生很大变化时，必须进行<code>realloc()</code>。
+如果元素需要插入到其它的地方，而非尾端，就要用到<code>memmove()</code>。但是如果我们这么做了，即便它移动得也很快，在当前的机器上，
+它依然会给人留下深刻的印象。</p>
+
+
+	<p>这就是为什么访问它的方式类似于<code>RString</code>。你可以访问<code>RARRAY(arr)-&amp;gt;ptr</code>和<code>RARRAY(arr)-&amp;gt;len</code>成员，
+但不能设置它们等等。我们只看些简单的例子：</p>
+
+
+<pre class="emlist">
+/* 在C中管理数组 */
+VALUE ary;
+ary = rb_ary_new();             /* 创建一个空数组 */
+rb_ary_push(ary, INT2FIX(9));   /* 推入一个Ruby的9 */
+RARRAY(ary)-&gt;ptr[0];            /* 查看索引0位置是什么 */
+rb_p(RARRAY(ary)-&gt;ptr[0]);      /* 对ary[0]做p （结果是9） */
+
+# 在Ruby中管理数组
+ary = []      # 创建一个空数组
+ary.push(9)   # 推入9
+ary[0]        # 查看索引0位置是什么
+p(ary[0])     # 对ary[0]做p （结果是9）
+</pre>
+
+	<h3><code>struct RRegexp</code></h3>
+
+
+	<p>它是正则表达式类<code>Regexp</code>实例的结构体。</p>
+
+
+▼ <code>struct RRegexp</code>
+<pre class="longlist">
+ 334  struct RRegexp {
+ 335      struct RBasic basic;
+ 336      struct re_pattern_buffer *ptr;
+ 337      long len;
+ 338      char *str;
+ 339  };
+
+(ruby.h)
+</pre>
+
+	<p><code>ptr</code>是编译后的正则表达式。<code>str</code>是编译前的字符串（正则表达式的源代码），<code>len</code>是这个字符串的长度。</p>
+
+
+	<p>因为本书未涉及<code>Regexp</code>对象处理的代码，我们就不谈如何使用它了。即使你在扩展库中用到它，
+只要你不想以非常特别的方式使用，接口函数足矣。</p>
+
+
+	<h3><code>struct RHash</code></h3>
+
+
+	<p><code>struct RHash</code>是Ruby中<code>Hash</code>对象的结构体。</p>
+
+
+▼ <code>struct RHash</code>
+<pre class="longlist">
+ 341  struct RHash {
+ 342      struct RBasic basic;
+ 343      struct st_table *tbl;
+ 344      int iter_lev;
+ 345      VALUE ifnone;
+ 346  };
+
+(ruby.h)
+</pre>
+
+	<p>它是对<code>struct st_table</code>的封装。<code>st_table</code>会在下一章《名称与名称表》中详述。</p>
+
+
+	<p><code>ifnone</code>是键值没有对应附着值时的值，缺省为<code>nil</code>。<code>iter_lev</code>保证了hash表可重入（多线程安全）。</p>
+
+
+	<h3><code>struct RFile</code></h3>
+
+
+	<p><code>struct RFile</code>是内建的IO类及其子类实例的结构体。</p>
+
+
+▼ <code>struct RFile</code>
+<pre class="longlist">
+ 348  struct RFile {
+ 349      struct RBasic basic;
+ 350      struct OpenFile *fptr;
+ 351  };
+
+(ruby.h)
+</pre>
+
+▼ <code>OpenFile</code>
+<pre class="longlist">
+  19  typedef struct OpenFile {
+  20      FILE *f;                    /* stdio ptr for read/write */
+  21      FILE *f2;                   /* additional ptr for rw pipes */
+  22      int mode;                   /* mode flags */
+  23      int pid;                    /* child's pid (for pipes) */
+  24      int lineno;                 /* number of lines read */
+  25      char *path;                 /* pathname for file */
+  26      void (*finalize) _((struct OpenFile*)); /* finalize proc */
+  27  } OpenFile;
+
+(rubyio.h)
+</pre>
+
+	<p>所有的成员都转到了<code>struct OpenFile</code>中。因为没有太多的<code>IO</code>实例，这么做也可以。各个成员的目的都写在注释中了。
+基本上，它就是C的<code>stdio</code>的封装。</p>
+
+
+	<h3><code>struct RData</code></h3>
+
+
+	<p><code>struct RData</code>同我们之前所见有着不同的思路。它是扩展库实现的结构体。</p>
+
+
+	<p>当然，创建扩展库类的结构体是必需的，但是这些结构体的类型依赖于已创建的类，不可能预先知道它们的大小或结构体。
+所以要在<code>ruby</code>端创建一个“管理用户自定义结构体指针的结构体”，以实现管理。这个结构体就是<code>struct RData</code>。</p>
+
+
+▼ <code>struct RData</code>
+<pre class="longlist">
+ 353  struct RData {
+ 354      struct RBasic basic;
+ 355      void (*dmark) _((void*));
+ 356      void (*dfree) _((void*));
+ 357      void *data;
+ 358  };
+
+(ruby.h)
+</pre>
+
+	<p><code>data</code>是一个指向用户自定义结构体的指针，<code>dfree</code>是用以释放这个结构体的函数，<code>dmark</code>也是一个函数，当发生标记和清除的“标记”时调用。</p>
+
+
+	<p>现在解释<code>struct RData</code>依然太复杂，我们暂时只是看看它的表示（图8）。在第五章《垃圾回收》中会再谈到它，
+在那你会读到更多关于其成员详细的解释。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_object_rdata.png" title="struct RData的表示" alt="struct RData的表示" /><br>图8: <code>struct RData</code>的表示</p><hr>
+
+The original work is Copyright &copy; 2002 - 2004 Minero AOKI.<br>
+Translated by Ye Zheng<br>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/"><img alt="Creative Commons License" border="0" src="images/somerights20.png"/></a><br/>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/">Creative Commons Attribution-NonCommercial-ShareAlike2.5 License</a>.
+
+</body>
+</html>

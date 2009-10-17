@@ -1,0 +1,1670 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="zh-CH">
+  <link rel="stylesheet" type="text/css" href="rhg.css">
+  <title>第四章：类与模块</title>
+</head>
+<body>
+<h1>第四章：类与模块</h1>
+
+
+	<p>在本章中，我们会详细的看一下用以创建类和模块的数据结构。</p>
+
+
+	<h2>类和模块的定义</h2>
+
+
+	<p>首先，我想看一下如何在C层次上定义一个Ruby的类。本章只介绍一些有特殊意义的地方，
+因此，我想让你先了解最常见的用法。</p>
+
+
+	<p>定义类和模块的API主要是下面的6个函数：</p>
+
+
+	<ul>
+	<li><code>rb_define_class()</code></li>
+		<li><code>rb_define_class_under()</code></li>
+		<li><code>rb_define_module()</code></li>
+		<li><code>rb_define_module_under()</code></li>
+		<li><code>rb_define_method()</code></li>
+		<li><code>rb_define_singleton_method()</code></li>
+	</ul>
+
+
+	<p>这些函数还有其它的版本，但是扩展库，甚至大多数核心库就只是用这些API定义的。
+我一个个地会为你介绍这些函数。</p>
+
+
+	<h3>类的定义</h3>
+
+
+	<p><code>rb_define_class()</code> 在顶层定义一个类。让我们以Ruby数组类<code>Array</code>为例。</p>
+
+
+▼ <code>Array</code>类的定义
+<pre class="longlist">
+  19  VALUE rb_cArray;
+
+1809  void
+1810  Init_Array()
+1811  {
+1812      rb_cArray  = rb_define_class("Array", rb_cObject);
+
+(array.c)
+</pre>
+
+	<p><code>rb_cObject</code>和<code>rb_cArray</code>分别对应着在Ruby的层次上<code>Object</code>和<code>Array</code>。
+前缀<code>rb</code>表示它属于<code>ruby</code>，<code>c</code>表示它是一个类对象。这个命名规则在<code>ruby</code>中随处可见。</p>
+
+
+	<p>调用<code>rb_define_class()</code>定义了<code>Array</code>，它继承自<code>Object</code>。<code>rb_define_class()</code>创建类对象，
+与此同时，它也创建一个常量。这意味着在这之后，你就可以在Ruby程序中访问<code>Array</code>。
+它对应着下面的Ruby程序：</p>
+
+
+<pre class="emlist">
+class Array &lt; Object
+</pre>
+
+	<p>相信你已经注意到这里没有<code>end</code>，故意这样写的。因为到<code>rb_define_class()</code>这里，
+类的主体还没有执行。</p>
+
+
+	<h3>嵌套类的定义</h3>
+
+
+	<p>之后是<code>rb_define_class_under()</code>。这个函数定义了一个嵌套在其它类或模块中的类。
+这次的例子是<code>stat(2)</code>返回的类，<code>File::Stat</code>。</p>
+
+
+▼ <code>File::Stat</code>的定义
+<pre class="longlist">
+  78  VALUE rb_cFile;
+  80  static VALUE rb_cStat;
+
+2581      rb_cFile = rb_define_class("File", rb_cIO);
+2674      rb_cStat = rb_define_class_under(rb_cFile, "Stat", rb_cObject);
+
+(file.c)
+</pre>
+
+	<p>这段代码对应着下面的Ruby程序：</p>
+
+
+<pre class="emlist">
+class File &lt; IO
+  class Stat &lt; Object
+</pre>
+
+	<p>这次我又故意省略了<code>end</code>。</p>
+
+
+	<h3>模块的定义</h3>
+
+
+	<p><code>rb_define_module()</code>很简单，让我们快点结束它。</p>
+
+
+▼ <code>Enumerable</code>的定义
+<pre class="longlist">
+  17  VALUE rb_mEnumerable;
+
+ 492      rb_mEnumerable = rb_define_module("Enumerable");
+
+(enum.c)
+</pre>
+
+	<p><code>rb_mEnumerable</code>的<code>m</code>类似于class的<code>c</code>：它表示这是一个模块（module）。
+对应的Ruby程序是：</p>
+
+
+<pre class="emlist">
+module Enumerable
+</pre>
+
+	<p><code>rb_define_module_under()</code>不常用，我们略过它。</p>
+
+
+	<h3>方法的定义</h3>
+
+
+	<p>这次的函数用以定义方法，<code>rb_define_method()</code>。它很常用。
+我们再从<code>Array</code>中找个例子。</p>
+
+
+▼ <code>Array#to_s</code>的定义
+<pre class="longlist">
+1818  rb_define_method(rb_cArray, "to_s", rb_ary_to_s, 0);
+
+(array.c)
+</pre>
+
+	<p>这个<code>to_s</code>方法定义在<code>Array</code>中。方法体由函数指针（<code>rb_ary_to_s</code>）指定。
+第四个参数是方法参数的个数。因为<code>to_s</code>没有参数，所以它是0。如果我们编写对应的Ruby程序，
+会是这样：</p>
+
+
+<pre class="emlist">
+class Array &lt; Object
+  def to_s
+    # rb_ary_to_s()的内容
+  end
+end
+</pre>
+
+	<p>当然，<code>class</code>部分不包含在<code>rb_define_method()</code>中，只有<code>def</code>是准确的。
+但是，如果没有<code>class</code>部分，它看上去像个一般的函数，因此我也写了用于封装的<code>class</code>部分。</p>
+
+
+	<p>再来一个例子，这次有一个参数：</p>
+
+
+▼ <code>Array#concat</code>的定义
+<pre class="longlist">
+1835  rb_define_method(rb_cArray, "concat", rb_ary_concat, 1);
+
+(array.c)
+</pre>
+
+	<p>这里定义的类是<code>rb_cArray</code>（<code>Array</code>），方法名是<code>concat</code>，它的主体是<code>rb_ary_concat()</code>，
+参数个数是1。它对应的Ruby程序是这样：</p>
+
+
+<pre class="emlist">
+class Array &lt; Object
+  def concat( str )
+    # rb_ary_concat()的内容
+  end
+end
+</pre>
+
+	<h3>Singleton方法定义</h3>
+
+
+	<p>我们可以为一个特定的对象实例定义方法。这种方法称为singleton方法。
+在第一章《Ruby语言最小化》中，我曾以<code>File.unlink</code>为例，我本想在这里先看一下它，
+但是由于一些特殊原因，我们来看<code>File.link</code>。</p>
+
+
+▼ <code>File.link</code>的定义
+<pre class="longlist">
+2624  rb_define_singleton_method(rb_cFile, "link", rb_file_s_link, 2);
+
+(file.c)
+</pre>
+
+	<p>它的用法很像<code>rb_define_method()</code>。唯一的差别在于第一个参数，它是方法所属的对象。
+这里是<code>rb_cFile</code>。</p>
+
+
+	<h3>入口点</h3>
+
+
+	<p>能够像前面那样进行定义当然好，但是这些函数在哪调用，又以何种方式执行呢？
+这些定义放到名为<code>Init_xxxx()</code>的函数中。比如，对于<code>Array</code>来说，这个函数是<code>Init_Array()</code>，
+它是这个样子：</p>
+
+
+▼ <code>Init_Array</code>
+<pre class="longlist">
+1809  void
+1810  Init_Array()
+1811  {
+1812      rb_cArray  = rb_define_class("Array", rb_cObject);
+1813      rb_include_module(rb_cArray, rb_mEnumerable);
+1814
+1815      rb_define_singleton_method(rb_cArray, "allocate",
+                                     rb_ary_s_alloc, 0);
+1816      rb_define_singleton_method(rb_cArray, "[]", rb_ary_s_create, -1);
+1817      rb_define_method(rb_cArray, "initialize", rb_ary_initialize, -1);
+1818      rb_define_method(rb_cArray, "to_s", rb_ary_to_s, 0);
+1819      rb_define_method(rb_cArray, "inspect", rb_ary_inspect, 0);
+1820      rb_define_method(rb_cArray, "to_a", rb_ary_to_a, 0);
+1821      rb_define_method(rb_cArray, "to_ary", rb_ary_to_a, 0);
+1822      rb_define_method(rb_cArray, "frozen?",  rb_ary_frozen_p, 0);
+
+(array.c)
+</pre>
+
+	<p><code>ruby</code>启动时会显式调用内建程序库的<code>Init</code>函数。这在<code>inits.c</code>中完成。</p>
+
+
+▼ <code>rb_call_inits()</code>
+<pre class="longlist">
+  47  void
+  48  rb_call_inits()
+  49  {
+  50      Init_sym();
+  51      Init_var_tables();
+  52      Init_Object();
+  53      Init_Comparable();
+  54      Init_Enumerable();
+  55      Init_Precision();
+  56      Init_eval();
+  57      Init_String();
+  58      Init_Exception();
+  59      Init_Thread();
+  60      Init_Numeric();
+  61      Init_Bignum();
+  62      Init_Array();
+
+(inits.c)
+</pre>
+
+	<p>这样，<code>Init_Array()</code>就得到了正确的调用。</p>
+
+
+	<p>这里解释了内建程序库，但扩展程序库又如何呢？实际上，对于扩展程序库而言，
+规则是一样的。看下面的代码：</p>
+
+
+<pre class="emlist">
+require "myextension" 
+</pre>
+
+	<p>以同样的方法，如果加载的扩展程序是<code>myextension.so</code>，在加载时，
+会调用名为<code>Init_myextension()</code>的（<code>extern</code>）函数。如果超出本章的范围，
+它们又是如何调用的呢？你应该读读第18章《加载》。让我们以一个<code>Init</code>的例子结束这里的讲解。</p>
+
+
+	<p>下面的例子来自<code>stringio</code>，<code>ruby</code>提供的一个扩展程序库，也就是说，它不属于内建程序库。</p>
+
+
+▼ <code>Init_stringio()</code> (起始部分)
+<pre class="longlist">
+ 895  void
+ 896  Init_stringio()
+ 897  {
+ 898      VALUE StringIO = rb_define_class("StringIO", rb_cData);
+ 899      rb_define_singleton_method(StringIO, "allocate",
+                                     strio_s_allocate, 0);
+ 900      rb_define_singleton_method(StringIO, "open", strio_s_open, -1);
+ 901      rb_define_method(StringIO, "initialize", strio_initialize, -1);
+ 902      rb_enable_super(StringIO, "initialize");
+ 903      rb_define_method(StringIO, "become", strio_become, 1);
+ 904      rb_define_method(StringIO, "reopen", strio_reopen, -1);
+
+(ext/stringio/stringio.c)
+</pre>
+
+	<h2>Singleton类</h2>
+
+
+	<h3><code>rb_define_singleton_method()</code></h3>
+
+
+	<p>现在，你应该或多或少的了解了如何定义普通方法。编写方法主体，然后在<code>m_tbl</code>注册就成了。
+但是singlton方法呢？我们先来看看singleton方法的定义。</p>
+
+
+▼ <code>rb_define_singleton_method()</code>
+<pre class="longlist">
+ 721  void
+ 722  rb_define_singleton_method(obj, name, func, argc)
+ 723      VALUE obj;
+ 724      const char *name;
+ 725      VALUE (*func)();
+ 726      int argc;
+ 727  {
+ 728      rb_define_method(rb_singleton_class(obj), name, func, argc);
+ 729  }
+
+(class.c)
+</pre>
+
+	<p>我已经解释过了，<code>rb_define_method()</code>是一个用来定义普通方法的函数，
+因此同普通方法的差异仅仅在于使用<code>rb_singleton_class()</code>。
+但是究竟什么是singleton类呢？</p>
+
+
+	<p>简而言之，singleton类就是一个虚拟类，它只用于执行singleton方法。
+singleton方法就是定义于singleton类的方法。
+（从某种意义上说）类首先是一种连接对象和方法的实现，singleton类侧重于实现的层面。
+Ruby语言中并不正式包含它们，所以，它们不会出现在Ruby的层次上。</p>
+
+
+	<h3><code>rb_singleton_class()</code></h3>
+
+
+	<p>好的，让我们确认一下singleton类的结构。每次都给你给你看函数代码太简单了，
+因此，这次我要使用新武器：调用图（Call Graph）。</p>
+
+
+<pre class="emlist">
+rb_define_singleton_method
+    rb_define_method
+    rb_singleton_class
+        SPECIAL_SINGLETON
+        rb_make_metaclass
+            rb_class_boot
+            rb_singleton_class_attached
+</pre>
+
+	<p>调用图是一个显示函数（更常见的是过程）间调用关系的图。
+把代码中所写的全部调用展现出来的调用图称为静态调用图（static call graph）。
+只展示一次执行期间内完成调用的调用图称为动态调用图（dynamic call graph）。</p>
+
+
+	<p>这个图是一张静态调用图，缩进表示哪个函数调用哪个函数。比如，
+<code>rb_define_singleton_method()</code>调用<code>rb_define_method()</code>和<code>rb_singleton_class()</code>。
+<code>rb_singleton_class()</code>调用<code>SPECIAL_SINGLETON()</code>和<code>rb_make_metaclass()</code>。</p>
+
+
+	<p>让我们回到代码。看调用图时，你可以看到<code>rb_singleton_class()</code>的调用走得非常深。
+至此，所有的调用层次都已透明，这样我们看函数时就不会迷失了。
+在这个深度，我很容易忘掉代码在做什么。在这种情况下，我就可以检查一下调用图，
+以得到一个更好的理解。这次，我们会并行的解释<code>rb_singleton_class()</code>下的两个过程做了些什么。
+我们要注意以下两点：</p>
+
+
+	<ul>
+	<li>singleton类到底是什么？</li>
+		<li>singleton类的目的何在？</li>
+	</ul>
+
+
+	<h3>普通类与singleton类</h3>
+
+
+	<p>singleton类是一种特殊的类：它们与普通类基本相同，但还是有些许些差别的。
+找到这些差别，我们就可以很好的解释singleton类。</p>
+
+
+	<p>如何找到这些差别呢？我们应该看看创建普通类的函数和创建singleton类的函数差别所在。
+为此，我们要找到创建普通类的函数。普通类由<code>rb_define_class()</code>定义，
+它一定是以某种方式调用，或是有另一个函数创建普通的类。
+我们暂时不看<code>rb_define_class()</code>本身的内容。由于某些原因，我对一些更深的东西感兴趣。
+所以，我们先看一下<code>rb_define_class()</code>的调用图。</p>
+
+
+<pre class="emlist">
+rb_define_class
+    rb_class_inherited
+    rb_define_class_id
+        rb_class_new
+            rb_class_boot
+        rb_make_metaclass
+            rb_class_boot
+            rb_singleton_class_attached
+</pre>
+
+	<p>我对<code>rb_class_new()</code>产生了兴趣。难道这个名字不意味着它要创建一个新的类吗？
+我们确认一下。</p>
+
+
+▼ <code>rb_class_new()</code>
+<pre class="longlist">
+  37  VALUE
+  38  rb_class_new(super)
+  39      VALUE super;
+  40  {
+  41      Check_Type(super, T_CLASS);
+  42      if (super == rb_cClass) {
+  43          rb_raise(rb_eTypeError, "can't make subclass of Class");
+  44      }
+  45      if (FL_TEST(super, FL_SINGLETON)) {
+  46          rb_raise(rb_eTypeError, "can't make subclass of virtual class");
+  47      }
+  48      return rb_class_boot(super);
+  49  }
+
+(class.c)
+</pre>
+
+	<p><code>Check_Type()</code>用以检查对象结构的类型，因此，我们可以忽略它。
+<code>rb_raise()</code>是错误处理，因为我们也忽略它。只剩下<code>rb_class_boot()</code>。
+那么我们就来看看它。</p>
+
+
+▼ <code>rb_class_boot()</code>
+<pre class="longlist">
+  21  VALUE
+  22  rb_class_boot(super)
+  23      VALUE super;
+  24  {
+  25      NEWOBJ(klass, struct RClass);        /* 分配struct RClass */
+  26      OBJSETUP(klass, rb_cClass, T_CLASS); /* 初始化RBasic部分 */
+  27
+  28      klass-&gt;super = super;       /* (A) */
+  29      klass-&gt;iv_tbl = 0;
+  30      klass-&gt;m_tbl = 0;
+  31      klass-&gt;m_tbl = st_init_numtable();
+  32
+  33      OBJ_INFECT(klass, super);
+  34      return (VALUE)klass;
+  35  }
+
+(class.c)
+</pre>
+
+	<p><code>NEWOBJ()</code>和<code>OBJSETUP()</code>是一种固定的表达式，用以创建一个内部结构类型（<code>struct Rxxxx</code>）的Ruby对象。
+它们都是宏。<code>NEWOBJ()</code>创建<code>struct RClass</code>，指针放到第一个参数<code>klass</code>中。
+<code>OBJSETUP()</code>初始化<code>RClass</code>的struct <code>RBasic</code>成员（也就是<code>basic.klass</code>和<code>basic.flags</code>）。</p>
+
+
+	<p><code>OBJ_INFECT()</code>是一个与安全相关的宏。从现在开始，我们忽略它。</p>
+
+
+	<p>在(A)处，<code>klass</code>的<code>super</code>成员设为参数<code>super</code>。看上去，
+<code>rb_class_boot()</code>这个函数创建了一个继承自<code>super</code>的类。</p>
+
+
+	<p>从上面可以看出，<code>rb_class_boot()</code>是一个创建类的函数。
+<code>rb_class_new()</code>与之类似。</p>
+
+
+	<p>然后，我们再来看一次<code>rb_singleton_class()</code>的调用图：</p>
+
+
+<pre class="emlist">
+rb_singleton_class
+    SPECIAL_SINGLETON
+    rb_make_metaclass
+        rb_class_boot
+        rb_singleton_class_attached
+</pre>
+
+	<p>这里也调用了<code>rb_class_boot()</code>。因此，直到那个点上，它等同于普通的类。
+随后的部分便是普通类和singleton类的差异之处，也就是singleton的特征所在。
+如果你已经弄清楚迄今为止的一切，我们只要读一下<code>rb_singleton_class()</code>和<code>rb_make_metaclass()</code>就可以了。</p>
+
+
+	<h3>压缩的<code>rb_singleton_class()</code></h3>
+
+
+	<p><code>rb_singleton_class()</code>有些长，让我们先去除一些无关紧要的部分。</p>
+
+
+▼ <code>rb_singleton_class()</code>
+<pre class="longlist">
+ 678  #define SPECIAL_SINGLETON(x,c) do {\
+ 679      if (obj == (x)) {\
+ 680          return c;\
+ 681      }\
+ 682  } while (0)
+
+ 684  VALUE
+ 685  rb_singleton_class(obj)
+ 686      VALUE obj;
+ 687  {
+ 688      VALUE klass;
+ 689
+ 690      if (FIXNUM_P(obj) || SYMBOL_P(obj)) {
+ 691          rb_raise(rb_eTypeError, "can't define singleton");
+ 692      }
+ 693      if (rb_special_const_p(obj)) {
+ 694          SPECIAL_SINGLETON(Qnil, rb_cNilClass);
+ 695          SPECIAL_SINGLETON(Qfalse, rb_cFalseClass);
+ 696          SPECIAL_SINGLETON(Qtrue, rb_cTrueClass);
+ 697          rb_bug("unknown immediate %ld", obj);
+ 698      }
+ 699
+ 700      DEFER_INTS;
+ 701      if (FL_TEST(RBASIC(obj)-&gt;klass, FL_SINGLETON) &#38;&#38;
+ 702          (BUILTIN_TYPE(obj) == T_CLASS ||
+ 703           rb_iv_get(RBASIC(obj)-&gt;klass, "__attached__") == obj)) {
+ 704          klass = RBASIC(obj)-&gt;klass;
+ 705      }
+ 706      else {
+ 707          klass = rb_make_metaclass(obj, RBASIC(obj)-&gt;klass);
+ 708      }
+ 709      if (OBJ_TAINTED(obj)) {
+ 710          OBJ_TAINT(klass);
+ 711      }
+ 712      else {
+ 713          FL_UNSET(klass, FL_TAINT);
+ 714      }
+ 715      if (OBJ_FROZEN(obj)) OBJ_FREEZE(klass);
+ 716      ALLOW_INTS;
+ 717
+ 718      return klass;
+ 719  }
+
+(class.c)
+</pre>
+
+	<p>前半部分和后半部分由空行分开。前半部分处理特殊情况，后半部分处理一般情况。
+换句话说，后半部分是函数的主干。所以，我们留下它，先来讨论前半部分。</p>
+
+
+	<p>前半部分处理的是非指针的<code>VALUE</code>，也就是说没有C结构的对象。首先，
+挑出<code>Fixnum</code>和<code>Symbol</code>。随后，<code>rb_special_const_p()</code>这个函数对非指针的<code>VALUE</code>返回true。
+这里，<code>Qtrue</code>, <code>Qfalse</code>和<code>Qnil</code>应该作为异常捕获。除此之外，便不再存在有效的非指针值了，
+因此，用<code>rb_bug()</code>报告bug。</p>
+
+
+	<p><code>DEFER_INTS()</code>和<code>ALLOW_INTS()</code>以相同的<code>INTS</code>结尾，因此你应该成对的来看它们。
+实际上，它们是同信号相关的宏。因为它们定义在<code>rubysig.h</code>中，你可以猜到，
+<code>INTS</code>是中断（interrupt）的缩写。你可以忽略它们。</p>
+
+
+	<h3>压缩的<code>rb_make_metaclass()</code></h3>
+
+
+▼ <code>rb_make_metaclass()</code>
+<pre class="longlist">
+ 142  VALUE
+ 143  rb_make_metaclass(obj, super)
+ 144      VALUE obj, super;
+ 145  {
+ 146      VALUE klass = rb_class_boot(super);
+ 147      FL_SET(klass, FL_SINGLETON);
+ 148      RBASIC(obj)-&gt;klass = klass;
+ 149      rb_singleton_class_attached(klass, obj);
+ 150      if (BUILTIN_TYPE(obj) == T_CLASS) {
+ 151          RBASIC(klass)-&gt;klass = klass;
+ 152          if (FL_TEST(obj, FL_SINGLETON)) {
+ 153              RCLASS(klass)-&gt;super =
+                          RBASIC(rb_class_real(RCLASS(obj)-&gt;super))-&gt;klass;
+ 154          }
+ 155      }
+ 156
+ 157      return klass;
+ 158  }
+
+(class.c)
+</pre>
+
+	<p>我们已经看过了<code>rb_class_boot()</code>。它使用参数<code>super</code>作为它的超类，创建了一个（普通）类。
+随后，这个类设置了<code>FL_SINGLETON</code>。这里明显很可疑。从函数名上看，
+我们认为它不该表示一个singleton类。</p>
+
+
+	<h3>singleton类是什么？</h3>
+
+
+	<p>继续简化过程。参数，返回值，局部变量都是<code>VALUE</code>，抛开声明，
+我们可以得到下面压缩的结果：</p>
+
+
+▼ <code>rb_singleton_class() rb_make_metaclass()</code> （压缩后）
+<pre class="longlist">
+rb_singleton_class(obj)
+{
+    if (FL_TEST(RBASIC(obj)-&gt;klass, FL_SINGLETON) &#38;&#38;
+        (BUILTIN_TYPE(obj) == T_CLASS || BUILTIN_TYPE(obj) == T_MODULE) &#38;&#38;
+        rb_iv_get(RBASIC(obj)-&gt;klass, "__attached__") == obj) {
+        klass = RBASIC(obj)-&gt;klass;
+    }
+    else {
+        klass = rb_make_metaclass(obj, RBASIC(obj)-&gt;klass);
+    }
+    return klass;
+}
+
+rb_make_metaclass(obj, super)
+{
+    klass = create a class with super as superclass;
+    FL_SET(klass, FL_SINGLETON);
+    RBASIC(obj)-&gt;klass = klass;
+    rb_singleton_class_attached(klass, obj);
+    if (BUILTIN_TYPE(obj) == T_CLASS) {
+        RBASIC(klass)-&gt;klass = klass;
+        if (FL_TEST(obj, FL_SINGLETON)) {
+            RCLASS(klass)-&gt;super =
+                    RBASIC(rb_class_real(RCLASS(obj)-&gt;super))-&gt;klass;
+        }
+    }
+
+    return klass;
+}
+</pre>
+
+	<p><code>rb_singleton_class()</code>中<code>if</code>语句的条件看上去相当复杂。然而，这个条件却并非主干，
+因此，我们稍后来看。我们先来思考一下<code>if</code>的false分支发生了什么。</p>
+
+
+	<p><code>rb_make_metaclass()</code>的<code>BUILTIN_TYPE()</code>类似于<code>TYPE()</code>，
+它是一个用以获取结构类型标志的宏（<code>T_xxxx</code>）。
+这里的条件就是“如果<code>obj</code>是一个类”。此刻，我们最好不要把自己限制在<code>obj</code>是一个类上，
+因此，我们去掉它。</p>
+
+
+	<p>通过这些简化，我们得到下面的代码：</p>
+
+
+▼ <code>rb_singleton_class() rb_make_metaclass()</code> （再压缩后）
+<pre class="longlist">
+rb_singleton_class(obj)
+{
+    klass = create a class with RBASIC(obj)-&gt;klass as superclass;
+    FL_SET(klass, FL_SINGLETON);
+    RBASIC(obj)-&gt;klass = klass;
+    return klass;
+}
+</pre>
+
+	<p>但是，这里仍有难于理解的一面。<code>klass</code>用得太多，我们把<code>klass</code>改为<code>sclass</code>。</p>
+
+
+▼ <code>rb_singleton_class() rb_make_metaclass()</code> （变量替换）
+<pre class="longlist">
+rb_singleton_class(obj)
+{
+    sclass = create a class with RBASIC(obj)-&gt;klass as superclass;
+    FL_SET(sclass, FL_SINGLETON);
+    RBASIC(obj)-&gt;klass = sclass;
+    return sclass;
+}
+</pre>
+
+	<p>现在，它应该很好理解了。为了让它更加简单，我用图来表示它做了些什么（图1）。
+水平方向上是“实例－类”的关系，垂直方向是继承（超类在上）。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_addsclass.png" title="rb_singleton_class" alt="rb_singleton_class" /><br>图1: <code>rb_singleton_class</code></p>
+
+
+	<p>对比这幅图的第一部分和最后一部分，你就可以理解在改变结构的情况下插入<code>sclass</code>。
+这就是singleton类的全部。总之，继承增加了一级。如果方法定义在singleton类中，
+这种构造方式让<code>klass</code>的其它实例可以定义完全不同的方法。</p>
+
+
+	<h3>Singleton类和实例</h3>
+
+
+	<p>顺便说一下，在压缩过程中，你一定已经看见了，
+对<code>rb_singleton_class_attached()</code>的调用被悄悄的去掉了。这里：</p>
+
+
+<pre class="emlist">
+rb_make_metaclass(obj, super)
+{
+    klass = create a class with super as superclass;
+    FL_SET(klass, FL_SINGLETON);
+    RBASIC(obj)-&gt;klass = klass;
+    rb_singleton_class_attached(klass, obj);   /* 这里 */
+</pre>
+
+	<p>让我们看一下它做了些什么。</p>
+
+
+▼ <code>rb_singleton_class_attached()</code>
+<pre class="longlist">
+ 130  void
+ 131  rb_singleton_class_attached(klass, obj)
+ 132      VALUE klass, obj;
+ 133  {
+ 134      if (FL_TEST(klass, FL_SINGLETON)) {
+ 135          if (!RCLASS(klass)-&gt;iv_tbl) {
+ 136              RCLASS(klass)-&gt;iv_tbl = st_init_numtable();
+ 137          }
+ 138          st_insert(RCLASS(klass)-&gt;iv_tbl,
+                        rb_intern("__attached__"), obj);
+ 139      }
+ 140  }
+
+(class.c)
+</pre>
+
+	<p>如果<code>klass</code>设置了FL_SINGLETON标志……，也就是说，如果它是一个singleton类，
+在<code>klass</code>实例变量表（<code>iv_tbl</code>）中加入<code>__attached__</code> → <code>obj</code>的关系。
+看上去就是这样了
+（在我们这种情况下，<code>klass</code>总是一个singleton类……，总之，它设置了<code>FL_SINGLETON</code>标志。）。</p>
+
+
+	<p><code>__attached__</code>没有<code>@</code>前缀，但它存在实例变量表中，因此它仍然是个实例变量。
+这种实例变量在Ruby层次上绝对无法读取，因此，它可以用于保存一些系统专用的值。</p>
+
+
+	<p>让我们考虑一下<code>klass</code>和<code>obj</code>的关系。<code>klass</code>是<code>obj</code>的singleton类。换句话说，
+singleton类用这个“不可见的”的实例变量记住了创建它的实例。
+在singleton类改变时，这个值用来调用实例（比如<code>obj</code>）的钩子方法。
+比如说，给singleton类添加一个方法时，就会调用<code>obj</code>的<code>singleton_method_added</code>。
+这么做没有什么逻辑上的必然性，因为语言是这么定义的。</p>
+
+
+	<p>但是，这么做不要紧吗？这样把实例存储在<code>__attached__</code>的方式，
+会让强制singleton类拥有一个唯一附着实例。比如，通过获取（以某种方式）singleton类，
+然后调用<code>new</code>，难道singleton类不会有多个实例吗？</p>
+
+
+	<p>没有那样的事，因为要做适当检查，以阻止创建singleton类的实例。</p>
+
+
+	<p>singleton类原本是为了singleton方法而存在的。singleton方法是只存在于特定对象的方法。
+如果singleton类可以有多个实例，它们便与普通类一样了。所以，要强制它们只有一个实例。</p>
+
+
+	<h3>总结</h3>
+
+
+	<p>我们已经做了许多，或许是蓄意破坏，我们还是结束吧！让我们按顺序总结一下。</p>
+
+
+	<p>什么是singleton类？它们是设置了<code>FL_SINGLETON</code>标志的类，只能拥有一个实例。</p>
+
+
+	<p>什么是singleton方法？它们是定义在一个对象的singleton类中的方法。</p>
+
+
+	<h2>Metaclasses</h2>
+
+
+	<h3>singleton方法的继承</h3>
+
+
+	<h4>类的无限链</h4>
+
+
+	<p>类也有一个“类”，那就是<code>Class</code>。<code>Class</code>的类也是<code>Class</code>。
+也就是说，我们在此陷入一个无限的循环中（图2）。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_infloop.png" title="类的无限循环" alt="类的无限循环" /><br>图2: 类的无限循环</p>
+
+
+	<p>至此，我们已经看过了一些东西，这之后就是本章的主题。类如何形成循环？</p>
+
+
+	<p>首先，在Ruby中，所有数据都是对象。类也是数据，因此在Ruby中，
+它们也是对象。</p>
+
+
+	<p>因为它们是对象，它们必须响应方法。“为了响应方法，你必须属于某个类”，
+设置这样的规则会使处理更加简单。“类也要有一个类”的需求由此产生。</p>
+
+
+	<p>让我们以此为基础，考虑一下如何实现它。首先，我们先来尝试一下最为天真的方法，
+<code>Class</code>的类是<code>ClassClass</code>，<code>ClassClass</code>的类是<code>ClassClassClass</code>……，
+以前面说的这种方式，你可以想象到一个由类的类相连的链。但是无论你以怎样的方式来看，
+这种方法都不可能高效的实现。所以，一般在面向对象语言中，<code>Class</code>的类就是<code>Class</code>自身，
+由此创建了一个无限的虚拟的实例——类的关系。</p>
+
+
+	<p>重复一次，<code>Class</code>的类是<code>Class</code>，但这样只是让实现简单，逻辑上没有什么重要的。</p>
+
+
+	<h4>“类也是对象”</h4>
+
+
+	<p>“一切皆对象”，这是谈到Ruby时经常用到的一句广告语。作为这句话另一部分，
+“类也对象！”也应运而生。但是这个表述通常太过高远。考虑这些说法时，
+我们必须一分为二：</p>
+
+
+	<ul>
+	<li>所有的数据都是对象</li>
+		<li>类是数据</li>
+	</ul>
+
+
+	<p>谈及数据或代码会让讨论更加难于理解，因此我们这里把“数据”的含义限制为“程序中可以被放入变量的东西”。</p>
+
+
+	<p>“能够在程序中操作类”这一事实让程序拥有了操作自身的能力。这种能力称为反射（reflection）。
+它适用于对类直接进行操作，对Ruby这种拥有类的面向对象程序设计语言更是如此。</p>
+
+
+	<p>尽管这样，也有不把类当对象的时候。比如以函数风格的方法（定义在顶层的函数）操作类也是完全没有问题。
+然而，因为在解释器内部存在表示类的数据结构，直接在面向对象语言中使用它们显得更自然，
+Ruby就是这样做的。</p>
+
+
+	<p>而且，Ruby的目标是所有的数据都是对象。因此，把类表示成对象也很合适。</p>
+
+
+	<p>顺便说一下，在Ruby中，类必须是对象，原因同反射无关。
+那就是能够定义独立于实例方法（在Java和C++中，称为静态方法）。</p>
+
+
+	<p>为了实现静态方法，有一件事是必需的：singleton方法。连锁反应让singleton类也成为了必需品。
+图3展示了这种依赖关系。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_reqlink.png" title="需求依赖" alt="需求依赖" /><br>图3: 需求依赖</p>
+
+
+	<h4>类方法继承</h4>
+
+
+	<p>在Ruby中，singleton方法定义在类中，称为类方法。然而这个规范有些奇怪。
+为什么类方法可以继承？</p>
+
+
+<pre class="emlist">
+class A
+  def A.test    # 在A中定义singleton方法
+    puts("ok")
+  end
+end
+
+class B &lt; A
+end
+
+B.test()  # 调用它
+</pre>
+
+	<p>类之外的对象绝对不可能发生这样的事情。换句话说，只有类进行了特殊处理。
+在下面一节中，我们会看到类方法如何继承。</p>
+
+
+	<h3>类的singleton类</h3>
+
+
+	<p>假设类方法可以继承，这个操作在哪完成的呢？类定义（创建）的时候？
+singleton方法定义的时候？让我们看看定义类的代码吧！</p>
+
+
+	<p>定义类当然就是<code>rb_define_class()</code>。让我们看看这个函数的调用图：</p>
+
+
+<pre class="emlist">
+rb_define_class
+    rb_class_inherited
+    rb_define_class_id
+        rb_class_new
+            rb_class_boot
+        rb_make_metaclass
+            rb_class_boot
+            rb_singleton_class_attached
+</pre>
+
+	<p>你会觉得好像在哪里见过它，确实，我们在前一节见过。那时你可能没有意识到，
+但是现在要仔细考虑一下，<code>rb_make_metaclass()</code>为何出现在这里。
+正如我们之前看到的那样，这个函数引入一个singleton类。这非常可疑。
+即便我们没有定义singleton函数，为什么还有这个调用。
+而且，为什么用低一级的<code>rb_make_metaclass()</code>而没有用<code>rb_singleton_class()</code>？
+看起来，我们要把这附近的内容再次确认一下了。</p>
+
+
+	<h4><code>rb_define_class_id()</code></h4>
+
+
+	<p>让我们先从它的调用者开始，<code>rb_define_class_id()</code>。</p>
+
+
+▼ <code>rb_define_class_id()</code>
+<pre class="longlist">
+ 160  VALUE
+ 161  rb_define_class_id(id, super)
+ 162      ID id;
+ 163      VALUE super;
+ 164  {
+ 165      VALUE klass;
+ 166
+ 167      if (!super) super = rb_cObject;
+ 168      klass = rb_class_new(super);
+ 169      rb_name_class(klass, id);
+ 170      rb_make_metaclass(klass, RBASIC(super)-&gt;klass);
+ 171
+ 172      return klass;
+ 173  }
+
+(class.c)
+</pre>
+
+	<p><code>rb_class_new()</code>这个函数创建了一个类，其超类是<code>super</code>。
+<code>rb_name_class()</code>的名字表示它是一个类命名，但是此刻，我们并不关心名字，
+因此我们忽略它。随后就是有疑问的<code>rb_make_metaclass()</code>了。
+这里同<code>rb_singleton_class()</code>中调用相比，参数不同。上次是这样：</p>
+
+
+<pre class="emlist">
+rb_make_metaclass(obj, RBASIC(obj)-&gt;klass);
+</pre>
+
+	<p>但是这次成了这样：</p>
+
+
+<pre class="emlist">
+rb_make_metaclass(klass, RBASIC(super)-&gt;klass);
+</pre>
+
+	<p>正如你所看到的，有些许不同。这样的差异会带来怎样的改变呢？
+让我们再看一次简化的<code>rb_make_metaclass()</code>。</p>
+
+
+	<h4><code>rb_make_metaclass</code>（再一次）</h4>
+
+
+▼ <code>rb_make_metaclass</code> （第一次压缩后）
+<pre class="longlist">
+rb_make_metaclass(obj, super)
+{
+    klass = create a class with super as superclass;
+    FL_SET(klass, FL_SINGLETON);
+    RBASIC(obj)-&gt;klass = klass;
+    rb_singleton_class_attached(klass, obj);
+    if (BUILTIN_TYPE(obj) == T_CLASS) {
+        RBASIC(klass)-&gt;klass = klass;
+        if (FL_TEST(obj, FL_SINGLETON)) {
+            RCLASS(klass)-&gt;super =
+                    RBASIC(rb_class_real(RCLASS(obj)-&gt;super))-&gt;klass;
+        }
+    }
+
+    return klass;
+}
+</pre>
+
+	<p>上次，故意忽略了<code>if</code>语句，但再来看一下，这里只针对<code>T_CLASS</code>，也就是类，
+做了些什么，很明显，这很重要。在<code>rb_define_class_id()</code>中，这样调用它：</p>
+
+
+<pre class="emlist">
+rb_make_metaclass(klass, RBASIC(super)-&gt;klass);
+</pre>
+
+	<p>让我们用这个值将<code>rb_make_metaclass()</code>参数变量展开。</p>
+
+
+▼ <code>rb_make_metaclass</code> (再压缩）
+<pre class="longlist">
+rb_make_metaclass(klass, super_klass /* == RBASIC(super)-&gt;klass */)
+{
+    sclass = create a class with super_class as superclass;
+    RBASIC(klass)-&gt;klass = sclass;
+    RBASIC(sclass)-&gt;klass = sclass;
+    return sclass;
+}
+</pre>
+
+	<p>按照上面所示来做的话，会得到图4所示的结果。图中，括号里的名字是singleton类。
+这个记法在本书中很常见，因此，我希望你可以记住。
+这表示<code>obj</code>的singleton类记作<code>(obj)</code>。<code>(klass)</code>是<code>klass</code>的singleton类。
+看上去singleton类夹在类和它超类的类之间。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_metaclass.png" title="类的singleton类导入" alt="类的singleton类导入" /><br>图4: 类的singleton类导入</p>
+
+
+	<p>试着从这个结果进一步扩展想像力，我们可以想到超类的类（图4的c）一定是超类的singleton类。
+这样再多一层继承你也可以理解了（图5）。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_multi.png" title="多层继承的层次结构" alt="多层继承的层次结构" /><br>图5: 多层继承的层次结构</p>
+
+
+	<p><code>super</code>和<code>klass</code>之间的关系等同于<code>klass</code>和<code>klass2</code>之间的关系，<code>c</code>一定是singleton类<code>(super)</code>。
+如果如此继续下去，最终你会得到一个结论，<code>Object</code>的类一定是<code>(Object)</code>。
+实际就是这样。比如，像下面的程序这样的继承：</p>
+
+
+<pre class="emlist">
+class A &lt; Object
+end
+class B &lt; A
+end
+</pre>
+
+	<p>内部创建了一个类似于图6的结构。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_metatree.png" title="类的层次结构和元类" alt="类的层次结构和元类" /><br>图6: 类的层次结构和元类</p>
+
+
+	<p>类和它的元类连接在一起，继承也如此，这样，类方法便得到了继承。</p>
+
+
+	<h3>类的类的类</h3>
+
+
+	<p>你已经理解类方法继承如何运作，但这么做反过来也带来一些问题。
+类的singleton类的类是什么？这个用调试器试一下就好。
+根据调查结果，我制作了图7。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_mmm.png" title="类的singleton类的类" alt="类的singleton类的类" /><br>图7: 类的singleton类的类</p>
+
+
+	<p>类的singleton类把自己当作自己的类。相当复杂。</p>
+
+
+	<p>第二个问题：<code>Object</code>的类必须是<code>Class</code>。
+在第一章《Ruby语言最小化》中，我已经确认了这一点，不是吗？</p>
+
+
+<pre class="emlist">
+p(Object.class())   # 类
+</pre>
+
+	<p>当然，这是“在Ruby层次”上的情况。但是“在C的层次上”，它是singleton类<code>(Object)</code>。
+如果<code>(Object)</code>没有出现在Ruby的层次上，那只是因为<code>Object#class</code>忽略了singleton类。
+让我们看看方法<code>rb_obj_class()</code>的主体来确认此事。</p>
+
+
+▼ <code>rb_obj_class()</code>
+<pre class="longlist">
+  86  VALUE
+  87  rb_obj_class(obj)
+  88      VALUE obj;
+  89  {
+  90      return rb_class_real(CLASS_OF(obj));
+  91  }
+
+  76  VALUE
+  77  rb_class_real(cl)
+  78      VALUE cl;
+  79  {
+  80      while (FL_TEST(cl, FL_SINGLETON) || TYPE(cl) == T_ICLASS) {
+  81          cl = RCLASS(cl)-&gt;super;
+  82      }
+  83      return cl;
+  84  }
+
+(object.c)
+</pre>
+
+	<p><code>CLASS_OF(obj)</code>返回<code>obj</code>的<code>basic.klass</code>。在<code>rb_class_real()</code>中，
+跳过了所有的singleton类（往超类方向）。首先，singleton类夹在类和其超类之间，
+类似于一个代理。需要“真正的”类时，我们必须沿超类链前进（图8）。</p>
+
+
+	<p><code>I_CLASS</code>会在我们稍后总结的时候出现。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_real.png" title="singleton类和真正的类" alt="singleton类和真正的类" /><br>图8: singleton类和真正的类</p>
+
+
+	<h3>singleton类和元类</h3>
+
+
+	<p>好的，类中导入的singleton类也是一种类，它是类的类，因此称为元类。</p>
+
+
+	<p>然而，你要注意，singleton类不是元类。类中导入的singleton类是元类。
+重要的不在于“它们是singleton类”，而在于“它们是类的类”。
+初学Ruby的时候，我也陷入其中。也许其他朋友也会困惑，所以，我想在这里先行声明。</p>
+
+
+	<p>考虑一下，<code>rb_make_metaclass()</code>这个函数名不是非常好。用于类时，它确实创建了一个元类，
+但用于对象时，却并非如此。</p>
+
+
+	<p>最后，即便你理解了一些类是元类，好像也没有什么具体的收获。
+我希望你不会过多去关心它。</p>
+
+
+	<h3>引导</h3>
+
+
+	<p>至此，关于类和元类的话题基本上结束了。但是还留下一个问题，关于3个元对象：
+<code>Object</code>, <code>Module</code>和<code>Class</code>。它们3个无法用常用的API创建。为了创建类，元类必须构建出来，
+但是正如我们前面看到的，元类的超类是<code>Class</code>。然而，因为<code>Class</code>还没有创建，
+元类是无法构建出来的。因此在<code>ruby</code>中，只有这3个类的创建需要特殊处理。</p>
+
+
+	<p>那么让我们看一下代码：</p>
+
+
+▼ <code>Object</code>, <code>Module</code>和<code>Class</code>的创建
+<pre class="longlist">
+1243  rb_cObject = boot_defclass("Object", 0);
+1244  rb_cModule = boot_defclass("Module", rb_cObject);
+1245  rb_cClass =  boot_defclass("Class",  rb_cModule);
+1246
+1247  metaclass = rb_make_metaclass(rb_cObject, rb_cClass);
+1248  metaclass = rb_make_metaclass(rb_cModule, metaclass);
+1249  metaclass = rb_make_metaclass(rb_cClass, metaclass);
+
+(object.c)
+</pre>
+
+	<p>首先，在前半部分，<code>boot_defclass()</code> 类似于<code>rb_class_boot()</code>，
+它只是以给定的超类创建一个类。至此，我们得到图9左半部分的连接。</p>
+
+
+	<p>后半部分的三行， 创建和设置了<code>(Object)</code>，<code>(Module)</code>和<code>(Class)</code>。
+<code>(Object)</code>和<code>(Module)</code>类……是其自身……已经在<code>rb_make_metaclass()</code>中设置了，
+因此，没有问题。这样的话，元对象的引导就结束了。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_boot1.png" title="元对象的创建" alt="元对象的创建" /><br>图9: 元对象的创建</p>
+
+
+	<p>考虑过所有内容之后，我们得到了如图10所示的最终形态。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_metaobj.png" title="Ruby元对象" alt="Ruby元对象" /><br>图10: Ruby元对象</p>
+
+
+	<h2>类的名字</h2>
+
+
+	<p>在本节中，我们会分析一下类和类名（也就是常量）之间的相互转换如何执行，
+具体的说，我们的目标是<code>rb_define_class()</code>和<code>rb_define_class_under()</code>。</p>
+
+
+	<h3>名字 → 类</h3>
+
+
+	<p>首先，我们来看一下<code>rb_defined_class()</code>。这个函数结束之后，就可以从常量找到这个类了。</p>
+
+
+▼ <code>rb_define_class()</code>
+<pre class="longlist">
+ 183  VALUE
+ 184  rb_define_class(name, super)
+ 185      const char *name;
+ 186      VALUE super;
+ 187  {
+ 188      VALUE klass;
+ 189      ID id;
+ 190
+ 191      id = rb_intern(name);
+ 192      if (rb_autoload_defined(id)) {             /* (A) 自动加载 */
+ 193          rb_autoload_load(id);
+ 194      }
+ 195      if (rb_const_defined(rb_cObject, id)) {    /* (B) rb_const_defined */
+ 196          klass = rb_const_get(rb_cObject, id);  /* (C) rb_const_get */
+ 197          if (TYPE(klass) != T_CLASS) {
+ 198              rb_raise(rb_eTypeError, "%s is not a class", name);
+ 199          }                                      /* (D) rb_class_real */
+ 200          if (rb_class_real(RCLASS(klass)-&gt;super) != super) {
+ 201              rb_name_error(id, "%s is already defined", name);
+ 202          }
+ 203          return klass;
+ 204      }
+ 205      if (!super) {
+ 206          rb_warn("no super class for '%s', Object assumed", name);
+ 207      }
+ 208      klass = rb_define_class_id(id, super);
+ 209      rb_class_inherited(super, klass);
+ 210      st_add_direct(rb_class_tbl, id, klass);
+ 211
+ 212      return klass;
+ 213  }
+
+(class.c)
+</pre>
+
+	<p><code>rb_define_class_id()</code>前后有许多东西要理解……之前，我们获取或创建类。
+之后，我们设置常量。我们下面详细的看一下。</p>
+
+
+	<p>（A） 在Ruby中，有一个自动加载的函数，访问一些常量时，自动加载程序库。
+<code>rb_autoload_xxxx()</code>函数完成这个功能。忽略它不会有任何问题。</p>
+
+
+	<p>（B） 判定<code>Object</code>中是否定义了<code>name</code>。</p>
+
+
+	<p>（C） 获取<code>name</code>常量的值。第六章《变量与常量》中会对此进行详细解释。</p>
+
+
+	<p>（D） 我们以前看过<code>rb_class_real()</code>，如果类<code>c</code>是一个singleton类，或是<code>ICLASS</code>，
+就沿着<code>super</code>的类层次结构向上，寻找一个不满足这样条件的类返回。简而言之，
+这个函数跳过了不该出现在Ruby层次上的虚拟类。</p>
+
+
+	<p>我们可读的就是这些了。</p>
+
+
+	<p>这附近牵扯的常量非常麻烦。不过，在常量的章节中，我们会再次讨论类定义的，此刻，
+部分的描述足以让我们心满意足了。</p>
+
+
+	<p><code>rb_define_class_id</code>之后是这样：</p>
+
+
+<pre class="emlist">
+st_add_direct(rb_class_tbl, id, klass);
+</pre>
+
+	<p>这部分将类赋值给常量。然而，无论怎样也看不出来。实际上，顶层类与其它常量是分开的，
+在<code>rb_class_tbl()</code>中重新归结到一起。这个划分同GC有些许关系，没有什么额外的本质意义。</p>
+
+
+	<h3>类 → 名字</h3>
+
+
+	<p>我们已经清楚了如何从类名获得类，但是反向操作如何来做呢？通过调用<code>p</code>或<code>Class#name</code>，
+我们就能得到类的名字，但是这是如何实现的呢？</p>
+
+
+	<p>实际上，前面的<code>rb_name_class()</code>已经完成了这个工作。附近的调用如下：</p>
+
+
+<pre class="emlist">
+rb_define_class
+    rb_define_class_id
+        rb_name_class
+</pre>
+
+	<p>我们看一下它的内容：</p>
+
+
+▼ <code>rb_name_class()</code>
+<pre class="longlist">
+ 269  void
+ 270  rb_name_class(klass, id)
+ 271      VALUE klass;
+ 272      ID id;
+ 273  {
+ 274      rb_iv_set(klass, "__classid__", ID2SYM(id));
+ 275  }
+
+(variable.c)
+</pre>
+
+	<p><code>__classid__</code>是另一个无法在Ruby中无法看到的实例变量。
+实例变量表中只能放置<code>VALUE</code>值，将<code>ID</code>转成<code>Symbol</code>的工作由<code>ID2SYM()</code>完成。</p>
+
+
+	<p>这样便实现了类→常量名的检索。</p>
+
+
+	<h3>嵌套类</h3>
+
+
+	<p>对于定义在顶层的类，我们已经知道了名字和类之间是如何连接。
+剩下的就是定义在模块或是其它类中的类，这就有些复杂了。
+定义嵌套类的函数是<code>rb_define_class_under()</code>。</p>
+
+
+▼ <code>rb_define_class_under()</code>
+<pre class="longlist">
+ 215  VALUE
+ 216  rb_define_class_under(outer, name, super)
+ 217      VALUE outer;
+ 218      const char *name;
+ 219      VALUE super;
+ 220  {
+ 221      VALUE klass;
+ 222      ID id;
+ 223
+ 224      id = rb_intern(name);
+ 225      if (rb_const_defined_at(outer, id)) {
+ 226          klass = rb_const_get(outer, id);
+ 227          if (TYPE(klass) != T_CLASS) {
+ 228              rb_raise(rb_eTypeError, "%s is not a class", name);
+ 229          }
+ 230          if (rb_class_real(RCLASS(klass)-&gt;super) != super) {
+ 231              rb_name_error(id, "%s is already defined", name);
+ 232          }
+ 233          return klass;
+ 234      }
+ 235      if (!super) {
+ 236          rb_warn("no super class for '%s::%s', Object assumed",
+ 237                  rb_class2name(outer), name);
+ 238      }
+ 239      klass = rb_define_class_id(id, super);
+ 240      rb_set_class_path(klass, outer, name);
+ 241      rb_class_inherited(super, klass);
+ 242      rb_const_set(outer, id, klass);
+ 243
+ 244      return klass;
+ 245  }
+
+(class.c)
+</pre>
+
+	<p>结构类似于<code>rb_define_class()</code>。<code>rb_define_class_id()</code>调用前是重定义的检查，
+之后，创建常量和类之间的相互连接。前半部分与<code>rb_define_class()</code>非常类似，
+我们跳过它。后半部分中，<code>rb_set_class_path()</code>是新的。我们就来看看它。</p>
+
+
+	<h4><code>rb_set_class_path()</code></h4>
+
+
+	<p>这个函数给出嵌套在类<code>under</code>中的类<code>klass</code>的名字<code>name</code>。
+函数名中的“类路径（class path）”表示一个名字，它包含从顶层开始的所有嵌套信息。
+比如，“<code>Net::NetPrivate::Socket</code>”。</p>
+
+
+▼ <code>rb_set_class_path()</code>
+<pre class="longlist">
+ 210  void
+ 211  rb_set_class_path(klass, under, name)
+ 212      VALUE klass, under;
+ 213      const char *name;
+ 214  {
+ 215      VALUE str;
+ 216
+ 217      if (under == rb_cObject) {
+              /* 定义在顶层 */
+ 218          str = rb_str_new2(name);    /* 从名字创建一个Ruby字符串 */
+ 219      }
+ 220      else {
+              /* 嵌套常量 */
+ 221          str = rb_str_dup(rb_class_path(under));  /* 复制返回值 */
+ 222          rb_str_cat2(str, "::");     /* 连接“::” */
+ 223          rb_str_cat2(str, name);     /* 连接名字 */
+ 224      }
+ 225      rb_iv_set(klass, "__classpath__", str);
+ 226  }
+
+(variable.c)
+</pre>
+
+	<p>除了最后一行，就是在构建类路径，最后一行让类记住了自己的名字。
+<code>__classpath__</code>当然又是一个Ruby程序不可见的实例变量。
+在<code>rb_name_class()</code>中，有个<code>__classid__</code>，但<code>id</code>有些不同，
+因为它并不包含嵌套信息（见下表）。</p>
+
+
+<pre class="emlist">
+__classpath__    Net::NetPrivate::Socket
+__classid__                       Socket
+</pre>
+
+	<p><code>rb_defined_class()</code>等函数定义的类都定义了<code>__classid__</code>或<code>__classpath__</code>。
+因此，要找到<code>under</code>的类路径，我们可以查询这些实例变量。
+这就是<code>rb_class_path()</code>的工作。我们省略它的内容。</p>
+
+
+	<h3>无名类</h3>
+
+
+	<p>实际上，与我刚说过的相反，有些情况既不设置<code>__classpath__</code>也不设置<code>__classid__</code>。
+因为在Ruby中，你可以使用类似如下的方法创建类：</p>
+
+
+<pre class="emlist">
+c = Class.new()
+</pre>
+
+	<p>如果你创建了一个这样的类，我们不会经过<code>rb_define_class_id()</code>，也就没设置类路径。
+在这种情况下，<code>c</code>就没有名字，也就是说，我们得到了一个无名类。</p>
+
+
+	<p>然而，如果随后将它复制给一个常量，这个常量的名字就会附着在类上。</p>
+
+
+<pre class="emlist">
+SomeClass = c   # 类的名字是SomeClass
+</pre>
+
+	<p>严格来说，名字是在复制之后第一次请求时附着的。比如对这个<code>SomeClass</code>类调用<code>p</code>，
+或是调用<code>Class#name</code>方法。这么做需要搜索<code>rb_class_tbl</code>，
+找到一个值，它等于这个类，用它创建一个名字。下面的情况就是：</p>
+
+
+<pre class="emlist">
+class A
+  class B
+    C = tmp = Class.new()
+    p(tmp)   # 这里我们要搜索名字
+  end
+end
+</pre>
+
+	<p>最坏的情况，我们不得不搜索整个常量空间。然而，通常没有太多常量，
+因此，搜索所有常量并不会花太多时间。</p>
+
+
+	<h2>包含</h2>
+
+
+	<p>我们只讨论了类，让我们改变一下视角，以模块来结束这一章。</p>
+
+
+	<h3><code>rb_include_module</code> (1)</h3>
+
+
+	<p>包含可以由一个普通的方法——<code>Module#include</code>——完成。它对应的C函数是<code>rb_include_module()</code>。
+实际上，更准确的说，它的主体是<code>rb_mod_include()</code>，在那调用<code>Module#append_feature</code>，
+这个函数的缺省实现最终会调用<code>rb_include_module()</code>。将Ruby和C所发生的一切合在一起，
+我们得到下面的调用图：</p>
+
+
+<pre class="emlist">
+Module#include (rb_mod_include)
+    Module#append_features (rb_mod_append_features)
+        rb_include_module
+</pre>
+
+	<p>通常的包含由<code>rb_include_module()</code>完成。这个函数有点长，我们一次看一半。</p>
+
+
+▼ <code>rb_include_module</code> （前半部分）
+<pre class="longlist">
+      /* 在类中包含模块 */
+ 347  void
+ 348  rb_include_module(klass, module)
+ 349      VALUE klass, module;
+ 350  {
+ 351      VALUE p, c;
+ 352      int changed = 0;
+ 353
+ 354      rb_frozen_class_p(klass);
+ 355      if (!OBJ_TAINTED(klass)) {
+ 356          rb_secure(4);
+ 357      }
+ 358
+ 359      if (NIL_P(module)) return;
+ 360      if (klass == module) return;
+ 361
+ 362      switch (TYPE(module)) {
+ 363        case T_MODULE:
+ 364        case T_CLASS:
+ 365        case T_ICLASS:
+ 366          break;
+ 367        default:
+ 368          Check_Type(module, T_MODULE);
+ 369      }
+
+(class.c)
+</pre>
+
+	<p>到这里只有安全和类型检查相关的内容，因此，我们可以忽略。
+下面是主要处理：</p>
+
+
+▼ <code>rb_include_module</code> （后半部分）
+<pre class="longlist">
+ 371      OBJ_INFECT(klass, module);
+ 372      c = klass;
+ 373      while (module) {
+ 374          int superclass_seen = Qfalse;
+ 375
+ 376          if (RCLASS(klass)-&gt;m_tbl == RCLASS(module)-&gt;m_tbl)
+ 377              rb_raise(rb_eArgError, "cyclic include detected");
+ 378          /* (A) 如果超类已经包含了该模块，则跳过 */
+ 379          for (p = RCLASS(klass)-&gt;super; p; p = RCLASS(p)-&gt;super) {
+ 380              switch (BUILTIN_TYPE(p)) {
+ 381                case T_ICLASS:
+ 382                  if (RCLASS(p)-&gt;m_tbl == RCLASS(module)-&gt;m_tbl) {
+ 383                      if (!superclass_seen) {
+ 384                          c = p;  /* 移到插入点 */
+ 385                      }
+ 386                      goto skip;
+ 387                  }
+ 388                  break;
+ 389                case T_CLASS:
+ 390                  superclass_seen = Qtrue;
+ 391                  break;
+ 392              }
+ 393          }
+ 394          c = RCLASS(c)-&gt;super =
+                          include_class_new(module, RCLASS(c)-&gt;super);
+ 395          changed = 1;
+ 396        skip:
+ 397          module = RCLASS(module)-&gt;super;
+ 398      }
+ 399      if (changed) rb_clear_cache();
+ 400  }
+
+(class.c)
+</pre>
+
+	<p>首先，（A）块做的事已经写在注释里了。看上去这是个特殊的条件，我们先跳过它。
+从剩下的内容中提出重要的部分，我们得到如下的内容：</p>
+
+
+<pre class="emlist">
+c = klass;
+while (module) {
+    c = RCLASS(c)-&gt;super = include_class_new(module, RCLASS(c)-&gt;super);
+    module = RCLASS(module)-&gt;super;
+}
+</pre>
+
+	<p>总之，这里在重复<code>module</code>的<code>super</code>。
+<code>module</code>的<code>super</code>中的内容一定是<code>module</code>包含的模块（直觉告诉我们）。
+在包含的地方有东西替换了类的超类，我们不知道是什么，但是此刻，我突然觉得
+“啊！难道这看起来不像给列表添加元素（类似于LISP的cons）吗？”
+它突然让故事快了起来。总之，它是下面的形式：</p>
+
+
+<pre class="emlist">
+list = new(item, list)
+</pre>
+
+	<p>考虑一下，我们的预期是在<code>c</code>和<code>c-&gt;super</code>之间插入了一个模块。
+如果是这样，它就符合模块的规范了。</p>
+
+
+	<p>为了确认这一点，我们要看一下<code>include_class_new()</code>。</p>
+
+
+	<h3><code>include_class_new()</code></h3>
+
+
+▼ <code>include_class_new()</code>
+<pre class="longlist">
+ 319  static VALUE
+ 320  include_class_new(module, super)
+ 321      VALUE module, super;
+ 322  {
+ 323      NEWOBJ(klass, struct RClass);               /* (A) */
+ 324      OBJSETUP(klass, rb_cClass, T_ICLASS);
+ 325
+ 326      if (BUILTIN_TYPE(module) == T_ICLASS) {
+ 327          module = RBASIC(module)-&gt;klass;
+ 328      }
+ 329      if (!RCLASS(module)-&gt;iv_tbl) {
+ 330          RCLASS(module)-&gt;iv_tbl = st_init_numtable();
+ 331      }
+ 332      klass-&gt;iv_tbl = RCLASS(module)-&gt;iv_tbl;     /* (B) */
+ 333      klass-&gt;m_tbl = RCLASS(module)-&gt;m_tbl;
+ 334      klass-&gt;super = super;                       /* (C) */
+ 335      if (TYPE(module) == T_ICLASS) {             /* (D) */
+ 336          RBASIC(klass)-&gt;klass = RBASIC(module)-&gt;klass;   /* (D-1) */
+ 337      }
+ 338      else {
+ 339          RBASIC(klass)-&gt;klass = module;                  /* (D-2) */
+ 340      }
+ 341      OBJ_INFECT(klass, module);
+ 342      OBJ_INFECT(klass, super);
+ 343
+ 344      return (VALUE)klass;
+ 345  }
+
+(class.c)
+</pre>
+
+	<p>非常幸运，这里没有什么我们不知道。</p>
+
+
+	<p>（A） 首先，创建一个新类。</p>
+
+
+	<p>（B） 把<code>module</code>的实例变量表和方法表加入这个类中。</p>
+
+
+	<p>（C）让包含类的超类（<code>super</code>）成为这个新类的超类。</p>
+
+
+	<p>总之，这个函数为模块创建了一个包含类。在（B）处，只是移动了指针，
+而没有复制整个表。稍后，如果添加一个方法，
+那么模块的主体和包含类就会拥有完全相同的方法（图11）。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_symbolic.png" title="包含类" alt="包含类" /><br>图11: 包含类</p>
+
+
+	<p>仔细看一下（A）处，结构类型标志设为了T_ICLASS。这好像是包含类的标记。
+这个函数的名字是<code>include_class_new()</code>，因此<code>ICLASS</code>的<code>I</code> 一定是<code>include</code>。</p>
+
+
+	<p>如果把这个函数和<code>rb_include_module()</code>联合起来考虑，我们就知道，
+我们先前的预期没有错。简而言之，包含是指在类和超类之间插入了一个包含类。（图12）</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_include.png" title="包含" alt="包含" /><br>图12: 包含</p>
+
+
+	<p>在（D-2）处，模块存储在包含类的<code>klass</code>中。在（D-1）处，取出模块的主体……
+实际上，这里的检查没有必要。这个函数开始的部分已经检查了<code>T_ICLASS</code>，
+到这里，不可能还是<code>T_ICLASS</code>。在相当长一段时间内，对<code>ruby</code>的修改都在飞快的积累着，
+因此有相当多细小的遗漏。</p>
+
+
+	<p>还有一件事要考虑。包含类的<code>basic.klass</code>只用于指向模块主体，
+对包含类调用的方法是不可接受的。因此包含类在Ruby程序中一定是不可见的。
+实际上所有的方法都会跳过包含类，不产生异常。</p>
+
+
+	<h3>模拟</h3>
+
+
+	<p>很复杂，让我们来看个具体的例子。我们看图13（1）。
+我们有<code>c1</code>类，<code>m1</code>模块，它包含了<code>m2</code>。（2）和（3）的变化让<code>c1</code>包含<code>m1</code>。
+<code>im</code>开头的当然就是包含类。</p>
+
+
+	<p style="text-align:center;"><img src="images/ch_class_simulate.png" title="包含" alt="包含" /><br>图13: 包含</p>
+
+
+	<h3><code>rb_include_module</code> (2)</h3>
+
+
+	<p>好的，现在我们可以解释我们略过的<code>rb_include_module()</code>了。</p>
+
+
+▼ <code>rb_include_module</code> （避免重复包含）
+<pre class="longlist">
+ 378  /* (A) 如果超类已经包含在包含了模块，则跳过 */
+ 379  for (p = RCLASS(klass)-&gt;super; p; p = RCLASS(p)-&gt;super) {
+ 380      switch (BUILTIN_TYPE(p)) {
+ 381        case T_ICLASS:
+ 382          if (RCLASS(p)-&gt;m_tbl == RCLASS(module)-&gt;m_tbl) {
+ 383              if (!superclass_seen) {
+ 384                  c = p;  /* 移动插入点 */
+ 385              }
+ 386              goto skip;
+ 387          }
+ 388          break;
+ 389        case T_CLASS:
+ 390          superclass_seen = Qtrue;
+ 391          break;
+ 392      }
+ 393  }
+
+(class.c)
+</pre>
+
+	<p>如果<code>klass</code>的超类（<code>p</code>）中有一个<code>T_ICLASS</code>（包含类），
+拥有与我们要包含的模块（<code>module</code>）相同的表，它就是<code>module</code>的包含类。
+我们要跳过包含，这样就不会两次包含这个模块。
+如果这个模块包含了其它的模块（<code>module-&gt;super</code>），我们就多确认一次。</p>
+
+
+	<p>然而，当我们跳过一次包含，<code>p</code>就已经包含一次的那个模块，因此，
+它的包含模块必然已经包含其中……经过瞬间思考，我们得到下面的上下文：</p>
+
+
+<pre class="emlist">
+module M
+end
+module M2
+end
+class C
+  include M   # M2还没有包含在M中
+end           # 因此M2还不在C的超类中
+
+module M
+  include M2  # 在这M2包含在M中，
+end
+class C
+  include M   # 我只想在这添加M2
+end
+</pre>
+
+	<p>反过来说，存在<code>include</code>没有实时响应的情况。</p>
+
+
+	<p>对于类继承而言，类的singleton方法得到了继承，但在模块这里没有这样的事情。
+包含类（或模块）无法继承模块的singleton方法。当你也想继承singleton方法时，
+通常的方式是覆写<code>Module#append_features</code>。</p><hr>
+
+The original work is Copyright &copy; 2002 - 2004 Minero AOKI.<br>
+Translated by Ye Zheng<br>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/"><img alt="Creative Commons License" border="0" src="images/somerights20.png"/></a><br/>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/">Creative Commons Attribution-NonCommercial-ShareAlike2.5 License</a>.
+
+</body>
+</html>
