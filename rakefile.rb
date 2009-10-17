@@ -5,7 +5,7 @@ end
 
 task :lf do
   Dir["*.htm"].each do |f|
-    d=IO.read(f).gsub(/\r\n/,"\n").gsub("\r","\n")
+    d=IO.read(f).gsub(/index.htm/,"index.html")
     puts f
     open(f,"w"){|f|f<<d}
   end  
