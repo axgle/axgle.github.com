@@ -1,88 +1,177 @@
-<html>
-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en-US">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<meta http-equiv="Content-Language" content="zh-cn">
-<title>��ҳ</title>
-<!--mstheme--><link rel="stylesheet" type="text/css" href="_themes/compass/comp1011-106.css"><meta name="Microsoft Theme" content="compass 1011, default">
-<meta name="Microsoft Border" content="tlb, default">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="zh-CH">
+  <link rel="stylesheet" type="text/css" href="rhg.css">
+  <title>Ruby Hacking Guide中文版</title>
 </head>
+<body>
+<h1>Ruby Hacking Guide中文版</h1>
 
-<body><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
 
-<center>
-<h1>
-<img src="_derived/index.html_cmp_compass010_bnr.gif" width="703" height="74" border="0" alt="��ҳ">
-</h1>
-<hr></center>
+	<p><a href="http://i.loveruby.net/ja/rhg/book">Ruby Hacking Guide</a> （简称RHG），是青木峰郎创作的一本剖析<code>ruby</code>实现的书。</p>
 
-</td></tr><!--msnavigation--></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="1%">
 
-<script language="JavaScript"><!--
-MSFPhover = 
-  (((navigator.appName == "Netscape") && 
-  (parseInt(navigator.appVersion) >= 3 )) || 
-  ((navigator.appName == "Microsoft Internet Explorer") && 
-  (parseInt(navigator.appVersion) >= 4 ))); 
-function MSFPpreload(img) 
-{
-  var a=new Image(); a.src=img; return a; 
-}
-// --></script><script language="JavaScript"><!--
-if(MSFPhover) { MSFPnav1n=MSFPpreload("_derived/home_cmp_compass010_vbtn_p.gif"); MSFPnav1h=MSFPpreload("_derived/home_cmp_compass010_vbtn_a.gif"); }
-// --></script><a href="index.html" language="JavaScript" onmouseover="if(MSFPhover) document['MSFPnav1'].src=MSFPnav1h.src" onmouseout="if(MSFPhover) document['MSFPnav1'].src=MSFPnav1n.src"><img src="_derived/home_cmp_compass010_vbtn_p.gif" width="141" height="20" border="0" alt="��ҳ" name="MSFPnav1"></a><br><script language="JavaScript"><!--
-if(MSFPhover) { MSFPnav2n=MSFPpreload("_derived/members.htm_cmp_compass010_vbtn.gif"); MSFPnav2h=MSFPpreload("_derived/members.htm_cmp_compass010_vbtn_a.gif"); }
-// --></script><a href="members.htm" language="JavaScript" onmouseover="if(MSFPhover) document['MSFPnav2'].src=MSFPnav2h.src" onmouseout="if(MSFPhover) document['MSFPnav2'].src=MSFPnav2n.src"><img src="_derived/members.htm_cmp_compass010_vbtn.gif" width="141" height="20" border="0" alt="��Ա" name="MSFPnav2"></a><br><script language="JavaScript"><!--
-if(MSFPhover) { MSFPnav3n=MSFPpreload("_derived/schedule.htm_cmp_compass010_vbtn.gif"); MSFPnav3h=MSFPpreload("_derived/schedule.htm_cmp_compass010_vbtn_a.gif"); }
-// --></script><a href="schedule.htm" language="JavaScript" onmouseover="if(MSFPhover) document['MSFPnav3'].src=MSFPnav3h.src" onmouseout="if(MSFPhover) document['MSFPnav3'].src=MSFPnav3n.src"><img src="_derived/schedule.htm_cmp_compass010_vbtn.gif" width="141" height="20" border="0" alt="�ƻ�" name="MSFPnav3"></a><br><script language="JavaScript"><!--
-if(MSFPhover) { MSFPnav4n=MSFPpreload("_derived/archive.htm_cmp_compass010_vbtn.gif"); MSFPnav4h=MSFPpreload("_derived/archive.htm_cmp_compass010_vbtn_a.gif"); }
-// --></script><a href="archive.htm" language="JavaScript" onmouseover="if(MSFPhover) document['MSFPnav4'].src=MSFPnav4h.src" onmouseout="if(MSFPhover) document['MSFPnav4'].src=MSFPnav4n.src"><img src="_derived/archive.htm_cmp_compass010_vbtn.gif" width="141" height="20" border="0" alt="�浵" name="MSFPnav4"></a><br><script language="JavaScript"><!--
-if(MSFPhover) { MSFPnav5n=MSFPpreload("_derived/search.htm_cmp_compass010_vbtn.gif"); MSFPnav5h=MSFPpreload("_derived/search.htm_cmp_compass010_vbtn_a.gif"); }
-// --></script><a href="search.htm" language="JavaScript" onmouseover="if(MSFPhover) document['MSFPnav5'].src=MSFPnav5h.src" onmouseout="if(MSFPhover) document['MSFPnav5'].src=MSFPnav5n.src"><img src="_derived/search.htm_cmp_compass010_vbtn.gif" width="141" height="20" border="0" alt="����" name="MSFPnav5"></a><br><script language="JavaScript"><!--
-if(MSFPhover) { MSFPnav6n=MSFPpreload("_derived/discuss.htm_cmp_compass010_vbtn.gif"); MSFPnav6h=MSFPpreload("_derived/discuss.htm_cmp_compass010_vbtn_a.gif"); }
-// --></script><a href="discuss.htm" language="JavaScript" onmouseover="if(MSFPhover) document['MSFPnav6'].src=MSFPnav6h.src" onmouseout="if(MSFPhover) document['MSFPnav6'].src=MSFPnav6n.src"><img src="_derived/discuss.htm_cmp_compass010_vbtn.gif" width="141" height="20" border="0" alt="������" name="MSFPnav6"></a><br><script language="JavaScript"><!--
-if(MSFPhover) { MSFPnav7n=MSFPpreload("_derived/contact.htm_cmp_compass010_vbtn.gif"); MSFPnav7h=MSFPpreload("_derived/contact.htm_cmp_compass010_vbtn_a.gif"); }
-// --></script><a href="contact.htm" language="JavaScript" onmouseover="if(MSFPhover) document['MSFPnav7'].src=MSFPnav7h.src" onmouseout="if(MSFPhover) document['MSFPnav7'].src=MSFPnav7n.src"><img src="_derived/contact.htm_cmp_compass010_vbtn.gif" width="141" height="20" border="0" alt="��ϵ����Ϣ" name="MSFPnav7"></a>
+	<p><a href="http://code.google.com/p/rhgchs/">Ruby Hacking Guide中文版</a> 就是将Ruby Hacking Guide这本书翻译成中文，让更多对Ruby有兴趣的人了解Ruby语言的实现。</p>
 
-</td><td valign="top" width="24"></td><!--msnavigation--><td valign="top">
 
-<table border="0" cellspacing="5" width="100%" cellpadding="5" align="left" style="border-left-width: 0; border-top-width: 0; border-bottom-width: 0">
-	<tr>
-		<td width="50%" rowspan="2" style="border-right-style: solid; border-right-width: 1; border-left-style:none; border-left-width:medium; border-top-style:none; border-top-width:medium; border-bottom-style:none; border-bottom-width:medium">
-		<h3>��ĿժҪ</h3>
-		<p>������Ϊ�� 4 ��Ķ����ں�Ժ��һ��Сľ�ݡ���ϣ���������ܹ���������<a href="schedule.htm">��ο��ҵ��ճ̰���</a>������Ϊ�������µĵܵ�Ҳ��һ�����ӣ����Ǽƻ��ô���վ�������ӵĵػ��ƻ������ǽ��ȵ���Ƭ�Լ����õ���ʾ��</p>
-		</td>
-		<td width="50%">
-		<h3>���½�չ</h3>
-		<ul>
-			<li>�ӹ�����Ʒ�̵깺����ϡ���<i>5 �� 29 ��</i></li>
-			<li>������ľ�ݡ���<i>5 �� 25 ��</i></li>
-		</ul>
-		</td>
-	</tr>
-	<tr>
-		<td width="50%">
-		<h3>��Ҫ��̱�</h3>
-		<ul>
-			<li>6 �� 1 �ա������Ƴ�ԭ����ͼ</li>
-			<li>6 �� 7 �ա������ CAD ͼ</li>
-			<li><a href="schedule.htm">��������</a></li>
-		</ul>
-		</td>
-	</tr>
-</table>
+	<h2>制作名单</h2>
 
-<!--msnavigation--></td></tr><!--msnavigation--></table><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
 
-<center><hr><small>
-<nobr>��ҳ</nobr>&nbsp;|&nbsp;<nobr><A HREF="members.htm" TARGET="" STYLE="text-decoration: none;">��Ա</A></nobr>&nbsp;|&nbsp;<nobr><A HREF="schedule.htm" TARGET="" STYLE="text-decoration: none;">�ƻ�</A></nobr>&nbsp;|&nbsp;<nobr><A HREF="archive.htm" TARGET="" STYLE="text-decoration: none;">�浵</A></nobr>&nbsp;|&nbsp;<nobr><A HREF="search.htm" TARGET="" STYLE="text-decoration: none;">����</A></nobr>&nbsp;|&nbsp;<nobr><A HREF="discuss.htm" TARGET="" STYLE="text-decoration: none;">������</A></nobr>&nbsp;|&nbsp;<nobr><A HREF="contact.htm" TARGET="" STYLE="text-decoration: none;">��ϵ����Ϣ</A></nobr>
-<br>
-<br>
-�����ǰ�Ȩ����������Ȩ������<br>
-�йش���վ�����⣬����<a href="mailto:[ProjectEmail]">[��Ŀ�����ʼ�]</a>���ʼ���<br>
-�ϴθ���ʱ��: 09 �� 10 �� 17 �ա� 
-</small></center>
+	<table>
+		<tr>
+			<td>章节        </td>
+			<td>翻译            </td>
+			<td>图        </td>
+		</tr>
+		<tr>
+			<td>前言        </td>
+			<td>陈赛力、郑晔        </td>
+		</tr>
+		<tr>
+			<td>序章        </td>
+			<td>陈赛力、郑晔        </td>
+			<td>李彦辉        </td>
+		</tr>
+		<tr>
+			<td>第一章        </td>
+			<td>陈赛力、郑晔        </td>
+			<td>Steven        </td>
+		</tr>
+		<tr>
+			<td>第二章        </td>
+			<td>郑晔            </td>
+			<td><span class="caps">RHG</span>英文版、李彦辉    </td>
+		</tr>
+		<tr>
+			<td>第三章        </td>
+			<td>郑晔            </td>
+			<td><span class="caps">RHG</span>英文版    </td>
+		</tr>
+		<tr>
+			<td>第四章        </td>
+			<td>郑晔            </td>
+			<td><span class="caps">RHG</span>英文版    </td>
+		</tr>
+		<tr>
+			<td>第五章        </td>
+			<td>陈赛力、姜超凡、郑晔    </td>
+			<td>李彦辉        </td>
+		</tr>
+		<tr>
+			<td>第六章        </td>
+			<td>郑晔            </td>
+			<td><span class="caps">RHG</span>英文版    </td>
+		</tr>
+		<tr>
+			<td>第七章        </td>
+			<td>郑晔、姜超凡        </td>
+		</tr>
+	</table>
 
-</td></tr><!--msnavigation--></table></body>
 
+
+
+	<h2>致谢</h2>
+
+
+	<p>感谢青木峰郎创作这样一本优秀的书籍，并允许我们翻译他的作品。</p>
+
+
+	<p><span class="caps">RHG</span>中文版制作采用了<a href="http://rhg.rubyforge.org/"><span class="caps">RHG</span>英文版</a> 的脚本。
+第二、三、四和六章是根据英文版进行翻译，并且这几章的图片是在英文版的基础上修改得来。
+在此对RHG英文版制作团队表示感谢！</p>
+
+
+	<p>感谢RHG中文版翻译团队的所有成员，利用自己业余时间参与到这个项目中来。</p>
+
+
+	<h2>加入我们</h2>
+
+
+	<p>如你所见，RHG中文版目前还没有全部完成。所以，欢迎有兴趣的朋友加入到RHG中文版的制作过程中来。</p>
+
+
+	<p>如果你懂日语，你可以加入翻译团队，协助完成剩余部分的翻译，或是校验已完成部分的正确性。</p>
+
+
+	<p>如果你擅长做图，你可以帮助我们制作后续章节的图片，也可以调整已经完成的图片使其上去更加完美。</p>
+
+
+	<p>如果你了解Ruby的实现，你可以从技术的角度，对已经完成的部分校验，让译稿在技术上更加准确。</p>
+
+
+	<p>如果你对Ruby的实现感兴趣，欢迎阅读已经完成的部分。阅读过程中发现的任何问题，都可以报告给我们，以便我们今后的发布中进行修改，让译稿更加完美。</p>
+
+
+	<p>这是我们的项目主页：
+<a href="http://code.google.com/p/rhgchs/":http://code.google.com/p/rhgchs/":http://code.google.com/p/rhgchs/">http://code.google.com/p/rhgchs/</a></p>
+
+
+	<h2>目录</h2>
+
+
+	<ul>
+	<li><a href="preface.html">前言</a></li>
+		<li><a href="introduction.html">导读</a></li>
+	</ul>
+
+
+	<h3>第一部分：对象</h3>
+
+
+	<ul>
+	<li><a href="chapter01.html">第一章：Ruby语言最小化</a></li>
+		<li><a href="chapter02.html">第二章：对象</a></li>
+		<li><a href="chapter03.html">第三章：名称与名称表</a></li>
+		<li><a href="chapter04.html">第四章：类与模块</a></li>
+		<li><a href="chapter05.html">第五章 垃圾回收</a></li>
+		<li><a href="chapter06.html">第六章：变量和常量</a></li>
+		<li><a href="chapter07.html">第七章：安全</a></li>
+	</ul>
+
+
+	<h3>第二部分：语法解析</h3>
+
+
+	<ul>
+	<li>第八章：Ruby语言详解</li>
+		<li>第九章：<code>yacc</code>快速教程</li>
+		<li>第十章：解析器</li>
+		<li>第十一章：上下文相关的扫描器</li>
+		<li>第十二章：构建语法树</li>
+	</ul>
+
+
+	<h3>第三部分：评估</h3>
+
+
+	<ul>
+	<li>第十三章：评估器的结构</li>
+		<li>第十四章：上下文</li>
+		<li>第十五章：方法</li>
+		<li>第十六章：代码块</li>
+		<li>第十七章：动态评估</li>
+	</ul>
+
+
+	<h3>第四部分：评估器的周边</h3>
+
+
+	<ul>
+	<li>第十九章：加载</li>
+		<li>第二十章：线程</li>
+	</ul>
+
+
+	<ul>
+	<li>Ruby的未来</li>
+	</ul><hr>
+
+The original work is Copyright &copy; 2002 - 2004 Minero AOKI.<br>
+Translated by Ruby Hacking Guide中文版翻译团队<br>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/"><img alt="Creative Commons License" border="0" src="images/somerights20.png"/></a><br/>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/">Creative Commons Attribution-NonCommercial-ShareAlike2.5 License</a>.
+
+</body>
 </html>
