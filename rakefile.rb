@@ -10,3 +10,7 @@ task :lf do
     open(f,"w"){|f|f<<d}
   end  
 end  
+
+task :pdf do
+  puts "adobe reader 920 is good!"
+end  
