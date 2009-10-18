@@ -25,3 +25,8 @@ desc "dreamweaver edit ruby"
 task :dw do
 	puts "http://blog.csdn.net/roso99/archive/2007/06/06/1640865.aspx"
 end
+
+task :config do
+	name="duoxiaoke"
+	sh "git config --global user.name \"#{name}\""
+end
