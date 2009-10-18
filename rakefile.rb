@@ -3,6 +3,10 @@ task :default do
 	sh "git push origin master"
 end
 
+task :erb do
+	require 'erb'
+	puts ERB.new("view/1.rhtml").result
+end
 task :lf do
   Dir["*.htm"].each do |f|
     d=IO.read(f).gsub(/index.htm/,"index.html")
