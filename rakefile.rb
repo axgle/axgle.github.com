@@ -5,7 +5,8 @@ end
 
 task :erb do
 	require 'erb'
-	puts ERB.new("view/1.rhtml").result
+	html=IO.read("view/demo.rhtml")
+	puts ERB.new(html).result
 end
 task :lf do
   Dir["*.htm"].each do |f|
