@@ -27,6 +27,6 @@ task :dw do
 end
 
 task :config do
-	name="duoxiaoke"
+	name="axgle"
 	sh "git config --global user.name \"#{name}\""
 end
