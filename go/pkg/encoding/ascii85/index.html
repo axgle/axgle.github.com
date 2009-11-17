@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package ascii85</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Sun Nov 15 20:28:13 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package ascii85</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "encoding/ascii85"</code></p>
+	<p>
+Package ascii85 implements the ascii85 data encoding
+as used in the btoa tool and Adobe&#39;s PostScript and PDF document formats.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/encoding/ascii85/ascii85.go">ascii85.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../../src/pkg/encoding/ascii85/ascii85.go#L190">Decode</a></h2>
+			<p><code><a id="L190"></a>func Decode(dst, src []byte, flush bool) (ndst, nsrc int, err os.Error)</code></p>
+			<p>
+Decode decodes src into dst, returning both the number
+of bytes written to dst and the number consumed from src.
+If src contains invalid ascii85 data, Decode will return the
+number of bytes successfully written and a CorruptInputError.
+Decode ignores space and control characters in src.
+Often, ascii85-encoded data is wrapped in &lt;~ and ~&gt; symbols.
+Decode expects these to have been stripped by the caller.
+</p>
+<p>
+If flush is true, Decode assumes that src represents the
+end of the input stream and processes it completely rather
+than wait for the completion of another 32-bit block.
+</p>
+<p>
+NewDecoder wraps an io.Reader interface around Decode.
+</p>
+
+			<h2>func <a href="../../../src/pkg/encoding/ascii85/ascii85.go#L29">Encode</a></h2>
+			<p><code><a id="L29"></a>func Encode(dst, src []byte) int</code></p>
+			<p>
+Encode encodes src into at most MaxEncodedLen(len(src))
+bytes of dst, returning the actual number of bytes written.
+</p>
+<p>
+The encoding handles 4-byte chunks, using a special encoding
+for the last fragment, so Encode is not appropriate for use on
+individual blocks of a large data stream.  Use NewEncoder() instead.
+</p>
+<p>
+Often, ascii85-encoded data is wrapped in &lt;~ and ~&gt; symbols.
+Encode does not add these.
+</p>
+
+			<h2>func <a href="../../../src/pkg/encoding/ascii85/ascii85.go#L87">MaxEncodedLen</a></h2>
+			<p><code><a id="L87"></a>func MaxEncodedLen(n int) int</code></p>
+			<p>
+MaxEncodedLen returns the maximum length of an encoding of n source bytes.
+</p>
+
+			<h2>func <a href="../../../src/pkg/encoding/ascii85/ascii85.go#L247">NewDecoder</a></h2>
+			<p><code><a id="L247"></a>func NewDecoder(r io.Reader) io.Reader</code></p>
+			<p>
+NewDecoder constructs a new ascii85 stream decoder.
+</p>
+
+			<h2>func <a href="../../../src/pkg/encoding/ascii85/ascii85.go#L94">NewEncoder</a></h2>
+			<p><code><a id="L94"></a>func NewEncoder(w io.Writer) io.WriteCloser</code></p>
+			<p>
+NewEncoder returns a new ascii85 stream encoder.  Data written to
+the returned writer will be encoded and then written to w.
+Ascii85 encodings operate in 32-bit blocks; when finished
+writing, the caller must Close the returned encoder to flush any
+trailing partial block.
+</p>
+
+			<h2>type <a href="../../../src/pkg/encoding/ascii85/ascii85.go#L170"><a id="L170"></a>CorruptInputError</a></h2>
+			
+			<p><pre><a id="L170"></a>type CorruptInputError int64</pre></p>
+				<h3>func (<a id="L172"></a>CorruptInputError) <a href="../../../src/pkg/encoding/ascii85/ascii85.go#L172">String</a></h3>
+				<p><code><a id="L172"></a>func (e CorruptInputError) String() string</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package path</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package path</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "path"</code></p>
+	<p>
+The path package implements utility routines for manipulating
+slash-separated filename paths.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/path/path.go">path.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/path/path.go#L32">Clean</a></h2>
+			<p><code><a id="L32"></a>func Clean(path string) string</code></p>
+			<p>
+Clean returns the shortest path name equivalent to path
+by purely lexical processing.  It applies the following rules
+iteratively until no further processing can be done:
+</p>
+<pre>1. Replace multiple slashes with a single slash.
+2. Eliminate each . path name element (the current directory).
+3. Eliminate each inner .. path name element (the parent directory)
+   along with the non-.. element that precedes it.
+4. Eliminate .. elements that begin a rooted path:
+   that is, replace &#34;/..&#34; by &#34;/&#34; at the beginning of a path.
+</pre>
+<p>
+If the result of this process is an empty string, Clean
+returns the string &#34;.&#34;.
+</p>
+<p>
+See also Rob Pike, &ldquo;Lexical File Names in Plan 9 or
+Getting Dot-Dot right,&rdquo;
+http://plan9.bell-labs.com/sys/doc/lexnames.html
+</p>
+
+			<h2>func <a href="../../src/pkg/path/path.go#L131">Ext</a></h2>
+			<p><code><a id="L131"></a>func Ext(path string) string</code></p>
+			<p>
+Ext returns the file name extension used by path.
+The extension is the suffix beginning at the final dot
+in the final slash-separated element of path;
+it is empty if there is no dot.
+</p>
+
+			<h2>func <a href="../../src/pkg/path/path.go#L120">Join</a></h2>
+			<p><code><a id="L120"></a>func Join(dir, file string) string</code></p>
+			<p>
+Join joins dir and file into a single path, adding a separating
+slash if necessary.  If dir is empty, it returns file.
+</p>
+
+			<h2>func <a href="../../src/pkg/path/path.go#L109">Split</a></h2>
+			<p><code><a id="L109"></a>func Split(path string) (dir, file string)</code></p>
+			<p>
+Split splits path immediately following the final slash,
+separating it into a directory and file name component.
+If there is no slash in path, DirFile returns an empty dir and
+file set to path.
+</p>
+
+			<h2>func <a href="../../src/pkg/path/path.go#L177">Walk</a></h2>
+			<p><code><a id="L177"></a>func Walk(root string, v Visitor, errors chan&lt;- os.Error)</code></p>
+			<p>
+Walk walks the file tree rooted at root, calling v.VisitDir or
+v.VisitFile for each directory or file in the tree, including root.
+If v.VisitDir returns false, Walk skips the directory&#39;s entries;
+otherwise it invokes itself for each directory entry in sorted order.
+An error reading a directory does not abort the Walk.
+If errors != nil, Walk sends each directory read error
+to the channel.  Otherwise Walk discards the error.
+</p>
+
+			<h2>type <a href="../../src/pkg/path/path.go#L143"><a id="L143"></a>Visitor</a></h2>
+			<p>
+Visitor methods are invoked for corresponding file tree entries
+visited by Walk. The parameter path is the full path of d relative
+to root.
+</p>
+
+			<p><pre><a id="L143"></a>type Visitor interface {
+    <a id="L144"></a>VisitDir(path string, d *os.Dir) bool;
+    <a id="L145"></a>VisitFile(path string, d *os.Dir);
+<a id="L146"></a>}</pre></p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

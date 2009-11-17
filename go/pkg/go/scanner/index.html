@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package scanner</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package scanner</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "go/scanner"</code></p>
+	<p>
+A scanner for Go source text. Takes a []byte as source which can
+then be tokenized through repeated calls to the Scan function.
+For a sample use of a scanner, see the implementation of Tokenize.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/go/scanner/errors.go">errors.go</a>
+				<a href="../../../src/pkg/go/scanner/scanner.go">scanner.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+These constants control the construction of the ErrorList
+returned by GetErrors.
+</p>
+
+			<pre><a id="L121"></a>const (
+    <a id="L122"></a>Raw          = iota; // leave error list unchanged
+    <a id="L123"></a>Sorted;              // sort error list by file, line, and column number
+    <a id="L124"></a>NoMultiples;         // sort error list and leave only the first error per line
+<a id="L125"></a>)</pre>
+			<p>
+The mode parameter to the Init function is a set of flags (or 0).
+They control scanner behavior.
+</p>
+
+			<pre><a id="L69"></a>const (
+    <a id="L70"></a>ScanComments       = 1 &lt;&lt; iota; // return comments as COMMENT tokens
+    <a id="L71"></a>AllowIllegalChars;              // do not report an error for illegal chars
+<a id="L72"></a>)</pre>
+			<h2>func <a href="../../../src/pkg/go/scanner/errors.go#L186">PrintError</a></h2>
+			<p><code><a id="L186"></a>func PrintError(w io.Writer, err os.Error)</code></p>
+			<p>
+PrintError is a utility function that prints a list of errors to w,
+one error per line, if the err parameter is an ErrorList. Otherwise
+it prints the err string.
+</p>
+
+			<h2>func <a href="../../../src/pkg/go/scanner/scanner.go#L553">Tokenize</a></h2>
+			<p><code><a id="L553"></a>func Tokenize(filename string, src []byte, err ErrorHandler, mode uint, f func(pos token.Position, tok token.Token, lit []byte) bool) int</code></p>
+			<p>
+Tokenize calls a function f with the token position, token value, and token
+text for each token in the source src. The other parameters have the same
+meaning as for the Init function. Tokenize keeps scanning until f returns
+false (usually when the token value is token.EOF). The result is the number
+of errors encountered.
+</p>
+
+			<h2>type <a href="../../../src/pkg/go/scanner/errors.go#L61"><a id="L61"></a>Error</a></h2>
+			<p>
+Within ErrorVector, an error is represented by an Error node. The
+position Pos, if valid, points to the beginning of the offending
+token, and the error condition is described by Msg.
+</p>
+
+			<p><pre><a id="L61"></a>type Error struct {
+    <a id="L62"></a>Pos token.Position;
+    <a id="L63"></a>Msg string;
+<a id="L64"></a>}</pre></p>
+				<h3>func (<a id="L67"></a>*Error) <a href="../../../src/pkg/go/scanner/errors.go#L67">String</a></h3>
+				<p><code><a id="L67"></a>func (e *Error) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/scanner/errors.go#L22"><a id="L22"></a>ErrorHandler</a></h2>
+			<p>
+An implementation of an ErrorHandler may be provided to the Scanner.
+If a syntax error is encountered and a handler was installed, Error
+is called with a position and an error message. The position points
+to the beginning of the offending token.
+</p>
+
+			<p><pre><a id="L22"></a>type ErrorHandler interface {
+    <a id="L23"></a>Error(pos token.Position, msg string);
+<a id="L24"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/scanner/errors.go#L78"><a id="L78"></a>ErrorList</a></h2>
+			<p>
+An ErrorList is a (possibly sorted) list of Errors.
+</p>
+
+			<p><pre><a id="L78"></a>type ErrorList []*Error</pre></p>
+				<h3>func (<a id="L82"></a>ErrorList) <a href="../../../src/pkg/go/scanner/errors.go#L82">Len</a></h3>
+				<p><code><a id="L82"></a>func (p ErrorList) Len() int</code></p>
+				<p>
+ErrorList implements the sort Interface.
+</p>
+
+				<h3>func (<a id="L86"></a>ErrorList) <a href="../../../src/pkg/go/scanner/errors.go#L86">Less</a></h3>
+				<p><code><a id="L86"></a>func (p ErrorList) Less(i, j int) bool</code></p>
+				
+				<h3>func (<a id="L107"></a>ErrorList) <a href="../../../src/pkg/go/scanner/errors.go#L107">String</a></h3>
+				<p><code><a id="L107"></a>func (p ErrorList) String() string</code></p>
+				
+				<h3>func (<a id="L83"></a>ErrorList) <a href="../../../src/pkg/go/scanner/errors.go#L83">Swap</a></h3>
+				<p><code><a id="L83"></a>func (p ErrorList) Swap(i, j int)</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/scanner/errors.go#L36"><a id="L36"></a>ErrorVector</a></h2>
+			<p>
+ErrorVector implements the ErrorHandler interface. It must be
+initialized with Init(). It maintains a list of errors which can
+be retrieved with GetErrorList and GetError.
+</p>
+<p>
+A common usage pattern is to embed an ErrorVector alongside a
+scanner in a data structure that uses the scanner. By passing a
+reference to an ErrorVector to the scanner&#39;s Init call, default
+error handling is obtained.
+</p>
+
+			<p><pre><a id="L36"></a>type ErrorVector struct {
+    // contains unexported fields
+<a id="L38"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/go/scanner/errors.go#L46">NewErrorVector</a></h3>
+				<p><code><a id="L46"></a>func NewErrorVector() *ErrorVector</code></p>
+				<p>
+NewErrorVector creates a new ErrorVector.
+</p>
+
+				<h3>func (<a id="L177"></a>*ErrorVector) <a href="../../../src/pkg/go/scanner/errors.go#L177">Error</a></h3>
+				<p><code><a id="L177"></a>func (h *ErrorVector) Error(pos token.Position, msg string)</code></p>
+				<p>
+ErrorVector implements the ErrorHandler interface.
+</p>
+
+				<h3>func (<a id="L54"></a>*ErrorVector) <a href="../../../src/pkg/go/scanner/errors.go#L54">ErrorCount</a></h3>
+				<p><code><a id="L54"></a>func (h *ErrorVector) ErrorCount() int</code></p>
+				<p>
+ErrorCount returns the number of errors collected.
+</p>
+
+				<h3>func (<a id="L167"></a>*ErrorVector) <a href="../../../src/pkg/go/scanner/errors.go#L167">GetError</a></h3>
+				<p><code><a id="L167"></a>func (h *ErrorVector) GetError(mode int) os.Error</code></p>
+				<p>
+GetError is like GetErrorList, but it returns an os.Error instead
+so that a nil result can be assigned to an os.Error variable and
+remains nil.
+</p>
+
+				<h3>func (<a id="L132"></a>*ErrorVector) <a href="../../../src/pkg/go/scanner/errors.go#L132">GetErrorList</a></h3>
+				<p><code><a id="L132"></a>func (h *ErrorVector) GetErrorList(mode int) ErrorList</code></p>
+				<p>
+GetErrorList returns the list of errors collected by an ErrorVector.
+The construction of the ErrorList returned is controlled by the mode
+parameter. If there are no errors, the result is nil.
+</p>
+
+				<h3>func (<a id="L42"></a>*ErrorVector) <a href="../../../src/pkg/go/scanner/errors.go#L42">Init</a></h3>
+				<p><code><a id="L42"></a>func (h *ErrorVector) Init()</code></p>
+				<p>
+Init initializes an ErrorVector.
+</p>
+
+			<h2>type <a href="../../../src/pkg/go/scanner/scanner.go#L25"><a id="L25"></a>Scanner</a></h2>
+			<p>
+A Scanner holds the scanner&#39;s internal state while processing
+a given text.  It can be allocated as part of another data
+structure but must be initialized via Init before use. For
+a sample use, see the implementation of Tokenize.
+</p>
+
+			<p><pre><a id="L25"></a>type Scanner struct {
+    <a id="L36"></a>// public state - ok to modify
+    <a id="L37"></a>ErrorCount int; // number of errors encountered
+    // contains unexported fields
+<a id="L38"></a>}</pre></p>
+				<h3>func (<a id="L83"></a>*Scanner) <a href="../../../src/pkg/go/scanner/scanner.go#L83">Init</a></h3>
+				<p><code><a id="L83"></a>func (S *Scanner) Init(filename string, src []byte, err ErrorHandler, mode uint)</code></p>
+				<p>
+Init prepares the scanner S to tokenize the text src. Calls to Scan
+will use the error handler err if they encounter a syntax error and
+err is not nil. Also, for each error encountered, the Scanner field
+ErrorCount is incremented by one. The filename parameter is used as
+filename in the token.Position returned by Scan for each token. The
+mode parameter determines how comments and illegal characters are
+handled.
+</p>
+
+				<h3>func (<a id="L434"></a>*Scanner) <a href="../../../src/pkg/go/scanner/scanner.go#L434">Scan</a></h3>
+				<p><code><a id="L434"></a>func (S *Scanner) Scan() (pos token.Position, tok token.Token, lit []byte)</code></p>
+				<p>
+Scan scans the next token and returns the token position pos,
+the token tok, and the literal text lit corresponding to the
+token. The source end is indicated by token.EOF.
+</p>
+<p>
+For more tolerant parsing, Scan will return a valid token if
+possible even if a syntax error was encountered. Thus, even
+if the resulting token sequence contains no illegal tokens,
+a client may not assume that no error occurred. Instead it
+must check the scanner&#39;s ErrorCount or the number of calls
+of the error handler, if there was one installed.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

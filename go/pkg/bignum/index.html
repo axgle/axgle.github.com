@@ -1,0 +1,832 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package bignum</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package bignum</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "bignum"</code></p>
+	<p>
+A package for arbitrary precision arithmethic.
+It implements the following numeric types:
+</p>
+<pre>- Natural	unsigned integers
+- Integer	signed integers
+- Rational	rational numbers
+</pre>
+<p>
+This package has been designed for ease of use but the functions it provides
+are likely to be quite slow. It may be deprecated eventually. Use package
+big instead, if possible.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/bignum/arith.go">arith.go</a>
+				<a href="../../src/pkg/bignum/bignum.go">bignum.go</a>
+				<a href="../../src/pkg/bignum/integer.go">integer.go</a>
+				<a href="../../src/pkg/bignum/rational.go">rational.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/bignum/arith.go#L113">Div128</a></h2>
+			<p><code><a id="L113"></a>func Div128(x1, x0, y uint64) (q, r uint64)</code></p>
+			<p>
+q = (x1&lt;&lt;64 + x0)/y + r
+</p>
+
+			<h2>func <a href="../../src/pkg/bignum/integer.go#L107">Iadd</a></h2>
+			<p><code><a id="L107"></a>func Iadd(z, x, y *Integer)</code></p>
+			<p>
+Iadd sets z to the sum x + y.
+z must exist and may be x or y.
+</p>
+
+			<h2>func <a href="../../src/pkg/bignum/integer.go#L167">Iscale</a></h2>
+			<p><code><a id="L167"></a>func Iscale(z *Integer, d int64)</code></p>
+			<p>
+Nscale sets *z to the scaled value (*z) * d.
+</p>
+
+			<h2>func <a href="../../src/pkg/bignum/integer.go#L136">Isub</a></h2>
+			<p><code><a id="L136"></a>func Isub(z, x, y *Integer)</code></p>
+			
+			<h2>func <a href="../../src/pkg/bignum/arith.go#L15">Mul128</a></h2>
+			<p><code><a id="L15"></a>func Mul128(x, y uint64) (z1, z0 uint64)</code></p>
+			<p>
+z1&lt;&lt;64 + z0 = x*y
+</p>
+
+			<h2>func <a href="../../src/pkg/bignum/arith.go#L77">MulAdd128</a></h2>
+			<p><code><a id="L77"></a>func MulAdd128(x, y, c uint64) (z1, z0 uint64)</code></p>
+			<p>
+z1&lt;&lt;64 + z0 = x*y + c
+</p>
+
+			<h2>func <a href="../../src/pkg/bignum/bignum.go#L231">Nadd</a></h2>
+			<p><code><a id="L231"></a>func Nadd(zp *Natural, x, y Natural)</code></p>
+			<p>
+Nadd sets *zp to the sum x + y.
+*zp may be x or y.
+</p>
+
+			<h2>func <a href="../../src/pkg/bignum/bignum.go#L328">Nscale</a></h2>
+			<p><code><a id="L328"></a>func Nscale(z *Natural, d uint64)</code></p>
+			<p>
+Nscale sets *z to the scaled value (*z) * d.
+</p>
+
+			<h2>func <a href="../../src/pkg/bignum/bignum.go#L273">Nsub</a></h2>
+			<p><code><a id="L273"></a>func Nsub(zp *Natural, x, y Natural)</code></p>
+			<p>
+Nsub sets *zp to the difference x - y for x &gt;= y.
+If x &lt; y, an underflow run-time error occurs (use Cmp to test if x &gt;= y).
+*zp may be x or y.
+</p>
+
+			<h2>type <a href="../../src/pkg/bignum/integer.go#L20"><a id="L20"></a>Integer</a></h2>
+			<p>
+Integer represents a signed integer value of arbitrary precision.
+</p>
+
+			<p><pre><a id="L20"></a>type Integer struct {
+    // contains unexported fields
+<a id="L23"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/bignum/integer.go#L40">Int</a></h3>
+				<p><code><a id="L40"></a>func Int(x int64) *Integer</code></p>
+				<p>
+Int creates a small integer with value x.
+</p>
+
+				<h3>func <a href="../../src/pkg/bignum/integer.go#L510">IntFromString</a></h3>
+				<p><code><a id="L510"></a>func IntFromString(s string, base uint) (*Integer, uint, int)</code></p>
+				<p>
+IntFromString returns the integer corresponding to the
+longest possible prefix of s representing an integer in a
+given conversion base, the actual conversion base used, and
+the prefix length. The syntax of integers follows the syntax
+of signed integer literals in Go.
+</p>
+<p>
+If the base argument is 0, the string prefix determines the actual
+conversion base. A prefix of &ldquo;0x&rdquo; or &ldquo;0X&rdquo; selects base 16; the
+&ldquo;0&rdquo; prefix selects base 8. Otherwise the selected base is 10.
+</p>
+
+				<h3>func <a href="../../src/pkg/bignum/integer.go#L30">MakeInt</a></h3>
+				<p><code><a id="L30"></a>func MakeInt(sign bool, mant Natural) *Integer</code></p>
+				<p>
+MakeInt makes an integer given a sign and a mantissa.
+The number is positive (&gt;= 0) if sign is false or the
+mantissa is zero; it is negative otherwise.
+</p>
+
+				<h3>func (<a id="L67"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L67">Abs</a></h3>
+				<p><code><a id="L67"></a>func (x *Integer) Abs() Natural</code></p>
+				<p>
+Abs returns the absolute value of x.
+</p>
+
+				<h3>func (<a id="L129"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L129">Add</a></h3>
+				<p><code><a id="L129"></a>func (x *Integer) Add(y *Integer) *Integer</code></p>
+				<p>
+Add returns the sum x + y.
+</p>
+
+				<h3>func (<a id="L357"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L357">And</a></h3>
+				<p><code><a id="L357"></a>func (x *Integer) And(y *Integer) *Integer</code></p>
+				<p>
+And returns the &ldquo;bitwise and&rdquo; x &amp; y for the 2&#39;s-complement representation of x and y.
+</p>
+
+				<h3>func (<a id="L380"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L380">AndNot</a></h3>
+				<p><code><a id="L380"></a>func (x *Integer) AndNot(y *Integer) *Integer</code></p>
+				<p>
+AndNot returns the &ldquo;bitwise clear&rdquo; x &amp;^ y for the 2&#39;s-complement representation of x and y.
+</p>
+
+				<h3>func (<a id="L453"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L453">Cmp</a></h3>
+				<p><code><a id="L453"></a>func (x *Integer) Cmp(y *Integer) int</code></p>
+				<p>
+Cmp compares x and y. The result is an int value that is
+</p>
+<pre>&lt;  0 if x &lt;  y
+== 0 if x == y
+&gt;  0 if x &gt;  y
+</pre>
+
+				<h3>func (<a id="L263"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L263">Div</a></h3>
+				<p><code><a id="L263"></a>func (x *Integer) Div(y *Integer) *Integer</code></p>
+				<p>
+Div returns the quotient q = x / y for y != 0.
+If y == 0, a division-by-zero run-time error occurs.
+</p>
+<p>
+Div and Mod implement Euclidian division and modulus:
+</p>
+<pre>q = x.Div(y)
+r = x.Mod(y) with: 0 &lt;= r &lt; |q| and: y = x*q + r
+</pre>
+<p>
+(Raymond T. Boute, &ldquo;The Euclidian definition of the functions
+div and mod&rdquo;. ACM Transactions on Programming Languages and
+Systems (TOPLAS), 14(2):127-144, New York, NY, USA, 4/1992.
+ACM press.)
+</p>
+
+				<h3>func (<a id="L295"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L295">DivMod</a></h3>
+				<p><code><a id="L295"></a>func (x *Integer) DivMod(y *Integer) (*Integer, *Integer)</code></p>
+				<p>
+DivMod returns the pair (x.Div(y), x.Mod(y)).
+</p>
+
+				<h3>func (<a id="L497"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L497">Format</a></h3>
+				<p><code><a id="L497"></a>func (x *Integer) Format(h fmt.State, c int)</code></p>
+				<p>
+Format is a support routine for fmt.Formatter. It accepts
+the formats &#39;b&#39; (binary), &#39;o&#39; (octal), and &#39;x&#39; (hexadecimal).
+</p>
+
+				<h3>func (<a id="L74"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L74">IsEven</a></h3>
+				<p><code><a id="L74"></a>func (x *Integer) IsEven() bool</code></p>
+				<p>
+IsEven returns true iff x is divisible by 2.
+</p>
+
+				<h3>func (<a id="L89"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L89">IsNeg</a></h3>
+				<p><code><a id="L89"></a>func (x *Integer) IsNeg() bool</code></p>
+				<p>
+IsNeg returns true iff x &lt; 0.
+</p>
+
+				<h3>func (<a id="L79"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L79">IsOdd</a></h3>
+				<p><code><a id="L79"></a>func (x *Integer) IsOdd() bool</code></p>
+				<p>
+IsOdd returns true iff x is not divisible by 2.
+</p>
+
+				<h3>func (<a id="L94"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L94">IsPos</a></h3>
+				<p><code><a id="L94"></a>func (x *Integer) IsPos() bool</code></p>
+				<p>
+IsPos returns true iff x &gt;= 0.
+</p>
+
+				<h3>func (<a id="L84"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L84">IsZero</a></h3>
+				<p><code><a id="L84"></a>func (x *Integer) IsZero() bool</code></p>
+				<p>
+IsZero returns true iff x == 0.
+</p>
+
+				<h3>func (<a id="L280"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L280">Mod</a></h3>
+				<p><code><a id="L280"></a>func (x *Integer) Mod(y *Integer) *Integer</code></p>
+				<p>
+Mod returns the modulus r of the division x / y for y != 0,
+with r = x - y*x.Div(y). r is always positive.
+If y == 0, a division-by-zero run-time error occurs.
+</p>
+
+				<h3>func (<a id="L190"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L190">Mul</a></h3>
+				<p><code><a id="L190"></a>func (x *Integer) Mul(y *Integer) *Integer</code></p>
+				<p>
+Mul returns the product x * y.
+</p>
+
+				<h3>func (<a id="L179"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L179">Mul1</a></h3>
+				<p><code><a id="L179"></a>func (x *Integer) Mul1(d int64) *Integer</code></p>
+				<p>
+Mul1 returns the product x * d.
+</p>
+
+				<h3>func (<a id="L201"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L201">MulNat</a></h3>
+				<p><code><a id="L201"></a>func (x *Integer) MulNat(y Natural) *Integer</code></p>
+				<p>
+MulNat returns the product x * y, where y is a (unsigned) natural number.
+</p>
+
+				<h3>func (<a id="L101"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L101">Neg</a></h3>
+				<p><code><a id="L101"></a>func (x *Integer) Neg() *Integer</code></p>
+				<p>
+Neg returns the negated value of x.
+</p>
+
+				<h3>func (<a id="L344"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L344">Not</a></h3>
+				<p><code><a id="L344"></a>func (x *Integer) Not() *Integer</code></p>
+				<p>
+Not returns the &ldquo;bitwise not&rdquo; ^x for the 2&#39;s-complement representation of x.
+</p>
+
+				<h3>func (<a id="L403"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L403">Or</a></h3>
+				<p><code><a id="L403"></a>func (x *Integer) Or(y *Integer) *Integer</code></p>
+				<p>
+Or returns the &ldquo;bitwise or&rdquo; x | y for the 2&#39;s-complement representation of x and y.
+</p>
+
+				<h3>func (<a id="L218"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L218">Quo</a></h3>
+				<p><code><a id="L218"></a>func (x *Integer) Quo(y *Integer) *Integer</code></p>
+				<p>
+Quo returns the quotient q = x / y for y != 0.
+If y == 0, a division-by-zero run-time error occurs.
+</p>
+<p>
+Quo and Rem implement T-division and modulus (like C99):
+</p>
+<pre>q = x.Quo(y) = trunc(x/y)  (truncation towards zero)
+r = x.Rem(y) = x - y*q
+</pre>
+<p>
+(Daan Leijen, &ldquo;Division and Modulus for Computer Scientists&rdquo;.)
+</p>
+
+				<h3>func (<a id="L244"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L244">QuoRem</a></h3>
+				<p><code><a id="L244"></a>func (x *Integer) QuoRem(y *Integer) (*Integer, *Integer)</code></p>
+				<p>
+QuoRem returns the pair (x.Quo(y), x.Rem(y)) for y != 0.
+If y == 0, a division-by-zero run-time error occurs.
+</p>
+
+				<h3>func (<a id="L232"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L232">Rem</a></h3>
+				<p><code><a id="L232"></a>func (x *Integer) Rem(y *Integer) *Integer</code></p>
+				<p>
+Rem returns the remainder r of the division x / y for y != 0,
+with r = x - y*x.Quo(y). Unless r is zero, its sign corresponds
+to the sign of x.
+If y == 0, a division-by-zero run-time error occurs.
+</p>
+
+				<h3>func (<a id="L312"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L312">Shl</a></h3>
+				<p><code><a id="L312"></a>func (x *Integer) Shl(s uint) *Integer</code></p>
+				<p>
+Shl implements &ldquo;shift left&rdquo; x &lt;&lt; s. It returns x * 2^s.
+</p>
+
+				<h3>func (<a id="L333"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L333">Shr</a></h3>
+				<p><code><a id="L333"></a>func (x *Integer) Shr(s uint) *Integer</code></p>
+				<p>
+Shr implements &ldquo;shift right&rdquo; x &gt;&gt; s. It returns x / 2^s.
+</p>
+
+				<h3>func (<a id="L491"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L491">String</a></h3>
+				<p><code><a id="L491"></a>func (x *Integer) String() string</code></p>
+				<p>
+String converts x to its decimal string representation.
+x.String() is the same as x.ToString(10).
+</p>
+
+				<h3>func (<a id="L158"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L158">Sub</a></h3>
+				<p><code><a id="L158"></a>func (x *Integer) Sub(y *Integer) *Integer</code></p>
+				<p>
+Sub returns the difference x - y.
+</p>
+
+				<h3>func (<a id="L476"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L476">ToString</a></h3>
+				<p><code><a id="L476"></a>func (x *Integer) ToString(base uint) string</code></p>
+				<p>
+ToString converts x to a string for a given base, with 2 &lt;= base &lt;= 16.
+</p>
+
+				<h3>func (<a id="L56"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L56">Value</a></h3>
+				<p><code><a id="L56"></a>func (x *Integer) Value() int64</code></p>
+				<p>
+Value returns the value of x, if x fits into an int64;
+otherwise the result is undefined.
+</p>
+
+				<h3>func (<a id="L426"></a>*Integer) <a href="../../src/pkg/bignum/integer.go#L426">Xor</a></h3>
+				<p><code><a id="L426"></a>func (x *Integer) Xor(y *Integer) *Integer</code></p>
+				<p>
+Xor returns the &ldquo;bitwise xor&rdquo; x | y for the 2&#39;s-complement representation of x and y.
+</p>
+
+			<h2>type <a href="../../src/pkg/bignum/bignum.go#L115"><a id="L115"></a>Natural</a></h2>
+			<p>
+Natural represents an unsigned integer value of arbitrary precision.
+</p>
+
+			<p><pre><a id="L115"></a>type Natural []digit</pre></p>
+				<h3>func <a href="../../src/pkg/bignum/bignum.go#L1010">Binomial</a></h3>
+				<p><code><a id="L1010"></a>func Binomial(n, k uint) Natural</code></p>
+				<p>
+Binomial computes the binomial coefficient of (n, k).
+</p>
+
+				<h3>func <a href="../../src/pkg/bignum/bignum.go#L1001">Fact</a></h3>
+				<p><code><a id="L1001"></a>func Fact(n uint) Natural</code></p>
+				<p>
+Fact computes the factorial of n (Fact(n) == MulRange(2, n)).
+</p>
+
+				<h3>func <a href="../../src/pkg/bignum/bignum.go#L984">MulRange</a></h3>
+				<p><code><a id="L984"></a>func MulRange(a, b uint) Natural</code></p>
+				<p>
+MulRange computes the product of all the unsigned integers
+in the range [a, b] inclusively.
+</p>
+
+				<h3>func <a href="../../src/pkg/bignum/bignum.go#L120">Nat</a></h3>
+				<p><code><a id="L120"></a>func Nat(x uint64) Natural</code></p>
+				<p>
+Nat creates a small natural number with value x.
+</p>
+
+				<h3>func <a href="../../src/pkg/bignum/bignum.go#L912">NatFromString</a></h3>
+				<p><code><a id="L912"></a>func NatFromString(s string, base uint) (Natural, uint, int)</code></p>
+				<p>
+NatFromString returns the natural number corresponding to the
+longest possible prefix of s representing a natural number in a
+given conversion base, the actual conversion base used, and the
+prefix length. The syntax of natural numbers follows the syntax
+of unsigned integer literals in Go.
+</p>
+<p>
+If the base argument is 0, the string prefix determines the actual
+conversion base. A prefix of &ldquo;0x&rdquo; or &ldquo;0X&rdquo; selects base 16; the
+&ldquo;0&rdquo; prefix selects base 8. Otherwise the selected base is 10.
+</p>
+
+				<h3>func (<a id="L262"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L262">Add</a></h3>
+				<p><code><a id="L262"></a>func (x Natural) Add(y Natural) Natural</code></p>
+				<p>
+Add returns the sum z = x + y.
+</p>
+
+				<h3>func (<a id="L678"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L678">And</a></h3>
+				<p><code><a id="L678"></a>func (x Natural) And(y Natural) Natural</code></p>
+				<p>
+And returns the &ldquo;bitwise and&rdquo; x &amp; y for the 2&#39;s-complement representation of x and y.
+</p>
+
+				<h3>func (<a id="L704"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L704">AndNot</a></h3>
+				<p><code><a id="L704"></a>func (x Natural) AndNot(y Natural) Natural</code></p>
+				<p>
+AndNot returns the &ldquo;bitwise clear&rdquo; x &amp;^ y for the 2&#39;s-complement representation of x and y.
+</p>
+
+				<h3>func (<a id="L765"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L765">Cmp</a></h3>
+				<p><code><a id="L765"></a>func (x Natural) Cmp(y Natural) int</code></p>
+				<p>
+Cmp compares x and y. The result is an int value
+</p>
+<pre>&lt;  0 if x &lt;  y
+== 0 if x == y
+&gt;  0 if x &gt;  y
+</pre>
+
+				<h3>func (<a id="L600"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L600">Div</a></h3>
+				<p><code><a id="L600"></a>func (x Natural) Div(y Natural) Natural</code></p>
+				<p>
+Div returns the quotient q = x / y for y &gt; 0,
+with x = y*q + r and 0 &lt;= r &lt; y.
+If y == 0, a division-by-zero run-time error occurs.
+</p>
+
+				<h3>func (<a id="L619"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L619">DivMod</a></h3>
+				<p><code><a id="L619"></a>func (x Natural) DivMod(y Natural) (Natural, Natural)</code></p>
+				<p>
+DivMod returns the pair (x.Div(y), x.Mod(y)) for y &gt; 0.
+If y == 0, a division-by-zero run-time error occurs.
+</p>
+
+				<h3>func (<a id="L885"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L885">Format</a></h3>
+				<p><code><a id="L885"></a>func (x Natural) Format(h fmt.State, c int)</code></p>
+				<p>
+Format is a support routine for fmt.Formatter. It accepts
+the formats &#39;b&#39; (binary), &#39;o&#39; (octal), and &#39;x&#39; (hexadecimal).
+</p>
+
+				<h3>func (<a id="L1015"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L1015">Gcd</a></h3>
+				<p><code><a id="L1015"></a>func (x Natural) Gcd(y Natural) Natural</code></p>
+				<p>
+Gcd computes the gcd of x and y.
+</p>
+
+				<h3>func (<a id="L181"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L181">IsEven</a></h3>
+				<p><code><a id="L181"></a>func (x Natural) IsEven() bool</code></p>
+				<p>
+IsEven returns true iff x is divisible by 2.
+</p>
+
+				<h3>func (<a id="L186"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L186">IsOdd</a></h3>
+				<p><code><a id="L186"></a>func (x Natural) IsOdd() bool</code></p>
+				<p>
+IsOdd returns true iff x is not divisible by 2.
+</p>
+
+				<h3>func (<a id="L191"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L191">IsZero</a></h3>
+				<p><code><a id="L191"></a>func (x Natural) IsZero() bool</code></p>
+				<p>
+IsZero returns true iff x == 0.
+</p>
+
+				<h3>func (<a id="L809"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L809">Log2</a></h3>
+				<p><code><a id="L809"></a>func (x Natural) Log2() uint</code></p>
+				<p>
+Log2 computes the binary logarithm of x for x &gt; 0.
+The result is the integer n for which 2^n &lt;= x &lt; 2^(n+1).
+If x == 0 a run-time error occurs.
+</p>
+
+				<h3>func (<a id="L610"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L610">Mod</a></h3>
+				<p><code><a id="L610"></a>func (x Natural) Mod(y Natural) Natural</code></p>
+				<p>
+Mod returns the modulus r of the division x / y for y &gt; 0,
+with x = y*q + r and 0 &lt;= r &lt; y.
+If y == 0, a division-by-zero run-time error occurs.
+</p>
+
+				<h3>func (<a id="L398"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L398">Mul</a></h3>
+				<p><code><a id="L398"></a>func (x Natural) Mul(y Natural) Natural</code></p>
+				<p>
+Mul returns the product x * y.
+</p>
+
+				<h3>func (<a id="L377"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L377">Mul1</a></h3>
+				<p><code><a id="L377"></a>func (x Natural) Mul1(d uint64) Natural</code></p>
+				<p>
+Mul1 returns the product x * d.
+</p>
+
+				<h3>func (<a id="L723"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L723">Or</a></h3>
+				<p><code><a id="L723"></a>func (x Natural) Or(y Natural) Natural</code></p>
+				<p>
+Or returns the &ldquo;bitwise or&rdquo; x | y for the 2&#39;s-complement representation of x and y.
+</p>
+
+				<h3>func (<a id="L956"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L956">Pop</a></h3>
+				<p><code><a id="L956"></a>func (x Natural) Pop() uint</code></p>
+				<p>
+Pop computes the &ldquo;population count&rdquo; of (the number of 1 bits in) x.
+</p>
+
+				<h3>func (<a id="L967"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L967">Pow</a></h3>
+				<p><code><a id="L967"></a>func (xp Natural) Pow(n uint) Natural</code></p>
+				<p>
+Pow computes x to the power of n.
+</p>
+
+				<h3>func (<a id="L638"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L638">Shl</a></h3>
+				<p><code><a id="L638"></a>func (x Natural) Shl(s uint) Natural</code></p>
+				<p>
+Shl implements &ldquo;shift left&rdquo; x &lt;&lt; s. It returns x * 2^s.
+</p>
+
+				<h3>func (<a id="L662"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L662">Shr</a></h3>
+				<p><code><a id="L662"></a>func (x Natural) Shr(s uint) Natural</code></p>
+				<p>
+Shr implements &ldquo;shift right&rdquo; x &gt;&gt; s. It returns x / 2^s.
+</p>
+
+				<h3>func (<a id="L866"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L866">String</a></h3>
+				<p><code><a id="L866"></a>func (x Natural) String() string</code></p>
+				<p>
+String converts x to its decimal string representation.
+x.String() is the same as x.ToString(10).
+</p>
+
+				<h3>func (<a id="L303"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L303">Sub</a></h3>
+				<p><code><a id="L303"></a>func (x Natural) Sub(y Natural) Natural</code></p>
+				<p>
+Sub returns the difference x - y for x &gt;= y.
+If x &lt; y, an underflow run-time error occurs (use Cmp to test if x &gt;= y).
+</p>
+
+				<h3>func (<a id="L836"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L836">ToString</a></h3>
+				<p><code><a id="L836"></a>func (x Natural) ToString(base uint) string</code></p>
+				<p>
+ToString converts x to a string for a given base, with 2 &lt;= base &lt;= 16.
+</p>
+
+				<h3>func (<a id="L153"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L153">Value</a></h3>
+				<p><code><a id="L153"></a>func (x Natural) Value() uint64</code></p>
+				<p>
+Value returns the lowest 64bits of x.
+</p>
+
+				<h3>func (<a id="L742"></a>Natural) <a href="../../src/pkg/bignum/bignum.go#L742">Xor</a></h3>
+				<p><code><a id="L742"></a>func (x Natural) Xor(y Natural) Natural</code></p>
+				<p>
+Xor returns the &ldquo;bitwise exclusive or&rdquo; x ^ y for the 2&#39;s-complement representation of x and y.
+</p>
+
+			<h2>type <a href="../../src/pkg/bignum/rational.go#L14"><a id="L14"></a>Rational</a></h2>
+			<p>
+Rational represents a quotient a/b of arbitrary precision.
+</p>
+
+			<p><pre><a id="L14"></a>type Rational struct {
+    // contains unexported fields
+<a id="L17"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/bignum/rational.go#L22">MakeRat</a></h3>
+				<p><code><a id="L22"></a>func MakeRat(a *Integer, b Natural) *Rational</code></p>
+				<p>
+MakeRat makes a rational number given a numerator a and a denominator b.
+</p>
+
+				<h3>func <a href="../../src/pkg/bignum/rational.go#L34">Rat</a></h3>
+				<p><code><a id="L34"></a>func Rat(a0 int64, b0 int64) *Rational</code></p>
+				<p>
+Rat creates a small rational number with value a0/b0.
+</p>
+
+				<h3>func <a href="../../src/pkg/bignum/rational.go#L165">RatFromString</a></h3>
+				<p><code><a id="L165"></a>func RatFromString(s string, base uint) (*Rational, uint, int)</code></p>
+				<p>
+RatFromString returns the rational number corresponding to the
+longest possible prefix of s representing a rational number in a
+given conversion base, the actual conversion base used, and the
+prefix length. The syntax of a rational number is:
+</p>
+<pre>rational = mantissa [exponent] .
+mantissa = integer (&#39;/&#39; natural | &#39;.&#39; natural) .
+exponent = (&#39;e&#39;|&#39;E&#39;) integer .
+</pre>
+<p>
+If the base argument is 0, the string prefix determines the actual
+conversion base for the mantissa. A prefix of &ldquo;0x&rdquo; or &ldquo;0X&rdquo; selects
+base 16; the &ldquo;0&rdquo; prefix selects base 8. Otherwise the selected base is 10.
+If the mantissa is represented via a division, both the numerator and
+denominator may have different base prefixes; in that case the base of
+of the numerator is returned. If the mantissa contains a decimal point,
+the base for the fractional part is the same as for the part before the
+decimal point and the fractional part does not accept a base prefix.
+The base for the exponent is always 10.
+</p>
+
+				<h3>func (<a id="L82"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L82">Add</a></h3>
+				<p><code><a id="L82"></a>func (x *Rational) Add(y *Rational) *Rational</code></p>
+				<p>
+Add returns the sum x + y.
+</p>
+
+				<h3>func (<a id="L118"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L118">Cmp</a></h3>
+				<p><code><a id="L118"></a>func (x *Rational) Cmp(y *Rational) int</code></p>
+				<p>
+Cmp compares x and y. The result is an int value
+</p>
+<pre>&lt;  0 if x &lt;  y
+== 0 if x == y
+&gt;  0 if x &gt;  y
+</pre>
+
+				<h3>func (<a id="L143"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L143">Format</a></h3>
+				<p><code><a id="L143"></a>func (x *Rational) Format(h fmt.State, c int)</code></p>
+				<p>
+Format is a support routine for fmt.Formatter. It accepts
+the formats &#39;b&#39; (binary), &#39;o&#39; (octal), and &#39;x&#39; (hexadecimal).
+</p>
+
+				<h3>func (<a id="L70"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L70">IsInt</a></h3>
+				<p><code><a id="L70"></a>func (x *Rational) IsInt() bool</code></p>
+				<p>
+IsInt returns true iff x can be written with a denominator 1
+in the form x == x&#39;/1; i.e., if x is an integer value.
+</p>
+
+				<h3>func (<a id="L59"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L59">IsNeg</a></h3>
+				<p><code><a id="L59"></a>func (x *Rational) IsNeg() bool</code></p>
+				<p>
+IsNeg returns true iff x &lt; 0.
+</p>
+
+				<h3>func (<a id="L64"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L64">IsPos</a></h3>
+				<p><code><a id="L64"></a>func (x *Rational) IsPos() bool</code></p>
+				<p>
+IsPos returns true iff x &gt; 0.
+</p>
+
+				<h3>func (<a id="L54"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L54">IsZero</a></h3>
+				<p><code><a id="L54"></a>func (x *Rational) IsZero() bool</code></p>
+				<p>
+IsZero returns true iff x == 0.
+</p>
+
+				<h3>func (<a id="L96"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L96">Mul</a></h3>
+				<p><code><a id="L96"></a>func (x *Rational) Mul(y *Rational) *Rational</code></p>
+				<p>
+Mul returns the product x * y.
+</p>
+
+				<h3>func (<a id="L77"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L77">Neg</a></h3>
+				<p><code><a id="L77"></a>func (x *Rational) Neg() *Rational</code></p>
+				<p>
+Neg returns the negated value of x.
+</p>
+
+				<h3>func (<a id="L102"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L102">Quo</a></h3>
+				<p><code><a id="L102"></a>func (x *Rational) Quo(y *Rational) *Rational</code></p>
+				<p>
+Quo returns the quotient x / y for y != 0.
+If y == 0, a division-by-zero run-time error occurs.
+</p>
+
+				<h3>func (<a id="L137"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L137">String</a></h3>
+				<p><code><a id="L137"></a>func (x *Rational) String() string</code></p>
+				<p>
+String converts x to its decimal string representation.
+x.String() is the same as x.ToString(10).
+</p>
+
+				<h3>func (<a id="L89"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L89">Sub</a></h3>
+				<p><code><a id="L89"></a>func (x *Rational) Sub(y *Rational) *Rational</code></p>
+				<p>
+Sub returns the difference x - y.
+</p>
+
+				<h3>func (<a id="L125"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L125">ToString</a></h3>
+				<p><code><a id="L125"></a>func (x *Rational) ToString(base uint) string</code></p>
+				<p>
+ToString converts x to a string for a given base, with 2 &lt;= base &lt;= 16.
+The string representation is of the form &#34;n&#34; if x is an integer; otherwise
+it is of form &#34;n/d&#34;.
+</p>
+
+				<h3>func (<a id="L45"></a>*Rational) <a href="../../src/pkg/bignum/rational.go#L45">Value</a></h3>
+				<p><code><a id="L45"></a>func (x *Rational) Value() (numerator *Integer, denominator Natural)</code></p>
+				<p>
+Value returns the numerator and denominator of x.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package gosym</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package gosym</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "debug/gosym"</code></p>
+	<p>
+Package gosym implements access to the Go symbol
+and line number tables embedded in Go binaries generated
+by the gc compilers.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/debug/gosym/pclntab.go">pclntab.go</a>
+				<a href="../../../src/pkg/debug/gosym/symtab.go">symtab.go</a>
+			</span>
+			</p>
+			<h2>type <a href="../../../src/pkg/debug/gosym/symtab.go#L535"><a id="L535"></a>DecodingError</a></h2>
+			<p>
+DecodingError represents an error during the decoding of
+the symbol table.
+</p>
+
+			<p><pre><a id="L535"></a>type DecodingError struct {
+    // contains unexported fields
+<a id="L539"></a>}</pre></p>
+				<h3>func (<a id="L541"></a>*DecodingError) <a href="../../../src/pkg/debug/gosym/symtab.go#L541">String</a></h3>
+				<p><code><a id="L541"></a>func (e *DecodingError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/gosym/symtab.go#L69"><a id="L69"></a>Func</a></h2>
+			<p>
+A Func collects information about a single function.
+</p>
+
+			<p><pre><a id="L69"></a>type Func struct {
+    <a id="L70"></a>Entry uint64;
+    <a id="L71"></a>*Sym;
+    <a id="L72"></a>End       uint64;
+    <a id="L73"></a>Params    []*Sym;
+    <a id="L74"></a>Locals    []*Sym;
+    <a id="L75"></a>FrameSize int;
+    <a id="L76"></a>LineTable *LineTable;
+    <a id="L77"></a>Obj       *Obj;
+<a id="L78"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/gosym/pclntab.go#L13"><a id="L13"></a>LineTable</a></h2>
+			
+			<p><pre><a id="L13"></a>type LineTable struct {
+    <a id="L14"></a>Data []byte;
+    <a id="L15"></a>PC   uint64;
+    <a id="L16"></a>Line int;
+<a id="L17"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/debug/gosym/pclntab.go#L80">NewLineTable</a></h3>
+				<p><code><a id="L80"></a>func NewLineTable(data []byte, text uint64) *LineTable</code></p>
+				<p>
+NewLineTable returns a new PC/line table
+corresponding to the encoded data.
+Text must be the start address of the
+corresponding text segment.
+</p>
+
+				<h3>func (<a id="L67"></a>*LineTable) <a href="../../../src/pkg/debug/gosym/pclntab.go#L67">LineToPC</a></h3>
+				<p><code><a id="L67"></a>func (t *LineTable) LineToPC(line int, maxpc uint64) uint64</code></p>
+				
+				<h3>func (<a id="L62"></a>*LineTable) <a href="../../../src/pkg/debug/gosym/pclntab.go#L62">PCToLine</a></h3>
+				<p><code><a id="L62"></a>func (t *LineTable) PCToLine(pc uint64) int</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/gosym/symtab.go#L81"><a id="L81"></a>Obj</a></h2>
+			<p>
+An Obj represents a single object file.
+</p>
+
+			<p><pre><a id="L81"></a>type Obj struct {
+    <a id="L82"></a>Funcs []Func;
+    <a id="L83"></a>Paths []Sym;
+<a id="L84"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/gosym/symtab.go#L28"><a id="L28"></a>Sym</a></h2>
+			<p>
+A Sym represents a single symbol table entry.
+</p>
+
+			<p><pre><a id="L28"></a>type Sym struct {
+    <a id="L29"></a>Value  uint64;
+    <a id="L30"></a>Type   byte;
+    <a id="L31"></a>Name   string;
+    <a id="L32"></a>GoType uint64;
+
+    <a id="L33"></a>// If this symbol if a function symbol, the corresponding Func
+    <a id="L34"></a>Func *Func;
+<a id="L35"></a>}</pre></p>
+				<h3>func (<a id="L61"></a>*Sym) <a href="../../../src/pkg/debug/gosym/symtab.go#L61">BaseName</a></h3>
+				<p><code><a id="L61"></a>func (s *Sym) BaseName() string</code></p>
+				<p>
+BaseName returns the symbol name without the package or receiver name.
+</p>
+
+				<h3>func (<a id="L42"></a>*Sym) <a href="../../../src/pkg/debug/gosym/symtab.go#L42">PackageName</a></h3>
+				<p><code><a id="L42"></a>func (s *Sym) PackageName() string</code></p>
+				<p>
+PackageName returns the package part of the symbol name,
+or the empty string if there is none.
+</p>
+
+				<h3>func (<a id="L51"></a>*Sym) <a href="../../../src/pkg/debug/gosym/symtab.go#L51">ReceiverName</a></h3>
+				<p><code><a id="L51"></a>func (s *Sym) ReceiverName() string</code></p>
+				<p>
+ReceiverName returns the receiver type name of this symbol,
+or the empty string if there is none.
+</p>
+
+				<h3>func (<a id="L38"></a>*Sym) <a href="../../../src/pkg/debug/gosym/symtab.go#L38">Static</a></h3>
+				<p><code><a id="L38"></a>func (s *Sym) Static() bool</code></p>
+				<p>
+Static returns whether this symbol is static (not visible outside its file).
+</p>
+
+			<h2>type <a href="../../../src/pkg/debug/gosym/symtab.go#L93"><a id="L93"></a>Table</a></h2>
+			<p>
+Table represents a Go symbol table.  It stores all of the
+symbols decoded from the program and provides methods to translate
+between symbols, names, and addresses.
+</p>
+
+			<p><pre><a id="L93"></a>type Table struct {
+    <a id="L94"></a>Syms  []Sym;
+    <a id="L95"></a>Funcs []Func;
+    <a id="L96"></a>Files map[string]*Obj;
+    <a id="L97"></a>Objs  []Obj;
+<a id="L99"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/debug/gosym/symtab.go#L152">NewTable</a></h3>
+				<p><code><a id="L152"></a>func NewTable(symtab []byte, pcln *LineTable) (*Table, os.Error)</code></p>
+				<p>
+NewTable decodes the Go symbol table in data,
+returning an in-memory representation.
+</p>
+
+				<h3>func (<a id="L358"></a>*Table) <a href="../../../src/pkg/debug/gosym/symtab.go#L358">LineToPC</a></h3>
+				<p><code><a id="L358"></a>func (t *Table) LineToPC(file string, line int) (pc uint64, fn *Func, err os.Error)</code></p>
+				<p>
+LineToPC looks up the first program counter on the given line in
+the named file.  Returns UnknownPathError or UnknownLineError if
+there is an error looking up this line.
+</p>
+
+				<h3>func (<a id="L395"></a>*Table) <a href="../../../src/pkg/debug/gosym/symtab.go#L395">LookupFunc</a></h3>
+				<p><code><a id="L395"></a>func (t *Table) LookupFunc(name string) *Func</code></p>
+				<p>
+LookupFunc returns the text, data, or bss symbol with the given name,
+or nil if no such symbol is found.
+</p>
+
+				<h3>func (<a id="L379"></a>*Table) <a href="../../../src/pkg/debug/gosym/symtab.go#L379">LookupSym</a></h3>
+				<p><code><a id="L379"></a>func (t *Table) LookupSym(name string) *Sym</code></p>
+				<p>
+LookupSym returns the text, data, or bss symbol with the given name,
+or nil if no such symbol is found.
+</p>
+
+				<h3>func (<a id="L328"></a>*Table) <a href="../../../src/pkg/debug/gosym/symtab.go#L328">PCToFunc</a></h3>
+				<p><code><a id="L328"></a>func (t *Table) PCToFunc(pc uint64) *Func</code></p>
+				<p>
+PCToFunc returns the function containing the program counter pc,
+or nil if there is no such function.
+</p>
+
+				<h3>func (<a id="L347"></a>*Table) <a href="../../../src/pkg/debug/gosym/symtab.go#L347">PCToLine</a></h3>
+				<p><code><a id="L347"></a>func (t *Table) PCToLine(pc uint64) (file string, line int, fn *Func)</code></p>
+				<p>
+PCToLine looks up line number information for a program counter.
+If there is no information, it returns fn == nil.
+</p>
+
+				<h3>func (<a id="L407"></a>*Table) <a href="../../../src/pkg/debug/gosym/symtab.go#L407">SymByAddr</a></h3>
+				<p><code><a id="L407"></a>func (t *Table) SymByAddr(addr uint64) *Sym</code></p>
+				<p>
+SymByAddr returns the text, data, or bss symbol starting at the given address.
+TODO(rsc): Allow lookup by any address within the symbol.
+</p>
+
+			<h2>type <a href="../../../src/pkg/debug/gosym/symtab.go#L517"><a id="L517"></a>UnknownFileError</a></h2>
+			<p>
+UnknownFileError represents a failure to find the specific file in
+the symbol table.
+</p>
+
+			<p><pre><a id="L517"></a>type UnknownFileError string</pre></p>
+				<h3>func (<a id="L519"></a>UnknownFileError) <a href="../../../src/pkg/debug/gosym/symtab.go#L519">String</a></h3>
+				<p><code><a id="L519"></a>func (e UnknownFileError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/gosym/symtab.go#L524"><a id="L524"></a>UnknownLineError</a></h2>
+			<p>
+UnknownLineError represents a failure to map a line to a program
+counter, either because the line is beyond the bounds of the file
+or because there is no code on the given line.
+</p>
+
+			<p><pre><a id="L524"></a>type UnknownLineError struct {
+    <a id="L525"></a>File string;
+    <a id="L526"></a>Line int;
+<a id="L527"></a>}</pre></p>
+				<h3>func (<a id="L529"></a>*UnknownLineError) <a href="../../../src/pkg/debug/gosym/symtab.go#L529">String</a></h3>
+				<p><code><a id="L529"></a>func (e *UnknownLineError) String() string</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

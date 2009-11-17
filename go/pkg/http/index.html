@@ -1,0 +1,752 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package http</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:47:43 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package http</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "http"</code></p>
+	<p>
+The http package implements parsing of HTTP requests, replies,
+and URLs and provides an extensible HTTP server and a basic
+HTTP client.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/http/client.go">client.go</a>
+				<a href="../../src/pkg/http/fs.go">fs.go</a>
+				<a href="../../src/pkg/http/request.go">request.go</a>
+				<a href="../../src/pkg/http/server.go">server.go</a>
+				<a href="../../src/pkg/http/status.go">status.go</a>
+				<a href="../../src/pkg/http/url.go">url.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+HTTP status codes, defined in RFC 2616.
+</p>
+
+			<pre><a id="L8"></a>const (
+    <a id="L9"></a>StatusContinue           = 100;
+    <a id="L10"></a>StatusSwitchingProtocols = 101;
+
+    <a id="L12"></a>StatusOK                   = 200;
+    <a id="L13"></a>StatusCreated              = 201;
+    <a id="L14"></a>StatusAccepted             = 202;
+    <a id="L15"></a>StatusNonAuthoritativeInfo = 203;
+    <a id="L16"></a>StatusNoContent            = 204;
+    <a id="L17"></a>StatusResetContent         = 205;
+    <a id="L18"></a>StatusPartialContent       = 206;
+
+    <a id="L20"></a>StatusMultipleChoices   = 300;
+    <a id="L21"></a>StatusMovedPermanently  = 301;
+    <a id="L22"></a>StatusFound             = 302;
+    <a id="L23"></a>StatusSeeOther          = 303;
+    <a id="L24"></a>StatusNotModified       = 304;
+    <a id="L25"></a>StatusUseProxy          = 305;
+    <a id="L26"></a>StatusTemporaryRedirect = 307;
+
+    <a id="L28"></a>StatusBadRequest                   = 400;
+    <a id="L29"></a>StatusUnauthorized                 = 401;
+    <a id="L30"></a>StatusPaymentRequired              = 402;
+    <a id="L31"></a>StatusForbidden                    = 403;
+    <a id="L32"></a>StatusNotFound                     = 404;
+    <a id="L33"></a>StatusMethodNotAllowed             = 405;
+    <a id="L34"></a>StatusNotAcceptable                = 406;
+    <a id="L35"></a>StatusProxyAuthRequired            = 407;
+    <a id="L36"></a>StatusRequestTimeout               = 408;
+    <a id="L37"></a>StatusConflict                     = 409;
+    <a id="L38"></a>StatusGone                         = 410;
+    <a id="L39"></a>StatusLengthRequired               = 411;
+    <a id="L40"></a>StatusPreconditionFailed           = 412;
+    <a id="L41"></a>StatusRequestEntityTooLarge        = 413;
+    <a id="L42"></a>StatusRequestURITooLong            = 414;
+    <a id="L43"></a>StatusUnsupportedMediaType         = 415;
+    <a id="L44"></a>StatusRequestedRangeNotSatisfiable = 416;
+    <a id="L45"></a>StatusExpectationFailed            = 417;
+
+    <a id="L47"></a>StatusInternalServerError     = 500;
+    <a id="L48"></a>StatusNotImplemented          = 501;
+    <a id="L49"></a>StatusBadGateway              = 502;
+    <a id="L50"></a>StatusServiceUnavailable      = 503;
+    <a id="L51"></a>StatusGatewayTimeout          = 504;
+    <a id="L52"></a>StatusHTTPVersionNotSupported = 505;
+<a id="L53"></a>)</pre>
+		<h2>Variables</h2>
+			<p>
+Errors introduced by the HTTP server.
+</p>
+
+			<pre><a id="L27"></a>var (
+    <a id="L28"></a>ErrWriteAfterFlush = os.NewError(&#34;Conn.Write called after Flush&#34;);
+    <a id="L29"></a>ErrHijacked        = os.NewError(&#34;Conn has been hijacked&#34;);
+<a id="L30"></a>)</pre>
+			
+			<pre><a id="L35"></a>var (
+    <a id="L36"></a>ErrLineTooLong   = &amp;ProtocolError{&#34;header line too long&#34;};
+    <a id="L37"></a>ErrHeaderTooLong = &amp;ProtocolError{&#34;header too long&#34;};
+    <a id="L38"></a>ErrShortBody     = &amp;ProtocolError{&#34;entity body too short&#34;};
+<a id="L39"></a>)</pre>
+			<p>
+DefaultServeMux is the default ServeMux used by Serve.
+</p>
+
+			<pre><a id="L435"></a>var DefaultServeMux = NewServeMux()</pre>
+			<h2>func <a href="../../src/pkg/http/request.go#L349">CanonicalHeaderKey</a></h2>
+			<p><code><a id="L349"></a>func CanonicalHeaderKey(s string) string</code></p>
+			<p>
+CanonicalHeaderKey returns the canonical format of the
+HTTP header key s.  The canonicalization converts the first
+letter and any letter following a hyphen to upper case;
+the rest are converted to lowercase.  For example, the
+canonical key for &#34;accept-encoding&#34; is &#34;Accept-Encoding&#34;.
+</p>
+
+			<h2>func <a href="../../src/pkg/http/server.go#L513">Handle</a></h2>
+			<p><code><a id="L513"></a>func Handle(pattern string, handler Handler)</code></p>
+			<p>
+Handle registers the handler for the given pattern
+in the DefaultServeMux.
+</p>
+
+			<h2>func <a href="../../src/pkg/http/server.go#L563">ListenAndServe</a></h2>
+			<p><code><a id="L563"></a>func ListenAndServe(addr string, handler Handler) os.Error</code></p>
+			<p>
+ListenAndServe listens on the TCP network address addr
+and then calls Serve with handler to handle requests
+on incoming connections.  Handler is typically nil,
+in which case the DefaultServeMux is used.
+</p>
+<p>
+A trivial example server is:
+</p>
+<pre>package main
+
+import (
+	&#34;http&#34;;
+	&#34;io&#34;;
+)
+
+// hello world, the web server
+func HelloServer(c *http.Conn, req *http.Request) {
+	io.WriteString(c, &#34;hello, world!\n&#34;);
+}
+
+func main() {
+	http.Handle(&#34;/hello&#34;, http.HandlerFunc(HelloServer));
+	err := http.ListenAndServe(&#34;:12345&#34;, nil);
+	if err != nil {
+		panic(&#34;ListenAndServe: &#34;, err.String())
+	}
+}
+</pre>
+
+			<h2>func <a href="../../src/pkg/http/server.go#L319">NotFound</a></h2>
+			<p><code><a id="L319"></a>func NotFound(c *Conn, req *Request)</code></p>
+			<p>
+NotFound replies to the request with an HTTP 404 not found error.
+</p>
+
+			<h2>func <a href="../../src/pkg/http/server.go#L331">Redirect</a></h2>
+			<p><code><a id="L331"></a>func Redirect(c *Conn, url string, code int)</code></p>
+			<p>
+Redirect replies to the request with a redirect to url,
+which may be a path relative to the request path.
+</p>
+
+			<h2>func <a href="../../src/pkg/http/server.go#L519">Serve</a></h2>
+			<p><code><a id="L519"></a>func Serve(l net.Listener, handler Handler) os.Error</code></p>
+			<p>
+Serve accepts incoming HTTP connections on the listener l,
+creating a new service thread for each.  The service threads
+read requests and then call handler to reply to them.
+Handler is typically nil, in which case the DefaultServeMux is used.
+</p>
+
+			<h2>func <a href="../../src/pkg/http/fs.go#L158">ServeFile</a></h2>
+			<p><code><a id="L158"></a>func ServeFile(c *Conn, r *Request, name string)</code></p>
+			<p>
+ServeFile replies to the request with the contents of the named file or directory.
+</p>
+
+			<h2>func <a href="../../src/pkg/http/url.go#L122">URLEscape</a></h2>
+			<p><code><a id="L122"></a>func URLEscape(s string) string</code></p>
+			<p>
+URLEscape converts a string into URL-encoded form.
+</p>
+
+			<h2>func <a href="../../src/pkg/http/url.go#L72">URLUnescape</a></h2>
+			<p><code><a id="L72"></a>func URLUnescape(s string) (string, os.Error)</code></p>
+			<p>
+URLUnescape unescapes a URL-encoded string,
+converting %AB into the byte 0xAB and &#39;+&#39; into &#39; &#39; (space).
+It returns an error if any % is not followed
+by two hexadecimal digits.
+</p>
+
+			<h2>type <a href="../../src/pkg/http/server.go#L40"><a id="L40"></a>Conn</a></h2>
+			<p>
+A Conn represents the server side of a single active HTTP connection.
+</p>
+
+			<p><pre><a id="L40"></a>type Conn struct {
+    <a id="L41"></a>RemoteAddr string;   // network address of remote side
+    <a id="L42"></a>Req        *Request; // current HTTP request
+    // contains unexported fields
+<a id="L56"></a>}</pre></p>
+				<h3>func (<a id="L293"></a>*Conn) <a href="../../src/pkg/http/server.go#L293">Hijack</a></h3>
+				<p><code><a id="L293"></a>func (c *Conn) Hijack() (rwc io.ReadWriteCloser, buf *bufio.ReadWriter, err os.Error)</code></p>
+				<p>
+Hijack lets the caller take over the connection.
+After a call to c.Hijack(), the HTTP server library
+will not do anything else with the connection.
+It becomes the caller&#39;s responsibility to manage
+and close the connection.
+</p>
+
+				<h3>func (<a id="L118"></a>*Conn) <a href="../../src/pkg/http/server.go#L118">SetHeader</a></h3>
+				<p><code><a id="L118"></a>func (c *Conn) SetHeader(hdr, val string)</code></p>
+				<p>
+SetHeader sets a header line in the eventual reply.
+For example, SetHeader(&#34;Content-Type&#34;, &#34;text/html; charset=utf-8&#34;)
+will result in the header line
+</p>
+<pre>Content-Type: text/html; charset=utf-8
+</pre>
+<p>
+being sent.  UTF-8 encoded HTML is the default setting for
+Content-Type in this library, so users need not make that
+particular call.  Calls to SetHeader after WriteHeader (or Write)
+are ignored.
+</p>
+
+				<h3>func (<a id="L159"></a>*Conn) <a href="../../src/pkg/http/server.go#L159">Write</a></h3>
+				<p><code><a id="L159"></a>func (c *Conn) Write(data []byte) (n int, err os.Error)</code></p>
+				<p>
+Write writes the data to the connection as part of an HTTP reply.
+If WriteHeader has not yet been called, Write calls WriteHeader(http.StatusOK)
+before writing the data.
+</p>
+
+				<h3>func (<a id="L125"></a>*Conn) <a href="../../src/pkg/http/server.go#L125">WriteHeader</a></h3>
+				<p><code><a id="L125"></a>func (c *Conn) WriteHeader(code int)</code></p>
+				<p>
+WriteHeader sends an HTTP response header with status code.
+If WriteHeader is not called explicitly, the first call to Write
+will trigger an implicit WriteHeader(http.StatusOK).
+Thus explicit calls to WriteHeader are mainly used to
+send error codes.
+</p>
+
+			<h2>type <a href="../../src/pkg/http/server.go#L35"><a id="L35"></a>Handler</a></h2>
+			<p>
+Objects implementing the Handler interface can be
+registered to serve a particular path or subtree
+in the HTTP server.
+</p>
+
+			<p><pre><a id="L35"></a>type Handler interface {
+    <a id="L36"></a>ServeHTTP(*Conn, *Request);
+<a id="L37"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/http/fs.go#L171">FileServer</a></h3>
+				<p><code><a id="L171"></a>func FileServer(root, prefix string) Handler</code></p>
+				<p>
+FileServer returns a handler that serves HTTP requests
+with the contents of the file system rooted at root.
+It strips prefix from the incoming requests before
+looking up the file name in the file system.
+</p>
+
+				<h3>func <a href="../../src/pkg/http/server.go#L327">NotFoundHandler</a></h3>
+				<p><code><a id="L327"></a>func NotFoundHandler() Handler</code></p>
+				<p>
+NotFoundHandler returns a simple request handler
+that replies to each request with a &ldquo;404 page not found&rdquo; reply.
+</p>
+
+				<h3>func <a href="../../src/pkg/http/server.go#L399">RedirectHandler</a></h3>
+				<p><code><a id="L399"></a>func RedirectHandler(url string, code int) Handler</code></p>
+				<p>
+RedirectHandler returns a request handler that redirects
+each request it receives to the given url using the given
+status code.
+</p>
+
+			<h2>type <a href="../../src/pkg/http/server.go#L309"><a id="L309"></a>HandlerFunc</a></h2>
+			<p>
+The HandlerFunc type is an adapter to allow the use of
+ordinary functions as HTTP handlers.  If f is a function
+with the appropriate signature, HandlerFunc(f) is a
+Handler object that calls f.
+</p>
+
+			<p><pre><a id="L309"></a>type HandlerFunc func(*Conn, *Request)</pre></p>
+				<h3>func (<a id="L312"></a>HandlerFunc) <a href="../../src/pkg/http/server.go#L312">ServeHTTP</a></h3>
+				<p><code><a id="L312"></a>func (f HandlerFunc) ServeHTTP(c *Conn, req *Request)</code></p>
+				<p>
+ServeHTTP calls f(c, req).
+</p>
+
+			<h2>type <a href="../../src/pkg/http/request.go#L31"><a id="L31"></a>ProtocolError</a></h2>
+			<p>
+HTTP request parsing errors.
+</p>
+
+			<p><pre><a id="L31"></a>type ProtocolError struct {
+    <a id="L32"></a>os.ErrorString;
+<a id="L33"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/http/request.go#L49"><a id="L49"></a>Request</a></h2>
+			<p>
+A Request represents a parsed HTTP request header.
+</p>
+
+			<p><pre><a id="L49"></a>type Request struct {
+    <a id="L50"></a>Method     string; // GET, POST, PUT, etc.
+    <a id="L51"></a>RawURL     string; // The raw URL given in the request.
+    <a id="L52"></a>URL        *URL;   // Parsed URL.
+    <a id="L53"></a>Proto      string; // &#34;HTTP/1.0&#34;
+    <a id="L54"></a>ProtoMajor int;    // 1
+    <a id="L55"></a>ProtoMinor int;    // 0
+
+    <a id="L57"></a>// A header mapping request lines to their values.
+    <a id="L58"></a>// If the header says
+    <a id="L59"></a>//
+    <a id="L60"></a>//  Accept-Language: en-us
+    <a id="L61"></a>//  accept-encoding: gzip, deflate
+    <a id="L62"></a>//  Connection: keep-alive
+    <a id="L63"></a>//
+    <a id="L64"></a>// then
+    <a id="L65"></a>//
+    <a id="L66"></a>//  Header = map[string]string{
+    <a id="L67"></a>//      &#34;Accept-Encoding&#34;: &#34;en-us&#34;,
+    <a id="L68"></a>//      &#34;Accept-Language&#34;: &#34;gzip, deflate&#34;,
+    <a id="L69"></a>//      &#34;Connection&#34;: &#34;keep-alive&#34;
+    <a id="L70"></a>//  }
+    <a id="L71"></a>//
+    <a id="L72"></a>// HTTP defines that header names are case-insensitive.
+    <a id="L73"></a>// The request parser implements this by canonicalizing the
+    <a id="L74"></a>// name, making the first character and any characters
+    <a id="L75"></a>// following a hyphen uppercase and the rest lowercase.
+    <a id="L76"></a>Header map[string]string;
+
+    <a id="L78"></a>// The message body.
+    <a id="L79"></a>Body io.Reader;
+
+    <a id="L81"></a>// Whether to close the connection after replying to this request.
+    <a id="L82"></a>Close bool;
+
+    <a id="L84"></a>// The host on which the URL is sought.
+    <a id="L85"></a>// Per RFC 2616, this is either the value of the Host: header
+    <a id="L86"></a>// or the host name given in the URL itself.
+    <a id="L87"></a>Host string;
+
+    <a id="L89"></a>// The referring URL, if sent in the request.
+    <a id="L90"></a>//
+    <a id="L91"></a>// Referer is misspelled as in the request itself,
+    <a id="L92"></a>// a mistake from the earliest days of HTTP.
+    <a id="L93"></a>// This value can also be fetched from the Header map
+    <a id="L94"></a>// as Header[&#34;Referer&#34;]; the benefit of making it
+    <a id="L95"></a>// available as a structure field is that the compiler
+    <a id="L96"></a>// can diagnose programs that use the alternate
+    <a id="L97"></a>// (correct English) spelling req.Referrer but cannot
+    <a id="L98"></a>// diagnose programs that use Header[&#34;Referrer&#34;].
+    <a id="L99"></a>Referer string;
+
+    <a id="L101"></a>// The User-Agent: header string, if sent in the request.
+    <a id="L102"></a>UserAgent string;
+
+    <a id="L104"></a>// The parsed form. Only available after ParseForm is called.
+    <a id="L105"></a>Form map[string][]string;
+<a id="L106"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/http/request.go#L441">ReadRequest</a></h3>
+				<p><code><a id="L441"></a>func ReadRequest(b *bufio.Reader) (req *Request, err os.Error)</code></p>
+				<p>
+ReadRequest reads and parses a request from b.
+</p>
+
+				<h3>func (<a id="L645"></a>*Request) <a href="../../src/pkg/http/request.go#L645">FormValue</a></h3>
+				<p><code><a id="L645"></a>func (r *Request) FormValue(key string) string</code></p>
+				<p>
+FormValue returns the first value for the named component of the query.
+FormValue calls ParseForm if necessary.
+</p>
+
+				<h3>func (<a id="L612"></a>*Request) <a href="../../src/pkg/http/request.go#L612">ParseForm</a></h3>
+				<p><code><a id="L612"></a>func (r *Request) ParseForm() (err os.Error)</code></p>
+				<p>
+ParseForm parses the request body as a form for POST requests, or the raw query for GET requests.
+It is idempotent.
+</p>
+
+				<h3>func (<a id="L110"></a>*Request) <a href="../../src/pkg/http/request.go#L110">ProtoAtLeast</a></h3>
+				<p><code><a id="L110"></a>func (r *Request) ProtoAtLeast(major, minor int) bool</code></p>
+				<p>
+ProtoAtLeast returns whether the HTTP protocol used
+in the request is at least major.minor.
+</p>
+
+				<h3>func (<a id="L135"></a>*Request) <a href="../../src/pkg/http/request.go#L135">Write</a></h3>
+				<p><code><a id="L135"></a>func (req *Request) Write(w io.Writer) os.Error</code></p>
+				<p>
+Write writes an HTTP/1.1 request -- header and body -- in wire format.
+This method consults the following fields of req:
+</p>
+<pre>URL
+Method (defaults to &#34;GET&#34;)
+UserAgent (defaults to defaultUserAgent)
+Referer
+Header
+Body
+</pre>
+<p>
+If Body is present, &#34;Transfer-Encoding: chunked&#34; is forced as a header.
+</p>
+
+			<h2>type <a href="../../src/pkg/http/client.go#L20"><a id="L20"></a>Response</a></h2>
+			<p>
+Response represents the response from an HTTP request.
+</p>
+
+			<p><pre><a id="L20"></a>type Response struct {
+    <a id="L21"></a>Status     string; // e.g. &#34;200 OK&#34;
+    <a id="L22"></a>StatusCode int;    // e.g. 200
+
+    <a id="L24"></a>// Header maps header keys to values.  If the response had multiple
+    <a id="L25"></a>// headers with the same key, they will be concatenated, with comma
+    <a id="L26"></a>// delimiters.  (Section 4.2 of RFC 2616 requires that multiple headers
+    <a id="L27"></a>// be semantically equivalent to a comma-delimited sequence.)
+    <a id="L28"></a>//
+    <a id="L29"></a>// Keys in the map are canonicalized (see CanonicalHeaderKey).
+    <a id="L30"></a>Header map[string]string;
+
+    <a id="L32"></a>// Stream from which the response body can be read.
+    <a id="L33"></a>Body io.ReadCloser;
+<a id="L34"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/http/client.go#L176">Get</a></h3>
+				<p><code><a id="L176"></a>func Get(url string) (r *Response, finalURL string, err os.Error)</code></p>
+				<p>
+Get issues a GET to the specified URL.  If the response is one of the following
+redirect codes, it follows the redirect, up to a maximum of 10 redirects:
+</p>
+<pre>301 (Moved Permanently)
+302 (Found)
+303 (See Other)
+307 (Temporary Redirect)
+</pre>
+<p>
+finalURL is the URL from which the response was fetched -- identical to the input
+URL unless redirects were followed.
+</p>
+<p>
+Caller should close r.Body when done reading it.
+</p>
+
+				<h3>func <a href="../../src/pkg/http/client.go#L213">Post</a></h3>
+				<p><code><a id="L213"></a>func Post(url string, bodyType string, body io.Reader) (r *Response, err os.Error)</code></p>
+				<p>
+Post issues a POST to the specified URL.
+</p>
+<p>
+Caller should close r.Body when done reading it.
+</p>
+
+				<h3>func <a href="../../src/pkg/http/client.go#L71">ReadResponse</a></h3>
+				<p><code><a id="L71"></a>func ReadResponse(r *bufio.Reader) (*Response, os.Error)</code></p>
+				<p>
+ReadResponse reads and returns an HTTP response from r.
+</p>
+
+				<h3>func (<a id="L47"></a>*Response) <a href="../../src/pkg/http/client.go#L47">AddHeader</a></h3>
+				<p><code><a id="L47"></a>func (r *Response) AddHeader(key, value string)</code></p>
+				<p>
+AddHeader adds a value under the given key.  Keys are not case sensitive.
+</p>
+
+				<h3>func (<a id="L41"></a>*Response) <a href="../../src/pkg/http/client.go#L41">GetHeader</a></h3>
+				<p><code><a id="L41"></a>func (r *Response) GetHeader(key string) (value string)</code></p>
+				<p>
+GetHeader returns the value of the response header with the given
+key, and true.  If there were multiple headers with this key, their
+values are concatenated, with a comma delimiter.  If there were no
+response headers with the given key, it returns the empty string and
+false.  Keys are not case sensitive.
+</p>
+
+			<h2>type <a href="../../src/pkg/http/server.go#L427"><a id="L427"></a>ServeMux</a></h2>
+			<p>
+ServeMux is an HTTP request multiplexer.
+It matches the URL of each incoming request against a list of registered
+patterns and calls the handler for the pattern that
+most closely matches the URL.
+</p>
+<p>
+Patterns named fixed paths, like &#34;/favicon.ico&#34;,
+or subtrees, like &#34;/images/&#34; (note the trailing slash).
+Patterns must begin with /.
+Longer patterns take precedence over shorter ones, so that
+if there are handlers registered for both &#34;/images/&#34;
+and &#34;/images/thumbnails/&#34;, the latter handler will be
+called for paths beginning &#34;/images/thumbnails/&#34; and the
+former will receiver requests for any other paths in the
+&#34;/images/&#34; subtree.
+</p>
+<p>
+In the future, the pattern syntax may be relaxed to allow
+an optional host-name at the beginning of the pattern,
+so that a handler might register for the two patterns
+&#34;/codesearch&#34; and &#34;codesearch.google.com/&#34;
+without taking over requests for http://www.google.com/.
+</p>
+<p>
+ServeMux also takes care of sanitizing the URL request path,
+redirecting any request containing . or .. elements to an
+equivalent .- and ..-free URL.
+</p>
+
+			<p><pre><a id="L427"></a>type ServeMux struct {
+    // contains unexported fields
+<a id="L429"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/http/server.go#L432">NewServeMux</a></h3>
+				<p><code><a id="L432"></a>func NewServeMux() *ServeMux</code></p>
+				<p>
+NewServeMux allocates and returns a new ServeMux.
+</p>
+
+				<h3>func (<a id="L496"></a>*ServeMux) <a href="../../src/pkg/http/server.go#L496">Handle</a></h3>
+				<p><code><a id="L496"></a>func (mux *ServeMux) Handle(pattern string, handler Handler)</code></p>
+				<p>
+Handle registers the handler for the given pattern.
+</p>
+
+				<h3>func (<a id="L469"></a>*ServeMux) <a href="../../src/pkg/http/server.go#L469">ServeHTTP</a></h3>
+				<p><code><a id="L469"></a>func (mux *ServeMux) ServeHTTP(c *Conn, req *Request)</code></p>
+				<p>
+ServeHTTP dispatches the request to the handler whose
+pattern most closely matches the request URL.
+</p>
+
+			<h2>type <a href="../../src/pkg/http/url.go#L168"><a id="L168"></a>URL</a></h2>
+			<p>
+A URL represents a parsed URL (technically, a URI reference).
+The general form represented is:
+</p>
+<pre>scheme://[userinfo@]host/path[?query][#fragment]
+</pre>
+<p>
+The Raw, RawPath, and RawQuery fields are in &#34;wire format&#34; (special
+characters must be hex-escaped if not meant to have special meaning).
+All other fields are logical values; &#39;+&#39; or &#39;%&#39; represent themselves.
+</p>
+<p>
+Note, the reason for using wire format for the query is that it needs
+to be split into key/value pairs before decoding.
+</p>
+
+			<p><pre><a id="L168"></a>type URL struct {
+    <a id="L169"></a>Raw       string; // the original string
+    <a id="L170"></a>Scheme    string; // scheme
+    <a id="L171"></a>RawPath   string; // //[userinfo@]host/path[?query][#fragment]
+    <a id="L172"></a>Authority string; // [userinfo@]host
+    <a id="L173"></a>Userinfo  string; // userinfo
+    <a id="L174"></a>Host      string; // host
+    <a id="L175"></a>Path      string; // /path
+    <a id="L176"></a>RawQuery  string; // query
+    <a id="L177"></a>Fragment  string; // fragment
+<a id="L178"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/http/url.go#L232">ParseURL</a></h3>
+				<p><code><a id="L232"></a>func ParseURL(rawurl string) (url *URL, err os.Error)</code></p>
+				<p>
+ParseURL parses rawurl into a URL structure.
+The string rawurl is assumed not to have a #fragment suffix.
+(Web browsers strip #fragment before sending the URL to a web server.)
+</p>
+
+				<h3>func <a href="../../src/pkg/http/url.go#L296">ParseURLReference</a></h3>
+				<p><code><a id="L296"></a>func ParseURLReference(rawurlref string) (url *URL, err os.Error)</code></p>
+				<p>
+ParseURLReference is like ParseURL but allows a trailing #fragment.
+</p>
+
+				<h3>func (<a id="L313"></a>*URL) <a href="../../src/pkg/http/url.go#L313">String</a></h3>
+				<p><code><a id="L313"></a>func (url *URL) String() string</code></p>
+				<p>
+String reassembles url into a valid URL string.
+</p>
+<p>
+There are redundant fields stored in the URL structure:
+the String method consults Scheme, Path, Host, Userinfo,
+RawQuery, and Fragment, but not Raw, RawPath or Authority.
+</p>
+
+			<h2>type <a href="../../src/pkg/http/url.go#L17"><a id="L17"></a>URLError</a></h2>
+			<p>
+URLError reports an error and the operation and URL that caused it.
+</p>
+
+			<p><pre><a id="L17"></a>type URLError struct {
+    <a id="L18"></a>Op    string;
+    <a id="L19"></a>URL   string;
+    <a id="L20"></a>Error os.Error;
+<a id="L21"></a>}</pre></p>
+				<h3>func (<a id="L23"></a>*URLError) <a href="../../src/pkg/http/url.go#L23">String</a></h3>
+				<p><code><a id="L23"></a>func (e *URLError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/http/url.go#L49"><a id="L49"></a>URLEscapeError</a></h2>
+			
+			<p><pre><a id="L49"></a>type URLEscapeError string</pre></p>
+				<h3>func (<a id="L51"></a>URLEscapeError) <a href="../../src/pkg/http/url.go#L51">String</a></h3>
+				<p><code><a id="L51"></a>func (e URLEscapeError) String() string</code></p>
+				
+		<h2>Bugs</h2>
+		<p>
+ParseURL should canonicalize the path,
+removing unnecessary . and .. elements.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package regexp</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:57:42 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package regexp</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "regexp"</code></p>
+	<p>
+Package regexp implements a simple regular expression library.
+</p>
+<p>
+The syntax of the regular expressions accepted is:
+</p>
+<pre>regexp:
+	concatenation { &#39;|&#39; concatenation }
+concatenation:
+	{ closure }
+closure:
+	term [ &#39;*&#39; | &#39;+&#39; | &#39;?&#39; ]
+term:
+	&#39;^&#39;
+	&#39;$&#39;
+	&#39;.&#39;
+	character
+	&#39;[&#39; [ &#39;^&#39; ] character-ranges &#39;]&#39;
+	&#39;(&#39; regexp &#39;)&#39;
+</pre>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/regexp/regexp.go">regexp.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			<p>
+Error codes returned by failures to parse an expression.
+</p>
+
+			<pre><a id="L36"></a>var (
+    <a id="L37"></a>ErrInternal            = os.NewError(&#34;internal error&#34;);
+    <a id="L38"></a>ErrUnmatchedLpar       = os.NewError(&#34;unmatched &#39;(&#39;&#34;);
+    <a id="L39"></a>ErrUnmatchedRpar       = os.NewError(&#34;unmatched &#39;)&#39;&#34;);
+    <a id="L40"></a>ErrUnmatchedLbkt       = os.NewError(&#34;unmatched &#39;[&#39;&#34;);
+    <a id="L41"></a>ErrUnmatchedRbkt       = os.NewError(&#34;unmatched &#39;]&#39;&#34;);
+    <a id="L42"></a>ErrBadRange            = os.NewError(&#34;bad range in character class&#34;);
+    <a id="L43"></a>ErrExtraneousBackslash = os.NewError(&#34;extraneous backslash&#34;);
+    <a id="L44"></a>ErrBadClosure          = os.NewError(&#34;repeated closure (**, ++, etc.)&#34;);
+    <a id="L45"></a>ErrBareClosure         = os.NewError(&#34;closure applies to nothing&#34;);
+    <a id="L46"></a>ErrBadBackslash        = os.NewError(&#34;illegal backslash escape&#34;);
+<a id="L47"></a>)</pre>
+			<h2>func <a href="../../src/pkg/regexp/regexp.go#L852">Match</a></h2>
+			<p><code><a id="L852"></a>func Match(pattern string, b []byte) (matched bool, error os.Error)</code></p>
+			<p>
+Match checks whether a textual regular expression
+matches a byte slice.  More complicated queries need
+to use Compile and the full Regexp interface.
+</p>
+
+			<h2>func <a href="../../src/pkg/regexp/regexp.go#L841">MatchString</a></h2>
+			<p><code><a id="L841"></a>func MatchString(pattern string, s string) (matched bool, error os.Error)</code></p>
+			<p>
+MatchString checks whether a textual regular expression
+matches a string.  More complicated queries need
+to use Compile and the full Regexp interface.
+</p>
+
+			<h2>func <a href="../../src/pkg/regexp/regexp.go#L951">QuoteMeta</a></h2>
+			<p><code><a id="L951"></a>func QuoteMeta(s string) string</code></p>
+			<p>
+QuoteMeta returns a string that quotes all regular expression metacharacters
+inside the argument text; the returned string is a regular expression matching
+the literal text.  For example, QuoteMeta(`[foo]`) returns `\[foo\]`.
+</p>
+
+			<h2>type <a href="../../src/pkg/regexp/regexp.go#L72"><a id="L72"></a>Regexp</a></h2>
+			<p>
+Regexp is the representation of a compiled regular expression.
+The public interface is entirely through methods.
+</p>
+
+			<p><pre><a id="L72"></a>type Regexp struct {
+    // contains unexported fields
+<a id="L77"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/regexp/regexp.go#L616">Compile</a></h3>
+				<p><code><a id="L616"></a>func Compile(str string) (regexp *Regexp, error os.Error)</code></p>
+				<p>
+Compile parses a regular expression and returns, if successful, a Regexp
+object that can be used to match against text.
+</p>
+
+				<h3>func <a href="../../src/pkg/regexp/regexp.go#L627">MustCompile</a></h3>
+				<p><code><a id="L627"></a>func MustCompile(str string) *Regexp</code></p>
+				<p>
+MustCompile is like Compile but panics if the expression cannot be parsed.
+It simplifies safe initialization of global variables holding compiled regular
+expressions.
+</p>
+
+				<h3>func (<a id="L1018"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L1018">AllMatches</a></h3>
+				<p><code><a id="L1018"></a>func (re *Regexp) AllMatches(b []byte, n int) [][]byte</code></p>
+				<p>
+AllMatches slices the byte slice b into substrings that are successive
+matches of the Regexp within b. If n &gt; 0, the function returns at most n
+matches. Text that does not match the expression will be skipped. Empty
+matches abutting a preceding match are ignored. The function returns a slice
+containing the matching substrings.
+</p>
+
+				<h3>func (<a id="L1054"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L1054">AllMatchesIter</a></h3>
+				<p><code><a id="L1054"></a>func (re *Regexp) AllMatchesIter(b []byte, n int) &lt;-chan []byte</code></p>
+				<p>
+AllMatchesIter slices the byte slice b into substrings that are successive
+matches of the Regexp within b. If n &gt; 0, the function returns at most n
+matches. Text that does not match the expression will be skipped. Empty
+matches abutting a preceding match are ignored. The function returns a
+channel that iterates over the matching substrings.
+</p>
+
+				<h3>func (<a id="L1036"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L1036">AllMatchesString</a></h3>
+				<p><code><a id="L1036"></a>func (re *Regexp) AllMatchesString(s string, n int) []string</code></p>
+				<p>
+AllMatchesString slices the string s into substrings that are successive
+matches of the Regexp within s. If n &gt; 0, the function returns at most n
+matches. Text that does not match the expression will be skipped. Empty
+matches abutting a preceding match are ignored. The function returns a slice
+containing the matching substrings.
+</p>
+
+				<h3>func (<a id="L1071"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L1071">AllMatchesStringIter</a></h3>
+				<p><code><a id="L1071"></a>func (re *Regexp) AllMatchesStringIter(s string, n int) &lt;-chan string</code></p>
+				<p>
+AllMatchesStringIter slices the string s into substrings that are successive
+matches of the Regexp within s. If n &gt; 0, the function returns at most n
+matches. Text that does not match the expression will be skipped. Empty
+matches abutting a preceding match are ignored. The function returns a
+channel that iterates over the matching substrings.
+</p>
+
+				<h3>func (<a id="L787"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L787">Execute</a></h3>
+				<p><code><a id="L787"></a>func (re *Regexp) Execute(b []byte) (a []int)</code></p>
+				<p>
+Execute matches the Regexp against the byte slice b.
+The return value is an array of integers, in pairs, identifying the positions of
+subslices matched by the expression.
+</p>
+<pre>b[a[0]:a[1]] is the subslice matched by the entire expression.
+b[a[2*i]:a[2*i+1]] for i &gt; 0 is the subslice matched by the ith parenthesized subexpression.
+</pre>
+<p>
+A negative value means the subexpression did not match any element of the slice.
+An empty array means &#34;no match&#34;.
+</p>
+
+				<h3>func (<a id="L775"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L775">ExecuteString</a></h3>
+				<p><code><a id="L775"></a>func (re *Regexp) ExecuteString(s string) (a []int)</code></p>
+				<p>
+ExecuteString matches the Regexp against the string s.
+The return value is an array of integers, in pairs, identifying the positions of
+substrings matched by the expression.
+</p>
+<pre>s[a[0]:a[1]] is the substring matched by the entire expression.
+s[a[2*i]:a[2*i+1]] for i &gt; 0 is the substring matched by the ith parenthesized subexpression.
+</pre>
+<p>
+A negative value means the subexpression did not match any element of the string.
+An empty array means &#34;no match&#34;.
+</p>
+
+				<h3>func (<a id="L797"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L797">Match</a></h3>
+				<p><code><a id="L797"></a>func (re *Regexp) Match(b []byte) bool</code></p>
+				<p>
+Match returns whether the Regexp matches the byte slice b.
+The return value is a boolean: true for match, false for no match.
+</p>
+
+				<h3>func (<a id="L824"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L824">MatchSlices</a></h3>
+				<p><code><a id="L824"></a>func (re *Regexp) MatchSlices(b []byte) (a [][]byte)</code></p>
+				<p>
+MatchSlices matches the Regexp against the byte slice b.
+The return value is an array of subslices matched by the expression.
+</p>
+<pre>a[0] is the subslice matched by the entire expression.
+a[i] for i &gt; 0 is the subslice matched by the ith parenthesized subexpression.
+</pre>
+<p>
+An empty array means &ldquo;no match&rdquo;.
+</p>
+
+				<h3>func (<a id="L792"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L792">MatchString</a></h3>
+				<p><code><a id="L792"></a>func (re *Regexp) MatchString(s string) bool</code></p>
+				<p>
+MatchString returns whether the Regexp matches the string s.
+The return value is a boolean: true for match, false for no match.
+</p>
+
+				<h3>func (<a id="L805"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L805">MatchStrings</a></h3>
+				<p><code><a id="L805"></a>func (re *Regexp) MatchStrings(s string) (a []string)</code></p>
+				<p>
+MatchStrings matches the Regexp against the string s.
+The return value is an array of strings matched by the expression.
+</p>
+<pre>a[0] is the substring matched by the entire expression.
+a[i] for i &gt; 0 is the substring matched by the ith parenthesized subexpression.
+</pre>
+<p>
+An empty array means &ldquo;no match&rdquo;.
+</p>
+
+				<h3>func (<a id="L907"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L907">ReplaceAll</a></h3>
+				<p><code><a id="L907"></a>func (re *Regexp) ReplaceAll(src, repl []byte) []byte</code></p>
+				<p>
+ReplaceAll returns a copy of src in which all matches for the Regexp
+have been replaced by repl.  No support is provided for expressions
+(e.g. \1 or $1) in the replacement text.
+</p>
+
+				<h3>func (<a id="L863"></a>*Regexp) <a href="../../src/pkg/regexp/regexp.go#L863">ReplaceAllString</a></h3>
+				<p><code><a id="L863"></a>func (re *Regexp) ReplaceAllString(src, repl string) string</code></p>
+				<p>
+ReplaceAllString returns a copy of src in which all matches for the Regexp
+have been replaced by repl.  No support is provided for expressions
+(e.g. \1 or $1) in the replacement string.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

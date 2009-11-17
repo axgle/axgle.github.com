@@ -1,0 +1,531 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package io</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:47:27 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package io</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "io"</code></p>
+	<p>
+This package provides basic interfaces to I/O primitives.
+Its primary job is to wrap existing implementations of such primitives,
+such as those in package os, into shared public interfaces that
+abstract the functionality.
+It also provides buffering primitives and some other basic operations.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/io/io.go">io.go</a>
+				<a href="../../src/pkg/io/pipe.go">pipe.go</a>
+				<a href="../../src/pkg/io/utils.go">utils.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			<p>
+ErrShortWrite means that a write accepted fewer bytes than requested
+but failed to return an explicit error.
+</p>
+
+			<pre><a id="L24"></a>var ErrShortWrite os.Error = &amp;Error{&#34;short write&#34;}</pre>
+			<p>
+ErrUnexpectedEOF means that os.EOF was encountered in the
+middle of reading a fixed-size block or data structure.
+</p>
+
+			<pre><a id="L28"></a>var ErrUnexpectedEOF os.Error = &amp;Error{&#34;unexpected EOF&#34;}</pre>
+			<h2>func <a href="../../src/pkg/io/io.go#L215">Copy</a></h2>
+			<p><code><a id="L215"></a>func Copy(dst Writer, src Reader) (written int64, err os.Error)</code></p>
+			<p>
+Copy copies from src to dst until either EOF is reached
+on src or an error occurs.  It returns the number of bytes
+copied and the error, if any.
+</p>
+
+			<h2>func <a href="../../src/pkg/io/io.go#L182">Copyn</a></h2>
+			<p><code><a id="L182"></a>func Copyn(dst Writer, src Reader, n int64) (written int64, err os.Error)</code></p>
+			<p>
+Copyn copies n bytes (or until an error) from src to dst.
+It returns the number of bytes copied and the error, if any.
+</p>
+
+			<h2>func <a href="../../src/pkg/io/utils.go#L16">ReadAll</a></h2>
+			<p><code><a id="L16"></a>func ReadAll(r Reader) ([]byte, os.Error)</code></p>
+			<p>
+ReadAll reads from r until an error or EOF and returns the data it read.
+</p>
+
+			<h2>func <a href="../../src/pkg/io/io.go#L154">ReadAtLeast</a></h2>
+			<p><code><a id="L154"></a>func ReadAtLeast(r Reader, buf []byte, min int) (n int, err os.Error)</code></p>
+			<p>
+ReadAtLeast reads from r into buf until it has read at least min bytes.
+It returns the number of bytes copied and an error if fewer bytes were read.
+The error is os.EOF only if no bytes were read.
+If an EOF happens after reading fewer than min bytes,
+ReadAtLeast returns ErrUnexpectedEOF.
+</p>
+
+			<h2>func <a href="../../src/pkg/io/utils.go#L57">ReadDir</a></h2>
+			<p><code><a id="L57"></a>func ReadDir(dirname string) ([]*os.Dir, os.Error)</code></p>
+			<p>
+ReadDir reads the directory named by dirname and returns
+a list of sorted directory entries.
+</p>
+
+			<h2>func <a href="../../src/pkg/io/utils.go#L23">ReadFile</a></h2>
+			<p><code><a id="L23"></a>func ReadFile(filename string) ([]byte, os.Error)</code></p>
+			<p>
+ReadFile reads the file named by filename and returns the contents.
+</p>
+
+			<h2>func <a href="../../src/pkg/io/io.go#L176">ReadFull</a></h2>
+			<p><code><a id="L176"></a>func ReadFull(r Reader, buf []byte) (n int, err os.Error)</code></p>
+			<p>
+ReadFull reads exactly len(buf) bytes from r into buf.
+It returns the number of bytes copied and an error if fewer bytes were read.
+The error is os.EOF only if no bytes were read.
+If an EOF happens after reading some but not all the bytes,
+ReadFull returns ErrUnexpectedEOF.
+</p>
+
+			<h2>func <a href="../../src/pkg/io/utils.go#L35">WriteFile</a></h2>
+			<p><code><a id="L35"></a>func WriteFile(filename string, data []byte, perm int) os.Error</code></p>
+			<p>
+WriteFile writes data to a file named by filename.
+If the file does not exist, WriteFile creates it with permissions perm;
+otherwise WriteFile truncates it before writing.
+</p>
+
+			<h2>func <a href="../../src/pkg/io/io.go#L145">WriteString</a></h2>
+			<p><code><a id="L145"></a>func WriteString(w Writer, s string) (n int, err os.Error)</code></p>
+			<p>
+WriteString writes the contents of the string s to w, which accepts an array of bytes.
+</p>
+
+			<h2>type <a href="../../src/pkg/io/io.go#L57"><a id="L57"></a>Closer</a></h2>
+			<p>
+Closer is the interface that wraps the basic Close method.
+</p>
+
+			<p><pre><a id="L57"></a>type Closer interface {
+    <a id="L58"></a>Close() os.Error;
+<a id="L59"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L18"><a id="L18"></a>Error</a></h2>
+			<p>
+Error represents an unexpected I/O behavior.
+</p>
+
+			<p><pre><a id="L18"></a>type Error struct {
+    <a id="L19"></a>os.ErrorString;
+<a id="L20"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/pipe.go#L134"><a id="L134"></a>PipeReader</a></h2>
+			<p>
+A PipeReader is the read half of a pipe.
+</p>
+
+			<p><pre><a id="L134"></a>type PipeReader struct {
+    // contains unexported fields
+<a id="L137"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/io/pipe.go#L214">Pipe</a></h3>
+				<p><code><a id="L214"></a>func Pipe() (*PipeReader, *PipeWriter)</code></p>
+				<p>
+Pipe creates a synchronous in-memory pipe.
+It can be used to connect code expecting an io.Reader
+with code expecting an io.Writer.
+Reads on one end are matched with writes on the other,
+copying data directly between the two; there is no internal buffering.
+</p>
+
+				<h3>func (<a id="L153"></a>*PipeReader) <a href="../../src/pkg/io/pipe.go#L153">Close</a></h3>
+				<p><code><a id="L153"></a>func (r *PipeReader) Close() os.Error</code></p>
+				<p>
+Close closes the reader; subsequent writes to the
+write half of the pipe will return the error os.EPIPE.
+</p>
+
+				<h3>func (<a id="L162"></a>*PipeReader) <a href="../../src/pkg/io/pipe.go#L162">CloseWithError</a></h3>
+				<p><code><a id="L162"></a>func (r *PipeReader) CloseWithError(rerr os.Error) os.Error</code></p>
+				<p>
+CloseWithError closes the reader; subsequent writes
+to the write half of the pipe will return the error rerr.
+</p>
+
+				<h3>func (<a id="L144"></a>*PipeReader) <a href="../../src/pkg/io/pipe.go#L144">Read</a></h3>
+				<p><code><a id="L144"></a>func (r *PipeReader) Read(data []byte) (n int, err os.Error)</code></p>
+				<p>
+Read implements the standard Read interface:
+it reads data from the pipe, blocking until a writer
+arrives or the write end is closed.
+If the write end is closed with an error, that error is
+returned as err; otherwise err is nil.
+</p>
+
+			<h2>type <a href="../../src/pkg/io/pipe.go#L172"><a id="L172"></a>PipeWriter</a></h2>
+			<p>
+Write half of pipe.
+</p>
+
+			<p><pre><a id="L172"></a>type PipeWriter struct {
+    // contains unexported fields
+<a id="L175"></a>}</pre></p>
+				<h3>func (<a id="L191"></a>*PipeWriter) <a href="../../src/pkg/io/pipe.go#L191">Close</a></h3>
+				<p><code><a id="L191"></a>func (w *PipeWriter) Close() os.Error</code></p>
+				<p>
+Close closes the writer; subsequent reads from the
+read half of the pipe will return no bytes and a nil error.
+</p>
+
+				<h3>func (<a id="L200"></a>*PipeWriter) <a href="../../src/pkg/io/pipe.go#L200">CloseWithError</a></h3>
+				<p><code><a id="L200"></a>func (w *PipeWriter) CloseWithError(werr os.Error) os.Error</code></p>
+				<p>
+CloseWithError closes the writer; subsequent reads from the
+read half of the pipe will return no bytes and the error werr.
+</p>
+
+				<h3>func (<a id="L182"></a>*PipeWriter) <a href="../../src/pkg/io/pipe.go#L182">Write</a></h3>
+				<p><code><a id="L182"></a>func (w *PipeWriter) Write(data []byte) (n int, err os.Error)</code></p>
+				<p>
+Write implements the standard Write interface:
+it writes data to the pipe, blocking until readers
+have consumed all the data or the read end is closed.
+If the read end is closed with an error, that err is
+returned as err; otherwise err is os.EPIPE.
+</p>
+
+			<h2>type <a href="../../src/pkg/io/io.go#L79"><a id="L79"></a>ReadCloser</a></h2>
+			<p>
+ReadCloser is the interface that groups the basic Read and Close methods.
+</p>
+
+			<p><pre><a id="L79"></a>type ReadCloser interface {
+    <a id="L80"></a>Reader;
+    <a id="L81"></a>Closer;
+<a id="L82"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L98"><a id="L98"></a>ReadSeeker</a></h2>
+			<p>
+ReadSeeker is the interface that groups the basic Read and Seek methods.
+</p>
+
+			<p><pre><a id="L98"></a>type ReadSeeker interface {
+    <a id="L99"></a>Reader;
+    <a id="L100"></a>Seeker;
+<a id="L101"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L91"><a id="L91"></a>ReadWriteCloser</a></h2>
+			<p>
+ReadWriteCloser is the interface that groups the basic Read, Write and Close methods.
+</p>
+
+			<p><pre><a id="L91"></a>type ReadWriteCloser interface {
+    <a id="L92"></a>Reader;
+    <a id="L93"></a>Writer;
+    <a id="L94"></a>Closer;
+<a id="L95"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L110"><a id="L110"></a>ReadWriteSeeker</a></h2>
+			<p>
+ReadWriteSeeker is the interface that groups the basic Read, Write and Seek methods.
+</p>
+
+			<p><pre><a id="L110"></a>type ReadWriteSeeker interface {
+    <a id="L111"></a>Reader;
+    <a id="L112"></a>Writer;
+    <a id="L113"></a>Seeker;
+<a id="L114"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L73"><a id="L73"></a>ReadWriter</a></h2>
+			<p>
+ReadWrite is the interface that groups the basic Read and Write methods.
+</p>
+
+			<p><pre><a id="L73"></a>type ReadWriter interface {
+    <a id="L74"></a>Reader;
+    <a id="L75"></a>Writer;
+<a id="L76"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L42"><a id="L42"></a>Reader</a></h2>
+			<p>
+Reader is the interface that wraps the basic Read method.
+</p>
+<p>
+Read reads up to len(p) bytes into p.  It returns the number of bytes
+read (0 &lt;= n &lt;= len(p)) and any error encountered.
+Even if Read returns n &lt; len(p),
+it may use all of p as scratch space during the call.
+If some data is available but not len(p) bytes, Read conventionally
+returns what is available rather than block waiting for more.
+</p>
+<p>
+At the end of the input stream, Read returns 0, os.EOF.
+Read may return a non-zero number of bytes with a non-nil err.
+In particular, a Read that exhausts the input may return n &gt; 0, os.EOF.
+</p>
+
+			<p><pre><a id="L42"></a>type Reader interface {
+    <a id="L43"></a>Read(p []byte) (n int, err os.Error);
+<a id="L44"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/io/io.go#L246">LimitReader</a></h3>
+				<p><code><a id="L246"></a>func LimitReader(r Reader, n int64) Reader</code></p>
+				<p>
+LimitReader returns a Reader that reads from r
+but stops with os.EOF after n bytes.
+</p>
+
+			<h2>type <a href="../../src/pkg/io/io.go#L130"><a id="L130"></a>ReaderAt</a></h2>
+			<p>
+ReaderAt is the interface that wraps the basic ReadAt method.
+</p>
+<p>
+ReadAt reads len(p) bytes into p starting at offset off in the
+underlying data stream.  It returns the number of bytes
+read (0 &lt;= n &lt;= len(p)) and any error encountered.
+</p>
+<p>
+Even if ReadAt returns n &lt; len(p),
+it may use all of p as scratch space during the call.
+If some data is available but not len(p) bytes, ReadAt blocks
+until either all the data is available or an error occurs.
+</p>
+<p>
+At the end of the input stream, ReadAt returns 0, os.EOF.
+ReadAt may return a non-zero number of bytes with a non-nil err.
+In particular, a ReadAt that exhausts the input may return n &gt; 0, os.EOF.
+</p>
+
+			<p><pre><a id="L130"></a>type ReaderAt interface {
+    <a id="L131"></a>ReadAt(p []byte, off int64) (n int, err os.Error);
+<a id="L132"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L273"><a id="L273"></a>SectionReader</a></h2>
+			<p>
+SectionReader implements Read, Seek, and ReadAt on a section
+of an underlying ReaderAt.
+</p>
+
+			<p><pre><a id="L273"></a>type SectionReader struct {
+    // contains unexported fields
+<a id="L278"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/io/io.go#L267">NewSectionReader</a></h3>
+				<p><code><a id="L267"></a>func NewSectionReader(r ReaderAt, off int64, n int64) *SectionReader</code></p>
+				<p>
+NewSectionReader returns a SectionReader that reads from r
+starting at offset off and stops with os.EOF after n bytes.
+</p>
+
+				<h3>func (<a id="L280"></a>*SectionReader) <a href="../../src/pkg/io/io.go#L280">Read</a></h3>
+				<p><code><a id="L280"></a>func (s *SectionReader) Read(p []byte) (n int, err os.Error)</code></p>
+				
+				<h3>func (<a id="L310"></a>*SectionReader) <a href="../../src/pkg/io/io.go#L310">ReadAt</a></h3>
+				<p><code><a id="L310"></a>func (s *SectionReader) ReadAt(p []byte, off int64) (n int, err os.Error)</code></p>
+				
+				<h3>func (<a id="L292"></a>*SectionReader) <a href="../../src/pkg/io/io.go#L292">Seek</a></h3>
+				<p><code><a id="L292"></a>func (s *SectionReader) Seek(offset int64, whence int) (ret int64, err os.Error)</code></p>
+				
+				<h3>func (<a id="L322"></a>*SectionReader) <a href="../../src/pkg/io/io.go#L322">Size</a></h3>
+				<p><code><a id="L322"></a>func (s *SectionReader) Size() int64</code></p>
+				<p>
+Size returns the size of the section in bytes.
+</p>
+
+			<h2>type <a href="../../src/pkg/io/io.go#L68"><a id="L68"></a>Seeker</a></h2>
+			<p>
+Seeker is the interface that wraps the basic Seek method.
+</p>
+<p>
+Seek sets the offset for the next Read or Write to offset,
+interpreted according to whence: 0 means relative to the origin of
+the file, 1 means relative to the current offset, and 2 means
+relative to the end.  Seek returns the new offset and an Error, if
+any.
+</p>
+
+			<p><pre><a id="L68"></a>type Seeker interface {
+    <a id="L69"></a>Seek(offset int64, whence int) (ret int64, err os.Error);
+<a id="L70"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L85"><a id="L85"></a>WriteCloser</a></h2>
+			<p>
+WriteCloser is the interface that groups the basic Write and Close methods.
+</p>
+
+			<p><pre><a id="L85"></a>type WriteCloser interface {
+    <a id="L86"></a>Writer;
+    <a id="L87"></a>Closer;
+<a id="L88"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L104"><a id="L104"></a>WriteSeeker</a></h2>
+			<p>
+WriteSeeker is the interface that groups the basic Write and Seek methods.
+</p>
+
+			<p><pre><a id="L104"></a>type WriteSeeker interface {
+    <a id="L105"></a>Writer;
+    <a id="L106"></a>Seeker;
+<a id="L107"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L52"><a id="L52"></a>Writer</a></h2>
+			<p>
+Writer is the interface that wraps the basic Write method.
+</p>
+<p>
+Write writes len(p) bytes from p to the underlying data stream.
+It returns the number of bytes written from p (0 &lt;= n &lt;= len(p))
+and any error encountered that caused the write to stop early.
+Write must return a non-nil error if it returns n &lt; len(p).
+</p>
+
+			<p><pre><a id="L52"></a>type Writer interface {
+    <a id="L53"></a>Write(p []byte) (n int, err os.Error);
+<a id="L54"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/io/io.go#L140"><a id="L140"></a>WriterAt</a></h2>
+			<p>
+WriterAt is the interface that wraps the basic WriteAt method.
+</p>
+<p>
+WriteAt writes len(p) bytes from p to the underlying data stream
+at offset off.  It returns the number of bytes written from p (0 &lt;= n &lt;= len(p))
+and any error encountered that caused the write to stop early.
+WriteAt must return a non-nil error if it returns n &lt; len(p).
+</p>
+
+			<p><pre><a id="L140"></a>type WriterAt interface {
+    <a id="L141"></a>WriteAt(p []byte, off int64) (n int, err os.Error);
+<a id="L142"></a>}</pre></p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

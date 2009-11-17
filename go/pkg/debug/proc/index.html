@@ -1,0 +1,432 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package proc</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package proc</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "debug/proc"</code></p>
+	<p>
+Package ptrace provides a platform-independent interface for
+tracing and controlling running processes.  It supports
+multi-threaded processes and provides typical low-level debugging
+controls such as breakpoints, single stepping, and manipulating
+memory and registers.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/debug/proc/proc.go">proc.go</a>
+				<a href="../../../src/pkg/debug/proc/proc_darwin.go">proc_darwin.go</a>
+				<a href="../../../src/pkg/debug/proc/proc_linux.go">proc_linux.go</a>
+				<a href="../../../src/pkg/debug/proc/proc_nacl.go">proc_nacl.go</a>
+				<a href="../../../src/pkg/debug/proc/regs_darwin_386.go">regs_darwin_386.go</a>
+				<a href="../../../src/pkg/debug/proc/regs_darwin_amd64.go">regs_darwin_amd64.go</a>
+				<a href="../../../src/pkg/debug/proc/regs_linux_386.go">regs_linux_386.go</a>
+				<a href="../../../src/pkg/debug/proc/regs_linux_amd64.go">regs_linux_amd64.go</a>
+				<a href="../../../src/pkg/debug/proc/regs_linux_arm.go">regs_linux_arm.go</a>
+				<a href="../../../src/pkg/debug/proc/regs_nacl_386.go">regs_nacl_386.go</a>
+			</span>
+			</p>
+			<h2>type <a href="../../../src/pkg/debug/proc/proc.go#L158"><a id="L158"></a>Breakpoint</a></h2>
+			<p>
+Breakpoint is a stop cause resulting from a thread reaching a set
+breakpoint.
+</p>
+
+			<p><pre><a id="L158"></a>type Breakpoint Word</pre></p>
+				<h3>func (<a id="L161"></a>Breakpoint) <a href="../../../src/pkg/debug/proc/proc.go#L161">PC</a></h3>
+				<p><code><a id="L161"></a>func (c Breakpoint) PC() Word</code></p>
+				<p>
+PC returns the program counter that the program is stopped at.
+</p>
+
+				<h3>func (<a id="L163"></a>Breakpoint) <a href="../../../src/pkg/debug/proc/proc.go#L163">String</a></h3>
+				<p><code><a id="L163"></a>func (c Breakpoint) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/proc/proc.go#L30"><a id="L30"></a>Cause</a></h2>
+			<p>
+A Cause explains why a thread is stopped.
+</p>
+
+			<p><pre><a id="L30"></a>type Cause interface {
+    <a id="L31"></a>String() string;
+<a id="L32"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/proc/proc.go#L113"><a id="L113"></a>Process</a></h2>
+			<p>
+Process is a process being traced.  It consists of a set of
+threads.  A process can be running, stopped, or terminated.  The
+process&#39;s state extends to all of its threads.
+</p>
+
+			<p><pre><a id="L113"></a>type Process interface {
+    <a id="L114"></a>// Threads returns an array of all threads in this process.
+    <a id="L115"></a>Threads() []Thread;
+
+    <a id="L117"></a>// AddBreakpoint creates a new breakpoint at program counter
+    <a id="L118"></a>// pc.  Breakpoints can only be created when the process is
+    <a id="L119"></a>// stopped.  It is an error if a breakpoint already exists at
+    <a id="L120"></a>// pc.
+    <a id="L121"></a>AddBreakpoint(pc Word) os.Error;
+
+    <a id="L123"></a>// RemoveBreakpoint removes the breakpoint at the program
+    <a id="L124"></a>// counter pc.  It is an error if no breakpoint exists at pc.
+    <a id="L125"></a>RemoveBreakpoint(pc Word) os.Error;
+
+    <a id="L127"></a>// Stop stops all running threads in this process before
+    <a id="L128"></a>// returning.
+    <a id="L129"></a>Stop() os.Error;
+
+    <a id="L131"></a>// Continue resumes execution of all threads in this process.
+    <a id="L132"></a>// Any thread that is stopped on a breakpoint will be stepped
+    <a id="L133"></a>// over that breakpoint.  Any thread that is stopped because
+    <a id="L134"></a>// of a signal (other than SIGSTOP or SIGTRAP) will receive
+    <a id="L135"></a>// the pending signal.
+    <a id="L136"></a>Continue() os.Error;
+
+    <a id="L138"></a>// WaitStop waits until all threads in process p are stopped
+    <a id="L139"></a>// as a result of some thread hitting a breakpoint, receiving
+    <a id="L140"></a>// a signal, creating a new thread, or exiting.
+    <a id="L141"></a>WaitStop() os.Error;
+
+    <a id="L143"></a>// Detach detaches from this process.  All stopped threads
+    <a id="L144"></a>// will be resumed.
+    <a id="L145"></a>Detach() os.Error;
+<a id="L146"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/debug/proc/proc_linux.go#L1268">Attach</a></h3>
+				<p><code><a id="L1268"></a>func Attach(pid int) (Process, os.Error)</code></p>
+				<p>
+Attach attaches to process pid and stops all of its threads.
+</p>
+
+				<h3>func <a href="../../../src/pkg/debug/proc/proc_linux.go#L1286">ForkExec</a></h3>
+				<p><code><a id="L1286"></a>func ForkExec(argv0 string, argv []string, envv []string, dir string, fd []*os.File) (Process, os.Error)</code></p>
+				<p>
+ForkExec forks the current process and execs argv0, stopping the
+new process after the exec syscall.  See os.ForkExec for additional
+details.
+</p>
+
+			<h2>type <a href="../../../src/pkg/debug/proc/proc_linux.go#L215"><a id="L215"></a>ProcessExited</a></h2>
+			
+			<p><pre><a id="L215"></a>type ProcessExited struct{}</pre></p>
+				<h3>func (<a id="L217"></a>ProcessExited) <a href="../../../src/pkg/debug/proc/proc_linux.go#L217">String</a></h3>
+				<p><code><a id="L217"></a>func (p ProcessExited) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/proc/proc.go#L43"><a id="L43"></a>Regs</a></h2>
+			<p>
+Regs is a set of named machine registers, including a program
+counter, link register, and stack pointer.
+</p>
+<p>
+TODO(austin) There&#39;s quite a proliferation of methods here.  We
+could make a Reg interface with Get and Set and make this just PC,
+Link, SP, Names, and Reg.  We could also put Index in Reg and that
+makes it easy to get the index of things like the PC (currently
+there&#39;s just no way to know that).  This would also let us include
+other per-register information like how to print it.
+</p>
+
+			<p><pre><a id="L43"></a>type Regs interface {
+    <a id="L44"></a>// PC returns the value of the program counter.
+    <a id="L45"></a>PC() Word;
+
+    <a id="L47"></a>// SetPC sets the program counter to val.
+    <a id="L48"></a>SetPC(val Word) os.Error;
+
+    <a id="L50"></a>// Link returns the link register, if any.
+    <a id="L51"></a>Link() Word;
+
+    <a id="L53"></a>// SetLink sets the link register to val.
+    <a id="L54"></a>SetLink(val Word) os.Error;
+
+    <a id="L56"></a>// SP returns the value of the stack pointer.
+    <a id="L57"></a>SP() Word;
+
+    <a id="L59"></a>// SetSP sets the stack pointer register to val.
+    <a id="L60"></a>SetSP(val Word) os.Error;
+
+    <a id="L62"></a>// Names returns the names of all of the registers.
+    <a id="L63"></a>Names() []string;
+
+    <a id="L65"></a>// Get returns the value of a register, where i corresponds to
+    <a id="L66"></a>// the index of the register&#39;s name in the array returned by
+    <a id="L67"></a>// Names.
+    <a id="L68"></a>Get(i int) Word;
+
+    <a id="L70"></a>// Set sets the value of a register.
+    <a id="L71"></a>Set(i int, val Word) os.Error;
+<a id="L72"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/proc/proc.go#L169"><a id="L169"></a>Signal</a></h2>
+			<p>
+Signal is a stop cause resulting from a thread receiving a signal.
+When the process is continued, the signal will be delivered.
+</p>
+
+			<p><pre><a id="L169"></a>type Signal string</pre></p>
+				<h3>func (<a id="L172"></a>Signal) <a href="../../../src/pkg/debug/proc/proc.go#L172">Name</a></h3>
+				<p><code><a id="L172"></a>func (c Signal) Name() string</code></p>
+				<p>
+Signal returns the signal being delivered to the thread.
+</p>
+
+				<h3>func (<a id="L174"></a>Signal) <a href="../../../src/pkg/debug/proc/proc.go#L174">String</a></h3>
+				<p><code><a id="L174"></a>func (c Signal) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/proc/proc.go#L152"><a id="L152"></a>Stopped</a></h2>
+			<p>
+Stopped is a stop cause used for threads that are stopped either by
+user request (e.g., from the Stop method or after single stepping),
+or that are stopped because some other thread caused the program to
+stop.
+</p>
+
+			<p><pre><a id="L152"></a>type Stopped struct{}</pre></p>
+				<h3>func (<a id="L154"></a>Stopped) <a href="../../../src/pkg/debug/proc/proc.go#L154">String</a></h3>
+				<p><code><a id="L154"></a>func (c Stopped) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/proc/proc.go#L75"><a id="L75"></a>Thread</a></h2>
+			<p>
+Thread is a thread in the process being traced.
+</p>
+
+			<p><pre><a id="L75"></a>type Thread interface {
+    <a id="L76"></a>// Step steps this thread by a single instruction.  The thread
+    <a id="L77"></a>// must be stopped.  If the thread is currently stopped on a
+    <a id="L78"></a>// breakpoint, this will step over the breakpoint.
+    <a id="L79"></a>//
+    <a id="L80"></a>// XXX What if it&#39;s stopped because of a signal?
+    <a id="L81"></a>Step() os.Error;
+
+    <a id="L83"></a>// Stopped returns the reason that this thread is stopped.  It
+    <a id="L84"></a>// is an error is the thread not stopped.
+    <a id="L85"></a>Stopped() (Cause, os.Error);
+
+    <a id="L87"></a>// Regs retrieves the current register values from this
+    <a id="L88"></a>// thread.  The thread must be stopped.
+    <a id="L89"></a>Regs() (Regs, os.Error);
+
+    <a id="L91"></a>// Peek reads len(out) bytes from the address addr in this
+    <a id="L92"></a>// thread into out.  The thread must be stopped.  It returns
+    <a id="L93"></a>// the number of bytes successfully read.  If an error occurs,
+    <a id="L94"></a>// such as attempting to read unmapped memory, this count
+    <a id="L95"></a>// could be short and an error will be returned.  If this does
+    <a id="L96"></a>// encounter unmapped memory, it will read up to the byte
+    <a id="L97"></a>// preceding the unmapped area.
+    <a id="L98"></a>Peek(addr Word, out []byte) (int, os.Error);
+
+    <a id="L100"></a>// Poke writes b to the address addr in this thread.  The
+    <a id="L101"></a>// thread must be stopped.  It returns the number of bytes
+    <a id="L102"></a>// successfully written.  If an error occurs, such as
+    <a id="L103"></a>// attempting to write to unmapped memory, this count could be
+    <a id="L104"></a>// short and an error will be returned.  If this does
+    <a id="L105"></a>// encounter unmapped memory, it will write up to the byte
+    <a id="L106"></a>// preceding the unmapped area.
+    <a id="L107"></a>Poke(addr Word, b []byte) (int, os.Error);
+<a id="L108"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/proc/proc.go#L180"><a id="L180"></a>ThreadCreate</a></h2>
+			<p>
+ThreadCreate is a stop cause returned from an existing thread when
+it creates a new thread.  The new thread exists in a primordial
+form at this point and will begin executing in earnest when the
+process is continued.
+</p>
+
+			<p><pre><a id="L180"></a>type ThreadCreate struct {
+    // contains unexported fields
+<a id="L182"></a>}</pre></p>
+				<h3>func (<a id="L184"></a>*ThreadCreate) <a href="../../../src/pkg/debug/proc/proc.go#L184">NewThread</a></h3>
+				<p><code><a id="L184"></a>func (c *ThreadCreate) NewThread() Thread</code></p>
+				
+				<h3>func (<a id="L186"></a>*ThreadCreate) <a href="../../../src/pkg/debug/proc/proc.go#L186">String</a></h3>
+				<p><code><a id="L186"></a>func (c *ThreadCreate) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/proc/proc.go#L192"><a id="L192"></a>ThreadExit</a></h2>
+			<p>
+ThreadExit is a stop cause resulting from a thread exiting.  When
+this cause first arises, the thread will still be in the list of
+process threads and its registers and memory will still be
+accessible.
+</p>
+
+			<p><pre><a id="L192"></a>type ThreadExit struct {
+    // contains unexported fields
+<a id="L195"></a>}</pre></p>
+				<h3>func (<a id="L202"></a>*ThreadExit) <a href="../../../src/pkg/debug/proc/proc.go#L202">ExitStatus</a></h3>
+				<p><code><a id="L202"></a>func (c *ThreadExit) ExitStatus() int</code></p>
+				<p>
+ExitStatus returns the exit status of the thread if it exited
+normally or -1 otherwise.
+</p>
+
+				<h3>func (<a id="L198"></a>*ThreadExit) <a href="../../../src/pkg/debug/proc/proc.go#L198">Exited</a></h3>
+				<p><code><a id="L198"></a>func (c *ThreadExit) Exited() bool</code></p>
+				<p>
+Exited returns true if the thread exited normally.
+</p>
+
+				<h3>func (<a id="L205"></a>*ThreadExit) <a href="../../../src/pkg/debug/proc/proc.go#L205">Signaled</a></h3>
+				<p><code><a id="L205"></a>func (c *ThreadExit) Signaled() bool</code></p>
+				<p>
+Signaled returns true if the thread was terminated by a signal.
+</p>
+
+				<h3>func (<a id="L209"></a>*ThreadExit) <a href="../../../src/pkg/debug/proc/proc.go#L209">StopSignal</a></h3>
+				<p><code><a id="L209"></a>func (c *ThreadExit) StopSignal() string</code></p>
+				<p>
+StopSignal returns the signal that terminated the thread, or &#34;&#34; if
+it was not terminated by a signal.
+</p>
+
+				<h3>func (<a id="L211"></a>*ThreadExit) <a href="../../../src/pkg/debug/proc/proc.go#L211">String</a></h3>
+				<p><code><a id="L211"></a>func (c *ThreadExit) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/proc/proc.go#L27"><a id="L27"></a>Word</a></h2>
+			
+			<p><pre><a id="L27"></a>type Word uint64</pre></p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

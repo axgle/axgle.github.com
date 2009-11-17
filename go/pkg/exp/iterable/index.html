@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package iterable</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package iterable</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "exp/iterable"</code></p>
+	<p>
+The iterable package provides several traversal and searching methods.
+It can be used on anything that satisfies the Iterable interface,
+including vector, though certain functions, such as Map, can also be used on
+something that would produce an infinite amount of data.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/exp/iterable/iterable.go">iterable.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../../src/pkg/exp/iterable/iterable.go#L23">All</a></h2>
+			<p><code><a id="L23"></a>func All(iter Iterable, f func(interface{}) bool) bool</code></p>
+			<p>
+All tests whether f is true for every element of iter.
+</p>
+
+			<h2>func <a href="../../../src/pkg/exp/iterable/iterable.go#L33">Any</a></h2>
+			<p><code><a id="L33"></a>func Any(iter Iterable, f func(interface{}) bool) bool</code></p>
+			<p>
+Any tests whether f is true for at least one element of iter.
+</p>
+
+			<h2>func <a href="../../../src/pkg/exp/iterable/iterable.go#L38">Data</a></h2>
+			<p><code><a id="L38"></a>func Data(iter Iterable) []interface{}</code></p>
+			<p>
+Data returns a slice containing the elements of iter.
+</p>
+
+			<h2>func <a href="../../../src/pkg/exp/iterable/iterable.go#L75">Find</a></h2>
+			<p><code><a id="L75"></a>func Find(iter Iterable, f func(interface{}) bool) interface{}</code></p>
+			<p>
+Find returns the first element of iter that satisfies f.
+Returns nil if no such element is found.
+</p>
+
+			<h2>func <a href="../../../src/pkg/exp/iterable/iterable.go#L95">Inject</a></h2>
+			<p><code><a id="L95"></a>func Inject(iter Iterable, initial interface{}, f Injector) interface{}</code></p>
+			<p>
+Inject combines the elements of iter by repeatedly calling f with an
+accumulated value and each element in order. The starting accumulated value
+is initial, and after each call the accumulated value is set to the return
+value of f. For instance, to compute a sum:
+</p>
+<pre>var arr IntArray = []int{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+sum := iterable.Inject(arr, 0,
+                       func(ax interface {}, x interface {}) interface {} {
+                         return ax.(int) + x.(int) }).(int)
+</pre>
+
+			<h2>type <a href="../../../src/pkg/exp/iterable/iterable.go#L85"><a id="L85"></a>Injector</a></h2>
+			<p>
+Injector is a type representing a function that takes two arguments,
+an accumulated value and an element, and returns the next accumulated value.
+See the Inject function.
+</p>
+
+			<p><pre><a id="L85"></a>type Injector func(interface{}, interface{}) interface{}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/iterable/iterable.go#L13"><a id="L13"></a>Iterable</a></h2>
+			
+			<p><pre><a id="L13"></a>type Iterable interface {
+    <a id="L14"></a>// Iter should return a fresh channel each time it is called.
+    <a id="L15"></a>Iter() &lt;-chan interface{};
+<a id="L16"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/iterable/iterable.go#L69">Filter</a></h3>
+				<p><code><a id="L69"></a>func Filter(iter Iterable, f func(interface{}) bool) Iterable</code></p>
+				<p>
+Filter returns an Iterable that returns the elements of iter that satisfy f.
+</p>
+
+				<h3>func <a href="../../../src/pkg/exp/iterable/iterable.go#L124">Map</a></h3>
+				<p><code><a id="L124"></a>func Map(iter Iterable, f func(interface{}) interface{}) Iterable</code></p>
+				<p>
+Map returns an Iterable that returns the result of applying f to each
+element of iter.
+</p>
+
+				<h3>func <a href="../../../src/pkg/exp/iterable/iterable.go#L129">Partition</a></h3>
+				<p><code><a id="L129"></a>func Partition(iter Iterable, f func(interface{}) bool) (Iterable, Iterable)</code></p>
+				<p>
+Partition(iter, f) returns Filter(iter, f) and Filter(iter, !f).
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

@@ -1,0 +1,892 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Text file src/cmd/cc/lexbody</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../../pkg/index.html">Package documentation</a></li>
+    <li><a href="../../index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:59:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Text file src/cmd/cc/lexbody</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <pre>
+// Inferno utils/cc/lexbody
+// http://code.google.com/p/inferno-os/source/browse/utils/cc/lexbody
+//
+//	Copyright © 1994-1999 Lucent Technologies Inc.  All rights reserved.
+//	Portions Copyright © 1995-1997 C H Forsyth (forsyth@terzarima.net)
+//	Portions Copyright © 1997-1999 Vita Nuova Limited
+//	Portions Copyright © 2000-2007 Vita Nuova Holdings Limited (www.vitanuova.com)
+//	Portions Copyright © 2004,2006 Bruce Ellis
+//	Portions Copyright © 2005-2007 C H Forsyth (forsyth@terzarima.net)
+//	Revisions Copyright © 2000-2007 Lucent Technologies Inc. and others
+//	Portions Copyright © 2009 The Go Authors.  All rights reserved.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the &#34;Software&#34;), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+/*
+ * common code for all the assemblers
+ */
+
+void
+pragpack(void)
+{
+	while(getnsc() != &#39;\n&#39;)
+		;
+}
+
+void
+pragvararg(void)
+{
+	while(getnsc() != &#39;\n&#39;)
+		;
+}
+
+void
+pragdynld(void)
+{
+	while(getnsc() != &#39;\n&#39;)
+		;
+}
+
+void
+pragfpround(void)
+{
+	while(getnsc() != &#39;\n&#39;)
+		;
+}
+
+void
+pragtextflag(void)
+{
+	while(getnsc() != &#39;\n&#39;)
+		;
+}
+
+void
+pragprofile(void)
+{
+	while(getnsc() != &#39;\n&#39;)
+		;
+}
+
+void
+pragincomplete(void)
+{
+	while(getnsc() != &#39;\n&#39;)
+		;
+}
+
+void
+gethunk(void)
+{
+	hunk = malloc(NHUNK);
+	memset(hunk, 0, NHUNK);
+	nhunk = NHUNK;
+}
+
+void*
+alloc(int32 n)
+{
+	void *p;
+
+	while((uintptr)hunk &amp; MAXALIGN) {
+		hunk++;
+		nhunk--;
+	}
+	while(nhunk &lt; n)
+		gethunk();
+	p = hunk;
+	nhunk -= n;
+	hunk += n;
+	return p;
+}
+
+void*
+allocn(void *p, int32 on, int32 n)
+{
+	void *q;
+
+	q = (uchar*)p + on;
+	if(q != hunk || nhunk &lt; n) {
+		while(nhunk &lt; on+n)
+			gethunk();
+		memmove(hunk, p, on);
+		p = hunk;
+		hunk += on;
+		nhunk -= on;
+	}
+	hunk += n;
+	nhunk -= n;
+	return p;
+}
+
+void
+setinclude(char *p)
+{
+	int i;
+
+	if(p == 0)
+		return;
+	for(i=1; i &lt; ninclude; i++)
+		if(strcmp(p, include[i]) == 0)
+			return;
+
+	if(ninclude &gt;= nelem(include)) {
+		yyerror(&#34;ninclude too small %d&#34;, nelem(include));
+		exits(&#34;ninclude&#34;);
+	}
+	include[ninclude++] = p;
+}
+
+void
+errorexit(void)
+{
+
+	if(outfile)
+		remove(outfile);
+	exits(&#34;error&#34;);
+}
+
+void
+pushio(void)
+{
+	Io *i;
+
+	i = iostack;
+	if(i == I) {
+		yyerror(&#34;botch in pushio&#34;);
+		errorexit();
+	}
+	i-&gt;p = fi.p;
+	i-&gt;c = fi.c;
+}
+
+void
+newio(void)
+{
+	Io *i;
+	static int pushdepth = 0;
+
+	i = iofree;
+	if(i == I) {
+		pushdepth++;
+		if(pushdepth &gt; 1000) {
+			yyerror(&#34;macro/io expansion too deep&#34;);
+			errorexit();
+		}
+		i = alloc(sizeof(*i));
+	} else
+		iofree = i-&gt;link;
+	i-&gt;c = 0;
+	i-&gt;f = -1;
+	ionext = i;
+}
+
+void
+newfile(char *s, int f)
+{
+	Io *i;
+
+	i = ionext;
+	i-&gt;link = iostack;
+	iostack = i;
+	i-&gt;f = f;
+	if(f &lt; 0)
+		i-&gt;f = open(s, 0);
+	if(i-&gt;f &lt; 0) {
+		yyerror(&#34;%ca: %r: %s&#34;, thechar, s);
+		errorexit();
+	}
+	fi.c = 0;
+	linehist(s, 0);
+}
+
+Sym*
+slookup(char *s)
+{
+
+	strcpy(symb, s);
+	return lookup();
+}
+
+Sym*
+lookup(void)
+{
+	Sym *s;
+	int32 h;
+	char *p;
+	int c, l;
+
+	h = 0;
+	for(p=symb; c = *p; p++)
+		h = h+h+h + c;
+	l = (p - symb) + 1;
+	if(h &lt; 0)
+		h = ~h;
+	h %= NHASH;
+	c = symb[0];
+	for(s = hash[h]; s != S; s = s-&gt;link) {
+		if(s-&gt;name[0] != c)
+			continue;
+		if(memcmp(s-&gt;name, symb, l) == 0)
+			return s;
+	}
+	s = alloc(sizeof(*s));
+	s-&gt;name = alloc(l);
+	memmove(s-&gt;name, symb, l);
+
+	s-&gt;link = hash[h];
+	hash[h] = s;
+	syminit(s);
+	return s;
+}
+
+int
+ISALPHA(int c)
+{
+	if(isalpha(c))
+		return 1;
+	if(c &gt;= Runeself)
+		return 1;
+	return 0;
+}
+
+int32
+yylex(void)
+{
+	int c, c1;
+	char *cp;
+	Sym *s;
+
+	c = peekc;
+	if(c != IGN) {
+		peekc = IGN;
+		goto l1;
+	}
+l0:
+	c = GETC();
+
+l1:
+	if(c == EOF) {
+		peekc = EOF;
+		return -1;
+	}
+	if(isspace(c)) {
+		if(c == &#39;\n&#39;) {
+			lineno++;
+			return &#39;;&#39;;
+		}
+		goto l0;
+	}
+	if(ISALPHA(c))
+		goto talph;
+	if(isdigit(c))
+		goto tnum;
+	switch(c)
+	{
+	case &#39;\n&#39;:
+		lineno++;
+		return &#39;;&#39;;
+
+	case &#39;#&#39;:
+		domacro();
+		goto l0;
+
+	case &#39;.&#39;:
+		c = GETC();
+		if(ISALPHA(c)) {
+			cp = symb;
+			*cp++ = &#39;.&#39;;
+			goto aloop;
+		}
+		if(isdigit(c)) {
+			cp = symb;
+			*cp++ = &#39;.&#39;;
+			goto casedot;
+		}
+		peekc = c;
+		return &#39;.&#39;;
+
+	talph:
+	case &#39;_&#39;:
+	case &#39;@&#39;:
+		cp = symb;
+
+	aloop:
+		*cp++ = c;
+		c = GETC();
+		if(ISALPHA(c) || isdigit(c) || c == &#39;_&#39; || c == &#39;$&#39;)
+			goto aloop;
+		*cp = 0;
+		peekc = c;
+		s = lookup();
+		if(s-&gt;macro) {
+			newio();
+			cp = ionext-&gt;b;
+			macexpand(s, cp);
+			pushio();
+			ionext-&gt;link = iostack;
+			iostack = ionext;
+			fi.p = cp;
+			fi.c = strlen(cp);
+			if(peekc != IGN) {
+				cp[fi.c++] = peekc;
+				cp[fi.c] = 0;
+				peekc = IGN;
+			}
+			goto l0;
+		}
+		if(s-&gt;type == 0)
+			s-&gt;type = LNAME;
+		if(s-&gt;type == LNAME ||
+		   s-&gt;type == LVAR ||
+		   s-&gt;type == LLAB) {
+			yylval.sym = s;
+			return s-&gt;type;
+		}
+		yylval.lval = s-&gt;value;
+		return s-&gt;type;
+
+	tnum:
+		cp = symb;
+		if(c != &#39;0&#39;)
+			goto dc;
+		*cp++ = c;
+		c = GETC();
+		c1 = 3;
+		if(c == &#39;x&#39; || c == &#39;X&#39;) {
+			c1 = 4;
+			c = GETC();
+		} else
+		if(c &lt; &#39;0&#39; || c &gt; &#39;7&#39;)
+			goto dc;
+		yylval.lval = 0;
+		for(;;) {
+			if(c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) {
+				if(c &gt; &#39;7&#39; &amp;&amp; c1 == 3)
+					break;
+				yylval.lval &lt;&lt;= c1;
+				yylval.lval += c - &#39;0&#39;;
+				c = GETC();
+				continue;
+			}
+			if(c1 == 3)
+				break;
+			if(c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;F&#39;)
+				c += &#39;a&#39; - &#39;A&#39;;
+			if(c &gt;= &#39;a&#39; &amp;&amp; c &lt;= &#39;f&#39;) {
+				yylval.lval &lt;&lt;= c1;
+				yylval.lval += c - &#39;a&#39; + 10;
+				c = GETC();
+				continue;
+			}
+			break;
+		}
+		goto ncu;
+
+	dc:
+		for(;;) {
+			if(!isdigit(c))
+				break;
+			*cp++ = c;
+			c = GETC();
+		}
+		if(c == &#39;.&#39;)
+			goto casedot;
+		if(c == &#39;e&#39; || c == &#39;E&#39;)
+			goto casee;
+		*cp = 0;
+		if(sizeof(yylval.lval) == sizeof(vlong))
+			yylval.lval = strtoll(symb, nil, 10);
+		else
+			yylval.lval = strtol(symb, nil, 10);
+
+	ncu:
+		while(c == &#39;U&#39; || c == &#39;u&#39; || c == &#39;l&#39; || c == &#39;L&#39;)
+			c = GETC();
+		peekc = c;
+		return LCONST;
+
+	casedot:
+		for(;;) {
+			*cp++ = c;
+			c = GETC();
+			if(!isdigit(c))
+				break;
+		}
+		if(c == &#39;e&#39; || c == &#39;E&#39;)
+			goto casee;
+		goto caseout;
+
+	casee:
+		*cp++ = &#39;e&#39;;
+		c = GETC();
+		if(c == &#39;+&#39; || c == &#39;-&#39;) {
+			*cp++ = c;
+			c = GETC();
+		}
+		while(isdigit(c)) {
+			*cp++ = c;
+			c = GETC();
+		}
+
+	caseout:
+		*cp = 0;
+		peekc = c;
+		if(FPCHIP) {
+			yylval.dval = atof(symb);
+			return LFCONST;
+		}
+		yyerror(&#34;assembler cannot interpret fp constants&#34;);
+		yylval.lval = 1L;
+		return LCONST;
+
+	case &#39;&#34;&#39;:
+		memcpy(yylval.sval, nullgen.sval, sizeof(yylval.sval));
+		cp = yylval.sval;
+		c1 = 0;
+		for(;;) {
+			c = escchar(&#39;&#34;&#39;);
+			if(c == EOF)
+				break;
+			if(c1 &lt; sizeof(yylval.sval))
+				*cp++ = c;
+			c1++;
+		}
+		if(c1 &gt; sizeof(yylval.sval))
+			yyerror(&#34;string constant too long&#34;);
+		return LSCONST;
+
+	case &#39;\&#39;&#39;:
+		c = escchar(&#39;\&#39;&#39;);
+		if(c == EOF)
+			c = &#39;\&#39;&#39;;
+		if(escchar(&#39;\&#39;&#39;) != EOF)
+			yyerror(&#34;missing &#39;&#34;);
+		yylval.lval = c;
+		return LCONST;
+
+	case &#39;/&#39;:
+		c1 = GETC();
+		if(c1 == &#39;/&#39;) {
+			for(;;) {
+				c = GETC();
+				if(c == &#39;\n&#39;)
+					goto l1;
+				if(c == EOF) {
+					yyerror(&#34;eof in comment&#34;);
+					errorexit();
+				}
+			}
+		}
+		if(c1 == &#39;*&#39;) {
+			for(;;) {
+				c = GETC();
+				while(c == &#39;*&#39;) {
+					c = GETC();
+					if(c == &#39;/&#39;)
+						goto l0;
+				}
+				if(c == EOF) {
+					yyerror(&#34;eof in comment&#34;);
+					errorexit();
+				}
+				if(c == &#39;\n&#39;)
+					lineno++;
+			}
+		}
+		break;
+
+	default:
+		return c;
+	}
+	peekc = c1;
+	return c;
+}
+
+int
+getc(void)
+{
+	int c;
+
+	c = peekc;
+	if(c != IGN) {
+		peekc = IGN;
+		return c;
+	}
+	c = GETC();
+	if(c == &#39;\n&#39;)
+		lineno++;
+	if(c == EOF) {
+		yyerror(&#34;End of file&#34;);
+		errorexit();
+	}
+	return c;
+}
+
+int
+getnsc(void)
+{
+	int c;
+
+	for(;;) {
+		c = getc();
+		if(!isspace(c) || c == &#39;\n&#39;)
+			return c;
+	}
+}
+
+void
+unget(int c)
+{
+
+	peekc = c;
+	if(c == &#39;\n&#39;)
+		lineno--;
+}
+
+int
+escchar(int e)
+{
+	int c, l;
+
+loop:
+	c = getc();
+	if(c == &#39;\n&#39;) {
+		yyerror(&#34;newline in string&#34;);
+		return EOF;
+	}
+	if(c != &#39;\\&#39;) {
+		if(c == e)
+			return EOF;
+		return c;
+	}
+	c = getc();
+	if(c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;7&#39;) {
+		l = c - &#39;0&#39;;
+		c = getc();
+		if(c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;7&#39;) {
+			l = l*8 + c-&#39;0&#39;;
+			c = getc();
+			if(c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;7&#39;) {
+				l = l*8 + c-&#39;0&#39;;
+				return l;
+			}
+		}
+		peekc = c;
+		return l;
+	}
+	switch(c)
+	{
+	case &#39;\n&#39;:	goto loop;
+	case &#39;n&#39;:	return &#39;\n&#39;;
+	case &#39;t&#39;:	return &#39;\t&#39;;
+	case &#39;b&#39;:	return &#39;\b&#39;;
+	case &#39;r&#39;:	return &#39;\r&#39;;
+	case &#39;f&#39;:	return &#39;\f&#39;;
+	case &#39;a&#39;:	return 0x07;
+	case &#39;v&#39;:	return 0x0b;
+	case &#39;z&#39;:	return 0x00;
+	}
+	return c;
+}
+
+void
+pinit(char *f)
+{
+	int i;
+	Sym *s;
+
+	lineno = 1;
+	newio();
+	newfile(f, -1);
+	pc = 0;
+	peekc = IGN;
+	sym = 1;
+	for(i=0; i&lt;NSYM; i++) {
+		h[i].type = 0;
+		h[i].sym = S;
+	}
+	for(i=0; i&lt;NHASH; i++)
+		for(s = hash[i]; s != S; s = s-&gt;link)
+			s-&gt;macro = 0;
+}
+
+int
+filbuf(void)
+{
+	Io *i;
+
+loop:
+	i = iostack;
+	if(i == I)
+		return EOF;
+	if(i-&gt;f &lt; 0)
+		goto pop;
+	fi.c = read(i-&gt;f, i-&gt;b, BUFSIZ) - 1;
+	if(fi.c &lt; 0) {
+		close(i-&gt;f);
+		linehist(0, 0);
+		goto pop;
+	}
+	fi.p = i-&gt;b + 1;
+	return i-&gt;b[0];
+
+pop:
+	iostack = i-&gt;link;
+	i-&gt;link = iofree;
+	iofree = i;
+	i = iostack;
+	if(i == I)
+		return EOF;
+	fi.p = i-&gt;p;
+	fi.c = i-&gt;c;
+	if(--fi.c &lt; 0)
+		goto loop;
+	return *fi.p++;
+}
+
+void
+yyerror(char *a, ...)
+{
+	char buf[200];
+	va_list arg;
+
+	/*
+	 * hack to intercept message from yaccpar
+	 */
+	if(strcmp(a, &#34;syntax error&#34;) == 0) {
+		yyerror(&#34;syntax error, last name: %s&#34;, symb);
+		return;
+	}
+	prfile(lineno);
+	va_start(arg, a);
+	vseprint(buf, buf+sizeof(buf), a, arg);
+	va_end(arg);
+	print(&#34;%s\n&#34;, buf);
+	nerrors++;
+	if(nerrors &gt; 10) {
+		print(&#34;too many errors\n&#34;);
+		errorexit();
+	}
+}
+
+void
+prfile(int32 l)
+{
+	int i, n;
+	Hist a[HISTSZ], *h;
+	int32 d;
+
+	n = 0;
+	for(h = hist; h != H; h = h-&gt;link) {
+		if(l &lt; h-&gt;line)
+			break;
+		if(h-&gt;name) {
+			if(h-&gt;offset == 0) {
+				if(n &gt;= 0 &amp;&amp; n &lt; HISTSZ)
+					a[n] = *h;
+				n++;
+				continue;
+			}
+			if(n &gt; 0 &amp;&amp; n &lt; HISTSZ)
+				if(a[n-1].offset == 0) {
+					a[n] = *h;
+					n++;
+				} else
+					a[n-1] = *h;
+			continue;
+		}
+		n--;
+		if(n &gt;= 0 &amp;&amp; n &lt; HISTSZ) {
+			d = h-&gt;line - a[n].line;
+			for(i=0; i&lt;n; i++)
+				a[i].line += d;
+		}
+	}
+	if(n &gt; HISTSZ)
+		n = HISTSZ;
+	for(i=0; i&lt;n; i++)
+		print(&#34;%s:%ld &#34;, a[i].name, (long)(l-a[i].line+a[i].offset+1));
+}
+
+void
+ieeedtod(Ieee *ieee, double native)
+{
+	double fr, ho, f;
+	int exp;
+
+	if(native &lt; 0) {
+		ieeedtod(ieee, -native);
+		ieee-&gt;h |= 0x80000000L;
+		return;
+	}
+	if(native == 0) {
+		ieee-&gt;l = 0;
+		ieee-&gt;h = 0;
+		return;
+	}
+	fr = frexp(native, &amp;exp);
+	f = 2097152L;		/* shouldnt use fp constants here */
+	fr = modf(fr*f, &amp;ho);
+	ieee-&gt;h = ho;
+	ieee-&gt;h &amp;= 0xfffffL;
+	ieee-&gt;h |= (exp+1022L) &lt;&lt; 20;
+	f = 65536L;
+	fr = modf(fr*f, &amp;ho);
+	ieee-&gt;l = ho;
+	ieee-&gt;l &lt;&lt;= 16;
+	ieee-&gt;l |= (int32)(fr*f);
+}
+</pre>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

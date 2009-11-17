@@ -1,0 +1,993 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Text file src/cmd/cc/macbody</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../../pkg/index.html">Package documentation</a></li>
+    <li><a href="../../index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Text file src/cmd/cc/macbody</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <pre>
+// Inferno utils/cc/macbody
+// http://code.google.com/p/inferno-os/source/browse/utils/cc/macbody
+//
+//	Copyright © 1994-1999 Lucent Technologies Inc.  All rights reserved.
+//	Portions Copyright © 1995-1997 C H Forsyth (forsyth@terzarima.net)
+//	Portions Copyright © 1997-1999 Vita Nuova Limited
+//	Portions Copyright © 2000-2007 Vita Nuova Holdings Limited (www.vitanuova.com)
+//	Portions Copyright © 2004,2006 Bruce Ellis
+//	Portions Copyright © 2005-2007 C H Forsyth (forsyth@terzarima.net)
+//	Revisions Copyright © 2000-2007 Lucent Technologies Inc. and others
+//	Portions Copyright © 2009 The Go Authors.  All rights reserved.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the &#34;Software&#34;), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+#define VARMAC 0x80
+
+int32
+getnsn(void)
+{
+	int32 n;
+	int c;
+
+	c = getnsc();
+	if(c &lt; &#39;0&#39; || c &gt; &#39;9&#39;)
+		return -1;
+	n = 0;
+	while(c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) {
+		n = n*10 + c-&#39;0&#39;;
+		c = getc();
+	}
+	unget(c);
+	return n;
+}
+
+Sym*
+getsym(void)
+{
+	int c;
+	char *cp;
+
+	c = getnsc();
+	if(!isalpha(c) &amp;&amp; c != &#39;_&#39; &amp;&amp; c &lt; 0x80) {
+		unget(c);
+		return S;
+	}
+	for(cp = symb;;) {
+		if(cp &lt;= symb+NSYMB-4)
+			*cp++ = c;
+		c = getc();
+		if(isalnum(c) || c == &#39;_&#39; || c &gt;= 0x80)
+			continue;
+		unget(c);
+		break;
+	}
+	*cp = 0;
+	if(cp &gt; symb+NSYMB-4)
+		yyerror(&#34;symbol too large: %s&#34;, symb);
+	return lookup();
+}
+
+Sym*
+getsymdots(int *dots)
+{
+	int c;
+	Sym *s;
+
+	s = getsym();
+	if(s != S)
+		return s;
+
+	c = getnsc();
+	if(c != &#39;.&#39;){
+		unget(c);
+		return S;
+	}
+	if(getc() != &#39;.&#39; || getc() != &#39;.&#39;)
+		yyerror(&#34;bad dots in macro&#34;);
+	*dots = 1;
+	return slookup(&#34;__VA_ARGS__&#34;);
+}
+
+int
+getcom(void)
+{
+	int c;
+
+	for(;;) {
+		c = getnsc();
+		if(c != &#39;/&#39;)
+			break;
+		c = getc();
+		if(c == &#39;/&#39;) {
+			while(c != &#39;\n&#39;)
+				c = getc();
+			break;
+		}
+		if(c != &#39;*&#39;)
+			break;
+		c = getc();
+		for(;;) {
+			if(c == &#39;*&#39;) {
+				c = getc();
+				if(c != &#39;/&#39;)
+					continue;
+				c = getc();
+				break;
+			}
+			if(c == &#39;\n&#39;) {
+				yyerror(&#34;comment across newline&#34;);
+				break;
+			}
+			c = getc();
+		}
+		if(c == &#39;\n&#39;)
+			break;
+	}
+	return c;
+}
+
+void
+dodefine(char *cp)
+{
+	Sym *s;
+	char *p;
+	int32 l;
+
+	strcpy(symb, cp);
+	p = strchr(symb, &#39;=&#39;);
+	if(p) {
+		*p++ = 0;
+		s = lookup();
+		l = strlen(p) + 2;	/* +1 null, +1 nargs */
+		s-&gt;macro = alloc(l);
+		strcpy(s-&gt;macro+1, p);
+	} else {
+		s = lookup();
+		s-&gt;macro = &#34;\0001&#34;;	/* \000 is nargs */
+	}
+	if(debug[&#39;m&#39;])
+		print(&#34;#define (-D) %s %s\n&#34;, s-&gt;name, s-&gt;macro+1);
+}
+
+struct
+{
+	char	*macname;
+	void	(*macf)(void);
+} mactab[] =
+{
+	&#34;ifdef&#34;,	0,	/* macif(0) */
+	&#34;ifndef&#34;,	0,	/* macif(1) */
+	&#34;else&#34;,		0,	/* macif(2) */
+
+	&#34;line&#34;,		maclin,
+	&#34;define&#34;,	macdef,
+	&#34;include&#34;,	macinc,
+	&#34;undef&#34;,	macund,
+
+	&#34;pragma&#34;,	macprag,
+	&#34;endif&#34;,	macend,
+	0
+};
+
+void
+domacro(void)
+{
+	int i;
+	Sym *s;
+
+	s = getsym();
+	if(s == S)
+		s = slookup(&#34;endif&#34;);
+	for(i=0; mactab[i].macname; i++)
+		if(strcmp(s-&gt;name, mactab[i].macname) == 0) {
+			if(mactab[i].macf)
+				(*mactab[i].macf)();
+			else
+				macif(i);
+			return;
+		}
+	yyerror(&#34;unknown #: %s&#34;, s-&gt;name);
+	macend();
+}
+
+void
+macund(void)
+{
+	Sym *s;
+
+	s = getsym();
+	macend();
+	if(s == S) {
+		yyerror(&#34;syntax in #undef&#34;);
+		return;
+	}
+	s-&gt;macro = 0;
+}
+
+#define	NARG	25
+void
+macdef(void)
+{
+	Sym *s, *a;
+	char *args[NARG], *np, *base;
+	int n, i, c, len, dots;
+	int ischr;
+
+	s = getsym();
+	if(s == S)
+		goto bad;
+	if(s-&gt;macro)
+		yyerror(&#34;macro redefined: %s&#34;, s-&gt;name);
+	c = getc();
+	n = -1;
+	dots = 0;
+	if(c == &#39;(&#39;) {
+		n++;
+		c = getnsc();
+		if(c != &#39;)&#39;) {
+			unget(c);
+			for(;;) {
+				a = getsymdots(&amp;dots);
+				if(a == S)
+					goto bad;
+				if(n &gt;= NARG) {
+					yyerror(&#34;too many arguments in #define: %s&#34;, s-&gt;name);
+					goto bad;
+				}
+				args[n++] = a-&gt;name;
+				c = getnsc();
+				if(c == &#39;)&#39;)
+					break;
+				if(c != &#39;,&#39; || dots)
+					goto bad;
+			}
+		}
+		c = getc();
+	}
+	if(isspace(c))
+		if(c != &#39;\n&#39;)
+			c = getnsc();
+	base = hunk;
+	len = 1;
+	ischr = 0;
+	for(;;) {
+		if(isalpha(c) || c == &#39;_&#39;) {
+			np = symb;
+			*np++ = c;
+			c = getc();
+			while(isalnum(c) || c == &#39;_&#39;) {
+				*np++ = c;
+				c = getc();
+			}
+			*np = 0;
+			for(i=0; i&lt;n; i++)
+				if(strcmp(symb, args[i]) == 0)
+					break;
+			if(i &gt;= n) {
+				i = strlen(symb);
+				base = allocn(base, len, i);
+				memcpy(base+len, symb, i);
+				len += i;
+				continue;
+			}
+			base = allocn(base, len, 2);
+			base[len++] = &#39;#&#39;;
+			base[len++] = &#39;a&#39; + i;
+			continue;
+		}
+		if(ischr){
+			if(c == &#39;\\&#39;){
+				base = allocn(base, len, 1);
+				base[len++] = c;
+				c = getc();
+			}else if(c == ischr)
+				ischr = 0;
+		}else{
+			if(c == &#39;&#34;&#39; || c == &#39;\&#39;&#39;){
+				base = allocn(base, len, 1);
+				base[len++] = c;
+				ischr = c;
+				c = getc();
+				continue;
+			}
+			if(c == &#39;/&#39;) {
+				c = getc();
+				if(c == &#39;/&#39;){
+					c = getc();
+					for(;;) {
+						if(c == &#39;\n&#39;)
+							break;
+						c = getc();
+					}
+					continue;
+				}
+				if(c == &#39;*&#39;){
+					c = getc();
+					for(;;) {
+						if(c == &#39;*&#39;) {
+							c = getc();
+							if(c != &#39;/&#39;)
+								continue;
+							c = getc();
+							break;
+						}
+						if(c == &#39;\n&#39;) {
+							yyerror(&#34;comment and newline in define: %s&#34;, s-&gt;name);
+							break;
+						}
+						c = getc();
+					}
+					continue;
+				}
+				base = allocn(base, len, 1);
+				base[len++] = &#39;/&#39;;
+				continue;
+			}
+		}
+		if(c == &#39;\\&#39;) {
+			c = getc();
+			if(c == &#39;\n&#39;) {
+				c = getc();
+				continue;
+			}
+			else if(c == &#39;\r&#39;) {
+				c = getc();
+				if(c == &#39;\n&#39;) {
+					c = getc();
+					continue;
+				}
+			}
+			base = allocn(base, len, 1);
+			base[len++] = &#39;\\&#39;;
+			continue;
+		}
+		if(c == &#39;\n&#39;)
+			break;
+		if(c == &#39;#&#39;)
+		if(n &gt; 0) {
+			base = allocn(base, len, 1);
+			base[len++] = c;
+		}
+		base = allocn(base, len, 1);
+		base[len++] = c;
+		c = ((--fi.c &lt; 0)? filbuf(): (*fi.p++ &amp; 0xff));
+		if(c == &#39;\n&#39;)
+			lineno++;
+		if(c == -1) {
+			yyerror(&#34;eof in a macro: %s&#34;, s-&gt;name);
+			break;
+		}
+	}
+	do {
+		base = allocn(base, len, 1);
+		base[len++] = 0;
+	} while(len &amp; 3);
+
+	*base = n+1;
+	if(dots)
+		*base |= VARMAC;
+	s-&gt;macro = base;
+	if(debug[&#39;m&#39;])
+		print(&#34;#define %s %s\n&#34;, s-&gt;name, s-&gt;macro+1);
+	return;
+
+bad:
+	if(s == S)
+		yyerror(&#34;syntax in #define&#34;);
+	else
+		yyerror(&#34;syntax in #define: %s&#34;, s-&gt;name);
+	macend();
+}
+
+void
+macexpand(Sym *s, char *b)
+{
+	char buf[2000];
+	int n, l, c, nargs;
+	char *arg[NARG], *cp, *ob, *ecp, dots;
+
+	ob = b;
+	if(*s-&gt;macro == 0) {
+		strcpy(b, s-&gt;macro+1);
+		if(debug[&#39;m&#39;])
+			print(&#34;#expand %s %s\n&#34;, s-&gt;name, ob);
+		return;
+	}
+
+	nargs = (char)(*s-&gt;macro &amp; ~VARMAC) - 1;
+	dots = *s-&gt;macro &amp; VARMAC;
+
+	c = getnsc();
+	if(c != &#39;(&#39;)
+		goto bad;
+	n = 0;
+	c = getc();
+	if(c != &#39;)&#39;) {
+		unget(c);
+		l = 0;
+		cp = buf;
+		ecp = cp + sizeof(buf)-4;
+		arg[n++] = cp;
+		for(;;) {
+			if(cp &gt;= ecp)
+				goto toobig;
+			c = getc();
+			if(c == &#39;&#34;&#39;)
+				for(;;) {
+					if(cp &gt;= ecp)
+						goto toobig;
+					*cp++ = c;
+					c = getc();
+					if(c == &#39;\\&#39;) {
+						*cp++ = c;
+						c = getc();
+						continue;
+					}
+					if(c == &#39;\n&#39;)
+						goto bad;
+					if(c == &#39;&#34;&#39;)
+						break;
+				}
+			if(c == &#39;\&#39;&#39;)
+				for(;;) {
+					if(cp &gt;= ecp)
+						goto toobig;
+					*cp++ = c;
+					c = getc();
+					if(c == &#39;\\&#39;) {
+						*cp++ = c;
+						c = getc();
+						continue;
+					}
+					if(c == &#39;\n&#39;)
+						goto bad;
+					if(c == &#39;\&#39;&#39;)
+						break;
+				}
+			if(c == &#39;/&#39;) {
+				c = getc();
+				switch(c) {
+				case &#39;*&#39;:
+					for(;;) {
+						c = getc();
+						if(c == &#39;*&#39;) {
+							c = getc();
+							if(c == &#39;/&#39;)
+								break;
+						}
+					}
+					*cp++ = &#39; &#39;;
+					continue;
+				case &#39;/&#39;:
+					while((c = getc()) != &#39;\n&#39;)
+						;
+					break;
+				default:
+					unget(c);
+					c = &#39;/&#39;;
+				}
+			}
+			if(l == 0) {
+				if(c == &#39;,&#39;) {
+					if(n == nargs &amp;&amp; dots) {
+						*cp++ = &#39;,&#39;;
+						continue;
+					}
+					*cp++ = 0;
+					arg[n++] = cp;
+					if(n &gt; nargs)
+						break;
+					continue;
+				}
+				if(c == &#39;)&#39;)
+					break;
+			}
+			if(c == &#39;\n&#39;)
+				c = &#39; &#39;;
+			*cp++ = c;
+			if(c == &#39;(&#39;)
+				l++;
+			if(c == &#39;)&#39;)
+				l--;
+		}
+		*cp = 0;
+	}
+	if(n != nargs) {
+		yyerror(&#34;argument mismatch expanding: %s&#34;, s-&gt;name);
+		*b = 0;
+		return;
+	}
+	cp = s-&gt;macro+1;
+	for(;;) {
+		c = *cp++;
+		if(c == &#39;\n&#39;)
+			c = &#39; &#39;;
+		if(c != &#39;#&#39;) {
+			*b++ = c;
+			if(c == 0)
+				break;
+			continue;
+		}
+		c = *cp++;
+		if(c == 0)
+			goto bad;
+		if(c == &#39;#&#39;) {
+			*b++ = c;
+			continue;
+		}
+		c -= &#39;a&#39;;
+		if(c &lt; 0 || c &gt;= n)
+			continue;
+		strcpy(b, arg[c]);
+		b += strlen(arg[c]);
+	}
+	*b = 0;
+	if(debug[&#39;m&#39;])
+		print(&#34;#expand %s %s\n&#34;, s-&gt;name, ob);
+	return;
+
+bad:
+	yyerror(&#34;syntax in macro expansion: %s&#34;, s-&gt;name);
+	*b = 0;
+	return;
+
+toobig:
+	yyerror(&#34;too much text in macro expansion: %s&#34;, s-&gt;name);
+	*b = 0;
+}
+
+void
+macinc(void)
+{
+	int c0, c, i, f;
+	char str[STRINGSZ], *hp;
+
+	c0 = getnsc();
+	if(c0 != &#39;&#34;&#39;) {
+		c = c0;
+		if(c0 != &#39;&lt;&#39;)
+			goto bad;
+		c0 = &#39;&gt;&#39;;
+	}
+	for(hp = str;;) {
+		c = getc();
+		if(c == c0)
+			break;
+		if(c == &#39;\n&#39;)
+			goto bad;
+		*hp++ = c;
+	}
+	*hp = 0;
+
+	c = getcom();
+	if(c != &#39;\n&#39;)
+		goto bad;
+
+	f = -1;
+	for(i=0; i&lt;ninclude; i++) {
+		if(i == 0 &amp;&amp; c0 == &#39;&gt;&#39;)
+			continue;
+		strcpy(symb, include[i]);
+		strcat(symb, &#34;/&#34;);
+		if(strcmp(symb, &#34;./&#34;) == 0)
+			symb[0] = 0;
+		strcat(symb, str);
+		f = open(symb, OREAD);
+		if(f &gt;= 0)
+			break;
+	}
+	if(f &lt; 0)
+		strcpy(symb, str);
+	c = strlen(symb) + 1;
+	hp = alloc(c);
+	memcpy(hp, symb, c);
+	newio();
+	pushio();
+	newfile(hp, f);
+	return;
+
+bad:
+	unget(c);
+	yyerror(&#34;syntax in #include&#34;);
+	macend();
+}
+
+void
+maclin(void)
+{
+	char *cp;
+	int c;
+	int32 n;
+
+	n = getnsn();
+	c = getc();
+	if(n &lt; 0)
+		goto bad;
+
+	for(;;) {
+		if(c == &#39; &#39; || c == &#39;\t&#39;) {
+			c = getc();
+			continue;
+		}
+		if(c == &#39;&#34;&#39;)
+			break;
+		if(c == &#39;\n&#39;) {
+			strcpy(symb, &#34;&lt;noname&gt;&#34;);
+			goto nn;
+		}
+		goto bad;
+	}
+	cp = symb;
+	for(;;) {
+		c = getc();
+		if(c == &#39;&#34;&#39;)
+			break;
+		*cp++ = c;
+	}
+	*cp = 0;
+	c = getcom();
+	if(c != &#39;\n&#39;)
+		goto bad;
+
+nn:
+	c = strlen(symb) + 1;
+	cp = alloc(c);
+	memcpy(cp, symb, c);
+	linehist(cp, n);
+	return;
+
+bad:
+	unget(c);
+	yyerror(&#34;syntax in #line&#34;);
+	macend();
+}
+
+void
+macif(int f)
+{
+	int c, l, bol;
+	Sym *s;
+
+	if(f == 2)
+		goto skip;
+	s = getsym();
+	if(s == S)
+		goto bad;
+	if(getcom() != &#39;\n&#39;)
+		goto bad;
+	if((s-&gt;macro != 0) ^ f)
+		return;
+
+skip:
+	bol = 1;
+	l = 0;
+	for(;;) {
+		c = getc();
+		if(c != &#39;#&#39;) {
+			if(!isspace(c))
+				bol = 0;
+			if(c == &#39;\n&#39;)
+				bol = 1;
+			continue;
+		}
+		if(!bol)
+			continue;
+		s = getsym();
+		if(s == S)
+			continue;
+		if(strcmp(s-&gt;name, &#34;endif&#34;) == 0) {
+			if(l) {
+				l--;
+				continue;
+			}
+			macend();
+			return;
+		}
+		if(strcmp(s-&gt;name, &#34;ifdef&#34;) == 0 || strcmp(s-&gt;name, &#34;ifndef&#34;) == 0) {
+			l++;
+			continue;
+		}
+		if(l == 0 &amp;&amp; f != 2 &amp;&amp; strcmp(s-&gt;name, &#34;else&#34;) == 0) {
+			macend();
+			return;
+		}
+	}
+
+bad:
+	yyerror(&#34;syntax in #if(n)def&#34;);
+	macend();
+}
+
+void
+macprag(void)
+{
+	Sym *s;
+	int c0, c;
+	char *hp;
+	Hist *h;
+
+	s = getsym();
+
+	if(s &amp;&amp; strcmp(s-&gt;name, &#34;lib&#34;) == 0)
+		goto praglib;
+	if(s &amp;&amp; strcmp(s-&gt;name, &#34;pack&#34;) == 0) {
+		pragpack();
+		return;
+	}
+	if(s &amp;&amp; strcmp(s-&gt;name, &#34;fpround&#34;) == 0) {
+		pragfpround();
+		return;
+	}
+	if(s &amp;&amp; strcmp(s-&gt;name, &#34;textflag&#34;) == 0) {
+		pragtextflag();
+		return;
+	}
+	if(s &amp;&amp; strcmp(s-&gt;name, &#34;varargck&#34;) == 0) {
+		pragvararg();
+		return;
+	}
+	if(s &amp;&amp; strcmp(s-&gt;name, &#34;incomplete&#34;) == 0) {
+		pragincomplete();
+		return;
+	}
+	if(s &amp;&amp; strcmp(s-&gt;name, &#34;dynld&#34;) == 0) {
+		pragdynld();
+		return;
+	}
+	while(getnsc() != &#39;\n&#39;)
+		;
+	return;
+
+praglib:
+	c0 = getnsc();
+	if(c0 != &#39;&#34;&#39;) {
+		c = c0;
+		if(c0 != &#39;&lt;&#39;)
+			goto bad;
+		c0 = &#39;&gt;&#39;;
+	}
+	for(hp = symb;;) {
+		c = getc();
+		if(c == c0)
+			break;
+		if(c == &#39;\n&#39;)
+			goto bad;
+		*hp++ = c;
+	}
+	*hp = 0;
+	c = getcom();
+	if(c != &#39;\n&#39;)
+		goto bad;
+
+	/*
+	 * put pragma-line in as a funny history
+	 */
+	c = strlen(symb) + 1;
+	hp = alloc(c);
+	memcpy(hp, symb, c);
+
+	h = alloc(sizeof(Hist));
+	h-&gt;name = hp;
+	h-&gt;line = lineno;
+	h-&gt;offset = -1;
+	h-&gt;link = H;
+	if(ehist == H) {
+		hist = h;
+		ehist = h;
+		return;
+	}
+	ehist-&gt;link = h;
+	ehist = h;
+	return;
+
+bad:
+	unget(c);
+	yyerror(&#34;syntax in #pragma lib&#34;);
+	macend();
+}
+
+void
+macend(void)
+{
+	int c;
+
+	for(;;) {
+		c = getnsc();
+		if(c &lt; 0 || c == &#39;\n&#39;)
+			return;
+	}
+}
+
+void
+linehist(char *f, int offset)
+{
+	Hist *h;
+
+	/*
+	 * overwrite the last #line directive if
+	 * no alloc has happened since the last one
+	 */
+	if(newflag == 0 &amp;&amp; ehist != H &amp;&amp; offset != 0 &amp;&amp; ehist-&gt;offset != 0)
+		if(f &amp;&amp; ehist-&gt;name &amp;&amp; strcmp(f, ehist-&gt;name) == 0) {
+			ehist-&gt;line = lineno;
+			ehist-&gt;offset = offset;
+			return;
+		}
+
+	if(debug[&#39;f&#39;])
+		if(f) {
+			if(offset)
+				print(&#34;%4ld: %s (#line %d)\n&#34;, lineno, f, offset);
+			else
+				print(&#34;%4ld: %s\n&#34;, lineno, f);
+		} else
+			print(&#34;%4ld: &lt;pop&gt;\n&#34;, lineno);
+	newflag = 0;
+
+	h = alloc(sizeof(Hist));
+	h-&gt;name = f;
+	h-&gt;line = lineno;
+	h-&gt;offset = offset;
+	h-&gt;link = H;
+	if(ehist == H) {
+		hist = h;
+		ehist = h;
+		return;
+	}
+	ehist-&gt;link = h;
+	ehist = h;
+}
+</pre>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

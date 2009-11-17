@@ -1,0 +1,830 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Directory .</title>
+
+  <link rel="stylesheet" type="text/css" href="../doc/style.css">
+  <script type="text/javascript" src="../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../index.html"><img src="../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../doc/install.html">Install Go</a></li>
+    <li><a href="../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../cmd/index.html">Command documentation</a></li>
+    <li><a href="index.html">Package documentation</a></li>
+    <li><a href="../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:51 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Directory .</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<h2>Subdirectories</h2>
+	<p>
+	<table class="layout">
+	<tr>
+	<th align="left" colspan="3">Name</th>
+	<td width="25">&nbsp;</td>
+	<th align="left">Synopsis</th>
+	</tr>
+	<tr>
+	<th align="left"><a href="../index.html">..<a></th>
+	</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="archive/index.html">archive<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="archive/tar/index.html">tar<a></td>
+		<td></td>
+		<td align="left">The tar package implements access to tar archives.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="asn1/index.html">asn1<a></td>
+		<td></td>
+		<td align="left">The asn1 package implements parsing of DER-encoded ASN.1 data structures,
+as defined in ITU-T Rec X.690.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="big/index.html">big<a></td>
+		<td></td>
+		<td align="left">This package implements multi-precision arithmetic (big numbers).</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="bignum/index.html">bignum<a></td>
+		<td></td>
+		<td align="left">A package for arbitrary precision arithmethic.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="bufio/index.html">bufio<a></td>
+		<td></td>
+		<td align="left">This package implements buffered I/O.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="bytes/index.html">bytes<a></td>
+		<td></td>
+		<td align="left">The bytes package implements functions for the manipulation of byte slices.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="compress/index.html">compress<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="compress/flate/index.html">flate<a></td>
+		<td></td>
+		<td align="left">The flate package implements the DEFLATE compressed data
+format, described in RFC 1951.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="compress/gzip/index.html">gzip<a></td>
+		<td></td>
+		<td align="left">The gzip package implements reading (and eventually writing) of
+gzip format compressed files, as specified in RFC 1952.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="compress/zlib/index.html">zlib<a></td>
+		<td></td>
+		<td align="left">The zlib package implements reading and writing of zlib
+format compressed files, as specified in RFC 1950.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="container/index.html">container<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="container/heap/index.html">heap<a></td>
+		<td></td>
+		<td align="left">This package provides heap operations for any type that implements
+heap.Interface.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="container/list/index.html">list<a></td>
+		<td></td>
+		<td align="left">The list package implements a doubly linked list.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="container/ring/index.html">ring<a></td>
+		<td></td>
+		<td align="left">The ring package implements operations on circular lists.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="container/vector/index.html">vector<a></td>
+		<td></td>
+		<td align="left">The vector package implements an efficient container for managing
+linear arrays of elements.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="crypto/index.html">crypto<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="crypto/aes/index.html">aes<a></td>
+		<td></td>
+		<td align="left">This package implements AES encryption (formerly Rijndael),
+as defined in U.S. Federal Information Processing Standards Publication 197.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="crypto/block/index.html">block<a></td>
+		<td></td>
+		<td align="left">The block package implements standard block cipher modes
+that can be wrapped around low-level block cipher implementations.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="crypto/hmac/index.html">hmac<a></td>
+		<td></td>
+		<td align="left">The hmac package implements the Keyed-Hash Message Authentication Code (HMAC)
+as defined in U.S. Federal Information Processing Standards Publication 198.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="crypto/md5/index.html">md5<a></td>
+		<td></td>
+		<td align="left">This package implements the MD5 hash algorithm as defined in RFC 1321.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="crypto/rc4/index.html">rc4<a></td>
+		<td></td>
+		<td align="left">This package implements RC4 encryption, as defined in Bruce Schneier&#39;s
+Applied Cryptography.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="crypto/rsa/index.html">rsa<a></td>
+		<td></td>
+		<td align="left">This package implements RSA encryption as specified in PKCS#1.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="crypto/sha1/index.html">sha1<a></td>
+		<td></td>
+		<td align="left">This package implements the SHA1 hash algorithm as defined in RFC 3174.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="crypto/subtle/index.html">subtle<a></td>
+		<td></td>
+		<td align="left">This package implements functions that are often useful in cryptographic
+code but require careful thought to use correctly.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="crypto/tls/index.html">tls<a></td>
+		<td></td>
+		<td align="left">This package partially implements the TLS 1.1 protocol, as specified in RFC 4346.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="crypto/x509/index.html">x509<a></td>
+		<td></td>
+		<td align="left">	NOTE: PACKAGE UNDER CONSTRUCTION.
+
+This package parses X.509-encoded keys and certificates.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="debug/index.html">debug<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="debug/dwarf/index.html">dwarf<a></td>
+		<td></td>
+		<td align="left">This package provides access to DWARF debugging information
+loaded from executable files, as defined in the DWARF 2.0 Standard
+at http://dwarfstd.org/dwarf-2.0.0.pdf.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="debug/elf/index.html">elf<a></td>
+		<td></td>
+		<td align="left">Package elf implements access to ELF object files.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="debug/gosym/index.html">gosym<a></td>
+		<td></td>
+		<td align="left">Package gosym implements access to the Go symbol
+and line number tables embedded in Go binaries generated
+by the gc compilers.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="debug/macho/index.html">macho<a></td>
+		<td></td>
+		<td align="left">Package macho implements access to Mach-O object files, as defined by
+http://developer.apple.com/mac/library/documentation/DeveloperTools/Conceptual/MachORuntime/Reference/reference.html.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="debug/proc/index.html">proc<a></td>
+		<td></td>
+		<td align="left">Package ptrace provides a platform-independent interface for
+tracing and controlling running processes.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="ebnf/index.html">ebnf<a></td>
+		<td></td>
+		<td align="left">A library for EBNF grammars.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="encoding/index.html">encoding<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="encoding/ascii85/index.html">ascii85<a></td>
+		<td></td>
+		<td align="left">Package ascii85 implements the ascii85 data encoding
+as used in the btoa tool and Adobe&#39;s PostScript and PDF document formats.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="encoding/base64/index.html">base64<a></td>
+		<td></td>
+		<td align="left">Package base64 implements base64 encoding as specified by RFC 4648.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="encoding/binary/index.html">binary<a></td>
+		<td></td>
+		<td align="left">This package implements translation between
+unsigned integer values and byte sequences.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="encoding/git85/index.html">git85<a></td>
+		<td></td>
+		<td align="left">Package git85 implements the radix 85 data encoding
+used in the Git version control system.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="encoding/hex/index.html">hex<a></td>
+		<td></td>
+		<td align="left">This package implements hexadecimal encoding and decoding.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="encoding/pem/index.html">pem<a></td>
+		<td></td>
+		<td align="left">This package implements the PEM data encoding, which originated in Privacy
+Enhanced Mail.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="exec/index.html">exec<a></td>
+		<td></td>
+		<td align="left">The exec package runs external commands.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="exp/index.html">exp<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="exp/4s/index.html">4s<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="exp/datafmt/index.html">datafmt<a></td>
+		<td></td>
+		<td align="left">	The datafmt package implements syntax-directed, type-driven formatting
+	of arbitrary data structures.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="exp/draw/index.html">draw<a></td>
+		<td></td>
+		<td align="left">Package draw provides basic graphics and drawing primitives,
+in the style of the Plan 9 graphics library
+(see http://plan9.bell-labs.com/magic/man2html/2/draw)
+and the X Render extension.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="exp/eval/index.html">eval<a></td>
+		<td></td>
+		<td align="left">This package is the beginning of an interpreter for Go.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="exp/iterable/index.html">iterable<a></td>
+		<td></td>
+		<td align="left">The iterable package provides several traversal and searching methods.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="exp/nacl/index.html">nacl<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td><td width="25"></td>
+		<td align="left" colspan="1"><a href="exp/nacl/av/index.html">av<a></td>
+		<td></td>
+		<td align="left">Package av implements audio and video access for Native Client
+binaries running standalone or embedded in a web browser window.</td>
+		</tr>
+		<tr>
+		<td width="25"></td><td width="25"></td>
+		<td align="left" colspan="1"><a href="exp/nacl/srpc/index.html">srpc<a></td>
+		<td></td>
+		<td align="left">This package implements Native Client&#39;s simple RPC (SRPC).</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="exp/ogle/index.html">ogle<a></td>
+		<td></td>
+		<td align="left">Ogle is the beginning of a debugger for Go.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="exp/spacewar/index.html">spacewar<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="expvar/index.html">expvar<a></td>
+		<td></td>
+		<td align="left">The expvar package provides a standardized interface to public variables,
+such as operation counters in servers.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="flag/index.html">flag<a></td>
+		<td></td>
+		<td align="left">	The flag package implements command-line flag parsing.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="fmt/index.html">fmt<a></td>
+		<td></td>
+		<td align="left">	Package fmt implements formatted I/O with functions analogous
+	to C&#39;s printf.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="go/index.html">go<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="go/ast/index.html">ast<a></td>
+		<td></td>
+		<td align="left">The AST package declares the types used to represent
+syntax trees for Go packages.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="go/doc/index.html">doc<a></td>
+		<td></td>
+		<td align="left">The doc package extracts source code documentation from a Go AST.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="go/parser/index.html">parser<a></td>
+		<td></td>
+		<td align="left">A parser for Go source files.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="go/printer/index.html">printer<a></td>
+		<td></td>
+		<td align="left">The printer package implements printing of AST nodes.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="go/scanner/index.html">scanner<a></td>
+		<td></td>
+		<td align="left">A scanner for Go source text.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="go/token/index.html">token<a></td>
+		<td></td>
+		<td align="left">This package defines constants representing the lexical
+tokens of the Go programming language and basic operations
+on tokens (printing, predicates).</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="gob/index.html">gob<a></td>
+		<td></td>
+		<td align="left">	The gob package manages streams of gobs - binary values exchanged between an
+	Encoder (transmitter) and a Decoder (receiver).</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="hash/index.html">hash<a></td>
+		<td></td>
+		<td align="left"></td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="hash/adler32/index.html">adler32<a></td>
+		<td></td>
+		<td align="left">This package implements the Adler-32 checksum.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="hash/crc32/index.html">crc32<a></td>
+		<td></td>
+		<td align="left">This package implements the 32-bit cyclic redundancy check, or CRC-32, checksum.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="http/index.html">http<a></td>
+		<td></td>
+		<td align="left">The http package implements parsing of HTTP requests, replies,
+and URLs and provides an extensible HTTP server and a basic
+HTTP client.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="image/index.html">image<a></td>
+		<td></td>
+		<td align="left">The image package implements a basic 2-D image library.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="image/png/index.html">png<a></td>
+		<td></td>
+		<td align="left">The png package implements a PNG image decoder and encoder.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="io/index.html">io<a></td>
+		<td></td>
+		<td align="left">This package provides basic interfaces to I/O primitives.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="json/index.html">json<a></td>
+		<td></td>
+		<td align="left">The json package implements a simple parser and
+representation for JSON (JavaScript Object Notation),
+as defined at http://www.json.org/.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="log/index.html">log<a></td>
+		<td></td>
+		<td align="left">Rudimentary logging package.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="malloc/index.html">malloc<a></td>
+		<td></td>
+		<td align="left">The malloc package exposes statistics and other low-level details about
+the run-time memory allocator and collector.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="math/index.html">math<a></td>
+		<td></td>
+		<td align="left">The math package provides basic constants and mathematical functions.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="net/index.html">net<a></td>
+		<td></td>
+		<td align="left">The net package provides a portable interface to Unix
+networks sockets, including TCP/IP, UDP, domain name
+resolution, and Unix domain sockets.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="once/index.html">once<a></td>
+		<td></td>
+		<td align="left">This package provides a single function, Do, to run a function
+exactly once, usually used as part of initialization.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="os/index.html">os<a></td>
+		<td></td>
+		<td align="left">The os package provides a platform-independent interface to operating
+system functionality.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="patch/index.html">patch<a></td>
+		<td></td>
+		<td align="left">Package patch implements parsing and execution of the textual and
+binary patch descriptions used by version control tools such as
+CVS, Git, Mercurial, and Subversion.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="path/index.html">path<a></td>
+		<td></td>
+		<td align="left">The path package implements utility routines for manipulating
+slash-separated filename paths.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="rand/index.html">rand<a></td>
+		<td></td>
+		<td align="left">Package rand implements pseudo-random number generators.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="reflect/index.html">reflect<a></td>
+		<td></td>
+		<td align="left">The reflect package implements run-time reflection, allowing a program to
+manipulate objects with arbitrary types.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="regexp/index.html">regexp<a></td>
+		<td></td>
+		<td align="left">Package regexp implements a simple regular expression library.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="rpc/index.html">rpc<a></td>
+		<td></td>
+		<td align="left">	The rpc package provides access to the public methods of an object across a
+	network or other I/O connection.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="runtime/index.html">runtime<a></td>
+		<td></td>
+		<td align="left">	The runtime package contains operations that interact with Go&#39;s runtime system,
+	such as functions to control goroutines.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="sort/index.html">sort<a></td>
+		<td></td>
+		<td align="left">The sort package provides primitives for sorting arrays
+and user-defined collections.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="strconv/index.html">strconv<a></td>
+		<td></td>
+		<td align="left">The strconv package implements conversions to and from
+string representations of basic data types.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="strings/index.html">strings<a></td>
+		<td></td>
+		<td align="left">A package of simple functions to manipulate strings.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="sync/index.html">sync<a></td>
+		<td></td>
+		<td align="left">The sync package provides basic synchronization primitives
+such as mutual exclusion locks.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="syscall/index.html">syscall<a></td>
+		<td></td>
+		<td align="left">This package contains an interface to the low-level operating system
+primitives.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="tabwriter/index.html">tabwriter<a></td>
+		<td></td>
+		<td align="left">The tabwriter package implements a write filter (tabwriter.Writer)
+that translates tabbed columns in input into properly aligned text.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="template/index.html">template<a></td>
+		<td></td>
+		<td align="left">	Data-driven templates for generating textual output such as
+	HTML. See
+		http://code.google.com/p/json-template/wiki/Reference
+	for full documentation of the template language.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="testing/index.html">testing<a></td>
+		<td></td>
+		<td align="left">The testing package provides support for automated testing of Go packages.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="testing/iotest/index.html">iotest<a></td>
+		<td></td>
+		<td align="left">The iotest package implements Readers and Writers
+useful only for testing.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="testing/quick/index.html">quick<a></td>
+		<td></td>
+		<td align="left">This package implements utility functions to help with black box testing.</td>
+		</tr>
+		<tr>
+		<td width="25"></td>
+		<td align="left" colspan="2"><a href="testing/script/index.html">script<a></td>
+		<td></td>
+		<td align="left">This package aids in the testing of code that uses channels.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="time/index.html">time<a></td>
+		<td></td>
+		<td align="left">The time package provides functionality for measuring and
+displaying time.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="unicode/index.html">unicode<a></td>
+		<td></td>
+		<td align="left">This package provides data and functions to test some properties of Unicode code points.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="unsafe/index.html">unsafe<a></td>
+		<td></td>
+		<td align="left">	The unsafe package contains operations that step around the type safety of Go programs.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="utf8/index.html">utf8<a></td>
+		<td></td>
+		<td align="left">Functions and constants to support text encoded in UTF-8.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="3"><a href="xml/index.html">xml<a></td>
+		<td></td>
+		<td align="left">Package xml implements a simple XML 1.0 parser that
+understands XML name spaces.</td>
+		</tr>
+	</table>
+	</p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

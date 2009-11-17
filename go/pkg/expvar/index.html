@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package expvar</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:47:43 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package expvar</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "expvar"</code></p>
+	<p>
+The expvar package provides a standardized interface to public variables,
+such as operation counters in servers. It exposes these variables via
+HTTP at /debug/vars in JSON format.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/expvar/expvar.go">expvar.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/expvar/expvar.go#L192">Iter</a></h2>
+			<p><code><a id="L192"></a>func Iter() &lt;-chan KeyValue</code></p>
+			
+			<h2>func <a href="../../src/pkg/expvar/expvar.go#L139">Publish</a></h2>
+			<p><code><a id="L139"></a>func Publish(name string, v Var)</code></p>
+			<p>
+Publish declares an named exported variable. This should be called from a
+package&#39;s init function when it creates its Vars. If the name is already
+registered then this will log.Crash.
+</p>
+
+			<h2>func <a href="../../src/pkg/expvar/expvar.go#L158">RemoveAll</a></h2>
+			<p><code><a id="L158"></a>func RemoveAll()</code></p>
+			<p>
+RemoveAll removes all exported variables.
+This is for tests; don&#39;t call this on a real server.
+</p>
+
+			<h2>type <a href="../../src/pkg/expvar/expvar.go#L25"><a id="L25"></a>Int</a></h2>
+			<p>
+Int is a 64-bit integer variable, and satisfies the Var interface.
+</p>
+
+			<p><pre><a id="L25"></a>type Int struct {
+    // contains unexported fields
+<a id="L28"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/expvar/expvar.go#L166">NewInt</a></h3>
+				<p><code><a id="L166"></a>func NewInt(name string) *Int</code></p>
+				
+				<h3>func (<a id="L32"></a>*Int) <a href="../../src/pkg/expvar/expvar.go#L32">Add</a></h3>
+				<p><code><a id="L32"></a>func (v *Int) Add(delta int64)</code></p>
+				
+				<h3>func (<a id="L30"></a>*Int) <a href="../../src/pkg/expvar/expvar.go#L30">String</a></h3>
+				<p><code><a id="L30"></a>func (v *Int) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/expvar/expvar.go#L127"><a id="L127"></a>IntFunc</a></h2>
+			<p>
+IntFunc wraps a func() int64 to create a value that satisfies the Var interface.
+The function will be called each time the Var is evaluated.
+</p>
+
+			<p><pre><a id="L127"></a>type IntFunc func() int64</pre></p>
+				<h3>func (<a id="L129"></a>IntFunc) <a href="../../src/pkg/expvar/expvar.go#L129">String</a></h3>
+				<p><code><a id="L129"></a>func (v IntFunc) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/expvar/expvar.go#L45"><a id="L45"></a>KeyValue</a></h2>
+			<p>
+KeyValue represents a single entry in a Map.
+</p>
+
+			<p><pre><a id="L45"></a>type KeyValue struct {
+    <a id="L46"></a>Key   string;
+    <a id="L47"></a>Value Var;
+<a id="L48"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/expvar/expvar.go#L39"><a id="L39"></a>Map</a></h2>
+			<p>
+Map is a string-to-Var map variable, and satisfies the Var interface.
+</p>
+
+			<p><pre><a id="L39"></a>type Map struct {
+    // contains unexported fields
+<a id="L42"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/expvar/expvar.go#L172">NewMap</a></h3>
+				<p><code><a id="L172"></a>func NewMap(name string) *Map</code></p>
+				
+				<h3>func (<a id="L87"></a>*Map) <a href="../../src/pkg/expvar/expvar.go#L87">Add</a></h3>
+				<p><code><a id="L87"></a>func (v *Map) Add(key string, delta int64)</code></p>
+				
+				<h3>func (<a id="L72"></a>*Map) <a href="../../src/pkg/expvar/expvar.go#L72">Get</a></h3>
+				<p><code><a id="L72"></a>func (v *Map) Get(key string) Var</code></p>
+				
+				<h3>func (<a id="L67"></a>*Map) <a href="../../src/pkg/expvar/expvar.go#L67">Init</a></h3>
+				<p><code><a id="L67"></a>func (v *Map) Init() *Map</code></p>
+				
+				<h3>func (<a id="L110"></a>*Map) <a href="../../src/pkg/expvar/expvar.go#L110">Iter</a></h3>
+				<p><code><a id="L110"></a>func (v *Map) Iter() &lt;-chan KeyValue</code></p>
+				
+				<h3>func (<a id="L81"></a>*Map) <a href="../../src/pkg/expvar/expvar.go#L81">Set</a></h3>
+				<p><code><a id="L81"></a>func (v *Map) Set(key string, av Var)</code></p>
+				
+				<h3>func (<a id="L50"></a>*Map) <a href="../../src/pkg/expvar/expvar.go#L50">String</a></h3>
+				<p><code><a id="L50"></a>func (v *Map) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/expvar/expvar.go#L117"><a id="L117"></a>String</a></h2>
+			<p>
+String is a string variable, and satisfies the Var interface.
+</p>
+
+			<p><pre><a id="L117"></a>type String struct {
+    // contains unexported fields
+<a id="L119"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/expvar/expvar.go#L178">NewString</a></h3>
+				<p><code><a id="L178"></a>func NewString(name string) *String</code></p>
+				
+				<h3>func (<a id="L123"></a>*String) <a href="../../src/pkg/expvar/expvar.go#L123">Set</a></h3>
+				<p><code><a id="L123"></a>func (v *String) Set(value string)</code></p>
+				
+				<h3>func (<a id="L121"></a>*String) <a href="../../src/pkg/expvar/expvar.go#L121">String</a></h3>
+				<p><code><a id="L121"></a>func (v *String) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/expvar/expvar.go#L20"><a id="L20"></a>Var</a></h2>
+			<p>
+Var is an abstract type for all exported variables.
+</p>
+
+			<p><pre><a id="L20"></a>type Var interface {
+    <a id="L21"></a>String() string;
+<a id="L22"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/expvar/expvar.go#L149">Get</a></h3>
+				<p><code><a id="L149"></a>func Get(name string) Var</code></p>
+				<p>
+Get retrieves a named exported variable.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

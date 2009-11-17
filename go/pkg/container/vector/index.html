@@ -1,0 +1,501 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package vector</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:46:16 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package vector</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "container/vector"</code></p>
+	<p>
+The vector package implements an efficient container for managing
+linear arrays of elements.  Unlike arrays, vectors can change size dynamically.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/container/vector/intvector.go">intvector.go</a>
+				<a href="../../../src/pkg/container/vector/stringvector.go">stringvector.go</a>
+				<a href="../../../src/pkg/container/vector/vector.go">vector.go</a>
+			</span>
+			</p>
+			<h2>type <a href="../../../src/pkg/container/vector/intvector.go#L9"><a id="L9"></a>IntVector</a></h2>
+			<p>
+IntVector is a specialization of Vector that hides the wrapping of Elements around ints.
+</p>
+
+			<p><pre><a id="L9"></a>type IntVector struct {
+    <a id="L10"></a>Vector;
+<a id="L11"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/container/vector/intvector.go#L24">NewIntVector</a></h3>
+				<p><code><a id="L24"></a>func NewIntVector(len int) *IntVector</code></p>
+				<p>
+NewIntVector returns an initialized new IntVector with length at least len.
+</p>
+
+				<h3>func (<a id="L77"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L77">AppendVector</a></h3>
+				<p><code><a id="L77"></a>func (p *IntVector) AppendVector(x *IntVector)</code></p>
+				<p>
+AppendVector appends the entire IntVector x to the end of this vector.
+</p>
+
+				<h3>func (<a id="L28"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L28">At</a></h3>
+				<p><code><a id="L28"></a>func (p *IntVector) At(i int) int</code></p>
+				<p>
+At returns the i&#39;th element of the vector.
+</p>
+
+				<h3>func (<a id="L40"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L40">Data</a></h3>
+				<p><code><a id="L40"></a>func (p *IntVector) Data() []int</code></p>
+				<p>
+Data returns all the elements as a slice.
+</p>
+
+				<h3>func (<a id="L17"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L17">Init</a></h3>
+				<p><code><a id="L17"></a>func (p *IntVector) Init(len int) *IntVector</code></p>
+				<p>
+Init initializes a new or resized vector.  The initial length may be &lt;= 0 to
+request a default length.  If initial_len is shorter than the current
+length of the IntVector, trailing elements of the IntVector will be cleared.
+</p>
+
+				<h3>func (<a id="L51"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L51">Insert</a></h3>
+				<p><code><a id="L51"></a>func (p *IntVector) Insert(i int, x int)</code></p>
+				<p>
+Insert inserts into the vector an element of value x before
+the current element at index i.
+</p>
+
+				<h3>func (<a id="L56"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L56">InsertVector</a></h3>
+				<p><code><a id="L56"></a>func (p *IntVector) InsertVector(i int, x *IntVector)</code></p>
+				<p>
+InsertVector inserts into the vector the contents of the Vector
+x such that the 0th element of x appears at index i after insertion.
+</p>
+
+				<h3>func (<a id="L97"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L97">Iter</a></h3>
+				<p><code><a id="L97"></a>func (p *IntVector) Iter() &lt;-chan int</code></p>
+				<p>
+Channel iterator for range.
+</p>
+
+				<h3>func (<a id="L36"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L36">Last</a></h3>
+				<p><code><a id="L36"></a>func (p *IntVector) Last() int</code></p>
+				<p>
+Last returns the element in the vector of highest index.
+</p>
+
+				<h3>func (<a id="L84"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L84">Less</a></h3>
+				<p><code><a id="L84"></a>func (p *IntVector) Less(i, j int) bool</code></p>
+				<p>
+sort.Interface support
+Less returns a boolean denoting whether the i&#39;th element is less than the j&#39;th element.
+</p>
+
+				<h3>func (<a id="L73"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L73">Pop</a></h3>
+				<p><code><a id="L73"></a>func (p *IntVector) Pop() int</code></p>
+				<p>
+Pop deletes and returns the last element of the vector.
+</p>
+
+				<h3>func (<a id="L69"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L69">Push</a></h3>
+				<p><code><a id="L69"></a>func (p *IntVector) Push(x int)</code></p>
+				<p>
+Push appends x to the end of the vector.
+</p>
+
+				<h3>func (<a id="L32"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L32">Set</a></h3>
+				<p><code><a id="L32"></a>func (p *IntVector) Set(i int, x int)</code></p>
+				<p>
+Set sets the i&#39;th element of the vector to value x.
+</p>
+
+				<h3>func (<a id="L63"></a>*IntVector) <a href="../../../src/pkg/container/vector/intvector.go#L63">Slice</a></h3>
+				<p><code><a id="L63"></a>func (p *IntVector) Slice(i, j int) *IntVector</code></p>
+				<p>
+Slice returns a new IntVector by slicing the old one to extract slice [i:j].
+The elements are copied. The original vector is unchanged.
+</p>
+
+			<h2>type <a href="../../../src/pkg/container/vector/vector.go#L196"><a id="L196"></a>LessInterface</a></h2>
+			<p>
+LessInterface provides partial support of the sort.Interface.
+</p>
+
+			<p><pre><a id="L196"></a>type LessInterface interface {
+    <a id="L197"></a>Less(y interface{}) bool;
+<a id="L198"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/container/vector/stringvector.go#L8"><a id="L8"></a>StringVector</a></h2>
+			<p>
+StringVector is a specialization of Vector that hides the wrapping of Elements around strings.
+</p>
+
+			<p><pre><a id="L8"></a>type StringVector struct {
+    <a id="L9"></a>Vector;
+<a id="L10"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/container/vector/stringvector.go#L23">NewStringVector</a></h3>
+				<p><code><a id="L23"></a>func NewStringVector(len int) *StringVector</code></p>
+				<p>
+NewStringVector returns an initialized new StringVector with length at least len.
+</p>
+
+				<h3>func (<a id="L78"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L78">AppendVector</a></h3>
+				<p><code><a id="L78"></a>func (p *StringVector) AppendVector(x *StringVector)</code></p>
+				<p>
+AppendVector appends the entire StringVector x to the end of this vector.
+</p>
+
+				<h3>func (<a id="L27"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L27">At</a></h3>
+				<p><code><a id="L27"></a>func (p *StringVector) At(i int) string</code></p>
+				<p>
+At returns the i&#39;th element of the vector.
+</p>
+
+				<h3>func (<a id="L39"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L39">Data</a></h3>
+				<p><code><a id="L39"></a>func (p *StringVector) Data() []string</code></p>
+				<p>
+Data returns all the elements as a slice.
+</p>
+
+				<h3>func (<a id="L16"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L16">Init</a></h3>
+				<p><code><a id="L16"></a>func (p *StringVector) Init(len int) *StringVector</code></p>
+				<p>
+Init initializes a new or resized vector.  The initial length may be &lt;= 0 to
+request a default length.  If initial_len is shorter than the current
+length of the StringVector, trailing elements of the StringVector will be cleared.
+</p>
+
+				<h3>func (<a id="L50"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L50">Insert</a></h3>
+				<p><code><a id="L50"></a>func (p *StringVector) Insert(i int, x string)</code></p>
+				<p>
+Insert inserts into the vector an element of value x before
+the current element at index i.
+</p>
+
+				<h3>func (<a id="L57"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L57">InsertVector</a></h3>
+				<p><code><a id="L57"></a>func (p *StringVector) InsertVector(i int, x *StringVector)</code></p>
+				<p>
+InsertVector inserts into the vector the contents of the Vector
+x such that the 0th element of x appears at index i after insertion.
+</p>
+
+				<h3>func (<a id="L98"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L98">Iter</a></h3>
+				<p><code><a id="L98"></a>func (p *StringVector) Iter() &lt;-chan string</code></p>
+				<p>
+Channel iterator for range.
+</p>
+
+				<h3>func (<a id="L35"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L35">Last</a></h3>
+				<p><code><a id="L35"></a>func (p *StringVector) Last() string</code></p>
+				<p>
+Last returns the element in the vector of highest index.
+</p>
+
+				<h3>func (<a id="L85"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L85">Less</a></h3>
+				<p><code><a id="L85"></a>func (p *StringVector) Less(i, j int) bool</code></p>
+				<p>
+sort.Interface support
+Less returns a boolean denoting whether the i&#39;th element is less than the j&#39;th element.
+</p>
+
+				<h3>func (<a id="L74"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L74">Pop</a></h3>
+				<p><code><a id="L74"></a>func (p *StringVector) Pop() string</code></p>
+				<p>
+Pop deletes and returns the last element of the vector.
+</p>
+
+				<h3>func (<a id="L70"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L70">Push</a></h3>
+				<p><code><a id="L70"></a>func (p *StringVector) Push(x string)</code></p>
+				<p>
+Push appends x to the end of the vector.
+</p>
+
+				<h3>func (<a id="L31"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L31">Set</a></h3>
+				<p><code><a id="L31"></a>func (p *StringVector) Set(i int, x string)</code></p>
+				<p>
+Set sets the i&#39;th element of the vector to value x.
+</p>
+
+				<h3>func (<a id="L64"></a>*StringVector) <a href="../../../src/pkg/container/vector/stringvector.go#L64">Slice</a></h3>
+				<p><code><a id="L64"></a>func (p *StringVector) Slice(i, j int) *StringVector</code></p>
+				<p>
+Slice returns a new StringVector by slicing the old one to extract slice [i:j].
+The elements are copied. The original vector is unchanged.
+</p>
+
+			<h2>type <a href="../../../src/pkg/container/vector/vector.go#L11"><a id="L11"></a>Vector</a></h2>
+			<p>
+Vector is the container itself.
+The zero value for Vector is an empty vector ready to use.
+</p>
+
+			<p><pre><a id="L11"></a>type Vector struct {
+    // contains unexported fields
+<a id="L13"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/container/vector/vector.go#L77">New</a></h3>
+				<p><code><a id="L77"></a>func New(len int) *Vector</code></p>
+				<p>
+New returns an initialized new Vector with length at least len.
+</p>
+
+				<h3>func (<a id="L190"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L190">AppendVector</a></h3>
+				<p><code><a id="L190"></a>func (p *Vector) AppendVector(x *Vector)</code></p>
+				<p>
+AppendVector appends the entire Vector x to the end of this vector.
+</p>
+
+				<h3>func (<a id="L91"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L91">At</a></h3>
+				<p><code><a id="L91"></a>func (p *Vector) At(i int) interface{}</code></p>
+				<p>
+At returns the i&#39;th element of the vector.
+</p>
+
+				<h3>func (<a id="L141"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L141">Cut</a></h3>
+				<p><code><a id="L141"></a>func (p *Vector) Cut(i, j int)</code></p>
+				<p>
+Cut deletes elements i through j-1, inclusive.
+</p>
+
+				<h3>func (<a id="L103"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L103">Data</a></h3>
+				<p><code><a id="L103"></a>func (p *Vector) Data() []interface{}</code></p>
+				<p>
+Data returns all the elements as a slice.
+</p>
+
+				<h3>func (<a id="L122"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L122">Delete</a></h3>
+				<p><code><a id="L122"></a>func (p *Vector) Delete(i int)</code></p>
+				<p>
+Delete deletes the i&#39;th element of the vector.  The gap is closed so the old
+element at index i+1 has index i afterwards.
+</p>
+
+				<h3>func (<a id="L166"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L166">Do</a></h3>
+				<p><code><a id="L166"></a>func (p *Vector) Do(f func(elem interface{}))</code></p>
+				<p>
+Do calls function f for each element of the vector, in order.
+The function should not change the indexing of the vector underfoot.
+</p>
+
+				<h3>func (<a id="L55"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L55">Init</a></h3>
+				<p><code><a id="L55"></a>func (p *Vector) Init(initial_len int) *Vector</code></p>
+				<p>
+Init initializes a new or resized vector.  The initial_len may be &lt;= 0 to
+request a default length.  If initial_len is shorter than the current
+length of the Vector, trailing elements of the Vector will be cleared.
+</p>
+
+				<h3>func (<a id="L114"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L114">Insert</a></h3>
+				<p><code><a id="L114"></a>func (p *Vector) Insert(i int, x interface{})</code></p>
+				<p>
+Insert inserts into the vector an element of value x before
+the current element at index i.
+</p>
+
+				<h3>func (<a id="L134"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L134">InsertVector</a></h3>
+				<p><code><a id="L134"></a>func (p *Vector) InsertVector(i int, x *Vector)</code></p>
+				<p>
+InsertVector inserts into the vector the contents of the Vector
+x such that the 0th element of x appears at index i after insertion.
+</p>
+
+				<h3>func (<a id="L222"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L222">Iter</a></h3>
+				<p><code><a id="L222"></a>func (p *Vector) Iter() &lt;-chan interface{}</code></p>
+				<p>
+Channel iterator for range.
+</p>
+
+				<h3>func (<a id="L99"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L99">Last</a></h3>
+				<p><code><a id="L99"></a>func (p *Vector) Last() interface{}</code></p>
+				<p>
+Last returns the element in the vector of highest index.
+</p>
+
+				<h3>func (<a id="L82"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L82">Len</a></h3>
+				<p><code><a id="L82"></a>func (p *Vector) Len() int</code></p>
+				<p>
+Len returns the number of elements in the vector.
+Len is 0 if p == nil.
+</p>
+
+				<h3>func (<a id="L202"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L202">Less</a></h3>
+				<p><code><a id="L202"></a>func (p *Vector) Less(i, j int) bool</code></p>
+				<p>
+Less returns a boolean denoting whether the i&#39;th element is less than the j&#39;th element.
+</p>
+
+				<h3>func (<a id="L180"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L180">Pop</a></h3>
+				<p><code><a id="L180"></a>func (p *Vector) Pop() interface{}</code></p>
+				<p>
+Pop deletes the last element of the vector.
+</p>
+
+				<h3>func (<a id="L176"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L176">Push</a></h3>
+				<p><code><a id="L176"></a>func (p *Vector) Push(x interface{})</code></p>
+				<p>
+Push appends x to the end of the vector.
+</p>
+
+				<h3>func (<a id="L95"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L95">Set</a></h3>
+				<p><code><a id="L95"></a>func (p *Vector) Set(i int, x interface{})</code></p>
+				<p>
+Set sets the i&#39;th element of the vector to value x.
+</p>
+
+				<h3>func (<a id="L157"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L157">Slice</a></h3>
+				<p><code><a id="L157"></a>func (p *Vector) Slice(i, j int) *Vector</code></p>
+				<p>
+Slice returns a new Vector by slicing the old one to extract slice [i:j].
+The elements are copied. The original vector is unchanged.
+</p>
+
+				<h3>func (<a id="L206"></a>*Vector) <a href="../../../src/pkg/container/vector/vector.go#L206">Swap</a></h3>
+				<p><code><a id="L206"></a>func (p *Vector) Swap(i, j int)</code></p>
+				<p>
+Swap exchanges the elements at indexes i and j.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

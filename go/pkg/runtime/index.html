@@ -1,0 +1,446 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package runtime</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package runtime</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "runtime"</code></p>
+	<p>
+The runtime package contains operations that interact with Go&#39;s runtime system,
+such as functions to control goroutines.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/runtime/extern.go">extern.go</a>
+				<a href="../../src/pkg/runtime/type.go">type.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/runtime/extern.go#L21">Breakpoint</a></h2>
+			<p><code><a id="L21"></a>func Breakpoint()</code></p>
+			<p>
+Breakpoint() executes a breakpoint trap.
+</p>
+
+			<h2>func <a href="../../src/pkg/runtime/extern.go#L28">Caller</a></h2>
+			<p><code><a id="L28"></a>func Caller(n int) (pc uintptr, file string, line int, ok bool)</code></p>
+			<p>
+Caller reports file and line number information about function invocations on
+the calling goroutine&#39;s stack.  The argument is the number of stack frames to
+ascend, with 1 identifying the the caller of Caller.  The return values report the
+program counter, file name, and line number within the file of the corresponding
+call.  The boolean ok is false if it was not possible to recover the information.
+</p>
+
+			<h2>func <a href="../../src/pkg/runtime/extern.go#L48">Cgocalls</a></h2>
+			<p><code><a id="L48"></a>func Cgocalls() int64</code></p>
+			<p>
+Cgocalls returns the number of cgo calls made by the current process.
+</p>
+
+			<h2>func <a href="../../src/pkg/runtime/extern.go#L45">GOMAXPROCS</a></h2>
+			<p><code><a id="L45"></a>func GOMAXPROCS(n int)</code></p>
+			<p>
+GOMAXPROCS sets the maximum number of CPUs that can be executing
+simultaneously.   This call will go away when the scheduler improves.
+</p>
+
+			<h2>func <a href="../../src/pkg/runtime/extern.go#L18">Goexit</a></h2>
+			<p><code><a id="L18"></a>func Goexit()</code></p>
+			<p>
+Goexit terminates the goroutine that calls it.  No other goroutine is affected.
+</p>
+
+			<h2>func <a href="../../src/pkg/runtime/extern.go#L15">Gosched</a></h2>
+			<p><code><a id="L15"></a>func Gosched()</code></p>
+			<p>
+Gosched yields the processor, allowing other goroutines to run.  It does not
+suspend the current goroutine, so execution resumes automatically.
+</p>
+
+			<h2>func <a href="../../src/pkg/runtime/extern.go#L37">LockOSThread</a></h2>
+			<p><code><a id="L37"></a>func LockOSThread()</code></p>
+			<p>
+LockOSThread wires the calling goroutine to its current operating system thread.
+Until the calling goroutine exits or calls UnlockOSThread, it will always
+execute in that thread, and no other goroutine can.
+LockOSThread cannot be used during init functions.
+</p>
+
+			<h2>func <a href="../../src/pkg/runtime/extern.go#L53">Semacquire</a></h2>
+			<p><code><a id="L53"></a>func Semacquire(s *uint32)</code></p>
+			<p>
+Semacquire waits until *s &gt; 0 and then atomically decrements it.
+It is intended as a simple sleep primitive for use by the synchronization
+library and should not be used directly.
+</p>
+
+			<h2>func <a href="../../src/pkg/runtime/extern.go#L59">Semrelease</a></h2>
+			<p><code><a id="L59"></a>func Semrelease(s *uint32)</code></p>
+			<p>
+Semrelease atomically increments *s and notifies a waiting goroutine
+if one is blocked in Semacquire.
+It is intended as a simple wakeup primitive for use by the synchronization
+library and should not be used directly.
+</p>
+
+			<h2>func <a href="../../src/pkg/runtime/extern.go#L41">UnlockOSThread</a></h2>
+			<p><code><a id="L41"></a>func UnlockOSThread()</code></p>
+			<p>
+UnlockOSThread unwires the calling goroutine from its fixed operating system thread.
+If the calling goroutine has not called LockOSThread, UnlockOSThread is a no-op.
+</p>
+
+			<h2>type <a href="../../src/pkg/runtime/type.go#L114"><a id="L114"></a>ArrayType</a></h2>
+			<p>
+ArrayType represents a fixed array type.
+</p>
+
+			<p><pre><a id="L114"></a>type ArrayType struct {
+    // contains unexported fields
+<a id="L118"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L59"><a id="L59"></a>BoolType</a></h2>
+			<p>
+BoolType represents a boolean type.
+</p>
+
+			<p><pre><a id="L59"></a>type BoolType commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L127"><a id="L127"></a>ChanDir</a></h2>
+			<p>
+ChanDir represents a channel type&#39;s direction.
+</p>
+
+			<p><pre><a id="L127"></a>type ChanDir int</pre></p>
+				
+				<pre><a id="L129"></a>const (
+    <a id="L130"></a>RecvDir  ChanDir = 1 &lt;&lt; iota;         // &lt;-chan
+    <a id="L131"></a>SendDir;                              // chan&lt;-
+    <a id="L132"></a>BothDir          = RecvDir | SendDir; // chan
+<a id="L133"></a>)</pre>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L136"><a id="L136"></a>ChanType</a></h2>
+			<p>
+ChanType represents a channel type.
+</p>
+
+			<p><pre><a id="L136"></a>type ChanType struct {
+    // contains unexported fields
+<a id="L140"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L108"><a id="L108"></a>DotDotDotType</a></h2>
+			<p>
+DotDotDotType represents the ... that can
+be used as the type of the final function parameter.
+</p>
+
+			<p><pre><a id="L108"></a>type DotDotDotType commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L62"><a id="L62"></a>Float32Type</a></h2>
+			<p>
+Float32Type represents a float32 type.
+</p>
+
+			<p><pre><a id="L62"></a>type Float32Type commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L65"><a id="L65"></a>Float64Type</a></h2>
+			<p>
+Float64Type represents a float64 type.
+</p>
+
+			<p><pre><a id="L65"></a>type Float64Type commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L68"><a id="L68"></a>FloatType</a></h2>
+			<p>
+FloatType represents a float type.
+</p>
+
+			<p><pre><a id="L68"></a>type FloatType commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L143"><a id="L143"></a>FuncType</a></h2>
+			<p>
+FuncType represents a function type.
+</p>
+
+			<p><pre><a id="L143"></a>type FuncType struct {
+    // contains unexported fields
+<a id="L147"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L71"><a id="L71"></a>Int16Type</a></h2>
+			<p>
+Int16Type represents an int16 type.
+</p>
+
+			<p><pre><a id="L71"></a>type Int16Type commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L74"><a id="L74"></a>Int32Type</a></h2>
+			<p>
+Int32Type represents an int32 type.
+</p>
+
+			<p><pre><a id="L74"></a>type Int32Type commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L77"><a id="L77"></a>Int64Type</a></h2>
+			<p>
+Int64Type represents an int64 type.
+</p>
+
+			<p><pre><a id="L77"></a>type Int64Type commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L80"><a id="L80"></a>Int8Type</a></h2>
+			<p>
+Int8Type represents an int8 type.
+</p>
+
+			<p><pre><a id="L80"></a>type Int8Type commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L83"><a id="L83"></a>IntType</a></h2>
+			<p>
+IntType represents an int type.
+</p>
+
+			<p><pre><a id="L83"></a>type IntType commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L159"><a id="L159"></a>InterfaceType</a></h2>
+			<p>
+InterfaceType represents an interface type.
+</p>
+
+			<p><pre><a id="L159"></a>type InterfaceType struct {
+    // contains unexported fields
+<a id="L162"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L195"><a id="L195"></a>Itable</a></h2>
+			<p>
+* Must match iface.c:/Itab and compilers.
+</p>
+
+			<p><pre><a id="L195"></a>type Itable struct {
+    <a id="L196"></a>Itype *Type; // (*tab.inter).(*InterfaceType) is the interface type
+    <a id="L197"></a>Type  *Type;
+
+    <a id="L201"></a>Fn  [100000]uintptr; // bigger than we&#39;ll ever see
+    // contains unexported fields
+<a id="L202"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L165"><a id="L165"></a>MapType</a></h2>
+			<p>
+MapType represents a map type.
+</p>
+
+			<p><pre><a id="L165"></a>type MapType struct {
+    // contains unexported fields
+<a id="L169"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L172"><a id="L172"></a>PtrType</a></h2>
+			<p>
+PtrType represents a pointer type.
+</p>
+
+			<p><pre><a id="L172"></a>type PtrType struct {
+    // contains unexported fields
+<a id="L175"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L121"><a id="L121"></a>SliceType</a></h2>
+			<p>
+SliceType represents a slice type.
+</p>
+
+			<p><pre><a id="L121"></a>type SliceType struct {
+    // contains unexported fields
+<a id="L124"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L101"><a id="L101"></a>StringType</a></h2>
+			<p>
+StringType represents a string type.
+</p>
+
+			<p><pre><a id="L101"></a>type StringType commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L187"><a id="L187"></a>StructType</a></h2>
+			<p>
+StructType represents a struct type.
+</p>
+
+			<p><pre><a id="L187"></a>type StructType struct {
+    // contains unexported fields
+<a id="L190"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L24"><a id="L24"></a>Type</a></h2>
+			<p>
+The compiler can only construct empty interface values at
+compile time; non-empty interface values get created
+during initialization.  Type is an empty interface
+so that the compiler can lay out references as data.
+</p>
+
+			<p><pre><a id="L24"></a>type Type interface{}</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L86"><a id="L86"></a>Uint16Type</a></h2>
+			<p>
+Uint16Type represents a uint16 type.
+</p>
+
+			<p><pre><a id="L86"></a>type Uint16Type commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L89"><a id="L89"></a>Uint32Type</a></h2>
+			<p>
+Uint32Type represents a uint32 type.
+</p>
+
+			<p><pre><a id="L89"></a>type Uint32Type commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L92"><a id="L92"></a>Uint64Type</a></h2>
+			<p>
+Uint64Type represents a uint64 type.
+</p>
+
+			<p><pre><a id="L92"></a>type Uint64Type commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L95"><a id="L95"></a>Uint8Type</a></h2>
+			<p>
+Uint8Type represents a uint8 type.
+</p>
+
+			<p><pre><a id="L95"></a>type Uint8Type commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L98"><a id="L98"></a>UintType</a></h2>
+			<p>
+UintType represents a uint type.
+</p>
+
+			<p><pre><a id="L98"></a>type UintType commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L104"><a id="L104"></a>UintptrType</a></h2>
+			<p>
+UintptrType represents a uintptr type.
+</p>
+
+			<p><pre><a id="L104"></a>type UintptrType commonType</pre></p>
+			<h2>type <a href="../../src/pkg/runtime/type.go#L111"><a id="L111"></a>UnsafePointerType</a></h2>
+			<p>
+UnsafePointerType represents an unsafe.Pointer type.
+</p>
+
+			<p><pre><a id="L111"></a>type UnsafePointerType commonType</pre></p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

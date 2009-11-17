@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package av</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../../doc/style.css">
+  <script type="text/javascript" src="../../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../../index.html"><img src="../../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../../index.html">Package documentation</a></li>
+    <li><a href="../../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:51:13 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package av</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "exp/nacl/av"</code></p>
+	<p>
+Package av implements audio and video access for Native Client
+binaries running standalone or embedded in a web browser window.
+</p>
+<p>
+The C version of the API is documented at
+http://nativeclient.googlecode.com/svn/data/docs_tarball/nacl/googleclient/native_client/scons-out/doc/html/group__audio__video.html
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../../src/pkg/exp/nacl/av/av.go">av.go</a>
+				<a href="../../../../src/pkg/exp/nacl/av/event.go">event.go</a>
+				<a href="../../../../src/pkg/exp/nacl/av/image.go">image.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+Subsystem values for Init.
+</p>
+
+			<pre><a id="L29"></a>const (
+    <a id="L30"></a>SubsystemVideo = 1 &lt;&lt; iota;
+    <a id="L31"></a>SubsystemAudio;
+    <a id="L32"></a>SubsystemEmbed;
+<a id="L33"></a>)</pre>
+			<p>
+Audio formats.
+</p>
+
+			<pre><a id="L37"></a>const (
+    <a id="L38"></a>AudioFormatStereo44K = iota;
+    <a id="L39"></a>AudioFormatStereo48K;
+<a id="L40"></a>)</pre>
+		<h2>Variables</h2>
+			<p>
+ColorModel is the color model corresponding to the Native Client Color.
+</p>
+
+			<pre><a id="L89"></a>var ColorModel = image.ColorModelFunc(toColor)</pre>
+			<h2>func <a href="../../../../src/pkg/exp/nacl/av/av.go#L187">AudioStream</a></h2>
+			<p><code><a id="L187"></a>func AudioStream(data []uint16) (nextSize int, err os.Error)</code></p>
+			<p>
+AudioStream provides access to the audio device.
+Each call to AudioStream writes the given data,
+which should be a slice of 16-bit stereo PCM audio samples,
+and returns the number of samples required by the next
+call to AudioStream.
+</p>
+<p>
+To find out the initial number of samples to write, call AudioStream(nil).
+</p>
+
+			<h2>type <a href="../../../../src/pkg/exp/nacl/av/image.go#L58"><a id="L58"></a>Color</a></h2>
+			<p>
+A Color represents a Native Client color value,
+a 32-bit R, G, B, A value packed as 0xAARRGGBB.
+</p>
+
+			<p><pre><a id="L58"></a>type Color uint32</pre></p>
+				<h3>func (<a id="L60"></a>Color) <a href="../../../../src/pkg/exp/nacl/av/image.go#L60">RGBA</a></h3>
+				<p><code><a id="L60"></a>func (p Color) RGBA() (r, g, b, a uint32)</code></p>
+				
+			<h2>type <a href="../../../../src/pkg/exp/nacl/av/image.go#L18"><a id="L18"></a>Image</a></h2>
+			<p>
+An Image represents a Native Client frame buffer.
+The pixels in the image can be accessed as a single
+linear slice or as a two-dimensional slice of slices.
+Image implements image.Image.
+</p>
+
+			<p><pre><a id="L18"></a>type Image struct {
+    <a id="L19"></a>Linear []Color;
+    <a id="L20"></a>Pixel  [][]Color;
+<a id="L21"></a>}</pre></p>
+				<h3>func (<a id="L36"></a>*Image) <a href="../../../../src/pkg/exp/nacl/av/image.go#L36">At</a></h3>
+				<p><code><a id="L36"></a>func (m *Image) At(x, y int) image.Color</code></p>
+				
+				<h3>func (<a id="L25"></a>*Image) <a href="../../../../src/pkg/exp/nacl/av/image.go#L25">ColorModel</a></h3>
+				<p><code><a id="L25"></a>func (m *Image) ColorModel() image.ColorModel</code></p>
+				
+				<h3>func (<a id="L34"></a>*Image) <a href="../../../../src/pkg/exp/nacl/av/image.go#L34">Height</a></h3>
+				<p><code><a id="L34"></a>func (m *Image) Height() int</code></p>
+				
+				<h3>func (<a id="L38"></a>*Image) <a href="../../../../src/pkg/exp/nacl/av/image.go#L38">Set</a></h3>
+				<p><code><a id="L38"></a>func (m *Image) Set(x, y int, color image.Color)</code></p>
+				
+				<h3>func (<a id="L27"></a>*Image) <a href="../../../../src/pkg/exp/nacl/av/image.go#L27">Width</a></h3>
+				<p><code><a id="L27"></a>func (m *Image) Width() int</code></p>
+				
+			<h2>type <a href="../../../../src/pkg/exp/nacl/av/av.go#L44"><a id="L44"></a>Window</a></h2>
+			<p>
+A Window represents a connection to the Native Client window.
+It implements draw.Context.
+</p>
+
+			<p><pre><a id="L44"></a>type Window struct {
+    <a id="L45"></a>Embedded bool; // running as part of a web page?
+    <a id="L46"></a>*Image;        // screen image
+    // contains unexported fields
+<a id="L52"></a>}</pre></p>
+				<h3>func <a href="../../../../src/pkg/exp/nacl/av/av.go#L80">Init</a></h3>
+				<p><code><a id="L80"></a>func Init(subsys int, dx, dy int) (*Window, os.Error)</code></p>
+				<p>
+Init initializes the Native Client subsystems specified by subsys.
+Init must be called before using any of the other functions
+in this package, and it must be called only once.
+</p>
+<p>
+If the SubsystemVideo flag is set, Init requests a window of size dx×dy.
+When embedded in a web page, the web page&#39;s window specification
+overrides the parameters to Init, so the returned Window may have
+a different size than requested.
+</p>
+<p>
+If the SubsystemAudio flag is set, Init requests a connection to the
+audio device carrying 44 kHz 16-bit stereo PCM audio samples.
+</p>
+
+				<h3>func (<a id="L123"></a>*Window) <a href="../../../../src/pkg/exp/nacl/av/av.go#L123">FlushImage</a></h3>
+				<p><code><a id="L123"></a>func (w *Window) FlushImage()</code></p>
+				
+				<h3>func (<a id="L57"></a>*Window) <a href="../../../../src/pkg/exp/nacl/av/av.go#L57">KeyboardChan</a></h3>
+				<p><code><a id="L57"></a>func (w *Window) KeyboardChan() &lt;-chan int</code></p>
+				
+				<h3>func (<a id="L59"></a>*Window) <a href="../../../../src/pkg/exp/nacl/av/av.go#L59">MouseChan</a></h3>
+				<p><code><a id="L59"></a>func (w *Window) MouseChan() &lt;-chan draw.Mouse</code></p>
+				
+				<h3>func (<a id="L63"></a>*Window) <a href="../../../../src/pkg/exp/nacl/av/av.go#L63">QuitChan</a></h3>
+				<p><code><a id="L63"></a>func (w *Window) QuitChan() &lt;-chan bool</code></p>
+				
+				<h3>func (<a id="L65"></a>*Window) <a href="../../../../src/pkg/exp/nacl/av/av.go#L65">ResizeChan</a></h3>
+				<p><code><a id="L65"></a>func (w *Window) ResizeChan() &lt;-chan bool</code></p>
+				
+				<h3>func (<a id="L67"></a>*Window) <a href="../../../../src/pkg/exp/nacl/av/av.go#L67">Screen</a></h3>
+				<p><code><a id="L67"></a>func (w *Window) Screen() draw.Image</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

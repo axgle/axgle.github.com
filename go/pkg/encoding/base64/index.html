@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package base64</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package base64</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "encoding/base64"</code></p>
+	<p>
+Package base64 implements base64 encoding as specified by RFC 4648.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/encoding/base64/base64.go">base64.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			<p>
+StdEncoding is the standard base64 encoding, as defined in
+RFC 4648.
+</p>
+
+			<pre><a id="L48"></a>var StdEncoding = NewEncoding(encodeStd)</pre>
+			<p>
+URLEncoding is the alternate base64 encoding defined in RFC 4648.
+It is typically used in URLs and file names.
+</p>
+
+			<pre><a id="L52"></a>var URLEncoding = NewEncoding(encodeURL)</pre>
+			<h2>func <a href="../../../src/pkg/encoding/base64/base64.go#L324">NewDecoder</a></h2>
+			<p><code><a id="L324"></a>func NewDecoder(enc *Encoding, r io.Reader) io.Reader</code></p>
+			<p>
+NewDecoder constructs a new base64 stream decoder.
+</p>
+
+			<h2>func <a href="../../../src/pkg/encoding/base64/base64.go#L186">NewEncoder</a></h2>
+			<p><code><a id="L186"></a>func NewEncoder(enc *Encoding, w io.Writer) io.WriteCloser</code></p>
+			<p>
+NewEncoder returns a new base64 stream encoder.  Data written to
+the returned writer will be encoded using enc and then written to w.
+Base64 encodings operate in 4-byte blocks; when finished
+writing, the caller must Close the returned encoder to flush any
+partially written blocks.
+</p>
+
+			<h2>type <a href="../../../src/pkg/encoding/base64/base64.go#L198"><a id="L198"></a>CorruptInputError</a></h2>
+			
+			<p><pre><a id="L198"></a>type CorruptInputError int64</pre></p>
+				<h3>func (<a id="L200"></a>CorruptInputError) <a href="../../../src/pkg/encoding/base64/base64.go#L200">String</a></h3>
+				<p><code><a id="L200"></a>func (e CorruptInputError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/encoding/base64/base64.go#L24"><a id="L24"></a>Encoding</a></h2>
+			<p>
+An Encoding is a radix 64 encoding/decoding scheme, defined by a
+64-character alphabet.  The most common encoding is the &#34;base64&#34;
+encoding defined in RFC 4648 and used in MIME (RFC 2045) and PEM
+(RFC 1421).  RFC 4648 also defines an alternate encoding, which is
+the standard encoding with - and _ substituted for + and /.
+</p>
+
+			<p><pre><a id="L24"></a>type Encoding struct {
+    // contains unexported fields
+<a id="L27"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/encoding/base64/base64.go#L34">NewEncoding</a></h3>
+				<p><code><a id="L34"></a>func NewEncoding(encoder string) *Encoding</code></p>
+				<p>
+NewEncoding returns a new Encoding defined by the given alphabet,
+which must be a 64-byte string.
+</p>
+
+				<h3>func (<a id="L255"></a>*Encoding) <a href="../../../src/pkg/encoding/base64/base64.go#L255">Decode</a></h3>
+				<p><code><a id="L255"></a>func (enc *Encoding) Decode(dst, src []byte) (n int, err os.Error)</code></p>
+				<p>
+Decode decodes src using the encoding enc.  It writes at most
+DecodedLen(len(src)) bytes to dst and returns the number of bytes
+written.  If src contains invalid base64 data, it will return the
+number of bytes successfully written and CorruptInputError.
+</p>
+
+				<h3>func (<a id="L330"></a>*Encoding) <a href="../../../src/pkg/encoding/base64/base64.go#L330">DecodedLen</a></h3>
+				<p><code><a id="L330"></a>func (enc *Encoding) DecodedLen(n int) int</code></p>
+				<p>
+DecodeLen returns the maximum length in bytes of the decoded data
+corresponding to n bytes of base64-encoded data.
+</p>
+
+				<h3>func (<a id="L64"></a>*Encoding) <a href="../../../src/pkg/encoding/base64/base64.go#L64">Encode</a></h3>
+				<p><code><a id="L64"></a>func (enc *Encoding) Encode(dst, src []byte)</code></p>
+				<p>
+Encode encodes src using the encoding enc, writing
+EncodedLen(len(src)) bytes to dst.
+</p>
+<p>
+The encoding pads the output to a multiple of 4 bytes,
+so Encode is not appropriate for use on individual blocks
+of a large data stream.  Use NewEncoder() instead.
+</p>
+
+				<h3>func (<a id="L192"></a>*Encoding) <a href="../../../src/pkg/encoding/base64/base64.go#L192">EncodedLen</a></h3>
+				<p><code><a id="L192"></a>func (enc *Encoding) EncodedLen(n int) int</code></p>
+				<p>
+EncodedLen returns the length in bytes of the base64 encoding
+of an input buffer of length n.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

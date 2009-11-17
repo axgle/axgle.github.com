@@ -1,0 +1,704 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package dwarf</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:46:16 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package dwarf</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "debug/dwarf"</code></p>
+	<p>
+This package provides access to DWARF debugging information
+loaded from executable files, as defined in the DWARF 2.0 Standard
+at http://dwarfstd.org/dwarf-2.0.0.pdf.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/debug/dwarf/buf.go">buf.go</a>
+				<a href="../../../src/pkg/debug/dwarf/const.go">const.go</a>
+				<a href="../../../src/pkg/debug/dwarf/entry.go">entry.go</a>
+				<a href="../../../src/pkg/debug/dwarf/open.go">open.go</a>
+				<a href="../../../src/pkg/debug/dwarf/type.go">type.go</a>
+				<a href="../../../src/pkg/debug/dwarf/unit.go">unit.go</a>
+			</span>
+			</p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L90"><a id="L90"></a>AddrType</a></h2>
+			<p>
+An AddrType represents a machine address type.
+</p>
+
+			<p><pre><a id="L90"></a>type AddrType struct {
+    <a id="L91"></a>BasicType;
+<a id="L92"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L108"><a id="L108"></a>ArrayType</a></h2>
+			<p>
+An ArrayType represents a fixed size array type.
+</p>
+
+			<p><pre><a id="L108"></a>type ArrayType struct {
+    <a id="L109"></a>CommonType;
+    <a id="L110"></a>Type          Type;
+    <a id="L111"></a>StrideBitSize int64; // if &gt; 0, number of bits to hold each element
+    <a id="L112"></a>Count         int64; // if == -1, an incomplete array, like char x[].
+<a id="L113"></a>}</pre></p>
+				<h3>func (<a id="L119"></a>*ArrayType) <a href="../../../src/pkg/debug/dwarf/type.go#L119">Size</a></h3>
+				<p><code><a id="L119"></a>func (t *ArrayType) Size() int64</code></p>
+				
+				<h3>func (<a id="L115"></a>*ArrayType) <a href="../../../src/pkg/debug/dwarf/type.go#L115">String</a></h3>
+				<p><code><a id="L115"></a>func (t *ArrayType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/const.go#L12"><a id="L12"></a>Attr</a></h2>
+			<p>
+An Attr identifies the attribute type in a DWARF Entry&#39;s Field.
+</p>
+
+			<p><pre><a id="L12"></a>type Attr uint32</pre></p>
+				
+				<pre><a id="L14"></a>const (
+    <a id="L15"></a>AttrSibling        Attr = 0x01;
+    <a id="L16"></a>AttrLocation       Attr = 0x02;
+    <a id="L17"></a>AttrName           Attr = 0x03;
+    <a id="L18"></a>AttrOrdering       Attr = 0x09;
+    <a id="L19"></a>AttrByteSize       Attr = 0x0B;
+    <a id="L20"></a>AttrBitOffset      Attr = 0x0C;
+    <a id="L21"></a>AttrBitSize        Attr = 0x0D;
+    <a id="L22"></a>AttrStmtList       Attr = 0x10;
+    <a id="L23"></a>AttrLowpc          Attr = 0x11;
+    <a id="L24"></a>AttrHighpc         Attr = 0x12;
+    <a id="L25"></a>AttrLanguage       Attr = 0x13;
+    <a id="L26"></a>AttrDiscr          Attr = 0x15;
+    <a id="L27"></a>AttrDiscrValue     Attr = 0x16;
+    <a id="L28"></a>AttrVisibility     Attr = 0x17;
+    <a id="L29"></a>AttrImport         Attr = 0x18;
+    <a id="L30"></a>AttrStringLength   Attr = 0x19;
+    <a id="L31"></a>AttrCommonRef      Attr = 0x1A;
+    <a id="L32"></a>AttrCompDir        Attr = 0x1B;
+    <a id="L33"></a>AttrConstValue     Attr = 0x1C;
+    <a id="L34"></a>AttrContainingType Attr = 0x1D;
+    <a id="L35"></a>AttrDefaultValue   Attr = 0x1E;
+    <a id="L36"></a>AttrInline         Attr = 0x20;
+    <a id="L37"></a>AttrIsOptional     Attr = 0x21;
+    <a id="L38"></a>AttrLowerBound     Attr = 0x22;
+    <a id="L39"></a>AttrProducer       Attr = 0x25;
+    <a id="L40"></a>AttrPrototyped     Attr = 0x27;
+    <a id="L41"></a>AttrReturnAddr     Attr = 0x2A;
+    <a id="L42"></a>AttrStartScope     Attr = 0x2C;
+    <a id="L43"></a>AttrStrideSize     Attr = 0x2E;
+    <a id="L44"></a>AttrUpperBound     Attr = 0x2F;
+    <a id="L45"></a>AttrAbstractOrigin Attr = 0x31;
+    <a id="L46"></a>AttrAccessibility  Attr = 0x32;
+    <a id="L47"></a>AttrAddrClass      Attr = 0x33;
+    <a id="L48"></a>AttrArtificial     Attr = 0x34;
+    <a id="L49"></a>AttrBaseTypes      Attr = 0x35;
+    <a id="L50"></a>AttrCalling        Attr = 0x36;
+    <a id="L51"></a>AttrCount          Attr = 0x37;
+    <a id="L52"></a>AttrDataMemberLoc  Attr = 0x38;
+    <a id="L53"></a>AttrDeclColumn     Attr = 0x39;
+    <a id="L54"></a>AttrDeclFile       Attr = 0x3A;
+    <a id="L55"></a>AttrDeclLine       Attr = 0x3B;
+    <a id="L56"></a>AttrDeclaration    Attr = 0x3C;
+    <a id="L57"></a>AttrDiscrList      Attr = 0x3D;
+    <a id="L58"></a>AttrEncoding       Attr = 0x3E;
+    <a id="L59"></a>AttrExternal       Attr = 0x3F;
+    <a id="L60"></a>AttrFrameBase      Attr = 0x40;
+    <a id="L61"></a>AttrFriend         Attr = 0x41;
+    <a id="L62"></a>AttrIdentifierCase Attr = 0x42;
+    <a id="L63"></a>AttrMacroInfo      Attr = 0x43;
+    <a id="L64"></a>AttrNamelistItem   Attr = 0x44;
+    <a id="L65"></a>AttrPriority       Attr = 0x45;
+    <a id="L66"></a>AttrSegment        Attr = 0x46;
+    <a id="L67"></a>AttrSpecification  Attr = 0x47;
+    <a id="L68"></a>AttrStaticLink     Attr = 0x48;
+    <a id="L69"></a>AttrType           Attr = 0x49;
+    <a id="L70"></a>AttrUseLocation    Attr = 0x4A;
+    <a id="L71"></a>AttrVarParam       Attr = 0x4B;
+    <a id="L72"></a>AttrVirtuality     Attr = 0x4C;
+    <a id="L73"></a>AttrVtableElemLoc  Attr = 0x4D;
+    <a id="L74"></a>AttrAllocated      Attr = 0x4E;
+    <a id="L75"></a>AttrAssociated     Attr = 0x4F;
+    <a id="L76"></a>AttrDataLocation   Attr = 0x50;
+    <a id="L77"></a>AttrStride         Attr = 0x51;
+    <a id="L78"></a>AttrEntrypc        Attr = 0x52;
+    <a id="L79"></a>AttrUseUTF8        Attr = 0x53;
+    <a id="L80"></a>AttrExtension      Attr = 0x54;
+    <a id="L81"></a>AttrRanges         Attr = 0x55;
+    <a id="L82"></a>AttrTrampoline     Attr = 0x56;
+    <a id="L83"></a>AttrCallColumn     Attr = 0x57;
+    <a id="L84"></a>AttrCallFile       Attr = 0x58;
+    <a id="L85"></a>AttrCallLine       Attr = 0x59;
+    <a id="L86"></a>AttrDescription    Attr = 0x5A;
+<a id="L87"></a>)</pre>
+				<h3>func (<a id="L174"></a>Attr) <a href="../../../src/pkg/debug/dwarf/const.go#L174">GoString</a></h3>
+				<p><code><a id="L174"></a>func (a Attr) GoString() string</code></p>
+				
+				<h3>func (<a id="L164"></a>Attr) <a href="../../../src/pkg/debug/dwarf/const.go#L164">String</a></h3>
+				<p><code><a id="L164"></a>func (a Attr) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L39"><a id="L39"></a>BasicType</a></h2>
+			<p>
+A BasicType holds fields common to all basic types.
+</p>
+
+			<p><pre><a id="L39"></a>type BasicType struct {
+    <a id="L40"></a>CommonType;
+    <a id="L41"></a>BitSize   int64;
+    <a id="L42"></a>BitOffset int64;
+<a id="L43"></a>}</pre></p>
+				<h3>func (<a id="L45"></a>*BasicType) <a href="../../../src/pkg/debug/dwarf/type.go#L45">Basic</a></h3>
+				<p><code><a id="L45"></a>func (b *BasicType) Basic() *BasicType</code></p>
+				
+				<h3>func (<a id="L47"></a>*BasicType) <a href="../../../src/pkg/debug/dwarf/type.go#L47">String</a></h3>
+				<p><code><a id="L47"></a>func (t *BasicType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L85"><a id="L85"></a>BoolType</a></h2>
+			<p>
+A BoolType represents a boolean type.
+</p>
+
+			<p><pre><a id="L85"></a>type BoolType struct {
+    <a id="L86"></a>BasicType;
+<a id="L87"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L55"><a id="L55"></a>CharType</a></h2>
+			<p>
+A CharType represents a signed character type.
+</p>
+
+			<p><pre><a id="L55"></a>type CharType struct {
+    <a id="L56"></a>BasicType;
+<a id="L57"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L27"><a id="L27"></a>CommonType</a></h2>
+			<p>
+A CommonType holds fields common to multiple types.
+If a field is not known or not applicable for a given type,
+the zero value is used.
+</p>
+
+			<p><pre><a id="L27"></a>type CommonType struct {
+    <a id="L28"></a>ByteSize int64;  // size of value of this type, in bytes
+    <a id="L29"></a>Name     string; // name that can be used to refer to type
+<a id="L30"></a>}</pre></p>
+				<h3>func (<a id="L32"></a>*CommonType) <a href="../../../src/pkg/debug/dwarf/type.go#L32">Common</a></h3>
+				<p><code><a id="L32"></a>func (c *CommonType) Common() *CommonType</code></p>
+				
+				<h3>func (<a id="L34"></a>*CommonType) <a href="../../../src/pkg/debug/dwarf/type.go#L34">Size</a></h3>
+				<p><code><a id="L34"></a>func (c *CommonType) Size() int64</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L80"><a id="L80"></a>ComplexType</a></h2>
+			<p>
+A ComplexType represents a complex floating point type.
+</p>
+
+			<p><pre><a id="L80"></a>type ComplexType struct {
+    <a id="L81"></a>BasicType;
+<a id="L82"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/open.go#L17"><a id="L17"></a>Data</a></h2>
+			<p>
+Data represents the DWARF debugging information
+loaded from an executable file (for example, an ELF or Mach-O executable).
+</p>
+
+			<p><pre><a id="L17"></a>type Data struct {
+    // contains unexported fields
+<a id="L34"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/debug/dwarf/open.go#L43">New</a></h3>
+				<p><code><a id="L43"></a>func New(abbrev, aranges, frame, info, line, pubnames, ranges, str []byte) (*Data, os.Error)</code></p>
+				<p>
+New returns a new Data object initialized from the given parameters.
+Clients should typically use [TODO(rsc): method to be named later] instead of calling
+New directly.
+</p>
+<p>
+The []byte arguments are the data from the corresponding debug section
+in the object file; for example, for an ELF object, abbrev is the contents of
+the &#34;.debug_abbrev&#34; section.
+</p>
+
+				<h3>func (<a id="L243"></a>*Data) <a href="../../../src/pkg/debug/dwarf/entry.go#L243">Reader</a></h3>
+				<p><code><a id="L243"></a>func (d *Data) Reader() *Reader</code></p>
+				<p>
+Reader returns a new Reader for Data.
+The reader is positioned at byte offset 0 in the DWARF &ldquo;info&rdquo; section.
+</p>
+
+				<h3>func (<a id="L257"></a>*Data) <a href="../../../src/pkg/debug/dwarf/type.go#L257">Type</a></h3>
+				<p><code><a id="L257"></a>func (d *Data) Type(off Offset) (Type, os.Error)</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/buf.go#L146"><a id="L146"></a>DecodeError</a></h2>
+			
+			<p><pre><a id="L146"></a>type DecodeError struct {
+    <a id="L147"></a>Name   string;
+    <a id="L148"></a>Offset Offset;
+    <a id="L149"></a>Error  string;
+<a id="L150"></a>}</pre></p>
+				<h3>func (<a id="L152"></a>DecodeError) <a href="../../../src/pkg/debug/dwarf/buf.go#L152">String</a></h3>
+				<p><code><a id="L152"></a>func (e DecodeError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L241"><a id="L241"></a>DotDotDotType</a></h2>
+			<p>
+A DotDotDotType represents the variadic ... function parameter.
+</p>
+
+			<p><pre><a id="L241"></a>type DotDotDotType struct {
+    <a id="L242"></a>CommonType;
+<a id="L243"></a>}</pre></p>
+				<h3>func (<a id="L245"></a>*DotDotDotType) <a href="../../../src/pkg/debug/dwarf/type.go#L245">String</a></h3>
+				<p><code><a id="L245"></a>func (t *DotDotDotType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/entry.go#L94"><a id="L94"></a>Entry</a></h2>
+			<p>
+An entry is a sequence of attribute/value pairs.
+</p>
+
+			<p><pre><a id="L94"></a>type Entry struct {
+    <a id="L95"></a>Offset   Offset; // offset of Entry in DWARF info
+    <a id="L96"></a>Tag      Tag;    // tag (kind of Entry)
+    <a id="L97"></a>Children bool;   // whether Entry is followed by children
+    <a id="L98"></a>Field    []Field;
+<a id="L99"></a>}</pre></p>
+				<h3>func (<a id="L114"></a>*Entry) <a href="../../../src/pkg/debug/dwarf/entry.go#L114">Val</a></h3>
+				<p><code><a id="L114"></a>func (e *Entry) Val(a Attr) interface{}</code></p>
+				<p>
+Val returns the value associated with attribute Attr in Entry,
+or nil if there is no such attribute.
+</p>
+<p>
+A common idiom is to merge the check for nil return with
+the check that the value has the expected dynamic type, as in:
+</p>
+<pre>v, ok := e.Val(AttrSibling).(int64);
+</pre>
+
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L190"><a id="L190"></a>EnumType</a></h2>
+			<p>
+An EnumType represents an enumerated type.
+The only indication of its native integer type is its ByteSize
+(inside CommonType).
+</p>
+
+			<p><pre><a id="L190"></a>type EnumType struct {
+    <a id="L191"></a>CommonType;
+    <a id="L192"></a>EnumName string;
+    <a id="L193"></a>Val      []*EnumValue;
+<a id="L194"></a>}</pre></p>
+				<h3>func (<a id="L202"></a>*EnumType) <a href="../../../src/pkg/debug/dwarf/type.go#L202">String</a></h3>
+				<p><code><a id="L202"></a>func (t *EnumType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L197"><a id="L197"></a>EnumValue</a></h2>
+			<p>
+An EnumValue represents a single enumeration value.
+</p>
+
+			<p><pre><a id="L197"></a>type EnumValue struct {
+    <a id="L198"></a>Name string;
+    <a id="L199"></a>Val  int64;
+<a id="L200"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/entry.go#L102"><a id="L102"></a>Field</a></h2>
+			<p>
+A Field is a single attribute/value pair in an Entry.
+</p>
+
+			<p><pre><a id="L102"></a>type Field struct {
+    <a id="L103"></a>Attr Attr;
+    <a id="L104"></a>Val  interface{};
+<a id="L105"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L75"><a id="L75"></a>FloatType</a></h2>
+			<p>
+A FloatType represents a floating point type.
+</p>
+
+			<p><pre><a id="L75"></a>type FloatType struct {
+    <a id="L76"></a>BasicType;
+<a id="L77"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L219"><a id="L219"></a>FuncType</a></h2>
+			<p>
+A FuncType represents a function type.
+</p>
+
+			<p><pre><a id="L219"></a>type FuncType struct {
+    <a id="L220"></a>CommonType;
+    <a id="L221"></a>ReturnType Type;
+    <a id="L222"></a>ParamType  []Type;
+<a id="L223"></a>}</pre></p>
+				<h3>func (<a id="L225"></a>*FuncType) <a href="../../../src/pkg/debug/dwarf/type.go#L225">String</a></h3>
+				<p><code><a id="L225"></a>func (t *FuncType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L65"><a id="L65"></a>IntType</a></h2>
+			<p>
+An IntType represents a signed integer type.
+</p>
+
+			<p><pre><a id="L65"></a>type IntType struct {
+    <a id="L66"></a>BasicType;
+<a id="L67"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/entry.go#L125"><a id="L125"></a>Offset</a></h2>
+			<p>
+An Offset represents the location of an Entry within the DWARF info.
+(See Reader.Seek.)
+</p>
+
+			<p><pre><a id="L125"></a>type Offset uint32</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L129"><a id="L129"></a>PtrType</a></h2>
+			<p>
+A PtrType represents a pointer type.
+</p>
+
+			<p><pre><a id="L129"></a>type PtrType struct {
+    <a id="L130"></a>CommonType;
+    <a id="L131"></a>Type Type;
+<a id="L132"></a>}</pre></p>
+				<h3>func (<a id="L134"></a>*PtrType) <a href="../../../src/pkg/debug/dwarf/type.go#L134">String</a></h3>
+				<p><code><a id="L134"></a>func (t *PtrType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L97"><a id="L97"></a>QualType</a></h2>
+			<p>
+A QualType represents a type that has the C/C++ &#34;const&#34;, &#34;restrict&#34;, or &#34;volatile&#34; qualifier.
+</p>
+
+			<p><pre><a id="L97"></a>type QualType struct {
+    <a id="L98"></a>CommonType;
+    <a id="L99"></a>Qual string;
+    <a id="L100"></a>Type Type;
+<a id="L101"></a>}</pre></p>
+				<h3>func (<a id="L105"></a>*QualType) <a href="../../../src/pkg/debug/dwarf/type.go#L105">Size</a></h3>
+				<p><code><a id="L105"></a>func (t *QualType) Size() int64</code></p>
+				
+				<h3>func (<a id="L103"></a>*QualType) <a href="../../../src/pkg/debug/dwarf/type.go#L103">String</a></h3>
+				<p><code><a id="L103"></a>func (t *QualType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/entry.go#L232"><a id="L232"></a>Reader</a></h2>
+			<p>
+A Reader allows reading Entry structures from a DWARF &ldquo;info&rdquo; section.
+The Entry structures are arranged in a tree.  The Reader&#39;s Next function
+return successive entries from a pre-order traversal of the tree.
+If an entry has children, its Children field will be true, and the children
+follow, terminated by an Entry with Tag 0.
+</p>
+
+			<p><pre><a id="L232"></a>type Reader struct {
+    // contains unexported fields
+<a id="L239"></a>}</pre></p>
+				<h3>func (<a id="L292"></a>*Reader) <a href="../../../src/pkg/debug/dwarf/entry.go#L292">Next</a></h3>
+				<p><code><a id="L292"></a>func (r *Reader) Next() (*Entry, os.Error)</code></p>
+				<p>
+Next reads the next entry from the encoded entry stream.
+It returns nil, nil when it reaches the end of the section.
+It returns an error if the current offset is invalid or the data at the
+offset cannot be decoded as a valid Entry.
+</p>
+
+				<h3>func (<a id="L251"></a>*Reader) <a href="../../../src/pkg/debug/dwarf/entry.go#L251">Seek</a></h3>
+				<p><code><a id="L251"></a>func (r *Reader) Seek(off Offset)</code></p>
+				<p>
+Seek positions the Reader at offset off in the encoded entry stream.
+Offset 0 can be used to denote the first entry.
+</p>
+
+				<h3>func (<a id="L320"></a>*Reader) <a href="../../../src/pkg/debug/dwarf/entry.go#L320">SkipChildren</a></h3>
+				<p><code><a id="L320"></a>func (r *Reader) SkipChildren()</code></p>
+				<p>
+SkipChildren skips over the child entries associated with
+the last Entry returned by Next.  If that Entry did not have
+children or Next has not been called, SkipChildren is a no-op.
+</p>
+
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L146"><a id="L146"></a>StructField</a></h2>
+			<p>
+A StructField represents a field in a struct, union, or C++ class type.
+</p>
+
+			<p><pre><a id="L146"></a>type StructField struct {
+    <a id="L147"></a>Name       string;
+    <a id="L148"></a>Type       Type;
+    <a id="L149"></a>ByteOffset int64;
+    <a id="L150"></a>ByteSize   int64;
+    <a id="L151"></a>BitOffset  int64; // within the ByteSize bytes at ByteOffset
+    <a id="L152"></a>BitSize    int64; // zero if not a bit field
+<a id="L153"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L137"><a id="L137"></a>StructType</a></h2>
+			<p>
+A StructType represents a struct, union, or C++ class type.
+</p>
+
+			<p><pre><a id="L137"></a>type StructType struct {
+    <a id="L138"></a>CommonType;
+    <a id="L139"></a>StructName string;
+    <a id="L140"></a>Kind       string; // &#34;struct&#34;, &#34;union&#34;, or &#34;class&#34;.
+    <a id="L141"></a>Field      []*StructField;
+    <a id="L142"></a>Incomplete bool; // if true, struct, union, class is declared but not defined
+<a id="L143"></a>}</pre></p>
+				<h3>func (<a id="L162"></a>*StructType) <a href="../../../src/pkg/debug/dwarf/type.go#L162">Defn</a></h3>
+				<p><code><a id="L162"></a>func (t *StructType) Defn() string</code></p>
+				
+				<h3>func (<a id="L155"></a>*StructType) <a href="../../../src/pkg/debug/dwarf/type.go#L155">String</a></h3>
+				<p><code><a id="L155"></a>func (t *StructType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/const.go#L213"><a id="L213"></a>Tag</a></h2>
+			<p>
+A Tag is the classification (the type) of an Entry.
+</p>
+
+			<p><pre><a id="L213"></a>type Tag uint32</pre></p>
+				
+				<pre><a id="L215"></a>const (
+    <a id="L216"></a>TagArrayType              Tag = 0x01;
+    <a id="L217"></a>TagClassType              Tag = 0x02;
+    <a id="L218"></a>TagEntryPoint             Tag = 0x03;
+    <a id="L219"></a>TagEnumerationType        Tag = 0x04;
+    <a id="L220"></a>TagFormalParameter        Tag = 0x05;
+    <a id="L221"></a>TagImportedDeclaration    Tag = 0x08;
+    <a id="L222"></a>TagLabel                  Tag = 0x0A;
+    <a id="L223"></a>TagLexDwarfBlock          Tag = 0x0B;
+    <a id="L224"></a>TagMember                 Tag = 0x0D;
+    <a id="L225"></a>TagPointerType            Tag = 0x0F;
+    <a id="L226"></a>TagReferenceType          Tag = 0x10;
+    <a id="L227"></a>TagCompileUnit            Tag = 0x11;
+    <a id="L228"></a>TagStringType             Tag = 0x12;
+    <a id="L229"></a>TagStructType             Tag = 0x13;
+    <a id="L230"></a>TagSubroutineType         Tag = 0x15;
+    <a id="L231"></a>TagTypedef                Tag = 0x16;
+    <a id="L232"></a>TagUnionType              Tag = 0x17;
+    <a id="L233"></a>TagUnspecifiedParameters  Tag = 0x18;
+    <a id="L234"></a>TagVariant                Tag = 0x19;
+    <a id="L235"></a>TagCommonDwarfBlock       Tag = 0x1A;
+    <a id="L236"></a>TagCommonInclusion        Tag = 0x1B;
+    <a id="L237"></a>TagInheritance            Tag = 0x1C;
+    <a id="L238"></a>TagInlinedSubroutine      Tag = 0x1D;
+    <a id="L239"></a>TagModule                 Tag = 0x1E;
+    <a id="L240"></a>TagPtrToMemberType        Tag = 0x1F;
+    <a id="L241"></a>TagSetType                Tag = 0x20;
+    <a id="L242"></a>TagSubrangeType           Tag = 0x21;
+    <a id="L243"></a>TagWithStmt               Tag = 0x22;
+    <a id="L244"></a>TagAccessDeclaration      Tag = 0x23;
+    <a id="L245"></a>TagBaseType               Tag = 0x24;
+    <a id="L246"></a>TagCatchDwarfBlock        Tag = 0x25;
+    <a id="L247"></a>TagConstType              Tag = 0x26;
+    <a id="L248"></a>TagConstant               Tag = 0x27;
+    <a id="L249"></a>TagEnumerator             Tag = 0x28;
+    <a id="L250"></a>TagFileType               Tag = 0x29;
+    <a id="L251"></a>TagFriend                 Tag = 0x2A;
+    <a id="L252"></a>TagNamelist               Tag = 0x2B;
+    <a id="L253"></a>TagNamelistItem           Tag = 0x2C;
+    <a id="L254"></a>TagPackedType             Tag = 0x2D;
+    <a id="L255"></a>TagSubprogram             Tag = 0x2E;
+    <a id="L256"></a>TagTemplateTypeParameter  Tag = 0x2F;
+    <a id="L257"></a>TagTemplateValueParameter Tag = 0x30;
+    <a id="L258"></a>TagThrownType             Tag = 0x31;
+    <a id="L259"></a>TagTryDwarfBlock          Tag = 0x32;
+    <a id="L260"></a>TagVariantPart            Tag = 0x33;
+    <a id="L261"></a>TagVariable               Tag = 0x34;
+    <a id="L262"></a>TagVolatileType           Tag = 0x35;
+    <a id="L263"></a>TagDwarfProcedure         Tag = 0x36;
+    <a id="L264"></a>TagRestrictType           Tag = 0x37;
+    <a id="L265"></a>TagInterfaceType          Tag = 0x38;
+    <a id="L266"></a>TagNamespace              Tag = 0x39;
+    <a id="L267"></a>TagImportedModule         Tag = 0x3A;
+    <a id="L268"></a>TagUnspecifiedType        Tag = 0x3B;
+    <a id="L269"></a>TagPartialUnit            Tag = 0x3C;
+    <a id="L270"></a>TagImportedUnit           Tag = 0x3D;
+    <a id="L271"></a>TagMutableType            Tag = 0x3E;
+<a id="L272"></a>)</pre>
+				<h3>func (<a id="L343"></a>Tag) <a href="../../../src/pkg/debug/dwarf/const.go#L343">GoString</a></h3>
+				<p><code><a id="L343"></a>func (t Tag) GoString() string</code></p>
+				
+				<h3>func (<a id="L333"></a>Tag) <a href="../../../src/pkg/debug/dwarf/const.go#L333">String</a></h3>
+				<p><code><a id="L333"></a>func (t Tag) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L18"><a id="L18"></a>Type</a></h2>
+			<p>
+A Type conventionally represents a pointer to any of the
+specific Type structures (CharType, StructType, etc.).
+</p>
+
+			<p><pre><a id="L18"></a>type Type interface {
+    <a id="L19"></a>Common() *CommonType;
+    <a id="L20"></a>String() string;
+    <a id="L21"></a>Size() int64;
+<a id="L22"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L248"><a id="L248"></a>TypedefType</a></h2>
+			<p>
+A TypedefType represents a named type.
+</p>
+
+			<p><pre><a id="L248"></a>type TypedefType struct {
+    <a id="L249"></a>CommonType;
+    <a id="L250"></a>Type Type;
+<a id="L251"></a>}</pre></p>
+				<h3>func (<a id="L255"></a>*TypedefType) <a href="../../../src/pkg/debug/dwarf/type.go#L255">Size</a></h3>
+				<p><code><a id="L255"></a>func (t *TypedefType) Size() int64</code></p>
+				
+				<h3>func (<a id="L253"></a>*TypedefType) <a href="../../../src/pkg/debug/dwarf/type.go#L253">String</a></h3>
+				<p><code><a id="L253"></a>func (t *TypedefType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L60"><a id="L60"></a>UcharType</a></h2>
+			<p>
+A UcharType represents an unsigned character type.
+</p>
+
+			<p><pre><a id="L60"></a>type UcharType struct {
+    <a id="L61"></a>BasicType;
+<a id="L62"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L70"><a id="L70"></a>UintType</a></h2>
+			<p>
+A UintType represents an unsigned integer type.
+</p>
+
+			<p><pre><a id="L70"></a>type UintType struct {
+    <a id="L71"></a>BasicType;
+<a id="L72"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/dwarf/type.go#L122"><a id="L122"></a>VoidType</a></h2>
+			<p>
+A VoidType represents the C void type.
+</p>
+
+			<p><pre><a id="L122"></a>type VoidType struct {
+    <a id="L123"></a>CommonType;
+<a id="L124"></a>}</pre></p>
+				<h3>func (<a id="L126"></a>*VoidType) <a href="../../../src/pkg/debug/dwarf/type.go#L126">String</a></h3>
+				<p><code><a id="L126"></a>func (t *VoidType) String() string</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

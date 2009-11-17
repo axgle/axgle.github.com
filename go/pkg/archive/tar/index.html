@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package tar</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package tar</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "archive/tar"</code></p>
+	<p>
+The tar package implements access to tar archives.
+It aims to cover most of the variations, including those produced
+by GNU and BSD tars.
+</p>
+<p>
+References:
+</p>
+<pre>http://www.freebsd.org/cgi/man.cgi?query=tar&amp;sektion=5
+http://www.gnu.org/software/tar/manual/html_node/Standard.html
+</pre>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/archive/tar/common.go">common.go</a>
+				<a href="../../../src/pkg/archive/tar/reader.go">reader.go</a>
+				<a href="../../../src/pkg/archive/tar/writer.go">writer.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			
+			<pre><a id="L14"></a>const (
+    <a id="L17"></a>// Types
+    <a id="L18"></a>TypeReg           = &#39;0&#39;;
+    <a id="L19"></a>TypeRegA          = &#39;\x00&#39;;
+    <a id="L20"></a>TypeLink          = &#39;1&#39;;
+    <a id="L21"></a>TypeSymlink       = &#39;2&#39;;
+    <a id="L22"></a>TypeChar          = &#39;3&#39;;
+    <a id="L23"></a>TypeBlock         = &#39;4&#39;;
+    <a id="L24"></a>TypeDir           = &#39;5&#39;;
+    <a id="L25"></a>TypeFifo          = &#39;6&#39;;
+    <a id="L26"></a>TypeCont          = &#39;7&#39;;
+    <a id="L27"></a>TypeXHeader       = &#39;x&#39;;
+    <a id="L28"></a>TypeXGlobalHeader = &#39;g&#39;;
+<a id="L29"></a>)</pre>
+		<h2>Variables</h2>
+			
+			<pre><a id="L18"></a>var (
+    <a id="L19"></a>ErrWriteTooLong = os.NewError(&#34;write too long&#34;);
+    <a id="L20"></a>ErrFieldTooLong = os.NewError(&#34;header field too long&#34;);
+<a id="L21"></a>)</pre>
+			
+			<pre><a id="L17"></a>var (
+    <a id="L18"></a>HeaderError os.Error = os.ErrorString(&#34;invalid tar header&#34;);
+<a id="L19"></a>)</pre>
+			<h2>type <a href="../../../src/pkg/archive/tar/common.go#L33"><a id="L33"></a>Header</a></h2>
+			<p>
+A Header represents a single header in a tar archive.
+Some fields may not be populated.
+</p>
+
+			<p><pre><a id="L33"></a>type Header struct {
+    <a id="L34"></a>Name     string;
+    <a id="L35"></a>Mode     int64;
+    <a id="L36"></a>Uid      int64;
+    <a id="L37"></a>Gid      int64;
+    <a id="L38"></a>Size     int64;
+    <a id="L39"></a>Mtime    int64;
+    <a id="L40"></a>Typeflag byte;
+    <a id="L41"></a>Linkname string;
+    <a id="L42"></a>Uname    string;
+    <a id="L43"></a>Gname    string;
+    <a id="L44"></a>Devmajor int64;
+    <a id="L45"></a>Devminor int64;
+    <a id="L46"></a>Atime    int64;
+    <a id="L47"></a>Ctime    int64;
+<a id="L48"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/archive/tar/reader.go#L39"><a id="L39"></a>Reader</a></h2>
+			<p>
+A Reader provides sequential access to the contents of a tar archive.
+A tar archive consists of a sequence of files.
+The Next method advances to the next file in the archive (including the first),
+and then it can be treated as an io.Reader to access the file&#39;s data.
+</p>
+<p>
+Example:
+</p>
+<pre>tr := tar.NewReader(r);
+for {
+	hdr, err := tr.Next();
+	if err != nil {
+		// handle error
+	}
+	if hdr == nil {
+		// end of tar archive
+		break
+	}
+	io.Copy(data, tr);
+}
+</pre>
+
+			<p><pre><a id="L39"></a>type Reader struct {
+    // contains unexported fields
+<a id="L44"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/archive/tar/reader.go#L47">NewReader</a></h3>
+				<p><code><a id="L47"></a>func NewReader(r io.Reader) *Reader</code></p>
+				<p>
+NewReader creates a new Reader reading from r.
+</p>
+
+				<h3>func (<a id="L50"></a>*Reader) <a href="../../../src/pkg/archive/tar/reader.go#L50">Next</a></h3>
+				<p><code><a id="L50"></a>func (tr *Reader) Next() (*Header, os.Error)</code></p>
+				<p>
+Next advances to the next entry in the tar archive.
+</p>
+
+				<h3>func (<a id="L207"></a>*Reader) <a href="../../../src/pkg/archive/tar/reader.go#L207">Read</a></h3>
+				<p><code><a id="L207"></a>func (tr *Reader) Read(b []uint8) (n int, err os.Error)</code></p>
+				<p>
+Read reads from the current entry in the tar archive.
+It returns 0, nil when it reaches the end of that entry,
+until Next is called to advance to the next entry.
+</p>
+
+			<h2>type <a href="../../../src/pkg/archive/tar/writer.go#L38"><a id="L38"></a>Writer</a></h2>
+			<p>
+A Writer provides sequential writing of a tar archive in POSIX.1 format.
+A tar archive consists of a sequence of files.
+Call WriteHeader to begin a new file, and then call Write to supply that file&#39;s data,
+writing at most hdr.Size bytes in total.
+</p>
+<p>
+Example:
+</p>
+<pre>tw := tar.NewWriter(w);
+hdr := new(Header);
+hdr.Size = length of data in bytes;
+// populate other hdr fields as desired
+if err := tw.WriteHeader(hdr); err != nil {
+	// handle error
+}
+io.Copy(tw, data);
+tw.Close();
+</pre>
+
+			<p><pre><a id="L38"></a>type Writer struct {
+    // contains unexported fields
+<a id="L45"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/archive/tar/writer.go#L48">NewWriter</a></h3>
+				<p><code><a id="L48"></a>func NewWriter(w io.Writer) *Writer</code></p>
+				<p>
+NewWriter creates a new Writer writing to w.
+</p>
+
+				<h3>func (<a id="L182"></a>*Writer) <a href="../../../src/pkg/archive/tar/writer.go#L182">Close</a></h3>
+				<p><code><a id="L182"></a>func (tw *Writer) Close() os.Error</code></p>
+				
+				<h3>func (<a id="L51"></a>*Writer) <a href="../../../src/pkg/archive/tar/writer.go#L51">Flush</a></h3>
+				<p><code><a id="L51"></a>func (tw *Writer) Flush() os.Error</code></p>
+				<p>
+Flush finishes writing the current file (optional).
+</p>
+
+				<h3>func (<a id="L167"></a>*Writer) <a href="../../../src/pkg/archive/tar/writer.go#L167">Write</a></h3>
+				<p><code><a id="L167"></a>func (tw *Writer) Write(b []uint8) (n int, err os.Error)</code></p>
+				<p>
+Write writes to the current entry in the tar archive.
+Write returns the error ErrWriteTooLong if more than
+hdr.Size bytes are written after WriteHeader.
+</p>
+
+				<h3>func (<a id="L112"></a>*Writer) <a href="../../../src/pkg/archive/tar/writer.go#L112">WriteHeader</a></h3>
+				<p><code><a id="L112"></a>func (tw *Writer) WriteHeader(hdr *Header) os.Error</code></p>
+				<p>
+WriteHeader writes hdr and prepares to accept the file&#39;s contents.
+WriteHeader calls Flush if it is not the first header.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

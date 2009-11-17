@@ -1,0 +1,773 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package eval</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:58:03 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package eval</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "exp/eval"</code></p>
+	<p>
+This package is the beginning of an interpreter for Go.
+It can run simple Go programs but does not implement
+interface values or packages.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/exp/eval/abort.go">abort.go</a>
+				<a href="../../../src/pkg/exp/eval/bridge.go">bridge.go</a>
+				<a href="../../../src/pkg/exp/eval/compiler.go">compiler.go</a>
+				<a href="../../../src/pkg/exp/eval/expr.go">expr.go</a>
+				<a href="../../../src/pkg/exp/eval/expr1.go">expr1.go</a>
+				<a href="../../../src/pkg/exp/eval/func.go">func.go</a>
+				<a href="../../../src/pkg/exp/eval/scope.go">scope.go</a>
+				<a href="../../../src/pkg/exp/eval/stmt.go">stmt.go</a>
+				<a href="../../../src/pkg/exp/eval/type.go">type.go</a>
+				<a href="../../../src/pkg/exp/eval/typec.go">typec.go</a>
+				<a href="../../../src/pkg/exp/eval/util.go">util.go</a>
+				<a href="../../../src/pkg/exp/eval/value.go">value.go</a>
+				<a href="../../../src/pkg/exp/eval/world.go">world.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			
+			<pre><a id="L190"></a>var (
+    <a id="L191"></a>Uint8Type  = universe.DefineType(&#34;uint8&#34;, universePos, &amp;uintType{commonType{}, 8, false, &#34;uint8&#34;});
+    <a id="L192"></a>Uint16Type = universe.DefineType(&#34;uint16&#34;, universePos, &amp;uintType{commonType{}, 16, false, &#34;uint16&#34;});
+    <a id="L193"></a>Uint32Type = universe.DefineType(&#34;uint32&#34;, universePos, &amp;uintType{commonType{}, 32, false, &#34;uint32&#34;});
+    <a id="L194"></a>Uint64Type = universe.DefineType(&#34;uint64&#34;, universePos, &amp;uintType{commonType{}, 64, false, &#34;uint64&#34;});
+
+    <a id="L196"></a>UintType    = universe.DefineType(&#34;uint&#34;, universePos, &amp;uintType{commonType{}, 0, false, &#34;uint&#34;});
+    <a id="L197"></a>UintptrType = universe.DefineType(&#34;uintptr&#34;, universePos, &amp;uintType{commonType{}, 0, true, &#34;uintptr&#34;});
+<a id="L198"></a>)</pre>
+			
+			<pre><a id="L269"></a>var (
+    <a id="L270"></a>Int8Type  = universe.DefineType(&#34;int8&#34;, universePos, &amp;intType{commonType{}, 8, &#34;int8&#34;});
+    <a id="L271"></a>Int16Type = universe.DefineType(&#34;int16&#34;, universePos, &amp;intType{commonType{}, 16, &#34;int16&#34;});
+    <a id="L272"></a>Int32Type = universe.DefineType(&#34;int32&#34;, universePos, &amp;intType{commonType{}, 32, &#34;int32&#34;});
+    <a id="L273"></a>Int64Type = universe.DefineType(&#34;int64&#34;, universePos, &amp;intType{commonType{}, 64, &#34;int64&#34;});
+
+    <a id="L275"></a>IntType = universe.DefineType(&#34;int&#34;, universePos, &amp;intType{commonType{}, 0, &#34;int&#34;});
+<a id="L276"></a>)</pre>
+			
+			<pre><a id="L365"></a>var (
+    <a id="L366"></a>Float32Type = universe.DefineType(&#34;float32&#34;, universePos, &amp;floatType{commonType{}, 32, &#34;float32&#34;});
+    <a id="L367"></a>Float64Type = universe.DefineType(&#34;float64&#34;, universePos, &amp;floatType{commonType{}, 64, &#34;float64&#34;});
+    <a id="L368"></a>FloatType   = universe.DefineType(&#34;float&#34;, universePos, &amp;floatType{commonType{}, 0, &#34;float&#34;});
+<a id="L369"></a>)</pre>
+			
+			<pre><a id="L153"></a>var BoolType = universe.DefineType(&#34;bool&#34;, universePos, &amp;boolType{})</pre>
+			
+			<pre><a id="L465"></a>var StringType = universe.DefineType(&#34;string&#34;, universePos, &amp;stringType{})</pre>
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L485"><a id="L485"></a>ArrayType</a></h2>
+			
+			<p><pre><a id="L485"></a>type ArrayType struct {
+    <a id="L487"></a>Len  int64;
+    <a id="L488"></a>Elem Type;
+    // contains unexported fields
+<a id="L489"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/type.go#L496">NewArrayType</a></h3>
+				<p><code><a id="L496"></a>func NewArrayType(len int64, elem Type) *ArrayType</code></p>
+				
+				<h3>func (<a id="L520"></a>*ArrayType) <a href="../../../src/pkg/exp/eval/type.go#L520">String</a></h3>
+				<p><code><a id="L520"></a>func (t *ArrayType) String() string</code></p>
+				
+				<h3>func (<a id="L522"></a>*ArrayType) <a href="../../../src/pkg/exp/eval/type.go#L522">Zero</a></h3>
+				<p><code><a id="L522"></a>func (t *ArrayType) Zero() Value</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L63"><a id="L63"></a>ArrayValue</a></h2>
+			
+			<p><pre><a id="L63"></a>type ArrayValue interface {
+    <a id="L64"></a>Value;
+
+    <a id="L65"></a>// TODO(austin) Get() is here for uniformity, but is
+    <a id="L66"></a>// completely useless.  If a lot of other types have similarly
+    <a id="L67"></a>// useless Get methods, just special-case these uses.
+    <a id="L68"></a>Get(*Thread) ArrayValue;
+    <a id="L69"></a>Elem(*Thread, int64) Value;
+
+    <a id="L70"></a>// Sub returns an ArrayValue backed by the same array that
+    <a id="L71"></a>// starts from element i and has length len.
+    <a id="L72"></a>Sub(i int64, len int64) ArrayValue;
+<a id="L73"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L21"><a id="L21"></a>BoolValue</a></h2>
+			
+			<p><pre><a id="L21"></a>type BoolValue interface {
+    <a id="L22"></a>Value;
+    <a id="L23"></a>Get(*Thread) bool;
+    <a id="L24"></a>Set(*Thread, bool);
+<a id="L25"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L60"><a id="L60"></a>BoundedType</a></h2>
+			
+			<p><pre><a id="L60"></a>type BoundedType interface {
+    <a id="L61"></a>Type;
+    // contains unexported methods
+<a id="L66"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/world.go#L30"><a id="L30"></a>Code</a></h2>
+			
+			<p><pre><a id="L30"></a>type Code interface {
+    <a id="L31"></a>// The type of the value Run returns, or nil if Run returns nil.
+    <a id="L32"></a>Type() Type;
+
+    <a id="L34"></a>// Run runs the code; if the code is a single expression
+    <a id="L35"></a>// with a value, it returns the value; otherwise it returns nil.
+    <a id="L36"></a>Run() (Value, os.Error);
+<a id="L37"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/scope.go#L33"><a id="L33"></a>Constant</a></h2>
+			
+			<p><pre><a id="L33"></a>type Constant struct {
+    <a id="L34"></a>token.Position;
+    <a id="L35"></a>Type  Type;
+    <a id="L36"></a>Value Value;
+<a id="L37"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/scope.go#L17"><a id="L17"></a>Def</a></h2>
+			<p>
+A definition can be a *Variable, *Constant, or Type.
+</p>
+
+			<p><pre><a id="L17"></a>type Def interface {
+    <a id="L18"></a>Pos() token.Position;
+<a id="L19"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/abort.go#L38"><a id="L38"></a>DivByZeroError</a></h2>
+			
+			<p><pre><a id="L38"></a>type DivByZeroError struct{}</pre></p>
+				<h3>func (<a id="L40"></a>DivByZeroError) <a href="../../../src/pkg/exp/eval/abort.go#L40">String</a></h3>
+				<p><code><a id="L40"></a>func (DivByZeroError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L46"><a id="L46"></a>FloatValue</a></h2>
+			
+			<p><pre><a id="L46"></a>type FloatValue interface {
+    <a id="L47"></a>Value;
+    <a id="L48"></a>Get(*Thread) float64;
+    <a id="L49"></a>Set(*Thread, float64);
+<a id="L50"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/scope.go#L182"><a id="L182"></a>Frame</a></h2>
+			
+			<p><pre><a id="L182"></a>type Frame struct {
+    <a id="L183"></a>Outer *Frame;
+    <a id="L184"></a>Vars  []Value;
+<a id="L185"></a>}</pre></p>
+				<h3>func (<a id="L187"></a>*Frame) <a href="../../../src/pkg/exp/eval/scope.go#L187">Get</a></h3>
+				<p><code><a id="L187"></a>func (f *Frame) Get(level int, index int) Value</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L88"><a id="L88"></a>Func</a></h2>
+			
+			<p><pre><a id="L88"></a>type Func interface {
+    <a id="L89"></a>NewFrame() *Frame;
+    <a id="L90"></a>Call(*Thread);
+<a id="L91"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L800"><a id="L800"></a>FuncDecl</a></h2>
+			
+			<p><pre><a id="L800"></a>type FuncDecl struct {
+    <a id="L801"></a>Type *FuncType;
+    <a id="L802"></a>Name *ast.Ident; // nil for function literals
+    <a id="L803"></a>// InNames will be one longer than Type.In if this function is
+    <a id="L804"></a>// variadic.
+    <a id="L805"></a>InNames  []*ast.Ident;
+    <a id="L806"></a>OutNames []*ast.Ident;
+<a id="L807"></a>}</pre></p>
+				<h3>func (<a id="L809"></a>*FuncDecl) <a href="../../../src/pkg/exp/eval/type.go#L809">String</a></h3>
+				<p><code><a id="L809"></a>func (t *FuncDecl) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L685"><a id="L685"></a>FuncType</a></h2>
+			
+			<p><pre><a id="L685"></a>type FuncType struct {
+    <a id="L687"></a>// TODO(austin) Separate receiver Type for methods?
+    <a id="L688"></a>In       []Type;
+    <a id="L689"></a>Variadic bool;
+    <a id="L690"></a>Out      []Type;
+    // contains unexported fields
+<a id="L692"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/bridge.go#L163">FuncFromNativeTyped</a></h3>
+				<p><code><a id="L163"></a>func FuncFromNativeTyped(fn func(*Thread, []Value, []Value), t interface{}) (*FuncType, FuncValue)</code></p>
+				<p>
+FuncFromNativeTyped is like FuncFromNative, but constructs the
+function type from a function pointer using reflection.  Typically,
+the type will be given as a nil pointer to a function with the
+desired signature.
+</p>
+
+				<h3>func <a href="../../../src/pkg/exp/eval/type.go#L716">NewFuncType</a></h3>
+				<p><code><a id="L716"></a>func NewFuncType(in []Type, variadic bool, out []Type) *FuncType</code></p>
+				
+				<h3>func (<a id="L780"></a>*FuncType) <a href="../../../src/pkg/exp/eval/type.go#L780">String</a></h3>
+				<p><code><a id="L780"></a>func (t *FuncType) String() string</code></p>
+				
+				<h3>func (<a id="L798"></a>*FuncType) <a href="../../../src/pkg/exp/eval/type.go#L798">Zero</a></h3>
+				<p><code><a id="L798"></a>func (t *FuncType) Zero() Value</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L93"><a id="L93"></a>FuncValue</a></h2>
+			
+			<p><pre><a id="L93"></a>type FuncValue interface {
+    <a id="L94"></a>Value;
+    <a id="L95"></a>Get(*Thread) Func;
+    <a id="L96"></a>Set(*Thread, Func);
+<a id="L97"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/bridge.go#L155">FuncFromNative</a></h3>
+				<p><code><a id="L155"></a>func FuncFromNative(fn func(*Thread, []Value, []Value), t *FuncType) FuncValue</code></p>
+				<p>
+FuncFromNative creates an interpreter function from a native
+function that takes its in and out arguments as slices of
+interpreter Value&#39;s.  While somewhat inconvenient, this avoids
+value marshalling.
+</p>
+
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L850"><a id="L850"></a>IMethod</a></h2>
+			
+			<p><pre><a id="L850"></a>type IMethod struct {
+    <a id="L851"></a>Name string;
+    <a id="L852"></a>Type *FuncType;
+<a id="L853"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L52"><a id="L52"></a>IdealFloatValue</a></h2>
+			
+			<p><pre><a id="L52"></a>type IdealFloatValue interface {
+    <a id="L53"></a>Value;
+    <a id="L54"></a>Get() *bignum.Rational;
+<a id="L55"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L41"><a id="L41"></a>IdealIntValue</a></h2>
+			<p>
+TODO(austin) IdealIntValue and IdealFloatValue should not exist
+because ideals are not l-values.
+</p>
+
+			<p><pre><a id="L41"></a>type IdealIntValue interface {
+    <a id="L42"></a>Value;
+    <a id="L43"></a>Get() *bignum.Integer;
+<a id="L44"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/abort.go#L46"><a id="L46"></a>IndexError</a></h2>
+			
+			<p><pre><a id="L46"></a>type IndexError struct {
+    <a id="L47"></a>Idx, Len int64;
+<a id="L48"></a>}</pre></p>
+				<h3>func (<a id="L50"></a>IndexError) <a href="../../../src/pkg/exp/eval/abort.go#L50">String</a></h3>
+				<p><code><a id="L50"></a>func (e IndexError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L33"><a id="L33"></a>IntValue</a></h2>
+			
+			<p><pre><a id="L33"></a>type IntValue interface {
+    <a id="L34"></a>Value;
+    <a id="L35"></a>Get(*Thread) int64;
+    <a id="L36"></a>Set(*Thread, int64);
+<a id="L37"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L99"><a id="L99"></a>Interface</a></h2>
+			
+			<p><pre><a id="L99"></a>type Interface struct {
+    <a id="L100"></a>Type  Type;
+    <a id="L101"></a>Value Value;
+<a id="L102"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L842"><a id="L842"></a>InterfaceType</a></h2>
+			
+			<p><pre><a id="L842"></a>type InterfaceType struct {
+    // contains unexported fields
+<a id="L848"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/type.go#L857">NewInterfaceType</a></h3>
+				<p><code><a id="L857"></a>func NewInterfaceType(methods []IMethod, embeds []*InterfaceType) *InterfaceType</code></p>
+				
+				<h3>func (<a id="L930"></a>*InterfaceType) <a href="../../../src/pkg/exp/eval/type.go#L930">String</a></h3>
+				<p><code><a id="L930"></a>func (t *InterfaceType) String() string</code></p>
+				
+				<h3>func (<a id="L997"></a>*InterfaceType) <a href="../../../src/pkg/exp/eval/type.go#L997">Zero</a></h3>
+				<p><code><a id="L997"></a>func (t *InterfaceType) Zero() Value</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L104"><a id="L104"></a>InterfaceValue</a></h2>
+			
+			<p><pre><a id="L104"></a>type InterfaceValue interface {
+    <a id="L105"></a>Value;
+    <a id="L106"></a>Get(*Thread) Interface;
+    <a id="L107"></a>Set(*Thread, Interface);
+<a id="L108"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/abort.go#L65"><a id="L65"></a>KeyError</a></h2>
+			
+			<p><pre><a id="L65"></a>type KeyError struct {
+    <a id="L66"></a>Key interface{};
+<a id="L67"></a>}</pre></p>
+				<h3>func (<a id="L69"></a>KeyError) <a href="../../../src/pkg/exp/eval/abort.go#L69">String</a></h3>
+				<p><code><a id="L69"></a>func (e KeyError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L121"><a id="L121"></a>Map</a></h2>
+			
+			<p><pre><a id="L121"></a>type Map interface {
+    <a id="L122"></a>Len(*Thread) int64;
+
+    <a id="L123"></a>// Retrieve an element from the map, returning nil if it does
+    <a id="L124"></a>// not exist.
+    <a id="L125"></a>Elem(t *Thread, key interface{}) Value;
+
+    <a id="L126"></a>// Set an entry in the map.  If val is nil, delete the entry.
+    <a id="L127"></a>SetElem(t *Thread, key interface{}, val Value);
+
+    <a id="L128"></a>// TODO(austin)  Perhaps there should be an iterator interface instead.
+    <a id="L129"></a>Iter(func(key interface{}, val Value) bool);
+<a id="L130"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L1043"><a id="L1043"></a>MapType</a></h2>
+			
+			<p><pre><a id="L1043"></a>type MapType struct {
+    <a id="L1045"></a>Key  Type;
+    <a id="L1046"></a>Elem Type;
+    // contains unexported fields
+<a id="L1047"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/type.go#L1051">NewMapType</a></h3>
+				<p><code><a id="L1051"></a>func NewMapType(key Type, elem Type) *MapType</code></p>
+				
+				<h3>func (<a id="L1075"></a>*MapType) <a href="../../../src/pkg/exp/eval/type.go#L1075">String</a></h3>
+				<p><code><a id="L1075"></a>func (t *MapType) String() string</code></p>
+				
+				<h3>func (<a id="L1077"></a>*MapType) <a href="../../../src/pkg/exp/eval/type.go#L1077">Zero</a></h3>
+				<p><code><a id="L1077"></a>func (t *MapType) Zero() Value</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L132"><a id="L132"></a>MapValue</a></h2>
+			
+			<p><pre><a id="L132"></a>type MapValue interface {
+    <a id="L133"></a>Value;
+    <a id="L134"></a>Get(*Thread) Map;
+    <a id="L135"></a>Set(*Thread, Map);
+<a id="L136"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L1092"><a id="L1092"></a>Method</a></h2>
+			
+			<p><pre><a id="L1092"></a>type Method struct {
+    // contains unexported fields
+<a id="L1095"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L1169"><a id="L1169"></a>MultiType</a></h2>
+			<p>
+MultiType is a special type used for multi-valued expressions, akin
+to a tuple type.  It&#39;s not generally accessible within the
+language.
+</p>
+
+			<p><pre><a id="L1169"></a>type MultiType struct {
+    <a id="L1171"></a>Elems []Type;
+    // contains unexported fields
+<a id="L1172"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/type.go#L1176">NewMultiType</a></h3>
+				<p><code><a id="L1176"></a>func NewMultiType(elems []Type) *MultiType</code></p>
+				
+				<h3>func (<a id="L1206"></a>*MultiType) <a href="../../../src/pkg/exp/eval/type.go#L1206">String</a></h3>
+				<p><code><a id="L1206"></a>func (t *MultiType) String() string</code></p>
+				
+				<h3>func (<a id="L1213"></a>*MultiType) <a href="../../../src/pkg/exp/eval/type.go#L1213">Zero</a></h3>
+				<p><code><a id="L1213"></a>func (t *MultiType) Zero() Value</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L1097"><a id="L1097"></a>NamedType</a></h2>
+			
+			<p><pre><a id="L1097"></a>type NamedType struct {
+    <a id="L1098"></a>token.Position;
+    <a id="L1099"></a>Name string;
+
+    <a id="L1100"></a>// Underlying type.  If incomplete is true, this will be nil.
+    <a id="L1101"></a>// If incomplete is false and this is still nil, then this is
+    <a id="L1102"></a>// a placeholder type representing an error.
+    <a id="L1103"></a>Def Type;
+    // contains unexported fields
+<a id="L1107"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/type.go#L1111">NewNamedType</a></h3>
+				<p><code><a id="L1111"></a>func NewNamedType(name string) *NamedType</code></p>
+				<p>
+TODO(austin) This is temporarily needed by the debugger&#39;s remote
+type parser.  This should only be possible with block.DefineType.
+</p>
+
+				<h3>func (<a id="L1115"></a>*NamedType) <a href="../../../src/pkg/exp/eval/type.go#L1115">Complete</a></h3>
+				<p><code><a id="L1115"></a>func (t *NamedType) Complete(def Type)</code></p>
+				
+				<h3>func (<a id="L1158"></a>*NamedType) <a href="../../../src/pkg/exp/eval/type.go#L1158">String</a></h3>
+				<p><code><a id="L1158"></a>func (t *NamedType) String() string</code></p>
+				
+				<h3>func (<a id="L1160"></a>*NamedType) <a href="../../../src/pkg/exp/eval/type.go#L1160">Zero</a></h3>
+				<p><code><a id="L1160"></a>func (t *NamedType) Zero() Value</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/abort.go#L79"><a id="L79"></a>NegativeCapacityError</a></h2>
+			
+			<p><pre><a id="L79"></a>type NegativeCapacityError struct {
+    <a id="L80"></a>Len int64;
+<a id="L81"></a>}</pre></p>
+				<h3>func (<a id="L83"></a>NegativeCapacityError) <a href="../../../src/pkg/exp/eval/abort.go#L83">String</a></h3>
+				<p><code><a id="L83"></a>func (e NegativeCapacityError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/abort.go#L71"><a id="L71"></a>NegativeLengthError</a></h2>
+			
+			<p><pre><a id="L71"></a>type NegativeLengthError struct {
+    <a id="L72"></a>Len int64;
+<a id="L73"></a>}</pre></p>
+				<h3>func (<a id="L75"></a>NegativeLengthError) <a href="../../../src/pkg/exp/eval/abort.go#L75">String</a></h3>
+				<p><code><a id="L75"></a>func (e NegativeLengthError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/abort.go#L42"><a id="L42"></a>NilPointerError</a></h2>
+			
+			<p><pre><a id="L42"></a>type NilPointerError struct{}</pre></p>
+				<h3>func (<a id="L44"></a>NilPointerError) <a href="../../../src/pkg/exp/eval/abort.go#L44">String</a></h3>
+				<p><code><a id="L44"></a>func (NilPointerError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L649"><a id="L649"></a>PtrType</a></h2>
+			
+			<p><pre><a id="L649"></a>type PtrType struct {
+    <a id="L651"></a>Elem Type;
+    // contains unexported fields
+<a id="L652"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/type.go#L658">NewPtrType</a></h3>
+				<p><code><a id="L658"></a>func NewPtrType(elem Type) *PtrType</code></p>
+				
+				<h3>func (<a id="L677"></a>*PtrType) <a href="../../../src/pkg/exp/eval/type.go#L677">String</a></h3>
+				<p><code><a id="L677"></a>func (t *PtrType) String() string</code></p>
+				
+				<h3>func (<a id="L679"></a>*PtrType) <a href="../../../src/pkg/exp/eval/type.go#L679">Zero</a></h3>
+				<p><code><a id="L679"></a>func (t *PtrType) Zero() Value</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L82"><a id="L82"></a>PtrValue</a></h2>
+			
+			<p><pre><a id="L82"></a>type PtrValue interface {
+    <a id="L83"></a>Value;
+    <a id="L84"></a>Get(*Thread) Value;
+    <a id="L85"></a>Set(*Thread, Value);
+<a id="L86"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/world.go#L156"><a id="L156"></a>RedefinitionError</a></h2>
+			
+			<p><pre><a id="L156"></a>type RedefinitionError struct {
+    <a id="L157"></a>Name string;
+    <a id="L158"></a>Prev Def;
+<a id="L159"></a>}</pre></p>
+				<h3>func (<a id="L161"></a>*RedefinitionError) <a href="../../../src/pkg/exp/eval/world.go#L161">String</a></h3>
+				<p><code><a id="L161"></a>func (e *RedefinitionError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/scope.go#L66"><a id="L66"></a>Scope</a></h2>
+			<p>
+A Scope is the compile-time analogue of a Frame, which captures
+some subtree of blocks.
+</p>
+
+			<p><pre><a id="L66"></a>type Scope struct {
+    // contains unexported fields
+<a id="L73"></a>}</pre></p>
+				<h3>func (<a id="L176"></a>*Scope) <a href="../../../src/pkg/exp/eval/scope.go#L176">NewFrame</a></h3>
+				<p><code><a id="L176"></a>func (s *Scope) NewFrame(outer *Frame) *Frame</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L110"><a id="L110"></a>Slice</a></h2>
+			
+			<p><pre><a id="L110"></a>type Slice struct {
+    <a id="L111"></a>Base     ArrayValue;
+    <a id="L112"></a>Len, Cap int64;
+<a id="L113"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/abort.go#L57"><a id="L57"></a>SliceError</a></h2>
+			
+			<p><pre><a id="L57"></a>type SliceError struct {
+    <a id="L58"></a>Lo, Hi, Cap int64;
+<a id="L59"></a>}</pre></p>
+				<h3>func (<a id="L61"></a>SliceError) <a href="../../../src/pkg/exp/eval/abort.go#L61">String</a></h3>
+				<p><code><a id="L61"></a>func (e SliceError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L1003"><a id="L1003"></a>SliceType</a></h2>
+			
+			<p><pre><a id="L1003"></a>type SliceType struct {
+    <a id="L1005"></a>Elem Type;
+    // contains unexported fields
+<a id="L1006"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/type.go#L1012">NewSliceType</a></h3>
+				<p><code><a id="L1012"></a>func NewSliceType(elem Type) *SliceType</code></p>
+				
+				<h3>func (<a id="L1031"></a>*SliceType) <a href="../../../src/pkg/exp/eval/type.go#L1031">String</a></h3>
+				<p><code><a id="L1031"></a>func (t *SliceType) String() string</code></p>
+				
+				<h3>func (<a id="L1033"></a>*SliceType) <a href="../../../src/pkg/exp/eval/type.go#L1033">Zero</a></h3>
+				<p><code><a id="L1033"></a>func (t *SliceType) Zero() Value</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L115"><a id="L115"></a>SliceValue</a></h2>
+			
+			<p><pre><a id="L115"></a>type SliceValue interface {
+    <a id="L116"></a>Value;
+    <a id="L117"></a>Get(*Thread) Slice;
+    <a id="L118"></a>Set(*Thread, Slice);
+<a id="L119"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L57"><a id="L57"></a>StringValue</a></h2>
+			
+			<p><pre><a id="L57"></a>type StringValue interface {
+    <a id="L58"></a>Value;
+    <a id="L59"></a>Get(*Thread) string;
+    <a id="L60"></a>Set(*Thread, string);
+<a id="L61"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L539"><a id="L539"></a>StructField</a></h2>
+			
+			<p><pre><a id="L539"></a>type StructField struct {
+    <a id="L540"></a>Name      string;
+    <a id="L541"></a>Type      Type;
+    <a id="L542"></a>Anonymous bool;
+<a id="L543"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L545"><a id="L545"></a>StructType</a></h2>
+			
+			<p><pre><a id="L545"></a>type StructType struct {
+    <a id="L547"></a>Elems []StructField;
+    // contains unexported fields
+<a id="L548"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/type.go#L557">NewStructType</a></h3>
+				<p><code><a id="L557"></a>func NewStructType(fields []StructField) *StructType</code></p>
+				
+				<h3>func (<a id="L623"></a>*StructType) <a href="../../../src/pkg/exp/eval/type.go#L623">String</a></h3>
+				<p><code><a id="L623"></a>func (t *StructType) String() string</code></p>
+				
+				<h3>func (<a id="L637"></a>*StructType) <a href="../../../src/pkg/exp/eval/type.go#L637">Zero</a></h3>
+				<p><code><a id="L637"></a>func (t *StructType) Zero() Value</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L75"><a id="L75"></a>StructValue</a></h2>
+			
+			<p><pre><a id="L75"></a>type StructValue interface {
+    <a id="L76"></a>Value;
+
+    <a id="L77"></a>// TODO(austin) This is another useless Get()
+    <a id="L78"></a>Get(*Thread) StructValue;
+    <a id="L79"></a>Field(*Thread, int) Value;
+<a id="L80"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/func.go#L13"><a id="L13"></a>Thread</a></h2>
+			
+			<p><pre><a id="L13"></a>type Thread struct {
+    // contains unexported fields
+<a id="L19"></a>}</pre></p>
+				<h3>func (<a id="L15"></a>*Thread) <a href="../../../src/pkg/exp/eval/abort.go#L15">Abort</a></h3>
+				<p><code><a id="L15"></a>func (t *Thread) Abort(err os.Error)</code></p>
+				<p>
+Abort aborts the thread&#39;s current computation,
+causing the innermost Try to return err.
+</p>
+
+				<h3>func (<a id="L25"></a>*Thread) <a href="../../../src/pkg/exp/eval/abort.go#L25">Try</a></h3>
+				<p><code><a id="L25"></a>func (t *Thread) Try(f func(t *Thread)) os.Error</code></p>
+				<p>
+Try executes a computation; if the computation
+Aborts, Try returns the error passed to abort.
+</p>
+
+			<h2>type <a href="../../../src/pkg/exp/eval/type.go#L30"><a id="L30"></a>Type</a></h2>
+			
+			<p><pre><a id="L30"></a>type Type interface {
+    <a id="L52"></a>// Zero returns a new zero value of this type.
+    <a id="L53"></a>Zero() Value;
+
+    <a id="L54"></a>// String returns the string representation of this type.
+    <a id="L55"></a>String() string;
+
+    <a id="L56"></a>// The position where this type was defined, if any.
+    <a id="L57"></a>Pos() token.Position;
+    // contains unexported methods
+<a id="L58"></a>}</pre></p>
+				
+				<pre><a id="L1202"></a>var EmptyType Type = NewMultiType([]Type{})</pre>
+				
+				<pre><a id="L440"></a>var IdealFloatType Type = &amp;idealFloatType{}</pre>
+				
+				<pre><a id="L335"></a>var IdealIntType Type = &amp;idealIntType{}</pre>
+				<h3>func <a href="../../../src/pkg/exp/eval/bridge.go#L24">TypeFromNative</a></h3>
+				<p><code><a id="L24"></a>func TypeFromNative(t reflect.Type) Type</code></p>
+				<p>
+TypeFromNative converts a regular Go type into a the corresponding
+interpreter Type.
+</p>
+
+				<h3>func <a href="../../../src/pkg/exp/eval/bridge.go#L133">TypeOfNative</a></h3>
+				<p><code><a id="L133"></a>func TypeOfNative(v interface{}) Type</code></p>
+				<p>
+TypeOfNative returns the interpreter Type of a regular Go value.
+</p>
+
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L27"><a id="L27"></a>UintValue</a></h2>
+			
+			<p><pre><a id="L27"></a>type UintValue interface {
+    <a id="L28"></a>Value;
+    <a id="L29"></a>Get(*Thread) uint64;
+    <a id="L30"></a>Set(*Thread, uint64);
+<a id="L31"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/value.go#L12"><a id="L12"></a>Value</a></h2>
+			
+			<p><pre><a id="L12"></a>type Value interface {
+    <a id="L13"></a>String() string;
+
+    <a id="L14"></a>// Assign copies another value into this one.  It should
+    <a id="L15"></a>// assume that the other value satisfies the same specific
+    <a id="L16"></a>// value interface (BoolValue, etc.), but must not assume
+    <a id="L17"></a>// anything about its specific type.
+    <a id="L18"></a>Assign(t *Thread, o Value);
+<a id="L19"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/scope.go#L21"><a id="L21"></a>Variable</a></h2>
+			
+			<p><pre><a id="L21"></a>type Variable struct {
+    <a id="L22"></a>token.Position;
+
+    <a id="L23"></a>// Index of this variable in the Frame structure
+    <a id="L24"></a>Index int;
+
+    <a id="L25"></a>// Static type of this variable
+    <a id="L26"></a>Type Type;
+
+    <a id="L27"></a>// Value of this variable.  This is only used by Scope.NewFrame;
+    <a id="L28"></a>// therefore, it is useful for global scopes but cannot be used
+    <a id="L29"></a>// in function scopes.
+    <a id="L30"></a>Init Value;
+<a id="L31"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/eval/world.go#L18"><a id="L18"></a>World</a></h2>
+			
+			<p><pre><a id="L18"></a>type World struct {
+    // contains unexported fields
+<a id="L21"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/eval/world.go#L23">NewWorld</a></h3>
+				<p><code><a id="L23"></a>func NewWorld() *World</code></p>
+				
+				<h3>func (<a id="L138"></a>*World) <a href="../../../src/pkg/exp/eval/world.go#L138">Compile</a></h3>
+				<p><code><a id="L138"></a>func (w *World) Compile(text string) (Code, os.Error)</code></p>
+				
+				<h3>func (<a id="L76"></a>*World) <a href="../../../src/pkg/exp/eval/world.go#L76">CompileDeclList</a></h3>
+				<p><code><a id="L76"></a>func (w *World) CompileDeclList(decls []ast.Decl) (Code, os.Error)</code></p>
+				
+				<h3>func (<a id="L98"></a>*World) <a href="../../../src/pkg/exp/eval/world.go#L98">CompileExpr</a></h3>
+				<p><code><a id="L98"></a>func (w *World) CompileExpr(e ast.Expr) (Code, os.Error)</code></p>
+				
+				<h3>func (<a id="L44"></a>*World) <a href="../../../src/pkg/exp/eval/world.go#L44">CompileStmtList</a></h3>
+				<p><code><a id="L44"></a>func (w *World) CompileStmtList(stmts []ast.Stmt) (Code, os.Error)</code></p>
+				
+				<h3>func (<a id="L170"></a>*World) <a href="../../../src/pkg/exp/eval/world.go#L170">DefineConst</a></h3>
+				<p><code><a id="L170"></a>func (w *World) DefineConst(name string, t Type, val Value) os.Error</code></p>
+				
+				<h3>func (<a id="L178"></a>*World) <a href="../../../src/pkg/exp/eval/world.go#L178">DefineVar</a></h3>
+				<p><code><a id="L178"></a>func (w *World) DefineVar(name string, t Type, val Value) os.Error</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

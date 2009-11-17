@@ -1,0 +1,977 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package ast</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:47:27 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package ast</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "go/ast"</code></p>
+	<p>
+The AST package declares the types used to represent
+syntax trees for Go packages.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/go/ast/ast.go">ast.go</a>
+				<a href="../../../src/pkg/go/ast/filter.go">filter.go</a>
+				<a href="../../../src/pkg/go/ast/scope.go">scope.go</a>
+				<a href="../../../src/pkg/go/ast/walk.go">walk.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../../src/pkg/go/ast/filter.go#L159">FileExports</a></h2>
+			<p><code><a id="L159"></a>func FileExports(src *File) bool</code></p>
+			<p>
+FileExports trims the AST for a Go source file in place such that only
+exported nodes remain: all top-level identifiers which are not exported
+and their associated information (such as type, initial value, or function
+body) are removed. Non-exported fields and methods of exported types are
+stripped, and the function bodies of exported functions are set to nil.
+The File.comments list is not changed.
+</p>
+<p>
+FileExports returns true if there is an exported declaration; it returns
+false otherwise.
+</p>
+
+			<h2>func <a href="../../../src/pkg/go/ast/ast.go#L343">IsExported</a></h2>
+			<p><code><a id="L343"></a>func IsExported(name string) bool</code></p>
+			<p>
+IsExported returns whether name is an exported Go symbol
+(i.e., whether it begins with an uppercase letter).
+</p>
+
+			<h2>func <a href="../../../src/pkg/go/ast/filter.go#L179">PackageExports</a></h2>
+			<p><code><a id="L179"></a>func PackageExports(pkg *Package) bool</code></p>
+			<p>
+PackageExports trims the AST for a Go package in place such that only
+exported nodes remain. The pkg.Files list is not changed, so that file
+names and top-level package comments don&#39;t get lost.
+</p>
+<p>
+PackageExports returns true if there is an exported declaration; it
+returns false otherwise.
+</p>
+
+			<h2>func <a href="../../../src/pkg/go/ast/walk.go#L71">Walk</a></h2>
+			<p><code><a id="L71"></a>func Walk(v Visitor, node interface{})</code></p>
+			<p>
+Walk traverses an AST in depth-first order and invokes v.Visit(n) for each
+non-nil node n encountered, starting with node. If v.Visit(n) returns true,
+Walk visits each of the children of n.
+</p>
+
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L249"><a id="L251"></a>ArrayType</a></h2>
+			<p>
+An ArrayType node represents an array or slice type.
+</p>
+
+			<p><pre><a id="L249"></a>type <a id="L251"></a>ArrayType struct {
+    <a id="L252"></a>token.Position;       // position of &#34;[&#34;
+    <a id="L253"></a>Len             Expr; // Ellipsis node for [...]T array types, nil for slice types
+    <a id="L254"></a>Elt             Expr; // element type
+<a id="L255"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L404"></a>AssignStmt</a></h2>
+			<p>
+An AssignStmt node represents an assignment or
+a short variable declaration.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L404"></a>AssignStmt struct {
+    <a id="L405"></a>Lhs    []Expr;
+    <a id="L406"></a>TokPos token.Position; // position of Tok
+    <a id="L407"></a>Tok    token.Token;    // assignment token, DEFINE
+    <a id="L408"></a>Rhs    []Expr;
+<a id="L409"></a>}</pre></p>
+				<h3>func (<a id="L529"></a>*AssignStmt) <a href="../../../src/pkg/go/ast/ast.go#L529">Pos</a></h3>
+				<p><code><a id="L529"></a>func (s *AssignStmt) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L622"><a id="L627"></a>BadDecl</a></h2>
+			<p>
+A BadDecl node is a placeholder for declarations containing
+syntax errors for which no correct declaration nodes can be
+created.
+</p>
+
+			<p><pre><a id="L622"></a>type <a id="L627"></a>BadDecl struct {
+    <a id="L628"></a>token.Position; // beginning position of bad declaration
+<a id="L629"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L114"></a>BadExpr</a></h2>
+			<p>
+A BadExpr node is a placeholder for expressions containing
+syntax errors for which no correct expression nodes can be
+created.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L114"></a>BadExpr struct {
+    <a id="L115"></a>token.Position; // beginning position of bad expression
+<a id="L116"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L366"></a>BadStmt</a></h2>
+			<p>
+A BadStmt node is a placeholder for statements containing
+syntax errors for which no correct statement nodes can be
+created.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L366"></a>BadStmt struct {
+    <a id="L367"></a>token.Position; // beginning position of bad statement
+<a id="L368"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L132"></a>BasicLit</a></h2>
+			<p>
+A BasicLit node represents a literal of basic type.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L132"></a>BasicLit struct {
+    <a id="L133"></a>token.Position;              // literal position
+    <a id="L134"></a>Kind            token.Token; //  token.INT, token.FLOAT, token.CHAR, or token.STRING
+    <a id="L135"></a>Value           []byte;      // literal string; e.g. 42, 0x7f, 3.14, 1e-9, &#39;a&#39;, &#39;\x7f&#39;, &#34;foo&#34; or `\m\n\o`
+<a id="L136"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L216"></a>BinaryExpr</a></h2>
+			<p>
+A BinaryExpr node represents a binary expression.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L216"></a>BinaryExpr struct {
+    <a id="L217"></a>X     Expr;           // left operand
+    <a id="L218"></a>OpPos token.Position; // position of Op
+    <a id="L219"></a>Op    token.Token;    // operator
+    <a id="L220"></a>Y     Expr;           // right operand
+<a id="L221"></a>}</pre></p>
+				<h3>func (<a id="L310"></a>*BinaryExpr) <a href="../../../src/pkg/go/ast/ast.go#L310">Pos</a></h3>
+				<p><code><a id="L310"></a>func (x *BinaryExpr) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L439"></a>BlockStmt</a></h2>
+			<p>
+A BlockStmt node represents a braced statement list.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L439"></a>BlockStmt struct {
+    <a id="L440"></a>token.Position; // position of &#34;{&#34;
+    <a id="L441"></a>List            []Stmt;
+    <a id="L442"></a>Rbrace          token.Position; // position of &#34;}&#34;
+<a id="L443"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L432"></a>BranchStmt</a></h2>
+			<p>
+A BranchStmt node represents a break, continue, goto,
+or fallthrough statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L432"></a>BranchStmt struct {
+    <a id="L433"></a>token.Position;              // position of Tok
+    <a id="L434"></a>Tok             token.Token; // keyword token (BREAK, CONTINUE, GOTO, FALLTHROUGH)
+    <a id="L435"></a>Label           *Ident;
+<a id="L436"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L191"></a>CallExpr</a></h2>
+			<p>
+A CallExpr node represents an expression followed by an argument list.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L191"></a>CallExpr struct {
+    <a id="L192"></a>Fun    Expr;           // function expression
+    <a id="L193"></a>Lparen token.Position; // position of &#34;(&#34;
+    <a id="L194"></a>Args   []Expr;         // function arguments
+    <a id="L195"></a>Rparen token.Position; // positions of &#34;)&#34;
+<a id="L196"></a>}</pre></p>
+				<h3>func (<a id="L309"></a>*CallExpr) <a href="../../../src/pkg/go/ast/ast.go#L309">Pos</a></h3>
+				<p><code><a id="L309"></a>func (x *CallExpr) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L455"></a>CaseClause</a></h2>
+			<p>
+A CaseClause represents a case of an expression switch statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L455"></a>CaseClause struct {
+    <a id="L456"></a>token.Position;                 // position of &#34;case&#34; or &#34;default&#34; keyword
+    <a id="L457"></a>Values          []Expr;         // nil means default case
+    <a id="L458"></a>Colon           token.Position; // position of &#34;:&#34;
+    <a id="L459"></a>Body            []Stmt;         // statement list; or nil
+<a id="L460"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L237"><a id="L237"></a>ChanDir</a></h2>
+			<p>
+The direction of a channel type is indicated by one
+of the following constants.
+</p>
+
+			<p><pre><a id="L237"></a>type ChanDir int</pre></p>
+				
+				<pre><a id="L239"></a>const (
+    <a id="L240"></a>SEND ChanDir = 1 &lt;&lt; iota;
+    <a id="L241"></a>RECV;
+<a id="L242"></a>)</pre>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L249"><a id="L292"></a>ChanType</a></h2>
+			<p>
+A ChanType node represents a channel type.
+</p>
+
+			<p><pre><a id="L249"></a>type <a id="L292"></a>ChanType struct {
+    <a id="L293"></a>token.Position;          // position of &#34;chan&#34; keyword or &#34;&lt;-&#34; (whichever comes first)
+    <a id="L294"></a>Dir             ChanDir; // channel direction
+    <a id="L295"></a>Value           Expr;    // value type
+<a id="L296"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L487"></a>CommClause</a></h2>
+			<p>
+A CommClause node represents a case of a select statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L487"></a>CommClause struct {
+    <a id="L488"></a>token.Position;                 // position of &#34;case&#34; or &#34;default&#34; keyword
+    <a id="L489"></a>Tok             token.Token;    // ASSIGN or DEFINE (valid only if Lhs != nil)
+    <a id="L490"></a>Lhs, Rhs        Expr;           // Rhs == nil means default case
+    <a id="L491"></a>Colon           token.Position; // position of &#34;:&#34;
+    <a id="L492"></a>Body            []Stmt;         // statement list; or nil
+<a id="L493"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L67"><a id="L67"></a>Comment</a></h2>
+			<p>
+A Comment node represents a single //-style or /*-style comment.
+</p>
+
+			<p><pre><a id="L67"></a>type Comment struct {
+    <a id="L68"></a>token.Position;         // beginning position of the comment
+    <a id="L69"></a>Text            []byte; // comment text (excluding &#39;\n&#39; for //-style comments)
+<a id="L70"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L76"><a id="L76"></a>CommentGroup</a></h2>
+			<p>
+A CommentGroup represents a sequence of comments
+with no other tokens and no empty lines between.
+</p>
+
+			<p><pre><a id="L76"></a>type CommentGroup struct {
+    <a id="L77"></a>List []*Comment;
+    <a id="L78"></a>Next *CommentGroup; // next comment group in source order
+<a id="L79"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L155"></a>CompositeLit</a></h2>
+			<p>
+A CompositeLit node represents a composite literal.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L155"></a>CompositeLit struct {
+    <a id="L156"></a>Type   Expr;           // literal type
+    <a id="L157"></a>Lbrace token.Position; // position of &#34;{&#34;
+    <a id="L158"></a>Elts   []Expr;         // list of composite elements
+    <a id="L159"></a>Rbrace token.Position; // position of &#34;}&#34;
+<a id="L160"></a>}</pre></p>
+				<h3>func (<a id="L305"></a>*CompositeLit) <a href="../../../src/pkg/go/ast/ast.go#L305">Pos</a></h3>
+				<p><code><a id="L305"></a>func (x *CompositeLit) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L57"><a id="L57"></a>Decl</a></h2>
+			<p>
+All declaration nodes implement the Decl interface.
+</p>
+
+			<p><pre><a id="L57"></a>type Decl interface {
+    <a id="L58"></a>Node;
+    // contains unexported methods
+<a id="L60"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L371"></a>DeclStmt</a></h2>
+			<p>
+A DeclStmt node represents a declaration in a statement list.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L371"></a>DeclStmt struct {
+    <a id="L372"></a>Decl Decl;
+<a id="L373"></a>}</pre></p>
+				<h3>func (<a id="L525"></a>*DeclStmt) <a href="../../../src/pkg/go/ast/ast.go#L525">Pos</a></h3>
+				<p><code><a id="L525"></a>func (s *DeclStmt) Pos() token.Position</code></p>
+				<p>
+Pos() implementations for statement nodes where the position
+corresponds to the position of a sub-node.
+</p>
+
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L418"></a>DeferStmt</a></h2>
+			<p>
+A DeferStmt node represents a defer statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L418"></a>DeferStmt struct {
+    <a id="L419"></a>token.Position; // position of &#34;defer&#34; keyword
+    <a id="L420"></a>Call            *CallExpr;
+<a id="L421"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L127"></a>Ellipsis</a></h2>
+			<p>
+An Ellipsis node stands for the &#34;...&#34; type in a
+parameter list or the &#34;...&#34; length in an array type.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L127"></a>Ellipsis struct {
+    <a id="L128"></a>token.Position; // position of &#34;...&#34;
+<a id="L129"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L379"></a>EmptyStmt</a></h2>
+			<p>
+An EmptyStmt node represents an empty statement.
+The &#34;position&#34; of the empty statement is the position
+of the immediately preceeding semicolon.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L379"></a>EmptyStmt struct {
+    <a id="L380"></a>token.Position; // position of preceeding &#34;;&#34;
+<a id="L381"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L43"><a id="L43"></a>Expr</a></h2>
+			<p>
+All expression nodes implement the Expr interface.
+</p>
+
+			<p><pre><a id="L43"></a>type Expr interface {
+    <a id="L44"></a>Node;
+    // contains unexported methods
+<a id="L46"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L392"></a>ExprStmt</a></h2>
+			<p>
+An ExprStmt node represents a (stand-alone) expression
+in a statement list.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L392"></a>ExprStmt struct {
+    <a id="L393"></a>X Expr; // expression
+<a id="L394"></a>}</pre></p>
+				<h3>func (<a id="L527"></a>*ExprStmt) <a href="../../../src/pkg/go/ast/ast.go#L527">Pos</a></h3>
+				<p><code><a id="L527"></a>func (s *ExprStmt) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L89"><a id="L89"></a>Field</a></h2>
+			<p>
+A Field represents a Field declaration list in a struct type,
+a method list in an interface type, or a parameter/result declaration
+in a signature.
+</p>
+
+			<p><pre><a id="L89"></a>type Field struct {
+    <a id="L90"></a>Doc     *CommentGroup; // associated documentation; or nil
+    <a id="L91"></a>Names   []*Ident;      // field/method/parameter names; or nil if anonymous field
+    <a id="L92"></a>Type    Expr;          // field/method/parameter type
+    <a id="L93"></a>Tag     []*BasicLit;   // field tag; or nil
+    <a id="L94"></a>Comment *CommentGroup; // line comments; or nil
+<a id="L95"></a>}</pre></p>
+				<h3>func (<a id="L98"></a>*Field) <a href="../../../src/pkg/go/ast/ast.go#L98">Pos</a></h3>
+				<p><code><a id="L98"></a>func (f *Field) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L679"><a id="L679"></a>File</a></h2>
+			<p>
+A File node represents a Go source file.
+</p>
+
+			<p><pre><a id="L679"></a>type File struct {
+    <a id="L680"></a>Doc             *CommentGroup; // associated documentation; or nil
+    <a id="L681"></a>token.Position;                // position of &#34;package&#34; keyword
+    <a id="L682"></a>Name            *Ident;        // package name
+    <a id="L683"></a>Decls           []Decl;        // top-level declarations
+    <a id="L684"></a>Comments        *CommentGroup; // list of all comments in the source file
+<a id="L685"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/go/ast/filter.go#L199">MergePackageFiles</a></h3>
+				<p><code><a id="L199"></a>func MergePackageFiles(pkg *Package) *File</code></p>
+				<p>
+MergePackageFiles creates a file AST by merging the ASTs of the
+files belonging to a package.
+</p>
+
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L502"></a>ForStmt</a></h2>
+			<p>
+A ForStmt represents a for statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L502"></a>ForStmt struct {
+    <a id="L503"></a>token.Position; // position of &#34;for&#34; keyword
+    <a id="L504"></a>Init            Stmt;
+    <a id="L505"></a>Cond            Expr;
+    <a id="L506"></a>Post            Stmt;
+    <a id="L507"></a>Body            *BlockStmt;
+<a id="L508"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L622"><a id="L652"></a>FuncDecl</a></h2>
+			<p>
+A FuncDecl node represents a function declaration.
+</p>
+
+			<p><pre><a id="L622"></a>type <a id="L652"></a>FuncDecl struct {
+    <a id="L653"></a>Doc  *CommentGroup; // associated documentation; or nil
+    <a id="L654"></a>Recv *Field;        // receiver (methods); or nil (functions)
+    <a id="L655"></a>Name *Ident;        // function/method name
+    <a id="L656"></a>Type *FuncType;     // position of Func keyword, parameters and results
+    <a id="L657"></a>Body *BlockStmt;    // function body; or nil (forward declaration)
+<a id="L658"></a>}</pre></p>
+				<h3>func (<a id="L663"></a>*FuncDecl) <a href="../../../src/pkg/go/ast/ast.go#L663">Pos</a></h3>
+				<p><code><a id="L663"></a>func (d *FuncDecl) Pos() token.Position</code></p>
+				<p>
+The position of a FuncDecl node is the position of its function type.
+</p>
+
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L148"></a>FuncLit</a></h2>
+			<p>
+A FuncLit node represents a function literal.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L148"></a>FuncLit struct {
+    <a id="L149"></a>Type *FuncType;  // function type
+    <a id="L150"></a>Body *BlockStmt; // function body
+<a id="L151"></a>}</pre></p>
+				<h3>func (<a id="L304"></a>*FuncLit) <a href="../../../src/pkg/go/ast/ast.go#L304">Pos</a></h3>
+				<p><code><a id="L304"></a>func (x *FuncLit) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L249"><a id="L269"></a>FuncType</a></h2>
+			<p>
+A FuncType node represents a function type.
+</p>
+
+			<p><pre><a id="L249"></a>type <a id="L269"></a>FuncType struct {
+    <a id="L270"></a>token.Position;           // position of &#34;func&#34; keyword
+    <a id="L271"></a>Params          []*Field; // (incoming) parameters
+    <a id="L272"></a>Results         []*Field; // (outgoing) results
+<a id="L273"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L622"><a id="L642"></a>GenDecl</a></h2>
+			<p>
+A GenDecl node (generic declaration node) represents an import,
+constant, type or variable declaration. A valid Lparen position
+(Lparen.Line &gt; 0) indicates a parenthesized declaration.
+</p>
+<p>
+Relationship between Tok value and Specs element type:
+</p>
+<pre>token.IMPORT  *ImportSpec
+token.CONST   *ValueSpec
+token.TYPE    *TypeSpec
+token.VAR     *ValueSpec
+</pre>
+
+			<p><pre><a id="L622"></a>type <a id="L642"></a>GenDecl struct {
+    <a id="L643"></a>Doc             *CommentGroup;  // associated documentation; or nil
+    <a id="L644"></a>token.Position;                 // position of Tok
+    <a id="L645"></a>Tok             token.Token;    // IMPORT, CONST, TYPE, VAR
+    <a id="L646"></a>Lparen          token.Position; // position of &#39;(&#39;, if any
+    <a id="L647"></a>Specs           []Spec;
+    <a id="L648"></a>Rparen          token.Position; // position of &#39;)&#39;, if any
+<a id="L649"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L412"></a>GoStmt</a></h2>
+			<p>
+A GoStmt node represents a go statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L412"></a>GoStmt struct {
+    <a id="L413"></a>token.Position; // position of &#34;go&#34; keyword
+    <a id="L414"></a>Call            *CallExpr;
+<a id="L415"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L119"></a>Ident</a></h2>
+			<p>
+An Ident node represents an identifier.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L119"></a>Ident struct {
+    <a id="L120"></a>token.Position;         // identifier position
+    <a id="L121"></a>Value           string; // identifier string (e.g. foobar)
+<a id="L122"></a>}</pre></p>
+				<h3>func (<a id="L350"></a>*Ident) <a href="../../../src/pkg/go/ast/ast.go#L350">IsExported</a></h3>
+				<p><code><a id="L350"></a>func (name *Ident) IsExported() bool</code></p>
+				<p>
+IsExported returns whether name is an exported Go symbol
+(i.e., whether it begins with an uppercase letter).
+</p>
+
+				<h3>func (<a id="L352"></a>*Ident) <a href="../../../src/pkg/go/ast/ast.go#L352">String</a></h3>
+				<p><code><a id="L352"></a>func (name *Ident) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L446"></a>IfStmt</a></h2>
+			<p>
+An IfStmt node represents an if statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L446"></a>IfStmt struct {
+    <a id="L447"></a>token.Position; // position of &#34;if&#34; keyword
+    <a id="L448"></a>Init            Stmt;
+    <a id="L449"></a>Cond            Expr;
+    <a id="L450"></a>Body            *BlockStmt;
+    <a id="L451"></a>Else            Stmt;
+<a id="L452"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L564"><a id="L572"></a>ImportSpec</a></h2>
+			<p>
+An ImportSpec node represents a single package import.
+</p>
+
+			<p><pre><a id="L564"></a>type <a id="L572"></a>ImportSpec struct {
+    <a id="L573"></a>Doc     *CommentGroup; // associated documentation; or nil
+    <a id="L574"></a>Name    *Ident;        // local package name (including &#34;.&#34;); or nil
+    <a id="L575"></a>Path    []*BasicLit;   // package path
+    <a id="L576"></a>Comment *CommentGroup; // line comments; or nil
+<a id="L577"></a>}</pre></p>
+				<h3>func (<a id="L601"></a>*ImportSpec) <a href="../../../src/pkg/go/ast/ast.go#L601">Pos</a></h3>
+				<p><code><a id="L601"></a>func (s *ImportSpec) Pos() token.Position</code></p>
+				<p>
+Pos() implementations for spec nodes.
+</p>
+
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L397"></a>IncDecStmt</a></h2>
+			<p>
+An IncDecStmt node represents an increment or decrement statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L397"></a>IncDecStmt struct {
+    <a id="L398"></a>X   Expr;
+    <a id="L399"></a>Tok token.Token; // INC or DEC
+<a id="L400"></a>}</pre></p>
+				<h3>func (<a id="L528"></a>*IncDecStmt) <a href="../../../src/pkg/go/ast/ast.go#L528">Pos</a></h3>
+				<p><code><a id="L528"></a>func (s *IncDecStmt) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L176"></a>IndexExpr</a></h2>
+			<p>
+An IndexExpr node represents an expression followed by an index or slice.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L176"></a>IndexExpr struct {
+    <a id="L177"></a>X     Expr; // expression
+    <a id="L178"></a>Index Expr; // index expression or beginning of slice range
+    <a id="L179"></a>End   Expr; // end of slice range; or nil
+<a id="L180"></a>}</pre></p>
+				<h3>func (<a id="L307"></a>*IndexExpr) <a href="../../../src/pkg/go/ast/ast.go#L307">Pos</a></h3>
+				<p><code><a id="L307"></a>func (x *IndexExpr) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L249"><a id="L276"></a>InterfaceType</a></h2>
+			<p>
+An InterfaceType node represents an interface type.
+</p>
+
+			<p><pre><a id="L249"></a>type <a id="L276"></a>InterfaceType struct {
+    <a id="L277"></a>token.Position;                 // position of &#34;interface&#34; keyword
+    <a id="L278"></a>Lbrace          token.Position; // position of &#34;{&#34;
+    <a id="L279"></a>Methods         []*Field;       // list of methods
+    <a id="L280"></a>Rbrace          token.Position; // position of &#34;}&#34;
+    <a id="L281"></a>Incomplete      bool;           // true if (source) methods are missing in the Methods list
+<a id="L282"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L226"></a>KeyValueExpr</a></h2>
+			<p>
+A KeyValueExpr node represents (key : value) pairs
+in composite literals.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L226"></a>KeyValueExpr struct {
+    <a id="L227"></a>Key   Expr;
+    <a id="L228"></a>Colon token.Position; // position of &#34;:&#34;
+    <a id="L229"></a>Value Expr;
+<a id="L230"></a>}</pre></p>
+				<h3>func (<a id="L311"></a>*KeyValueExpr) <a href="../../../src/pkg/go/ast/ast.go#L311">Pos</a></h3>
+				<p><code><a id="L311"></a>func (x *KeyValueExpr) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L384"></a>LabeledStmt</a></h2>
+			<p>
+A LabeledStmt node represents a labeled statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L384"></a>LabeledStmt struct {
+    <a id="L385"></a>Label *Ident;
+    <a id="L386"></a>Stmt  Stmt;
+<a id="L387"></a>}</pre></p>
+				<h3>func (<a id="L526"></a>*LabeledStmt) <a href="../../../src/pkg/go/ast/ast.go#L526">Pos</a></h3>
+				<p><code><a id="L526"></a>func (s *LabeledStmt) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L249"><a id="L285"></a>MapType</a></h2>
+			<p>
+A MapType node represents a map type.
+</p>
+
+			<p><pre><a id="L249"></a>type <a id="L285"></a>MapType struct {
+    <a id="L286"></a>token.Position; // position of &#34;map&#34; keyword
+    <a id="L287"></a>Key             Expr;
+    <a id="L288"></a>Value           Expr;
+<a id="L289"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L36"><a id="L36"></a>Node</a></h2>
+			<p>
+All node types implement the Node interface.
+</p>
+
+			<p><pre><a id="L36"></a>type Node interface {
+    <a id="L37"></a>// Pos returns the (beginning) position of the node.
+    <a id="L38"></a>Pos() token.Position;
+<a id="L39"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L691"><a id="L691"></a>Package</a></h2>
+			<p>
+A Package node represents a set of source files
+collectively building a Go package.
+</p>
+
+			<p><pre><a id="L691"></a>type Package struct {
+    <a id="L692"></a>Name  string;           // package name
+    <a id="L693"></a>Path  string;           // package path
+    <a id="L694"></a>Files map[string]*File; // path-relative filenames
+<a id="L695"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L163"></a>ParenExpr</a></h2>
+			<p>
+A ParenExpr node represents a parenthesized expression.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L163"></a>ParenExpr struct {
+    <a id="L164"></a>token.Position;                 // position of &#34;(&#34;
+    <a id="L165"></a>X               Expr;           // parenthesized expression
+    <a id="L166"></a>Rparen          token.Position; // position of &#34;)&#34;
+<a id="L167"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L511"></a>RangeStmt</a></h2>
+			<p>
+A RangeStmt represents a for statement with a range clause.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L511"></a>RangeStmt struct {
+    <a id="L512"></a>token.Position;                 // position of &#34;for&#34; keyword
+    <a id="L513"></a>Key, Value      Expr;           // Value may be nil
+    <a id="L514"></a>TokPos          token.Position; // position of Tok
+    <a id="L515"></a>Tok             token.Token;    // ASSIGN, DEFINE
+    <a id="L516"></a>X               Expr;           // value to range over
+    <a id="L517"></a>Body            *BlockStmt;
+<a id="L518"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L424"></a>ReturnStmt</a></h2>
+			<p>
+A ReturnStmt node represents a return statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L424"></a>ReturnStmt struct {
+    <a id="L425"></a>token.Position; // position of &#34;return&#34; keyword
+    <a id="L426"></a>Results         []Expr;
+<a id="L427"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/scope.go#L13"><a id="L13"></a>Scope</a></h2>
+			<p>
+A Scope maintains the set of identifiers visible
+in the scope and a link to the immediately surrounding
+(outer) scope.
+</p>
+<pre>NOTE: WORK IN PROGRESS
+</pre>
+
+			<p><pre><a id="L13"></a>type Scope struct {
+    <a id="L14"></a>Outer *Scope;
+    <a id="L15"></a>Names map[string]*Ident;
+<a id="L16"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/go/ast/scope.go#L20">NewScope</a></h3>
+				<p><code><a id="L20"></a>func NewScope(outer *Scope) *Scope</code></p>
+				<p>
+NewScope creates a new scope nested in the outer scope.
+</p>
+
+				<h3>func (<a id="L27"></a>*Scope) <a href="../../../src/pkg/go/ast/scope.go#L27">Declare</a></h3>
+				<p><code><a id="L27"></a>func (s *Scope) Declare(ident *Ident) bool</code></p>
+				<p>
+Declare inserts an identifier into the scope s. If the
+declaration succeeds, the result is true, if the identifier
+exists already in the scope, the result is false.
+</p>
+
+				<h3>func (<a id="L40"></a>*Scope) <a href="../../../src/pkg/go/ast/scope.go#L40">Lookup</a></h3>
+				<p><code><a id="L40"></a>func (s *Scope) Lookup(name string) *Ident</code></p>
+				<p>
+Lookup looks up an identifier in the current scope chain.
+If the identifier is found, it is returned; otherwise the
+result is nil.
+</p>
+
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L496"></a>SelectStmt</a></h2>
+			<p>
+An SelectStmt node represents a select statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L496"></a>SelectStmt struct {
+    <a id="L497"></a>token.Position;             // position of &#34;select&#34; keyword
+    <a id="L498"></a>Body            *BlockStmt; // CommClauses only
+<a id="L499"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L170"></a>SelectorExpr</a></h2>
+			<p>
+A SelectorExpr node represents an expression followed by a selector.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L170"></a>SelectorExpr struct {
+    <a id="L171"></a>X   Expr;   // expression
+    <a id="L172"></a>Sel *Ident; // field selector
+<a id="L173"></a>}</pre></p>
+				<h3>func (<a id="L306"></a>*SelectorExpr) <a href="../../../src/pkg/go/ast/ast.go#L306">Pos</a></h3>
+				<p><code><a id="L306"></a>func (x *SelectorExpr) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L564"><a id="L566"></a>Spec</a></h2>
+			<p>
+The Spec type stands for any of *ImportSpec, *ValueSpec, and *TypeSpec.
+</p>
+
+			<p><pre><a id="L564"></a>type <a id="L566"></a>Spec interface {
+    <a id="L567"></a>Node;
+    // contains unexported methods
+<a id="L569"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L200"></a>StarExpr</a></h2>
+			<p>
+A StarExpr node represents an expression of the form &#34;*&#34; Expression.
+Semantically it could be a unary &#34;*&#34; expression, or a pointer type.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L200"></a>StarExpr struct {
+    <a id="L201"></a>token.Position;       // position of &#34;*&#34;
+    <a id="L202"></a>X               Expr; // operand
+<a id="L203"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L50"><a id="L50"></a>Stmt</a></h2>
+			<p>
+All statement nodes implement the Stmt interface.
+</p>
+
+			<p><pre><a id="L50"></a>type Stmt interface {
+    <a id="L51"></a>Node;
+    // contains unexported methods
+<a id="L53"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L143"></a>StringList</a></h2>
+			<p>
+A StringList node represents a sequence of adjacent string literals.
+A single string literal (common case) is represented by a BasicLit
+node; StringList nodes are used only if there are two or more string
+literals in a sequence.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L143"></a>StringList struct {
+    <a id="L144"></a>Strings []*BasicLit; // list of strings, len(Strings) &gt; 1
+<a id="L145"></a>}</pre></p>
+				<h3>func (<a id="L303"></a>*StringList) <a href="../../../src/pkg/go/ast/ast.go#L303">Pos</a></h3>
+				<p><code><a id="L303"></a>func (x *StringList) Pos() token.Position</code></p>
+				<p>
+Pos() implementations for expression/type where the position
+corresponds to the position of a sub-node.
+</p>
+
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L249"><a id="L258"></a>StructType</a></h2>
+			<p>
+A StructType node represents a struct type.
+</p>
+
+			<p><pre><a id="L249"></a>type <a id="L258"></a>StructType struct {
+    <a id="L259"></a>token.Position;                 // position of &#34;struct&#34; keyword
+    <a id="L260"></a>Lbrace          token.Position; // position of &#34;{&#34;
+    <a id="L261"></a>Fields          []*Field;       // list of field declarations
+    <a id="L262"></a>Rbrace          token.Position; // position of &#34;}&#34;
+    <a id="L263"></a>Incomplete      bool;           // true if (source) fields are missing in the Fields list
+<a id="L264"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L463"></a>SwitchStmt</a></h2>
+			<p>
+A SwitchStmt node represents an expression switch statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L463"></a>SwitchStmt struct {
+    <a id="L464"></a>token.Position; // position of &#34;switch&#34; keyword
+    <a id="L465"></a>Init            Stmt;
+    <a id="L466"></a>Tag             Expr;
+    <a id="L467"></a>Body            *BlockStmt; // CaseClauses only
+<a id="L468"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L185"></a>TypeAssertExpr</a></h2>
+			<p>
+A TypeAssertExpr node represents an expression followed by a
+type assertion.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L185"></a>TypeAssertExpr struct {
+    <a id="L186"></a>X    Expr; // expression
+    <a id="L187"></a>Type Expr; // asserted type; nil means type switch X.(type)
+<a id="L188"></a>}</pre></p>
+				<h3>func (<a id="L308"></a>*TypeAssertExpr) <a href="../../../src/pkg/go/ast/ast.go#L308">Pos</a></h3>
+				<p><code><a id="L308"></a>func (x *TypeAssertExpr) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L471"></a>TypeCaseClause</a></h2>
+			<p>
+A TypeCaseClause represents a case of a type switch statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L471"></a>TypeCaseClause struct {
+    <a id="L472"></a>token.Position;                 // position of &#34;case&#34; or &#34;default&#34; keyword
+    <a id="L473"></a>Types           []Expr;         // nil means default case
+    <a id="L474"></a>Colon           token.Position; // position of &#34;:&#34;
+    <a id="L475"></a>Body            []Stmt;         // statement list; or nil
+<a id="L476"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L564"><a id="L590"></a>TypeSpec</a></h2>
+			<p>
+A TypeSpec node represents a type declaration (TypeSpec production).
+</p>
+
+			<p><pre><a id="L564"></a>type <a id="L590"></a>TypeSpec struct {
+    <a id="L591"></a>Doc     *CommentGroup; // associated documentation; or nil
+    <a id="L592"></a>Name    *Ident;        // type name
+    <a id="L593"></a>Type    Expr;
+    <a id="L594"></a>Comment *CommentGroup; // line comments; or nil
+<a id="L595"></a>}</pre></p>
+				<h3>func (<a id="L609"></a>*TypeSpec) <a href="../../../src/pkg/go/ast/ast.go#L609">Pos</a></h3>
+				<p><code><a id="L609"></a>func (s *TypeSpec) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L361"><a id="L479"></a>TypeSwitchStmt</a></h2>
+			<p>
+An TypeSwitchStmt node represents a type switch statement.
+</p>
+
+			<p><pre><a id="L361"></a>type <a id="L479"></a>TypeSwitchStmt struct {
+    <a id="L480"></a>token.Position; // position of &#34;switch&#34; keyword
+    <a id="L481"></a>Init            Stmt;
+    <a id="L482"></a>Assign          Stmt;       // x := y.(type)
+    <a id="L483"></a>Body            *BlockStmt; // TypeCaseClauses only
+<a id="L484"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L109"><a id="L208"></a>UnaryExpr</a></h2>
+			<p>
+A UnaryExpr node represents a unary expression.
+Unary &#34;*&#34; expressions are represented via StarExpr nodes.
+</p>
+
+			<p><pre><a id="L109"></a>type <a id="L208"></a>UnaryExpr struct {
+    <a id="L209"></a>token.Position;              // position of Op
+    <a id="L210"></a>Op              token.Token; // operator
+    <a id="L211"></a>X               Expr;        // operand
+<a id="L212"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/go/ast/ast.go#L564"><a id="L581"></a>ValueSpec</a></h2>
+			<p>
+A ValueSpec node represents a constant or variable declaration
+(ConstSpec or VarSpec production).
+</p>
+
+			<p><pre><a id="L564"></a>type <a id="L581"></a>ValueSpec struct {
+    <a id="L582"></a>Doc     *CommentGroup; // associated documentation; or nil
+    <a id="L583"></a>Names   []*Ident;      // value names
+    <a id="L584"></a>Type    Expr;          // value type; or nil
+    <a id="L585"></a>Values  []Expr;        // initial values; or nil
+    <a id="L586"></a>Comment *CommentGroup; // line comments; or nil
+<a id="L587"></a>}</pre></p>
+				<h3>func (<a id="L608"></a>*ValueSpec) <a href="../../../src/pkg/go/ast/ast.go#L608">Pos</a></h3>
+				<p><code><a id="L608"></a>func (s *ValueSpec) Pos() token.Position</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/ast/walk.go#L13"><a id="L13"></a>Visitor</a></h2>
+			<p>
+A Visitor&#39;s Visit method is invoked for each node encountered by Walk.
+If Visit returns true, Walk is invoked for each of the node&#39;s children.
+</p>
+
+			<p><pre><a id="L13"></a>type Visitor interface {
+    <a id="L14"></a>Visit(node interface{}) bool;
+<a id="L15"></a>}</pre></p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package template</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:57:42 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package template</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "template"</code></p>
+	<p>
+Data-driven templates for generating textual output such as
+HTML. See
+</p>
+<pre>http://code.google.com/p/json-template/wiki/Reference
+</pre>
+<p>
+for full documentation of the template language. A summary:
+</p>
+<p>
+Templates are executed by applying them to a data structure.
+Annotations in the template refer to elements of the data
+structure (typically a field of a struct) to control execution
+and derive values to be displayed.  The template walks the
+structure as it executes and the &#34;cursor&#34; @ represents the
+value at the current location in the structure.
+</p>
+<p>
+Data items may be values or pointers; the interface hides the
+indirection.
+</p>
+<p>
+Major constructs ({} are metacharacters; [] marks optional elements):
+</p>
+<pre>{# comment }
+</pre>
+<p>
+A one-line comment.
+</p>
+<pre>{.section field} XXX [ {.or} YYY ] {.end}
+</pre>
+<p>
+Set @ to the value of the field.  It may be an explicit @
+to stay at the same point in the data. If the field is nil
+or empty, execute YYY; otherwise execute XXX.
+</p>
+<pre>{.repeated section field} XXX [ {.alternates with} ZZZ ] [ {.or} YYY ] {.end}
+</pre>
+<p>
+Like .section, but field must be an array or slice.  XXX
+is executed for each element.  If the array is nil or empty,
+YYY is executed instead.  If the {.alternates with} marker
+is present, ZZZ is executed between iterations of XXX.
+</p>
+<pre>{field}
+{field|formatter}
+</pre>
+<p>
+Insert the value of the field into the output. Field is
+first looked for in the cursor, as in .section and .repeated.
+If it is not found, the search continues in outer sections
+until the top level is reached.
+</p>
+<p>
+If a formatter is specified, it must be named in the formatter
+map passed to the template set up routines or in the default
+set (&#34;html&#34;,&#34;str&#34;,&#34;&#34;) and is used to process the data for
+output.  The formatter function has signature
+</p>
+<pre>func(wr io.Write, data interface{}, formatter string)
+</pre>
+<p>
+where wr is the destination for output, data is the field
+value, and formatter is its name at the invocation site.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/template/format.go">format.go</a>
+				<a href="../../src/pkg/template/template.go">template.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/template/format.go#L34">HTMLEscape</a></h2>
+			<p><code><a id="L34"></a>func HTMLEscape(w io.Writer, s []byte)</code></p>
+			<p>
+HTMLEscape writes to w the properly escaped HTML equivalent
+of the plain text data s.
+</p>
+
+			<h2>func <a href="../../src/pkg/template/format.go#L60">HTMLFormatter</a></h2>
+			<p><code><a id="L60"></a>func HTMLFormatter(w io.Writer, value interface{}, format string)</code></p>
+			<p>
+HTMLFormatter formats arbitrary values for HTML
+</p>
+
+			<h2>func <a href="../../src/pkg/template/format.go#L20">StringFormatter</a></h2>
+			<p><code><a id="L20"></a>func StringFormatter(w io.Writer, value interface{}, format string)</code></p>
+			<p>
+StringFormatter formats into the default string representation.
+It is stored under the name &#34;str&#34; and is the default formatter.
+You can override the default formatter by storing your default
+under the name &#34;&#34; in your custom formatter map.
+</p>
+
+			<h2>type <a href="../../src/pkg/template/template.go#L70"><a id="L70"></a>Error</a></h2>
+			<p>
+Errors returned during parsing and execution.  Users may extract the information and reformat
+if they desire.
+</p>
+
+			<p><pre><a id="L70"></a>type Error struct {
+    <a id="L71"></a>Line int;
+    <a id="L72"></a>Msg  string;
+<a id="L73"></a>}</pre></p>
+				<h3>func (<a id="L75"></a>*Error) <a href="../../src/pkg/template/template.go#L75">String</a></h3>
+				<p><code><a id="L75"></a>func (e *Error) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/template/template.go#L98"><a id="L98"></a>FormatterMap</a></h2>
+			<p>
+FormatterMap is the type describing the mapping from formatter
+names to the functions that implement them.
+</p>
+
+			<p><pre><a id="L98"></a>type FormatterMap map[string]func(io.Writer, interface{}, string)</pre></p>
+			<h2>type <a href="../../src/pkg/template/template.go#L145"><a id="L145"></a>Template</a></h2>
+			<p>
+Template is the type that represents a template definition.
+It is unchanged after parsing.
+</p>
+
+			<p><pre><a id="L145"></a>type Template struct {
+    // contains unexported fields
+<a id="L155"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/template/template.go#L894">MustParse</a></h3>
+				<p><code><a id="L894"></a>func MustParse(s string, fmap FormatterMap) *Template</code></p>
+				<p>
+MustParse is like Parse but panics if the template cannot be parsed.
+</p>
+
+				<h3>func <a href="../../src/pkg/template/template.go#L173">New</a></h3>
+				<p><code><a id="L173"></a>func New(fmap FormatterMap) *Template</code></p>
+				<p>
+New creates a new template with the specified formatter map (which
+may be nil) to define auxiliary functions for formatting variables.
+</p>
+
+				<h3>func <a href="../../src/pkg/template/template.go#L884">Parse</a></h3>
+				<p><code><a id="L884"></a>func Parse(s string, fmap FormatterMap) (t *Template, err os.Error)</code></p>
+				<p>
+Parse creates a Template with default parameters (such as {} for
+metacharacters).  The string s contains the template text while
+the formatter map fmap, which may be nil, defines auxiliary functions
+for formatting variables.  The template is returned. If any errors
+occur, err will be non-nil.
+</p>
+
+				<h3>func (<a id="L857"></a>*Template) <a href="../../src/pkg/template/template.go#L857">Execute</a></h3>
+				<p><code><a id="L857"></a>func (t *Template) Execute(data interface{}, wr io.Writer) os.Error</code></p>
+				<p>
+Execute applies a parsed template to the specified data object,
+generating output to wr.
+</p>
+
+				<h3>func (<a id="L844"></a>*Template) <a href="../../src/pkg/template/template.go#L844">Parse</a></h3>
+				<p><code><a id="L844"></a>func (t *Template) Parse(s string) os.Error</code></p>
+				<p>
+Parse initializes a Template by parsing its definition.  The string
+s contains the template text.  If any errors occur, Parse returns
+the error.
+</p>
+
+				<h3>func (<a id="L874"></a>*Template) <a href="../../src/pkg/template/template.go#L874">SetDelims</a></h3>
+				<p><code><a id="L874"></a>func (t *Template) SetDelims(left, right string)</code></p>
+				<p>
+SetDelims sets the left and right delimiters for operations in the
+template.  They are validated during parsing.  They could be
+validated here but it&#39;s better to keep the routine simple.  The
+delimiters are very rarely invalid and Parse has the necessary
+error-handling interface already.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

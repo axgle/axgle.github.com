@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package patch</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:47:43 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package patch</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "patch"</code></p>
+	<p>
+Package patch implements parsing and execution of the textual and
+binary patch descriptions used by version control tools such as
+CVS, Git, Mercurial, and Subversion.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/patch/apply.go">apply.go</a>
+				<a href="../../src/pkg/patch/git.go">git.go</a>
+				<a href="../../src/pkg/patch/patch.go">patch.go</a>
+				<a href="../../src/pkg/patch/textdiff.go">textdiff.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			
+			<pre><a id="L150"></a>var ErrPatchFailure = os.NewError(&#34;patch did not apply cleanly&#34;)</pre>
+			<h2>type <a href="../../src/pkg/patch/patch.go#L46"><a id="L46"></a>Diff</a></h2>
+			<p>
+A Diff is any object that describes changes to transform
+an old byte stream to a new one.
+</p>
+
+			<p><pre><a id="L46"></a>type Diff interface {
+    <a id="L47"></a>// Apply applies the changes listed in the diff
+    <a id="L48"></a>// to the string s, returning the new version of the string.
+    <a id="L49"></a>// Note that the string s need not be a text string.
+    <a id="L50"></a>Apply(old []byte) (new []byte, err os.Error);
+<a id="L51"></a>}</pre></p>
+				<p>
+NoDiff is a no-op Diff implementation: it passes the
+old data through unchanged.
+</p>
+
+				<pre><a id="L55"></a>var NoDiff Diff = noDiffType(0)</pre>
+				<h3>func <a href="../../src/pkg/patch/git.go#L71">ParseGitBinary</a></h3>
+				<p><code><a id="L71"></a>func ParseGitBinary(raw []byte) (Diff, os.Error)</code></p>
+				<p>
+ParseGitBinary parses raw as a Git binary patch.
+</p>
+
+			<h2>type <a href="../../src/pkg/patch/patch.go#L25"><a id="L25"></a>File</a></h2>
+			<p>
+A File represents a collection of changes to be made to a single file.
+</p>
+
+			<p><pre><a id="L25"></a>type File struct {
+    <a id="L26"></a>Verb             Verb;
+    <a id="L27"></a>Src              string; // source for Verb == Copy, Verb == Rename
+    <a id="L28"></a>Dst              string;
+    <a id="L29"></a>OldMode, NewMode int; // 0 indicates not used
+    <a id="L30"></a>Diff;                 // changes to data; == NoDiff if operation does not edit file
+<a id="L31"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/patch/git.go#L31"><a id="L31"></a>GitBinaryLiteral</a></h2>
+			<p>
+GitBinaryLiteral represents a Git binary literal diff.
+</p>
+
+			<p><pre><a id="L31"></a>type GitBinaryLiteral struct {
+    <a id="L32"></a>OldSHA1 []byte; // if non-empty, the SHA1 hash of the original
+    <a id="L33"></a>New     []byte; // the new contents
+<a id="L34"></a>}</pre></p>
+				<h3>func (<a id="L37"></a>*GitBinaryLiteral) <a href="../../src/pkg/patch/git.go#L37">Apply</a></h3>
+				<p><code><a id="L37"></a>func (d *GitBinaryLiteral) Apply(old []byte) ([]byte, os.Error)</code></p>
+				<p>
+Apply implements the Diff interface&#39;s Apply method.
+</p>
+
+			<h2>type <a href="../../src/pkg/patch/apply.go#L10"><a id="L10"></a>Op</a></h2>
+			<p>
+An Op is a single operation to execute to apply a patch.
+</p>
+
+			<p><pre><a id="L10"></a>type Op struct {
+    <a id="L11"></a>Verb Verb;   // action
+    <a id="L12"></a>Src  string; // source file
+    <a id="L13"></a>Dst  string; // destination file
+    <a id="L14"></a>Mode int;    // mode for destination (if non-zero)
+    <a id="L15"></a>Data []byte; // data for destination (if non-nil)
+<a id="L16"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/patch/patch.go#L19"><a id="L19"></a>Set</a></h2>
+			<p>
+A Set represents a set of patches to be applied as a single atomic unit.
+Patch sets are often preceded by a descriptive header.
+</p>
+
+			<p><pre><a id="L19"></a>type Set struct {
+    <a id="L20"></a>Header string; // free-form text
+    <a id="L21"></a>File   []*File;
+<a id="L22"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/patch/patch.go#L74">Parse</a></h3>
+				<p><code><a id="L74"></a>func Parse(text []byte) (*Set, os.Error)</code></p>
+				<p>
+Parse patches the patch text to create a patch Set.
+The patch text typically comprises a textual header and a sequence
+of file patches, as would be generated by CVS, Subversion,
+Mercurial, or Git.
+</p>
+
+				<h3>func (<a id="L26"></a>*Set) <a href="../../src/pkg/patch/apply.go#L26">Apply</a></h3>
+				<p><code><a id="L26"></a>func (set *Set) Apply(readFile func(string) ([]byte, os.Error)) ([]Op, os.Error)</code></p>
+				<p>
+Apply applies the patch set to the files named in the patch set,
+constructing an in-memory copy of the new file state.
+It is the client&#39;s job to write the changes to the file system
+if desired.
+</p>
+<p>
+The function readFile should return the contents of the named file.
+Typically this function will be io.ReadFile.
+</p>
+
+			<h2>type <a href="../../src/pkg/patch/patch.go#L64"><a id="L64"></a>SyntaxError</a></h2>
+			<p>
+A SyntaxError represents a syntax error encountered while parsing a patch.
+</p>
+
+			<p><pre><a id="L64"></a>type SyntaxError string</pre></p>
+				<h3>func (<a id="L66"></a>SyntaxError) <a href="../../src/pkg/patch/patch.go#L66">String</a></h3>
+				<p><code><a id="L66"></a>func (e SyntaxError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/patch/textdiff.go#L13"><a id="L13"></a>TextChunk</a></h2>
+			<p>
+A TextChunk specifies an edit to a section of a file:
+the text beginning at Line, which should be exactly Old,
+is to be replaced with New.
+</p>
+
+			<p><pre><a id="L13"></a>type TextChunk struct {
+    <a id="L14"></a>Line int;
+    <a id="L15"></a>Old  []byte;
+    <a id="L16"></a>New  []byte;
+<a id="L17"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/patch/textdiff.go#L8"><a id="L8"></a>TextDiff</a></h2>
+			
+			<p><pre><a id="L8"></a>type TextDiff []TextChunk</pre></p>
+				<h3>func <a href="../../src/pkg/patch/textdiff.go#L19">ParseTextDiff</a></h3>
+				<p><code><a id="L19"></a>func ParseTextDiff(raw []byte) (TextDiff, os.Error)</code></p>
+				
+				<h3>func (<a id="L154"></a>TextDiff) <a href="../../src/pkg/patch/textdiff.go#L154">Apply</a></h3>
+				<p><code><a id="L154"></a>func (d TextDiff) Apply(data []byte) ([]byte, os.Error)</code></p>
+				<p>
+Apply applies the changes listed in the diff
+to the data, returning the new version.
+</p>
+
+			<h2>type <a href="../../src/pkg/patch/patch.go#L34"><a id="L34"></a>Verb</a></h2>
+			<p>
+A Verb is an action performed on a file.
+</p>
+
+			<p><pre><a id="L34"></a>type Verb string</pre></p>
+				
+				<pre><a id="L36"></a>const (
+    <a id="L37"></a>Add    Verb = &#34;add&#34;;
+    <a id="L38"></a>Copy   Verb = &#34;copy&#34;;
+    <a id="L39"></a>Delete Verb = &#34;delete&#34;;
+    <a id="L40"></a>Edit   Verb = &#34;edit&#34;;
+    <a id="L41"></a>Rename Verb = &#34;rename&#34;;
+<a id="L42"></a>)</pre>
+		<h2>Bugs</h2>
+		<p>
+The Git binary delta format is not implemented, only Git binary literals.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

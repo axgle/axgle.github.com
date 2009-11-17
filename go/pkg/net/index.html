@@ -1,0 +1,1090 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package net</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package net</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "net"</code></p>
+	<p>
+The net package provides a portable interface to Unix
+networks sockets, including TCP/IP, UDP, domain name
+resolution, and Unix domain sockets.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/net/dnsclient.go">dnsclient.go</a>
+				<a href="../../src/pkg/net/dnsconfig.go">dnsconfig.go</a>
+				<a href="../../src/pkg/net/dnsmsg.go">dnsmsg.go</a>
+				<a href="../../src/pkg/net/fd.go">fd.go</a>
+				<a href="../../src/pkg/net/fd_darwin.go">fd_darwin.go</a>
+				<a href="../../src/pkg/net/fd_linux.go">fd_linux.go</a>
+				<a href="../../src/pkg/net/fd_nacl.go">fd_nacl.go</a>
+				<a href="../../src/pkg/net/ip.go">ip.go</a>
+				<a href="../../src/pkg/net/ipsock.go">ipsock.go</a>
+				<a href="../../src/pkg/net/net.go">net.go</a>
+				<a href="../../src/pkg/net/parse.go">parse.go</a>
+				<a href="../../src/pkg/net/port.go">port.go</a>
+				<a href="../../src/pkg/net/sock.go">sock.go</a>
+				<a href="../../src/pkg/net/tcpsock.go">tcpsock.go</a>
+				<a href="../../src/pkg/net/udpsock.go">udpsock.go</a>
+				<a href="../../src/pkg/net/unixsock.go">unixsock.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+IP address lengths (bytes).
+</p>
+
+			<pre><a id="L16"></a>const (
+    <a id="L17"></a>IPv4len = 4;
+    <a id="L18"></a>IPv6len = 16;
+<a id="L19"></a>)</pre>
+		<h2>Variables</h2>
+			<p>
+Well-known IPv4 addresses
+</p>
+
+			<pre><a id="L55"></a>var (
+    <a id="L56"></a>IPv4bcast     = IPv4(255, 255, 255, 255); // broadcast
+    <a id="L57"></a>IPv4allsys    = IPv4(224, 0, 0, 1);       // all systems
+    <a id="L58"></a>IPv4allrouter = IPv4(224, 0, 0, 2);       // all routers
+    <a id="L59"></a>IPv4zero      = IPv4(0, 0, 0, 0);         // all zeros
+<a id="L60"></a>)</pre>
+			<p>
+Well-known IPv6 addresses
+</p>
+
+			<pre><a id="L63"></a>var (
+    <a id="L64"></a>IPzero = make(IP, IPv6len); // all zeros
+<a id="L65"></a>)</pre>
+			<h2>func <a href="../../src/pkg/net/dnsclient.go#L230">LookupHost</a></h2>
+			<p><code><a id="L230"></a>func LookupHost(name string) (cname string, addrs []string, err os.Error)</code></p>
+			<p>
+LookupHost looks up the host name using the local DNS resolver.
+It returns the canonical name for the host and an array of that
+host&#39;s addresses.
+</p>
+
+			<h2>func <a href="../../src/pkg/net/port.go#L51">LookupPort</a></h2>
+			<p><code><a id="L51"></a>func LookupPort(network, service string) (port int, err os.Error)</code></p>
+			<p>
+LookupPort looks up the port for the given network and service.
+</p>
+
+			<h2>type <a href="../../src/pkg/net/net.go#L17"><a id="L17"></a>Addr</a></h2>
+			<p>
+Addr represents a network end point address.
+</p>
+
+			<p><pre><a id="L17"></a>type Addr interface {
+    <a id="L18"></a>Network() string; // name of the network
+    <a id="L19"></a>String() string;  // string form of address
+<a id="L20"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/net/net.go#L257"><a id="L257"></a>AddrError</a></h2>
+			
+			<p><pre><a id="L257"></a>type AddrError struct {
+    <a id="L258"></a>Error string;
+    <a id="L259"></a>Addr  string;
+<a id="L260"></a>}</pre></p>
+				<h3>func (<a id="L262"></a>*AddrError) <a href="../../src/pkg/net/net.go#L262">String</a></h3>
+				<p><code><a id="L262"></a>func (e *AddrError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/net/net.go#L23"><a id="L23"></a>Conn</a></h2>
+			<p>
+Conn is a generic stream-oriented network connection.
+</p>
+
+			<p><pre><a id="L23"></a>type Conn interface {
+    <a id="L24"></a>// Read reads data from the connection.
+    <a id="L25"></a>// Read can be made to time out and return err == os.EAGAIN
+    <a id="L26"></a>// after a fixed time limit; see SetTimeout and SetReadTimeout.
+    <a id="L27"></a>Read(b []byte) (n int, err os.Error);
+
+    <a id="L29"></a>// Write writes data to the connection.
+    <a id="L30"></a>// Write can be made to time out and return err == os.EAGAIN
+    <a id="L31"></a>// after a fixed time limit; see SetTimeout and SetReadTimeout.
+    <a id="L32"></a>Write(b []byte) (n int, err os.Error);
+
+    <a id="L34"></a>// Close closes the connection.
+    <a id="L35"></a>Close() os.Error;
+
+    <a id="L37"></a>// LocalAddr returns the local network address.
+    <a id="L38"></a>LocalAddr() Addr;
+
+    <a id="L40"></a>// RemoteAddr returns the remote network address.
+    <a id="L41"></a>RemoteAddr() Addr;
+
+    <a id="L43"></a>// SetTimeout sets the read and write deadlines associated
+    <a id="L44"></a>// with the connection.
+    <a id="L45"></a>SetTimeout(nsec int64) os.Error;
+
+    <a id="L47"></a>// SetReadTimeout sets the time (in nanoseconds) that
+    <a id="L48"></a>// Read will wait for data before returning os.EAGAIN.
+    <a id="L49"></a>// Setting nsec == 0 (the default) disables the deadline.
+    <a id="L50"></a>SetReadTimeout(nsec int64) os.Error;
+
+    <a id="L52"></a>// SetWriteTimeout sets the time (in nanoseconds) that
+    <a id="L53"></a>// Write will wait to send its data before returning os.EAGAIN.
+    <a id="L54"></a>// Setting nsec == 0 (the default) disables the deadline.
+    <a id="L55"></a>// Even if write times out, it may return n &gt; 0, indicating that
+    <a id="L56"></a>// some of the data was successfully written.
+    <a id="L57"></a>SetWriteTimeout(nsec int64) os.Error;
+<a id="L58"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/net.go#L123">Dial</a></h3>
+				<p><code><a id="L123"></a>func Dial(net, laddr, raddr string) (c Conn, err os.Error)</code></p>
+				<p>
+Dial connects to the remote address raddr on the network net.
+If the string laddr is not empty, it is used as the local address
+for the connection.
+</p>
+<p>
+Known networks are &#34;tcp&#34;, &#34;tcp4&#34; (IPv4-only), &#34;tcp6&#34; (IPv6-only),
+&#34;udp&#34;, &#34;udp4&#34; (IPv4-only), and &#34;udp6&#34; (IPv6-only).
+</p>
+<p>
+For IP networks, addresses have the form host:port.  If host is
+a literal IPv6 address, it must be enclosed in square brackets.
+</p>
+<p>
+Examples:
+</p>
+<pre>Dial(&#34;tcp&#34;, &#34;&#34;, &#34;12.34.56.78:80&#34;)
+Dial(&#34;tcp&#34;, &#34;&#34;, &#34;google.com:80&#34;)
+Dial(&#34;tcp&#34;, &#34;&#34;, &#34;[de:ad:be:ef::ca:fe]:80&#34;)
+Dial(&#34;tcp&#34;, &#34;127.0.0.1:123&#34;, &#34;127.0.0.1:88&#34;)
+</pre>
+
+			<h2>type <a href="../../src/pkg/net/dnsclient.go#L23"><a id="L23"></a>DNSError</a></h2>
+			<p>
+DNSError represents a DNS lookup error.
+</p>
+
+			<p><pre><a id="L23"></a>type DNSError struct {
+    <a id="L24"></a>Error  string; // description of the error
+    <a id="L25"></a>Name   string; // name looked for
+    <a id="L26"></a>Server string; // server used
+<a id="L27"></a>}</pre></p>
+				<h3>func (<a id="L29"></a>*DNSError) <a href="../../src/pkg/net/dnsclient.go#L29">String</a></h3>
+				<p><code><a id="L29"></a>func (e *DNSError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/net/ip.go#L33"><a id="L33"></a>IP</a></h2>
+			<p>
+An IP is a single IP address, an array of bytes.
+Functions in this package accept either 4-byte (IP v4)
+or 16-byte (IP v6) arrays as input.  Unless otherwise
+specified, functions in this package always return
+IP addresses in 16-byte form using the canonical
+embedding.
+</p>
+<p>
+Note that in this documentation, referring to an
+IP address as an IPv4 address or an IPv6 address
+is a semantic property of the address, not just the
+length of the byte array: a 16-byte array can still
+be an IPv4 address.
+</p>
+
+			<p><pre><a id="L33"></a>type IP []byte</pre></p>
+				<h3>func <a href="../../src/pkg/net/ip.go#L40">IPv4</a></h3>
+				<p><code><a id="L40"></a>func IPv4(a, b, c, d byte) IP</code></p>
+				<p>
+IPv4 returns the IP address (in 16-byte form) of the
+IPv4 address a.b.c.d.
+</p>
+
+				<h3>func <a href="../../src/pkg/net/ip.go#L413">ParseIP</a></h3>
+				<p><code><a id="L413"></a>func ParseIP(s string) IP</code></p>
+				<p>
+ParseIP parses s as an IP address, returning the result.
+The string s can be in dotted decimal (&#34;74.125.19.99&#34;)
+or IPv6 (&#34;2001:4860:0:2001::68&#34;) form.
+If s is not a valid textual representation of an IP address,
+ParseIP returns nil.
+</p>
+
+				<h3>func (<a id="L114"></a>IP) <a href="../../src/pkg/net/ip.go#L114">DefaultMask</a></h3>
+				<p><code><a id="L114"></a>func (ip IP) DefaultMask() IPMask</code></p>
+				<p>
+DefaultMask returns the default IP mask for the IP address ip.
+Only IPv4 addresses have default masks; DefaultMask returns
+nil if ip is not a valid IPv4 address.
+</p>
+
+				<h3>func (<a id="L130"></a>IP) <a href="../../src/pkg/net/ip.go#L130">Mask</a></h3>
+				<p><code><a id="L130"></a>func (ip IP) Mask(mask IPMask) IP</code></p>
+				<p>
+Mask returns the result of masking the IP address ip with mask.
+</p>
+
+				<h3>func (<a id="L180"></a>IP) <a href="../../src/pkg/net/ip.go#L180">String</a></h3>
+				<p><code><a id="L180"></a>func (ip IP) String() string</code></p>
+				<p>
+String returns the string form of the IP address ip.
+If the address is an IPv4 address, the string representation
+is dotted decimal (&#34;74.125.19.99&#34;).  Otherwise the representation
+is IPv6 (&#34;2001:4860:0:2001::68&#34;).
+</p>
+
+				<h3>func (<a id="L94"></a>IP) <a href="../../src/pkg/net/ip.go#L94">To16</a></h3>
+				<p><code><a id="L94"></a>func (ip IP) To16() IP</code></p>
+				<p>
+To16 converts the IP address ip to a 16-byte representation.
+If ip is not an IP address (it is the wrong length), To16 returns nil.
+</p>
+
+				<h3>func (<a id="L79"></a>IP) <a href="../../src/pkg/net/ip.go#L79">To4</a></h3>
+				<p><code><a id="L79"></a>func (ip IP) To4() IP</code></p>
+				<p>
+To4 converts the IPv4 address ip to a 4-byte representation.
+If ip is not an IPv4 address, To4 returns nil.
+</p>
+
+			<h2>type <a href="../../src/pkg/net/ip.go#L36"><a id="L36"></a>IPMask</a></h2>
+			<p>
+An IP mask is an IP address.
+</p>
+
+			<p><pre><a id="L36"></a>type IPMask []byte</pre></p>
+				<h3>func (<a id="L260"></a>IPMask) <a href="../../src/pkg/net/ip.go#L260">String</a></h3>
+				<p><code><a id="L260"></a>func (mask IPMask) String() string</code></p>
+				<p>
+String returns the string representation of mask.
+If the mask is in the canonical form--ones followed by zeros--the
+string representation is just the decimal number of ones.
+If the mask is in a non-canonical form, it is formatted
+as an IP address.
+</p>
+
+			<h2>type <a href="../../src/pkg/net/net.go#L101"><a id="L101"></a>Listener</a></h2>
+			<p>
+A Listener is a generic network listener for stream-oriented protocols.
+Accept waits for the next connection and Close closes the connection.
+</p>
+
+			<p><pre><a id="L101"></a>type Listener interface {
+    <a id="L102"></a>Accept() (c Conn, err os.Error);
+    <a id="L103"></a>Close() os.Error;
+    <a id="L104"></a>Addr() Addr; // Listener&#39;s network address
+<a id="L105"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/net.go#L173">Listen</a></h3>
+				<p><code><a id="L173"></a>func Listen(net, laddr string) (l Listener, err os.Error)</code></p>
+				<p>
+Listen announces on the local network address laddr.
+The network string net must be a stream-oriented
+network: &#34;tcp&#34;, &#34;tcp4&#34;, &#34;tcp6&#34;, or &#34;unix&#34;.
+</p>
+
+			<h2>type <a href="../../src/pkg/net/net.go#L238"><a id="L238"></a>OpError</a></h2>
+			
+			<p><pre><a id="L238"></a>type OpError struct {
+    <a id="L239"></a>Op    string;
+    <a id="L240"></a>Net   string;
+    <a id="L241"></a>Addr  Addr;
+    <a id="L242"></a>Error os.Error;
+<a id="L243"></a>}</pre></p>
+				<h3>func (<a id="L245"></a>*OpError) <a href="../../src/pkg/net/net.go#L245">String</a></h3>
+				<p><code><a id="L245"></a>func (e *OpError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/net/net.go#L61"><a id="L61"></a>PacketConn</a></h2>
+			<p>
+PacketConn is a generic packet-oriented network connection.
+</p>
+
+			<p><pre><a id="L61"></a>type PacketConn interface {
+    <a id="L62"></a>// ReadFrom reads a packet from the connection,
+    <a id="L63"></a>// copying the payload into b.  It returns the number of
+    <a id="L64"></a>// bytes copied into b and the return address that
+    <a id="L65"></a>// was on the packet.
+    <a id="L66"></a>// ReadFrom can be made to time out and return err == os.EAGAIN
+    <a id="L67"></a>// after a fixed time limit; see SetTimeout and SetReadTimeout.
+    <a id="L68"></a>ReadFrom(b []byte) (n int, addr Addr, err os.Error);
+
+    <a id="L70"></a>// WriteTo writes a packet with payload b to addr.
+    <a id="L71"></a>// WriteTo can be made to time out and return err == os.EAGAIN
+    <a id="L72"></a>// after a fixed time limit; see SetTimeout and SetWriteTimeout.
+    <a id="L73"></a>// On packet-oriented connections, write timeouts are rare.
+    <a id="L74"></a>WriteTo(b []byte, addr Addr) (n int, err os.Error);
+
+    <a id="L76"></a>// Close closes the connection.
+    <a id="L77"></a>Close() os.Error;
+
+    <a id="L79"></a>// LocalAddr returns the local network address.
+    <a id="L80"></a>LocalAddr() Addr;
+
+    <a id="L82"></a>// SetTimeout sets the read and write deadlines associated
+    <a id="L83"></a>// with the connection.
+    <a id="L84"></a>SetTimeout(nsec int64) os.Error;
+
+    <a id="L86"></a>// SetReadTimeout sets the time (in nanoseconds) that
+    <a id="L87"></a>// Read will wait for data before returning os.EAGAIN.
+    <a id="L88"></a>// Setting nsec == 0 (the default) disables the deadline.
+    <a id="L89"></a>SetReadTimeout(nsec int64) os.Error;
+
+    <a id="L91"></a>// SetWriteTimeout sets the time (in nanoseconds) that
+    <a id="L92"></a>// Write will wait to send its data before returning os.EAGAIN.
+    <a id="L93"></a>// Setting nsec == 0 (the default) disables the deadline.
+    <a id="L94"></a>// Even if write times out, it may return n &gt; 0, indicating that
+    <a id="L95"></a>// some of the data was successfully written.
+    <a id="L96"></a>SetWriteTimeout(nsec int64) os.Error;
+<a id="L97"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/net.go#L206">ListenPacket</a></h3>
+				<p><code><a id="L206"></a>func ListenPacket(net, laddr string) (c PacketConn, err os.Error)</code></p>
+				<p>
+ListenPacket announces on the local network address laddr.
+The network string net must be a packet-oriented network:
+&#34;udp&#34;, &#34;udp4&#34;, &#34;udp6&#34;, or &#34;unixgram&#34;.
+</p>
+
+			<h2>type <a href="../../src/pkg/net/tcpsock.go#L25"><a id="L25"></a>TCPAddr</a></h2>
+			<p>
+TCPAddr represents the address of a TCP end point.
+</p>
+
+			<p><pre><a id="L25"></a>type TCPAddr struct {
+    <a id="L26"></a>IP   IP;
+    <a id="L27"></a>Port int;
+<a id="L28"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/tcpsock.go#L60">ResolveTCPAddr</a></h3>
+				<p><code><a id="L60"></a>func ResolveTCPAddr(addr string) (*TCPAddr, os.Error)</code></p>
+				<p>
+ResolveTCPAddr parses addr as a TCP address of the form
+host:port and resolves domain names or port names to
+numeric addresses.  A literal IPv6 host address must be
+enclosed in square brackets, as in &#34;[::]:80&#34;.
+</p>
+
+				<h3>func (<a id="L31"></a>*TCPAddr) <a href="../../src/pkg/net/tcpsock.go#L31">Network</a></h3>
+				<p><code><a id="L31"></a>func (a *TCPAddr) Network() string</code></p>
+				<p>
+Network returns the address&#39;s network name, &#34;tcp&#34;.
+</p>
+
+				<h3>func (<a id="L33"></a>*TCPAddr) <a href="../../src/pkg/net/tcpsock.go#L33">String</a></h3>
+				<p><code><a id="L33"></a>func (a *TCPAddr) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/net/tcpsock.go#L70"><a id="L70"></a>TCPConn</a></h2>
+			<p>
+TCPConn is an implementation of the Conn interface
+for TCP network connections.
+</p>
+
+			<p><pre><a id="L70"></a>type TCPConn struct {
+    // contains unexported fields
+<a id="L72"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/tcpsock.go#L210">DialTCP</a></h3>
+				<p><code><a id="L210"></a>func DialTCP(net string, laddr, raddr *TCPAddr) (c *TCPConn, err os.Error)</code></p>
+				<p>
+DialTCP is like Dial but can only connect to TCP networks
+and returns a TCPConn structure.
+</p>
+
+				<h3>func (<a id="L107"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L107">Close</a></h3>
+				<p><code><a id="L107"></a>func (c *TCPConn) Close() os.Error</code></p>
+				<p>
+Close closes the TCP connection.
+</p>
+
+				<h3>func (<a id="L117"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L117">LocalAddr</a></h3>
+				<p><code><a id="L117"></a>func (c *TCPConn) LocalAddr() Addr</code></p>
+				<p>
+LocalAddr returns the local network address, a *TCPAddr.
+</p>
+
+				<h3>func (<a id="L88"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L88">Read</a></h3>
+				<p><code><a id="L88"></a>func (c *TCPConn) Read(b []byte) (n int, err os.Error)</code></p>
+				<p>
+Read reads data from the TCP connection.
+</p>
+<p>
+Read can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetReadTimeout.
+</p>
+
+				<h3>func (<a id="L125"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L125">RemoteAddr</a></h3>
+				<p><code><a id="L125"></a>func (c *TCPConn) RemoteAddr() Addr</code></p>
+				<p>
+RemoteAddr returns the remote network address, a *TCPAddr.
+</p>
+
+				<h3>func (<a id="L201"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L201">SetKeepAlive</a></h3>
+				<p><code><a id="L201"></a>func (c *TCPConn) SetKeepAlive(keepalive bool) os.Error</code></p>
+				<p>
+SetKeepAlive sets whether the operating system should send
+keepalive messages on the connection.
+</p>
+
+				<h3>func (<a id="L192"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L192">SetLinger</a></h3>
+				<p><code><a id="L192"></a>func (c *TCPConn) SetLinger(sec int) os.Error</code></p>
+				<p>
+SetLinger sets the behavior of Close() on a connection
+which still has data waiting to be sent or to be acknowledged.
+</p>
+<p>
+If sec &lt; 0 (the default), Close returns immediately and
+the operating system finishes sending the data in the background.
+</p>
+<p>
+If sec == 0, Close returns immediately and the operating system
+discards any unsent or unacknowledged data.
+</p>
+<p>
+If sec &gt; 0, Close blocks for at most sec seconds waiting for
+data to be sent and acknowledged.
+</p>
+
+				<h3>func (<a id="L165"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L165">SetReadBuffer</a></h3>
+				<p><code><a id="L165"></a>func (c *TCPConn) SetReadBuffer(bytes int) os.Error</code></p>
+				<p>
+SetReadBuffer sets the size of the operating system&#39;s
+receive buffer associated with the connection.
+</p>
+
+				<h3>func (<a id="L144"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L144">SetReadTimeout</a></h3>
+				<p><code><a id="L144"></a>func (c *TCPConn) SetReadTimeout(nsec int64) os.Error</code></p>
+				<p>
+SetReadTimeout sets the time (in nanoseconds) that
+Read will wait for data before returning os.EAGAIN.
+Setting nsec == 0 (the default) disables the deadline.
+</p>
+
+				<h3>func (<a id="L134"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L134">SetTimeout</a></h3>
+				<p><code><a id="L134"></a>func (c *TCPConn) SetTimeout(nsec int64) os.Error</code></p>
+				<p>
+SetTimeout sets the read and write deadlines associated
+with the connection.
+</p>
+
+				<h3>func (<a id="L174"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L174">SetWriteBuffer</a></h3>
+				<p><code><a id="L174"></a>func (c *TCPConn) SetWriteBuffer(bytes int) os.Error</code></p>
+				<p>
+SetWriteBuffer sets the size of the operating system&#39;s
+transmit buffer associated with the connection.
+</p>
+
+				<h3>func (<a id="L156"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L156">SetWriteTimeout</a></h3>
+				<p><code><a id="L156"></a>func (c *TCPConn) SetWriteTimeout(nsec int64) os.Error</code></p>
+				<p>
+SetWriteTimeout sets the time (in nanoseconds) that
+Write will wait to send its data before returning os.EAGAIN.
+Setting nsec == 0 (the default) disables the deadline.
+Even if write times out, it may return n &gt; 0, indicating that
+some of the data was successfully written.
+</p>
+
+				<h3>func (<a id="L99"></a>*TCPConn) <a href="../../src/pkg/net/tcpsock.go#L99">Write</a></h3>
+				<p><code><a id="L99"></a>func (c *TCPConn) Write(b []byte) (n int, err os.Error)</code></p>
+				<p>
+Write writes data to the TCP connection.
+</p>
+<p>
+Write can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetReadTimeout.
+</p>
+
+			<h2>type <a href="../../src/pkg/net/tcpsock.go#L224"><a id="L224"></a>TCPListener</a></h2>
+			<p>
+TCPListener is a TCP network listener.
+Clients should typically use variables of type Listener
+instead of assuming TCP.
+</p>
+
+			<p><pre><a id="L224"></a>type TCPListener struct {
+    // contains unexported fields
+<a id="L226"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/tcpsock.go#L232">ListenTCP</a></h3>
+				<p><code><a id="L232"></a>func ListenTCP(net string, laddr *TCPAddr) (l *TCPListener, err os.Error)</code></p>
+				<p>
+ListenTCP announces on the TCP address laddr and returns a TCP listener.
+Net must be &#34;tcp&#34;, &#34;tcp4&#34;, or &#34;tcp6&#34;.
+If laddr has a port of 0, it means to listen on some available port.
+The caller can use l.Addr() to retrieve the chosen address.
+</p>
+
+				<h3>func (<a id="L262"></a>*TCPListener) <a href="../../src/pkg/net/tcpsock.go#L262">Accept</a></h3>
+				<p><code><a id="L262"></a>func (l *TCPListener) Accept() (c Conn, err os.Error)</code></p>
+				<p>
+Accept implements the Accept method in the Listener interface;
+it waits for the next call and returns a generic Conn.
+</p>
+
+				<h3>func (<a id="L249"></a>*TCPListener) <a href="../../src/pkg/net/tcpsock.go#L249">AcceptTCP</a></h3>
+				<p><code><a id="L249"></a>func (l *TCPListener) AcceptTCP() (c *TCPConn, err os.Error)</code></p>
+				<p>
+AcceptTCP accepts the next incoming call and returns the new connection
+and the remote address.
+</p>
+
+				<h3>func (<a id="L280"></a>*TCPListener) <a href="../../src/pkg/net/tcpsock.go#L280">Addr</a></h3>
+				<p><code><a id="L280"></a>func (l *TCPListener) Addr() Addr</code></p>
+				<p>
+Addr returns the listener&#39;s network address, a *TCPAddr.
+</p>
+
+				<h3>func (<a id="L272"></a>*TCPListener) <a href="../../src/pkg/net/tcpsock.go#L272">Close</a></h3>
+				<p><code><a id="L272"></a>func (l *TCPListener) Close() os.Error</code></p>
+				<p>
+Close stops listening on the TCP address.
+Already Accepted connections are not closed.
+</p>
+
+			<h2>type <a href="../../src/pkg/net/udpsock.go#L25"><a id="L25"></a>UDPAddr</a></h2>
+			<p>
+UDPAddr represents the address of a UDP end point.
+</p>
+
+			<p><pre><a id="L25"></a>type UDPAddr struct {
+    <a id="L26"></a>IP   IP;
+    <a id="L27"></a>Port int;
+<a id="L28"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/udpsock.go#L60">ResolveUDPAddr</a></h3>
+				<p><code><a id="L60"></a>func ResolveUDPAddr(addr string) (*UDPAddr, os.Error)</code></p>
+				<p>
+ResolveUDPAddr parses addr as a UDP address of the form
+host:port and resolves domain names or port names to
+numeric addresses.  A literal IPv6 host address must be
+enclosed in square brackets, as in &#34;[::]:80&#34;.
+</p>
+
+				<h3>func (<a id="L31"></a>*UDPAddr) <a href="../../src/pkg/net/udpsock.go#L31">Network</a></h3>
+				<p><code><a id="L31"></a>func (a *UDPAddr) Network() string</code></p>
+				<p>
+Network returns the address&#39;s network name, &#34;udp&#34;.
+</p>
+
+				<h3>func (<a id="L33"></a>*UDPAddr) <a href="../../src/pkg/net/udpsock.go#L33">String</a></h3>
+				<p><code><a id="L33"></a>func (a *UDPAddr) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/net/udpsock.go#L70"><a id="L70"></a>UDPConn</a></h2>
+			<p>
+UDPConn is the implementation of the Conn and PacketConn
+interfaces for UDP network connections.
+</p>
+
+			<p><pre><a id="L70"></a>type UDPConn struct {
+    // contains unexported fields
+<a id="L72"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/udpsock.go#L256">DialUDP</a></h3>
+				<p><code><a id="L256"></a>func DialUDP(net string, laddr, raddr *UDPAddr) (c *UDPConn, err os.Error)</code></p>
+				<p>
+DialUDP connects to the remote address raddr on the network net,
+which must be &#34;udp&#34;, &#34;udp4&#34;, or &#34;udp6&#34;.  If laddr is not nil, it is used
+as the local address for the connection.
+</p>
+
+				<h3>func <a href="../../src/pkg/net/udpsock.go#L276">ListenUDP</a></h3>
+				<p><code><a id="L276"></a>func ListenUDP(net string, laddr *UDPAddr) (c *UDPConn, err os.Error)</code></p>
+				<p>
+ListenUDP listens for incoming UDP packets addressed to the
+local address laddr.  The returned connection c&#39;s ReadFrom
+and WriteTo methods can be used to receive and send UDP
+packets with per-packet addressing.
+</p>
+
+				<h3>func <a href="../../src/pkg/net/unixsock.go#L405">ListenUnixgram</a></h3>
+				<p><code><a id="L405"></a>func ListenUnixgram(net string, laddr *UnixAddr) (c *UDPConn, err os.Error)</code></p>
+				<p>
+ListenUnixgram listens for incoming Unix datagram packets addressed to the
+local address laddr.  The returned connection c&#39;s ReadFrom
+and WriteTo methods can be used to receive and send UDP
+packets with per-packet addressing.  The network net must be &#34;unixgram&#34;.
+</p>
+
+				<h3>func (<a id="L105"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L105">Close</a></h3>
+				<p><code><a id="L105"></a>func (c *UDPConn) Close() os.Error</code></p>
+				<p>
+Close closes the UDP connection.
+</p>
+
+				<h3>func (<a id="L115"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L115">LocalAddr</a></h3>
+				<p><code><a id="L115"></a>func (c *UDPConn) LocalAddr() Addr</code></p>
+				<p>
+LocalAddr returns the local network address.
+</p>
+
+				<h3>func (<a id="L86"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L86">Read</a></h3>
+				<p><code><a id="L86"></a>func (c *UDPConn) Read(b []byte) (n int, err os.Error)</code></p>
+				<p>
+Read reads data from a single UDP packet on the connection.
+If the slice b is smaller than the arriving packet,
+the excess packet data may be discarded.
+</p>
+<p>
+Read can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetReadTimeout.
+</p>
+
+				<h3>func (<a id="L210"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L210">ReadFrom</a></h3>
+				<p><code><a id="L210"></a>func (c *UDPConn) ReadFrom(b []byte) (n int, addr Addr, err os.Error)</code></p>
+				<p>
+ReadFrom reads a UDP packet from c, copying the payload into b.
+It returns the number of bytes copied into b and the return address
+that was on the packet.
+</p>
+<p>
+ReadFrom can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetReadTimeout.
+</p>
+
+				<h3>func (<a id="L187"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L187">ReadFromUDP</a></h3>
+				<p><code><a id="L187"></a>func (c *UDPConn) ReadFromUDP(b []byte) (n int, addr *UDPAddr, err os.Error)</code></p>
+				<p>
+ReadFromUDP reads a UDP packet from c, copying the payload into b.
+It returns the number of bytes copied into b and the return address
+that was on the packet.
+</p>
+<p>
+ReadFromUDP can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetReadTimeout.
+</p>
+
+				<h3>func (<a id="L123"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L123">RemoteAddr</a></h3>
+				<p><code><a id="L123"></a>func (c *UDPConn) RemoteAddr() Addr</code></p>
+				<p>
+RemoteAddr returns the remote network address, a *UDPAddr.
+</p>
+
+				<h3>func (<a id="L163"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L163">SetReadBuffer</a></h3>
+				<p><code><a id="L163"></a>func (c *UDPConn) SetReadBuffer(bytes int) os.Error</code></p>
+				<p>
+SetReadBuffer sets the size of the operating system&#39;s
+receive buffer associated with the connection.
+</p>
+
+				<h3>func (<a id="L142"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L142">SetReadTimeout</a></h3>
+				<p><code><a id="L142"></a>func (c *UDPConn) SetReadTimeout(nsec int64) os.Error</code></p>
+				<p>
+SetReadTimeout sets the time (in nanoseconds) that
+Read will wait for data before returning os.EAGAIN.
+Setting nsec == 0 (the default) disables the deadline.
+</p>
+
+				<h3>func (<a id="L132"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L132">SetTimeout</a></h3>
+				<p><code><a id="L132"></a>func (c *UDPConn) SetTimeout(nsec int64) os.Error</code></p>
+				<p>
+SetTimeout sets the read and write deadlines associated
+with the connection.
+</p>
+
+				<h3>func (<a id="L172"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L172">SetWriteBuffer</a></h3>
+				<p><code><a id="L172"></a>func (c *UDPConn) SetWriteBuffer(bytes int) os.Error</code></p>
+				<p>
+SetWriteBuffer sets the size of the operating system&#39;s
+transmit buffer associated with the connection.
+</p>
+
+				<h3>func (<a id="L154"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L154">SetWriteTimeout</a></h3>
+				<p><code><a id="L154"></a>func (c *UDPConn) SetWriteTimeout(nsec int64) os.Error</code></p>
+				<p>
+SetWriteTimeout sets the time (in nanoseconds) that
+Write will wait to send its data before returning os.EAGAIN.
+Setting nsec == 0 (the default) disables the deadline.
+Even if write times out, it may return n &gt; 0, indicating that
+some of the data was successfully written.
+</p>
+
+				<h3>func (<a id="L97"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L97">Write</a></h3>
+				<p><code><a id="L97"></a>func (c *UDPConn) Write(b []byte) (n int, err os.Error)</code></p>
+				<p>
+Write writes data to the connection as a single UDP packet.
+</p>
+<p>
+Write can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetReadTimeout.
+</p>
+
+				<h3>func (<a id="L242"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L242">WriteTo</a></h3>
+				<p><code><a id="L242"></a>func (c *UDPConn) WriteTo(b []byte, addr Addr) (n int, err os.Error)</code></p>
+				<p>
+WriteTo writes a UDP packet with payload b to addr via c.
+</p>
+<p>
+WriteTo can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetWriteTimeout.
+On packet-oriented connections such as UDP, write timeouts are rare.
+</p>
+
+				<h3>func (<a id="L223"></a>*UDPConn) <a href="../../src/pkg/net/udpsock.go#L223">WriteToUDP</a></h3>
+				<p><code><a id="L223"></a>func (c *UDPConn) WriteToUDP(b []byte, addr *UDPAddr) (n int, err os.Error)</code></p>
+				<p>
+WriteToUDP writes a UDP packet to addr via c, copying the payload from b.
+</p>
+<p>
+WriteToUDP can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetWriteTimeout.
+On packet-oriented connections such as UDP, write timeouts are rare.
+</p>
+
+			<h2>type <a href="../../src/pkg/net/unixsock.go#L69"><a id="L69"></a>UnixAddr</a></h2>
+			<p>
+UnixAddr represents the address of a Unix domain socket end point.
+</p>
+
+			<p><pre><a id="L69"></a>type UnixAddr struct {
+    <a id="L70"></a>Name     string;
+    <a id="L71"></a>Datagram bool;
+<a id="L72"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/unixsock.go#L112">ResolveUnixAddr</a></h3>
+				<p><code><a id="L112"></a>func ResolveUnixAddr(net, addr string) (*UnixAddr, os.Error)</code></p>
+				<p>
+ResolveUnixAddr parses addr as a Unix domain socket address.
+The string net gives the network name, &#34;unix&#34; or &#34;unixgram&#34;.
+</p>
+
+				<h3>func (<a id="L89"></a>*UnixAddr) <a href="../../src/pkg/net/unixsock.go#L89">Network</a></h3>
+				<p><code><a id="L89"></a>func (a *UnixAddr) Network() string</code></p>
+				<p>
+Network returns the address&#39;s network name, &#34;unix&#34; or &#34;unixgram&#34;.
+</p>
+
+				<h3>func (<a id="L96"></a>*UnixAddr) <a href="../../src/pkg/net/unixsock.go#L96">String</a></h3>
+				<p><code><a id="L96"></a>func (a *UnixAddr) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/net/unixsock.go#L126"><a id="L126"></a>UnixConn</a></h2>
+			<p>
+UnixConn is an implementation of the Conn interface
+for connections to Unix domain sockets.
+</p>
+
+			<p><pre><a id="L126"></a>type UnixConn struct {
+    // contains unexported fields
+<a id="L128"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/unixsock.go#L309">DialUnix</a></h3>
+				<p><code><a id="L309"></a>func DialUnix(net string, laddr, raddr *UnixAddr) (c *UnixConn, err os.Error)</code></p>
+				<p>
+DialUDP connects to the remote address raddr on the network net,
+which must be &#34;unix&#34; or &#34;unixdgram&#34;.  If laddr is not nil, it is used
+as the local address for the connection.
+</p>
+
+				<h3>func (<a id="L159"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L159">Close</a></h3>
+				<p><code><a id="L159"></a>func (c *UnixConn) Close() os.Error</code></p>
+				<p>
+Close closes the Unix domain connection.
+</p>
+
+				<h3>func (<a id="L170"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L170">LocalAddr</a></h3>
+				<p><code><a id="L170"></a>func (c *UnixConn) LocalAddr() Addr</code></p>
+				<p>
+LocalAddr returns the local network address, a *UnixAddr.
+Unlike in other protocols, LocalAddr is usually nil for dialed connections.
+</p>
+
+				<h3>func (<a id="L140"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L140">Read</a></h3>
+				<p><code><a id="L140"></a>func (c *UnixConn) Read(b []byte) (n int, err os.Error)</code></p>
+				<p>
+Read reads data from the Unix domain connection.
+</p>
+<p>
+Read can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetReadTimeout.
+</p>
+
+				<h3>func (<a id="L263"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L263">ReadFrom</a></h3>
+				<p><code><a id="L263"></a>func (c *UnixConn) ReadFrom(b []byte) (n int, addr Addr, err os.Error)</code></p>
+				<p>
+ReadFrom reads a packet from c, copying the payload into b.
+It returns the number of bytes copied into b and the return address
+that was on the packet.
+</p>
+<p>
+ReadFrom can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetReadTimeout.
+</p>
+
+				<h3>func (<a id="L242"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L242">ReadFromUnix</a></h3>
+				<p><code><a id="L242"></a>func (c *UnixConn) ReadFromUnix(b []byte) (n int, addr *UnixAddr, err os.Error)</code></p>
+				<p>
+ReadFromUnix reads a packet from c, copying the payload into b.
+It returns the number of bytes copied into b and the return address
+that was on the packet.
+</p>
+<p>
+ReadFromUnix can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetReadTimeout.
+</p>
+
+				<h3>func (<a id="L180"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L180">RemoteAddr</a></h3>
+				<p><code><a id="L180"></a>func (c *UnixConn) RemoteAddr() Addr</code></p>
+				<p>
+RemoteAddr returns the remote network address, a *UnixAddr.
+Unlike in other protocols, RemoteAddr is usually nil for connections
+accepted by a listener.
+</p>
+
+				<h3>func (<a id="L220"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L220">SetReadBuffer</a></h3>
+				<p><code><a id="L220"></a>func (c *UnixConn) SetReadBuffer(bytes int) os.Error</code></p>
+				<p>
+SetReadBuffer sets the size of the operating system&#39;s
+receive buffer associated with the connection.
+</p>
+
+				<h3>func (<a id="L199"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L199">SetReadTimeout</a></h3>
+				<p><code><a id="L199"></a>func (c *UnixConn) SetReadTimeout(nsec int64) os.Error</code></p>
+				<p>
+SetReadTimeout sets the time (in nanoseconds) that
+Read will wait for data before returning os.EAGAIN.
+Setting nsec == 0 (the default) disables the deadline.
+</p>
+
+				<h3>func (<a id="L189"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L189">SetTimeout</a></h3>
+				<p><code><a id="L189"></a>func (c *UnixConn) SetTimeout(nsec int64) os.Error</code></p>
+				<p>
+SetTimeout sets the read and write deadlines associated
+with the connection.
+</p>
+
+				<h3>func (<a id="L229"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L229">SetWriteBuffer</a></h3>
+				<p><code><a id="L229"></a>func (c *UnixConn) SetWriteBuffer(bytes int) os.Error</code></p>
+				<p>
+SetWriteBuffer sets the size of the operating system&#39;s
+transmit buffer associated with the connection.
+</p>
+
+				<h3>func (<a id="L211"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L211">SetWriteTimeout</a></h3>
+				<p><code><a id="L211"></a>func (c *UnixConn) SetWriteTimeout(nsec int64) os.Error</code></p>
+				<p>
+SetWriteTimeout sets the time (in nanoseconds) that
+Write will wait to send its data before returning os.EAGAIN.
+Setting nsec == 0 (the default) disables the deadline.
+Even if write times out, it may return n &gt; 0, indicating that
+some of the data was successfully written.
+</p>
+
+				<h3>func (<a id="L151"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L151">Write</a></h3>
+				<p><code><a id="L151"></a>func (c *UnixConn) Write(b []byte) (n int, err os.Error)</code></p>
+				<p>
+Write writes data to the Unix domain connection.
+</p>
+<p>
+Write can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetReadTimeout.
+</p>
+
+				<h3>func (<a id="L295"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L295">WriteTo</a></h3>
+				<p><code><a id="L295"></a>func (c *UnixConn) WriteTo(b []byte, addr Addr) (n int, err os.Error)</code></p>
+				<p>
+WriteTo writes a packet to addr via c, copying the payload from b.
+</p>
+<p>
+WriteTo can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetWriteTimeout.
+On packet-oriented connections such as UDP, write timeouts are rare.
+</p>
+
+				<h3>func (<a id="L276"></a>*UnixConn) <a href="../../src/pkg/net/unixsock.go#L276">WriteToUnix</a></h3>
+				<p><code><a id="L276"></a>func (c *UnixConn) WriteToUnix(b []byte, addr *UnixAddr) (n int, err os.Error)</code></p>
+				<p>
+WriteToUnix writes a packet to addr via c, copying the payload from b.
+</p>
+<p>
+WriteToUnix can be made to time out and return err == os.EAGAIN
+after a fixed time limit; see SetTimeout and SetWriteTimeout.
+On packet-oriented connections such as UDP, write timeouts are rare.
+</p>
+
+			<h2>type <a href="../../src/pkg/net/unixsock.go#L320"><a id="L320"></a>UnixListener</a></h2>
+			<p>
+UnixListener is a Unix domain socket listener.
+Clients should typically use variables of type Listener
+instead of assuming Unix domain sockets.
+</p>
+
+			<p><pre><a id="L320"></a>type UnixListener struct {
+    // contains unexported fields
+<a id="L323"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/net/unixsock.go#L327">ListenUnix</a></h3>
+				<p><code><a id="L327"></a>func ListenUnix(net string, laddr *UnixAddr) (l *UnixListener, err os.Error)</code></p>
+				<p>
+ListenUnix announces on the Unix domain socket laddr and returns a Unix listener.
+Net must be &#34;unix&#34; (stream sockets).
+</p>
+
+				<h3>func (<a id="L365"></a>*UnixListener) <a href="../../src/pkg/net/unixsock.go#L365">Accept</a></h3>
+				<p><code><a id="L365"></a>func (l *UnixListener) Accept() (c Conn, err os.Error)</code></p>
+				<p>
+Accept implements the Accept method in the Listener interface;
+it waits for the next call and returns a generic Conn.
+</p>
+
+				<h3>func (<a id="L351"></a>*UnixListener) <a href="../../src/pkg/net/unixsock.go#L351">AcceptUnix</a></h3>
+				<p><code><a id="L351"></a>func (l *UnixListener) AcceptUnix() (c *UnixConn, err os.Error)</code></p>
+				<p>
+AcceptUnix accepts the next incoming call and returns the new connection
+and the remote address.
+</p>
+
+				<h3>func (<a id="L399"></a>*UnixListener) <a href="../../src/pkg/net/unixsock.go#L399">Addr</a></h3>
+				<p><code><a id="L399"></a>func (l *UnixListener) Addr() Addr</code></p>
+				<p>
+Addr returns the listener&#39;s network address.
+</p>
+
+				<h3>func (<a id="L375"></a>*UnixListener) <a href="../../src/pkg/net/unixsock.go#L375">Close</a></h3>
+				<p><code><a id="L375"></a>func (l *UnixListener) Close() os.Error</code></p>
+				<p>
+Close stops listening on the Unix address.
+Already accepted connections are not closed.
+</p>
+
+			<h2>type <a href="../../src/pkg/net/net.go#L270"><a id="L270"></a>UnknownNetworkError</a></h2>
+			
+			<p><pre><a id="L270"></a>type UnknownNetworkError string</pre></p>
+				<h3>func (<a id="L272"></a>UnknownNetworkError) <a href="../../src/pkg/net/net.go#L272">String</a></h3>
+				<p><code><a id="L272"></a>func (e UnknownNetworkError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/net/sock.go#L132"><a id="L132"></a>UnknownSocketError</a></h2>
+			
+			<p><pre><a id="L132"></a>type UnknownSocketError struct {
+    // contains unexported fields
+<a id="L134"></a>}</pre></p>
+				<h3>func (<a id="L136"></a>*UnknownSocketError) <a href="../../src/pkg/net/sock.go#L136">String</a></h3>
+				<p><code><a id="L136"></a>func (e *UnknownSocketError) String() string</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

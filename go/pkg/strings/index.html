@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package strings</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:57:42 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package strings</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "strings"</code></p>
+	<p>
+A package of simple functions to manipulate strings.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/strings/reader.go">reader.go</a>
+				<a href="../../src/pkg/strings/strings.go">strings.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/strings/strings.go#L236">Bytes</a></h2>
+			<p><code><a id="L236"></a>func Bytes(s string) []byte</code></p>
+			<p>
+Bytes returns a new slice containing the bytes in s.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L37">Count</a></h2>
+			<p><code><a id="L37"></a>func Count(s, sep string) int</code></p>
+			<p>
+Count counts the number of non-overlapping instances of sep in s.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L153">HasPrefix</a></h2>
+			<p><code><a id="L153"></a>func HasPrefix(s, prefix string) bool</code></p>
+			<p>
+HasPrefix tests whether the string s begins with prefix.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L158">HasSuffix</a></h2>
+			<p><code><a id="L158"></a>func HasSuffix(s, suffix string) bool</code></p>
+			<p>
+HasSuffix tests whether the string s ends with suffix.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L53">Index</a></h2>
+			<p><code><a id="L53"></a>func Index(s, sep string) int</code></p>
+			<p>
+Index returns the index of the first instance of sep in s, or -1 if sep is not present in s.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L121">Join</a></h2>
+			<p><code><a id="L121"></a>func Join(a []string, sep string) string</code></p>
+			<p>
+Join concatenates the elements of a to create a single string.   The separator string
+sep is placed between elements in the resulting string.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L68">LastIndex</a></h2>
+			<p><code><a id="L68"></a>func LastIndex(s, sep string) int</code></p>
+			<p>
+LastIndex returns the index of the last instance of sep in s, or -1 if sep is not present in s.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L164">Map</a></h2>
+			<p><code><a id="L164"></a>func Map(mapping func(rune int) int, s string) string</code></p>
+			<p>
+Map returns a copy of the string s with all its characters modified
+according to the mapping function.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L110">Split</a></h2>
+			<p><code><a id="L110"></a>func Split(s, sep string, n int) []string</code></p>
+			<p>
+Split splits the string s around each instance of sep, returning an array of substrings of s.
+If sep is empty, Split splits s after each UTF-8 sequence.
+If n &gt; 0, split Splits s into at most n substrings; the last substring will be the unsplit remainder.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L115">SplitAfter</a></h2>
+			<p><code><a id="L115"></a>func SplitAfter(s, sep string, n int) []string</code></p>
+			<p>
+SplitAfter splits the string s after each instance of sep, returning an array of substrings of s.
+If sep is empty, SplitAfter splits s after each UTF-8 sequence.
+If n &gt; 0, SplitAfter splits s into at most n substrings; the last substring will be the unsplit remainder.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L195">ToLower</a></h2>
+			<p><code><a id="L195"></a>func ToLower(s string) string</code></p>
+			<p>
+ToUpper returns a copy of the string s with all Unicode letters mapped to their lower case.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L198">ToTitle</a></h2>
+			<p><code><a id="L198"></a>func ToTitle(s string) string</code></p>
+			<p>
+ToTitle returns a copy of the string s with all Unicode letters mapped to their title case.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L192">ToUpper</a></h2>
+			<p><code><a id="L192"></a>func ToUpper(s string) string</code></p>
+			<p>
+ToUpper returns a copy of the string s with all Unicode letters mapped to their upper case.
+</p>
+
+			<h2>func <a href="../../src/pkg/strings/strings.go#L202">TrimSpace</a></h2>
+			<p><code><a id="L202"></a>func TrimSpace(s string) string</code></p>
+			<p>
+Trim returns a slice of the string s, with all leading and trailing white space
+removed, as defined by Unicode.
+</p>
+
+			<h2>type <a href="../../src/pkg/strings/reader.go#L11"><a id="L11"></a>Reader</a></h2>
+			<p>
+A Reader satisfies calls to Read and ReadByte by
+reading from a string.
+</p>
+
+			<p><pre><a id="L11"></a>type Reader string</pre></p>
+				<h3>func <a href="../../src/pkg/strings/reader.go#L38">NewReader</a></h3>
+				<p><code><a id="L38"></a>func NewReader(s string) *Reader</code></p>
+				<p>
+NewReader returns a new Reader reading from s.
+It is similar to bytes.NewBufferString but more efficient and read-only.
+</p>
+
+				<h3>func (<a id="L13"></a>*Reader) <a href="../../src/pkg/strings/reader.go#L13">Read</a></h3>
+				<p><code><a id="L13"></a>func (r *Reader) Read(b []byte) (n int, err os.Error)</code></p>
+				
+				<h3>func (<a id="L26"></a>*Reader) <a href="../../src/pkg/strings/reader.go#L26">ReadByte</a></h3>
+				<p><code><a id="L26"></a>func (r *Reader) ReadByte() (b byte, err os.Error)</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

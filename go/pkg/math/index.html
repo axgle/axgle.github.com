@@ -1,0 +1,471 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package math</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package math</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "math"</code></p>
+	<p>
+The math package provides basic constants and mathematical functions.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/math/asin.go">asin.go</a>
+				<a href="../../src/pkg/math/atan.go">atan.go</a>
+				<a href="../../src/pkg/math/atan2.go">atan2.go</a>
+				<a href="../../src/pkg/math/bits.go">bits.go</a>
+				<a href="../../src/pkg/math/const.go">const.go</a>
+				<a href="../../src/pkg/math/exp.go">exp.go</a>
+				<a href="../../src/pkg/math/fabs.go">fabs.go</a>
+				<a href="../../src/pkg/math/floor.go">floor.go</a>
+				<a href="../../src/pkg/math/fmod.go">fmod.go</a>
+				<a href="../../src/pkg/math/hypot.go">hypot.go</a>
+				<a href="../../src/pkg/math/log.go">log.go</a>
+				<a href="../../src/pkg/math/pow.go">pow.go</a>
+				<a href="../../src/pkg/math/pow10.go">pow10.go</a>
+				<a href="../../src/pkg/math/sin.go">sin.go</a>
+				<a href="../../src/pkg/math/sinh.go">sinh.go</a>
+				<a href="../../src/pkg/math/sqrt.go">sqrt.go</a>
+				<a href="../../src/pkg/math/sqrt_decl.go">sqrt_decl.go</a>
+				<a href="../../src/pkg/math/tan.go">tan.go</a>
+				<a href="../../src/pkg/math/tanh.go">tanh.go</a>
+				<a href="../../src/pkg/math/unsafe.go">unsafe.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+Mathematical constants.
+Reference: http://www.research.att.com/~njas/sequences/Axxxxxx
+</p>
+
+			<pre><a id="L10"></a>const (
+    <a id="L11"></a>E   = 2.71828182845904523536028747135266249775724709369995957496696763; // A001113
+    <a id="L12"></a>Pi  = 3.14159265358979323846264338327950288419716939937510582097494459; // A000796
+    <a id="L13"></a>Phi = 1.61803398874989484820458683436563811772030917980576286213544862; // A001622
+
+    <a id="L15"></a>Sqrt2   = 1.41421356237309504880168872420969807856967187537694807317667974; // A002193
+    <a id="L16"></a>SqrtE   = 1.64872127070012814684865078781416357165377610071014801157507931; // A019774
+    <a id="L17"></a>SqrtPi  = 1.77245385090551602729816748334114518279754945612238712821380779; // A002161
+    <a id="L18"></a>SqrtPhi = 1.27201964951406896425242246173749149171560804184009624861664038; // A139339
+
+    <a id="L20"></a>Ln2    = 0.693147180559945309417232121458176568075500134360255254120680009; // A002162
+    <a id="L21"></a>Log2E  = 1 / Ln2;
+    <a id="L22"></a>Ln10   = 2.30258509299404568401799145468436420760110148862877297603332790; // A002392
+    <a id="L23"></a>Log10E = 1 / Ln10;
+<a id="L24"></a>)</pre>
+			<p>
+Floating-point limit values.
+Max is the largest finite value representable by the type.
+Min is the smallest nonzero value representable by the type.
+</p>
+
+			<pre><a id="L29"></a>const (
+    <a id="L30"></a>MaxFloat32 = 3.40282346638528859811704183484516925440e+38;  /* 2^127 * (2^24 - 1) / 2^23 */
+    <a id="L31"></a>MinFloat32 = 1.401298464324817070923729583289916131280e-45; /* 1 / 2^(127 - 1 + 23) */
+
+    <a id="L33"></a>MaxFloat64 = 1.797693134862315708145274237317043567981e+308; /* 2^1023 * (2^53 - 1) / 2^52 */
+    <a id="L34"></a>MinFloat64 = 4.940656458412465441765687928682213723651e-324; /* 1 / 2^(1023 - 1 + 52) */
+<a id="L35"></a>)</pre>
+			<p>
+Integer limit values.
+</p>
+
+			<pre><a id="L38"></a>const (
+    <a id="L39"></a>MaxInt8   = 1&lt;&lt;7 - 1;
+    <a id="L40"></a>MinInt8   = -1 &lt;&lt; 7;
+    <a id="L41"></a>MaxInt16  = 1&lt;&lt;15 - 1;
+    <a id="L42"></a>MinInt16  = -1 &lt;&lt; 15;
+    <a id="L43"></a>MaxInt32  = 1&lt;&lt;31 - 1;
+    <a id="L44"></a>MinInt32  = -1 &lt;&lt; 31;
+    <a id="L45"></a>MaxInt64  = 1&lt;&lt;63 - 1;
+    <a id="L46"></a>MinInt64  = -1 &lt;&lt; 63;
+    <a id="L47"></a>MaxUint8  = 1&lt;&lt;8 - 1;
+    <a id="L48"></a>MaxUint16 = 1&lt;&lt;16 - 1;
+    <a id="L49"></a>MaxUint32 = 1&lt;&lt;32 - 1;
+    <a id="L50"></a>MaxUint64 = 1&lt;&lt;64 - 1;
+<a id="L51"></a>)</pre>
+			<h2>func <a href="../../src/pkg/math/asin.go#L40">Acos</a></h2>
+			<p><code><a id="L40"></a>func Acos(x float64) float64</code></p>
+			<p>
+Acos returns the arc cosine of x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/asin.go#L16">Asin</a></h2>
+			<p><code><a id="L16"></a>func Asin(x float64) float64</code></p>
+			<p>
+Asin returns the arc sine of x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/atan.go#L60">Atan</a></h2>
+			<p><code><a id="L60"></a>func Atan(x float64) float64</code></p>
+			<p>
+Atan returns the arc tangent of x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/atan2.go#L11">Atan2</a></h2>
+			<p><code><a id="L11"></a>func Atan2(x, y float64) float64</code></p>
+			<p>
+Atan returns the arc tangent of y/x, using
+the signs of the two to determine the quadrant
+of the return value.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/floor.go#L22">Ceil</a></h2>
+			<p><code><a id="L22"></a>func Ceil(x float64) float64</code></p>
+			<p>
+Ceil returns the least integer value greater than or equal to x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/sin.go#L53">Cos</a></h2>
+			<p><code><a id="L53"></a>func Cos(x float64) float64</code></p>
+			<p>
+Cos returns the cosine of x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/sinh.go#L60">Cosh</a></h2>
+			<p><code><a id="L60"></a>func Cosh(x float64) float64</code></p>
+			<p>
+Cosh returns the hyperbolic cosine of x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/exp.go#L91">Exp</a></h2>
+			<p><code><a id="L91"></a>func Exp(x float64) float64</code></p>
+			<p>
+Exp returns e^x, the base-e exponential of x.
+</p>
+<p>
+Special cases are:
+</p>
+<pre>Exp(+Inf) = +Inf
+Exp(NaN) = NaN
+</pre>
+<p>
+Very large values overflow to -Inf or +Inf.
+Very small values underflow to 1.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/fabs.go#L8">Fabs</a></h2>
+			<p><code><a id="L8"></a>func Fabs(x float64) float64</code></p>
+			<p>
+Fabs returns the absolute value of x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/unsafe.go#L10">Float32bits</a></h2>
+			<p><code><a id="L10"></a>func Float32bits(f float32) uint32</code></p>
+			<p>
+Float32bits returns the IEEE 754 binary representation of f.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/unsafe.go#L14">Float32frombits</a></h2>
+			<p><code><a id="L14"></a>func Float32frombits(b uint32) float32</code></p>
+			<p>
+Float32frombits returns the floating point number corresponding
+to the IEEE 754 binary representation b.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/unsafe.go#L17">Float64bits</a></h2>
+			<p><code><a id="L17"></a>func Float64bits(f float64) uint64</code></p>
+			<p>
+Float64bits returns the IEEE 754 binary representation of f.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/unsafe.go#L21">Float64frombits</a></h2>
+			<p><code><a id="L21"></a>func Float64frombits(b uint64) float64</code></p>
+			<p>
+Float64frombits returns the floating point number corresponding
+the IEEE 754 binary representation b.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/floor.go#L9">Floor</a></h2>
+			<p><code><a id="L9"></a>func Floor(x float64) float64</code></p>
+			<p>
+Floor returns the greatest integer value less than or equal to x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/fmod.go#L13">Fmod</a></h2>
+			<p><code><a id="L13"></a>func Fmod(x, y float64) float64</code></p>
+			<p>
+Fmod returns the floating-point remainder of x/y.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/bits.go#L49">Frexp</a></h2>
+			<p><code><a id="L49"></a>func Frexp(f float64) (frac float64, exp int)</code></p>
+			<p>
+Frexp breaks f into a normalized fraction
+and an integral power of two.
+It returns frac and exp satisfying f == frac × 2&lt;sup&gt;exp&lt;/sup&gt;,
+with the absolute value of frac in the interval [½, 1).
+</p>
+
+			<h2>func <a href="../../src/pkg/math/hypot.go#L17">Hypot</a></h2>
+			<p><code><a id="L17"></a>func Hypot(p, q float64) float64</code></p>
+			<p>
+Hypot computes Sqrt(p*p + q*q), taking care to avoid
+unnecessary overflow and underflow.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/bits.go#L17">Inf</a></h2>
+			<p><code><a id="L17"></a>func Inf(sign int) float64</code></p>
+			<p>
+Inf returns positive infinity if sign &gt;= 0, negative infinity if sign &lt; 0.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/bits.go#L40">IsInf</a></h2>
+			<p><code><a id="L40"></a>func IsInf(f float64, sign int) bool</code></p>
+			<p>
+IsInf returns whether f is an infinity, according to sign.
+If sign &gt; 0, IsInf returns whether f is positive infinity.
+If sign &lt; 0, IsInf returns whether f is negative infinity.
+If sign == 0, IsInf returns whether f is either infinity.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/bits.go#L31">IsNaN</a></h2>
+			<p><code><a id="L31"></a>func IsNaN(f float64) (is bool)</code></p>
+			<p>
+IsNaN returns whether f is an IEEE 754 &ldquo;not-a-number&rdquo; value.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/bits.go#L63">Ldexp</a></h2>
+			<p><code><a id="L63"></a>func Ldexp(frac float64, exp int) float64</code></p>
+			<p>
+Ldexp is the inverse of Frexp.
+It returns frac × 2&lt;sup&gt;exp&lt;/sup&gt;.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/log.go#L77">Log</a></h2>
+			<p><code><a id="L77"></a>func Log(x float64) float64</code></p>
+			<p>
+Log returns the natural logarithm of x.
+</p>
+<p>
+Special cases are:
+</p>
+<pre>Log(+Inf) = +Inf
+Log(0) = -Inf
+Log(x &lt; 0) = NaN
+Log(NaN) = NaN
+</pre>
+
+			<h2>func <a href="../../src/pkg/math/log.go#L122">Log10</a></h2>
+			<p><code><a id="L122"></a>func Log10(x float64) float64</code></p>
+			<p>
+Log10 returns the decimal logarithm of x.
+The special cases are the same as for Log.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/bits.go#L83">Modf</a></h2>
+			<p><code><a id="L83"></a>func Modf(f float64) (int float64, frac float64)</code></p>
+			<p>
+Modf returns integer and fractional floating-point numbers
+that sum to f.
+Integer and frac have the same sign as f.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/bits.go#L28">NaN</a></h2>
+			<p><code><a id="L28"></a>func NaN() float64</code></p>
+			<p>
+NaN returns an IEEE 754 &ldquo;not-a-number&rdquo; value.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/pow.go#L9">Pow</a></h2>
+			<p><code><a id="L9"></a>func Pow(x, y float64) float64</code></p>
+			<p>
+Pow returns x**y, the base-x exponential of y.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/pow10.go#L19">Pow10</a></h2>
+			<p><code><a id="L19"></a>func Pow10(e int) float64</code></p>
+			<p>
+Pow10 returns 10**x, the base-10 exponential of x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/sin.go#L61">Sin</a></h2>
+			<p><code><a id="L61"></a>func Sin(x float64) float64</code></p>
+			<p>
+Sin returns the sine of x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/sinh.go#L21">Sinh</a></h2>
+			<p><code><a id="L21"></a>func Sinh(x float64) float64</code></p>
+			<p>
+Sinh returns the hyperbolic sine of x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/sqrt.go#L21">Sqrt</a></h2>
+			<p><code><a id="L21"></a>func Sqrt(x float64) float64</code></p>
+			<p>
+Sqrt returns the square root of x.
+</p>
+<p>
+Special cases are:
+</p>
+<pre>Sqrt(+Inf) = +Inf
+Sqrt(0) = 0
+Sqrt(x &lt; 0) = NaN
+</pre>
+
+			<h2>func <a href="../../src/pkg/math/tan.go#L13">Tan</a></h2>
+			<p><code><a id="L13"></a>func Tan(x float64) float64</code></p>
+			<p>
+Tan returns the tangent of x.
+</p>
+
+			<h2>func <a href="../../src/pkg/math/tanh.go#L17">Tanh</a></h2>
+			<p><code><a id="L17"></a>func Tanh(x float64) float64</code></p>
+			<p>
+Tanh computes the hyperbolic tangent of x.
+</p>
+
+		<h2>Bugs</h2>
+		<p>
+The manual should define the special cases for all of these functions.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

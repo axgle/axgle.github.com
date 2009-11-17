@@ -1,0 +1,843 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package os</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package os</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "os"</code></p>
+	<p>
+The os package provides a platform-independent interface to operating
+system functionality.  The design is Unix-like.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/os/dir_darwin.go">dir_darwin.go</a>
+				<a href="../../src/pkg/os/dir_linux.go">dir_linux.go</a>
+				<a href="../../src/pkg/os/dir_nacl.go">dir_nacl.go</a>
+				<a href="../../src/pkg/os/env.go">env.go</a>
+				<a href="../../src/pkg/os/error.go">error.go</a>
+				<a href="../../src/pkg/os/exec.go">exec.go</a>
+				<a href="../../src/pkg/os/file.go">file.go</a>
+				<a href="../../src/pkg/os/getwd.go">getwd.go</a>
+				<a href="../../src/pkg/os/path.go">path.go</a>
+				<a href="../../src/pkg/os/proc.go">proc.go</a>
+				<a href="../../src/pkg/os/stat_darwin.go">stat_darwin.go</a>
+				<a href="../../src/pkg/os/stat_linux.go">stat_linux.go</a>
+				<a href="../../src/pkg/os/stat_nacl.go">stat_nacl.go</a>
+				<a href="../../src/pkg/os/sys_darwin.go">sys_darwin.go</a>
+				<a href="../../src/pkg/os/sys_linux.go">sys_linux.go</a>
+				<a href="../../src/pkg/os/sys_nacl.go">sys_nacl.go</a>
+				<a href="../../src/pkg/os/time.go">time.go</a>
+				<a href="../../src/pkg/os/types.go">types.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+Flags to Open wrapping those of the underlying system. Not all flags
+may be implemented on a given system.
+</p>
+
+			<pre><a id="L52"></a>const (
+    <a id="L53"></a>O_RDONLY   = syscall.O_RDONLY;   // open the file read-only.
+    <a id="L54"></a>O_WRONLY   = syscall.O_WRONLY;   // open the file write-only.
+    <a id="L55"></a>O_RDWR     = syscall.O_RDWR;     // open the file read-write.
+    <a id="L56"></a>O_APPEND   = syscall.O_APPEND;   // open the file append-only.
+    <a id="L57"></a>O_ASYNC    = syscall.O_ASYNC;    // generate a signal when I/O is available.
+    <a id="L58"></a>O_CREAT    = syscall.O_CREAT;    // create a new file if none exists.
+    <a id="L59"></a>O_EXCL     = syscall.O_EXCL;     // used with O_CREAT, file must not exist
+    <a id="L60"></a>O_NOCTTY   = syscall.O_NOCTTY;   // do not make file the controlling tty.
+    <a id="L61"></a>O_NONBLOCK = syscall.O_NONBLOCK; // open in non-blocking mode.
+    <a id="L62"></a>O_NDELAY   = O_NONBLOCK;         // synonym for O_NONBLOCK
+    <a id="L63"></a>O_SYNC     = syscall.O_SYNC;     // open for synchronous I/O.
+    <a id="L64"></a>O_TRUNC    = syscall.O_TRUNC;    // if possible, truncate file when opened.
+    <a id="L65"></a>O_CREATE   = O_CREAT;            // create a new file if none exists.
+<a id="L66"></a>)</pre>
+			<p>
+Options for Wait.
+</p>
+
+			<pre><a id="L66"></a>const (
+    <a id="L67"></a>WNOHANG   = syscall.WNOHANG;  // Don&#39;t wait if no process has exited.
+    <a id="L68"></a>WSTOPPED  = syscall.WSTOPPED; // If set, status of stopped subprocesses is also reported.
+    <a id="L69"></a>WUNTRACED = WSTOPPED;
+    <a id="L70"></a>WRUSAGE   = 1 &lt;&lt; 20; // Record resource usage.
+<a id="L71"></a>)</pre>
+		<h2>Variables</h2>
+			<p>
+Stdin, Stdout, and Stderr are open Files pointing to the standard input,
+standard output, and standard error file descriptors.
+</p>
+
+			<pre><a id="L44"></a>var (
+    <a id="L45"></a>Stdin  = NewFile(0, &#34;/dev/stdin&#34;);
+    <a id="L46"></a>Stdout = NewFile(1, &#34;/dev/stdout&#34;);
+    <a id="L47"></a>Stderr = NewFile(2, &#34;/dev/stderr&#34;);
+<a id="L48"></a>)</pre>
+			
+			<pre><a id="L11"></a>var Args []string // provided by runtime</pre>
+			<p>
+ENOENV is the Error indicating that an environment variable does not exist.
+</p>
+
+			<pre><a id="L14"></a>var ENOENV = NewError(&#34;no such environment variable&#34;)</pre>
+			
+			<pre><a id="L12"></a>var Envs []string // provided by runtime</pre>
+			<h2>func <a href="../../src/pkg/os/file.go#L324">Chdir</a></h2>
+			<p><code><a id="L324"></a>func Chdir(dir string) Error</code></p>
+			<p>
+Chdir changes the current working directory to the named directory.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/file.go#L420">Chmod</a></h2>
+			<p><code><a id="L420"></a>func Chmod(name string, mode int) Error</code></p>
+			<p>
+Chmod changes the mode of the named file to mode.
+If the file is a symbolic link, it changes the uid and gid of the link&#39;s target.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/file.go#L437">Chown</a></h2>
+			<p><code><a id="L437"></a>func Chown(name string, uid, gid int) Error</code></p>
+			<p>
+Chown changes the numeric uid and gid of the named file.
+If the file is a symbolic link, it changes the uid and gid of the link&#39;s target.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/env.go#L66">Clearenv</a></h2>
+			<p><code><a id="L66"></a>func Clearenv()</code></p>
+			<p>
+Clearenv deletes all environment variables.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/env.go#L73">Environ</a></h2>
+			<p><code><a id="L73"></a>func Environ() []string</code></p>
+			<p>
+Environ returns an array of strings representing the environment,
+in the form &#34;key=value&#34;.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/exec.go#L40">Exec</a></h2>
+			<p><code><a id="L40"></a>func Exec(argv0 string, argv []string, envv []string) Error</code></p>
+			<p>
+Exec replaces the current process with an execution of the program
+named by argv0, with arguments argv and environment envv.
+If successful, Exec never returns.  If it fails, it returns an Error.
+ForkExec is almost always a better way to execute a program.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/proc.go#L35">Exit</a></h2>
+			<p><code><a id="L35"></a>func Exit(code int)</code></p>
+			<p>
+Exit causes the current program to exit with the given status code.
+Conventionally, code zero indicates success, non-zero an error.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/exec.go#L18">ForkExec</a></h2>
+			<p><code><a id="L18"></a>func ForkExec(argv0 string, argv []string, envv []string, dir string, fd []*File) (pid int, err Error)</code></p>
+			<p>
+ForkExec forks the current process and invokes Exec with the file, arguments,
+and environment specified by argv0, argv, and envv.  It returns the process
+id of the forked process and an Error, if any.  The fd array specifies the
+file descriptors to be set up in the new process: fd[0] will be Unix file
+descriptor 0 (standard input), fd[1] descriptor 1, and so on.  A nil entry
+will cause the child to have no open file descriptor with that index.
+If dir is not empty, the child chdirs into the directory before execing the program.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/proc.go#L25">Getegid</a></h2>
+			<p><code><a id="L25"></a>func Getegid() int</code></p>
+			<p>
+Getegid returns the numeric effective group id of the caller.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/env.go#L48">Getenv</a></h2>
+			<p><code><a id="L48"></a>func Getenv(key string) string</code></p>
+			<p>
+Getenv retrieves the value of the environment variable named by the key.
+It returns the value, which will be empty if the variable is not present.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/env.go#L33">Getenverror</a></h2>
+			<p><code><a id="L33"></a>func Getenverror(key string) (value string, err Error)</code></p>
+			<p>
+Getenverror retrieves the value of the environment variable named by the key.
+It returns the value and an error, if any.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/proc.go#L19">Geteuid</a></h2>
+			<p><code><a id="L19"></a>func Geteuid() int</code></p>
+			<p>
+Geteuid returns the numeric effective user id of the caller.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/proc.go#L22">Getgid</a></h2>
+			<p><code><a id="L22"></a>func Getgid() int</code></p>
+			<p>
+Getgid returns the numeric group id of the caller.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/proc.go#L28">Getgroups</a></h2>
+			<p><code><a id="L28"></a>func Getgroups() ([]int, Error)</code></p>
+			<p>
+Getgroups returns a list of the numeric ids of groups that the caller belongs to.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/types.go#L13">Getpagesize</a></h2>
+			<p><code><a id="L13"></a>func Getpagesize() int</code></p>
+			<p>
+Getpagesize returns the underlying system&#39;s memory page size.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/exec.go#L148">Getpid</a></h2>
+			<p><code><a id="L148"></a>func Getpid() int</code></p>
+			<p>
+Getpid returns the process id of the caller.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/exec.go#L151">Getppid</a></h2>
+			<p><code><a id="L151"></a>func Getppid() int</code></p>
+			<p>
+Getppid returns the process id of the caller&#39;s parent.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/proc.go#L16">Getuid</a></h2>
+			<p><code><a id="L16"></a>func Getuid() int</code></p>
+			<p>
+Getuid returns the numeric user id of the caller.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/getwd.go#L15">Getwd</a></h2>
+			<p><code><a id="L15"></a>func Getwd() (string, Error)</code></p>
+			<p>
+Getwd returns a rooted path name corresponding to the
+current directory.  If the current directory can be
+reached via multiple paths (due to symbolic links),
+Getwd may return any one of them.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/sys_nacl.go#L7">Hostname</a></h2>
+			<p><code><a id="L7"></a>func Hostname() (name string, err Error)</code></p>
+			
+			<h2>func <a href="../../src/pkg/os/file.go#L446">Lchown</a></h2>
+			<p><code><a id="L446"></a>func Lchown(name string, uid, gid int) Error</code></p>
+			<p>
+Lchown changes the numeric uid and gid of the named file.
+If the file is a symbolic link, it changes the uid and gid of the link itself.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/file.go#L384">Link</a></h2>
+			<p><code><a id="L384"></a>func Link(oldname, newname string) Error</code></p>
+			<p>
+Link creates a hard link.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/file.go#L244">Mkdir</a></h2>
+			<p><code><a id="L244"></a>func Mkdir(name string, perm int) Error</code></p>
+			<p>
+Mkdir creates a new directory with the specified name and permission bits.
+It returns an error, if any.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/path.go#L15">MkdirAll</a></h2>
+			<p><code><a id="L15"></a>func MkdirAll(path string, perm int) Error</code></p>
+			<p>
+MkdirAll creates a directory named path,
+along with any necessary parents, and returns nil,
+or else returns an error.
+The permission bits perm are used for all
+directories that MkdirAll creates.
+If path is already a directory, MkdirAll does nothing
+and returns nil.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/file.go#L403">Readlink</a></h2>
+			<p><code><a id="L403"></a>func Readlink(name string) (string, Error)</code></p>
+			<p>
+Readlink reads the contents of a symbolic link: the destination of
+the link.  It returns the contents and an Error, if any.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/file.go#L341">Remove</a></h2>
+			<p><code><a id="L341"></a>func Remove(name string) Error</code></p>
+			<p>
+Remove removes the named file or directory.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/path.go#L62">RemoveAll</a></h2>
+			<p><code><a id="L62"></a>func RemoveAll(path string) Error</code></p>
+			<p>
+RemoveAll removes path and any children it contains.
+It removes everything it can but returns the first error
+it encounters.  If the path does not exist, RemoveAll
+returns nil (no error).
+</p>
+
+			<h2>func <a href="../../src/pkg/os/env.go#L55">Setenv</a></h2>
+			<p><code><a id="L55"></a>func Setenv(key, value string) Error</code></p>
+			<p>
+Setenv sets the value of the environment variable named by the key.
+It returns an Error, if any.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/file.go#L393">Symlink</a></h2>
+			<p><code><a id="L393"></a>func Symlink(oldname, newname string) Error</code></p>
+			<p>
+Symlink creates a symbolic link.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/time.go#L14">Time</a></h2>
+			<p><code><a id="L14"></a>func Time() (sec int64, nsec int64, err Error)</code></p>
+			<p>
+Time returns the current time, in whole seconds and
+fractional nanoseconds, plus an Error if any. The current
+time is thus 1e9*sec+nsec, in nanoseconds.  The zero of
+time is the Unix epoch.
+</p>
+
+			<h2>func <a href="../../src/pkg/os/file.go#L463">Truncate</a></h2>
+			<p><code><a id="L463"></a>func Truncate(name string, size int64) Error</code></p>
+			<p>
+Truncate changes the size of the named file.
+If the file is a symbolic link, it changes the size of the link&#39;s target.
+</p>
+
+			<h2>type <a href="../../src/pkg/os/types.go#L16"><a id="L16"></a>Dir</a></h2>
+			<p>
+A Dir describes a file and is returned by Stat, Fstat, and Lstat
+</p>
+
+			<p><pre><a id="L16"></a>type Dir struct {
+    <a id="L17"></a>Dev             uint64; // device number of file system holding file.
+    <a id="L18"></a>Ino             uint64; // inode number.
+    <a id="L19"></a>Nlink           uint64; // number of hard links.
+    <a id="L20"></a>Mode            uint32; // permission and mode bits.
+    <a id="L21"></a>Uid             uint32; // user id of owner.
+    <a id="L22"></a>Gid             uint32; // group id of owner.
+    <a id="L23"></a>Rdev            uint64; // device type for special file.
+    <a id="L24"></a>Size            uint64; // length in bytes.
+    <a id="L25"></a>Blksize         uint64; // size of blocks, in bytes.
+    <a id="L26"></a>Blocks          uint64; // number of blocks allocated for file.
+    <a id="L27"></a>Atime_ns        uint64; // access time; nanoseconds since epoch.
+    <a id="L28"></a>Mtime_ns        uint64; // modified time; nanoseconds since epoch.
+    <a id="L29"></a>Ctime_ns        uint64; // status change time; nanoseconds since epoch.
+    <a id="L30"></a>Name            string; // name of file as presented to Open.
+    <a id="L31"></a>FollowedSymlink bool;   // followed a symlink to get this information
+<a id="L32"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/os/file.go#L287">Lstat</a></h3>
+				<p><code><a id="L287"></a>func Lstat(name string) (dir *Dir, err Error)</code></p>
+				<p>
+Lstat returns the Dir structure describing the named file and an error, if any.
+If the file is a symbolic link, the returned Dir describes the
+symbolic link.  Lstat makes no attempt to follow the link.
+</p>
+
+				<h3>func <a href="../../src/pkg/os/file.go#L257">Stat</a></h3>
+				<p><code><a id="L257"></a>func Stat(name string) (dir *Dir, err Error)</code></p>
+				<p>
+Stat returns a Dir structure describing the named file and an error, if any.
+If name names a valid symbolic link, the returned Dir describes
+the file pointed at by the link and has dir.FollowedSymlink set to true.
+If name names an invalid symbolic link, the returned Dir describes
+the link itself and has dir.FollowedSymlink set to false.
+</p>
+
+				<h3>func (<a id="L44"></a>*Dir) <a href="../../src/pkg/os/types.go#L44">IsBlock</a></h3>
+				<p><code><a id="L44"></a>func (dir *Dir) IsBlock() bool</code></p>
+				<p>
+IsBlock reports whether the Dir describes a block special file.
+</p>
+
+				<h3>func (<a id="L38"></a>*Dir) <a href="../../src/pkg/os/types.go#L38">IsChar</a></h3>
+				<p><code><a id="L38"></a>func (dir *Dir) IsChar() bool</code></p>
+				<p>
+IsChar reports whether the Dir describes a character special file.
+</p>
+
+				<h3>func (<a id="L41"></a>*Dir) <a href="../../src/pkg/os/types.go#L41">IsDirectory</a></h3>
+				<p><code><a id="L41"></a>func (dir *Dir) IsDirectory() bool</code></p>
+				<p>
+IsDirectory reports whether the Dir describes a directory.
+</p>
+
+				<h3>func (<a id="L35"></a>*Dir) <a href="../../src/pkg/os/types.go#L35">IsFifo</a></h3>
+				<p><code><a id="L35"></a>func (dir *Dir) IsFifo() bool</code></p>
+				<p>
+IsFifo reports whether the Dir describes a FIFO file.
+</p>
+
+				<h3>func (<a id="L47"></a>*Dir) <a href="../../src/pkg/os/types.go#L47">IsRegular</a></h3>
+				<p><code><a id="L47"></a>func (dir *Dir) IsRegular() bool</code></p>
+				<p>
+IsRegular reports whether the Dir describes a regular file.
+</p>
+
+				<h3>func (<a id="L53"></a>*Dir) <a href="../../src/pkg/os/types.go#L53">IsSocket</a></h3>
+				<p><code><a id="L53"></a>func (dir *Dir) IsSocket() bool</code></p>
+				<p>
+IsSocket reports whether the Dir describes a socket.
+</p>
+
+				<h3>func (<a id="L50"></a>*Dir) <a href="../../src/pkg/os/types.go#L50">IsSymlink</a></h3>
+				<p><code><a id="L50"></a>func (dir *Dir) IsSymlink() bool</code></p>
+				<p>
+IsSymlink reports whether the Dir describes a symbolic link.
+</p>
+
+				<h3>func (<a id="L56"></a>*Dir) <a href="../../src/pkg/os/types.go#L56">Permission</a></h3>
+				<p><code><a id="L56"></a>func (dir *Dir) Permission() int</code></p>
+				<p>
+Permission returns the file permission bits.
+</p>
+
+			<h2>type <a href="../../src/pkg/os/error.go#L29"><a id="L29"></a>Errno</a></h2>
+			<p>
+Errno is the Unix error number.  Names such as EINVAL are simple
+wrappers to convert the error number into an Error.
+</p>
+
+			<p><pre><a id="L29"></a>type Errno int64</pre></p>
+				<h3>func (<a id="L31"></a>Errno) <a href="../../src/pkg/os/error.go#L31">String</a></h3>
+				<p><code><a id="L31"></a>func (e Errno) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/os/error.go#L10"><a id="L10"></a>Error</a></h2>
+			<p>
+An Error can represent any printable error condition.
+</p>
+
+			<p><pre><a id="L10"></a>type Error interface {
+    <a id="L11"></a>String() string;
+<a id="L12"></a>}</pre></p>
+				<p>
+Commonly known Unix errors.
+</p>
+
+				<pre><a id="L34"></a>var (
+    <a id="L35"></a>EPERM        Error = Errno(syscall.EPERM);
+    <a id="L36"></a>ENOENT       Error = Errno(syscall.ENOENT);
+    <a id="L37"></a>ESRCH        Error = Errno(syscall.ESRCH);
+    <a id="L38"></a>EINTR        Error = Errno(syscall.EINTR);
+    <a id="L39"></a>EIO          Error = Errno(syscall.EIO);
+    <a id="L40"></a>ENXIO        Error = Errno(syscall.ENXIO);
+    <a id="L41"></a>E2BIG        Error = Errno(syscall.E2BIG);
+    <a id="L42"></a>ENOEXEC      Error = Errno(syscall.ENOEXEC);
+    <a id="L43"></a>EBADF        Error = Errno(syscall.EBADF);
+    <a id="L44"></a>ECHILD       Error = Errno(syscall.ECHILD);
+    <a id="L45"></a>EDEADLK      Error = Errno(syscall.EDEADLK);
+    <a id="L46"></a>ENOMEM       Error = Errno(syscall.ENOMEM);
+    <a id="L47"></a>EACCES       Error = Errno(syscall.EACCES);
+    <a id="L48"></a>EFAULT       Error = Errno(syscall.EFAULT);
+    <a id="L49"></a>EBUSY        Error = Errno(syscall.EBUSY);
+    <a id="L50"></a>EEXIST       Error = Errno(syscall.EEXIST);
+    <a id="L51"></a>EXDEV        Error = Errno(syscall.EXDEV);
+    <a id="L52"></a>ENODEV       Error = Errno(syscall.ENODEV);
+    <a id="L53"></a>ENOTDIR      Error = Errno(syscall.ENOTDIR);
+    <a id="L54"></a>EISDIR       Error = Errno(syscall.EISDIR);
+    <a id="L55"></a>EINVAL       Error = Errno(syscall.EINVAL);
+    <a id="L56"></a>ENFILE       Error = Errno(syscall.ENFILE);
+    <a id="L57"></a>EMFILE       Error = Errno(syscall.EMFILE);
+    <a id="L58"></a>ENOTTY       Error = Errno(syscall.ENOTTY);
+    <a id="L59"></a>EFBIG        Error = Errno(syscall.EFBIG);
+    <a id="L60"></a>ENOSPC       Error = Errno(syscall.ENOSPC);
+    <a id="L61"></a>ESPIPE       Error = Errno(syscall.ESPIPE);
+    <a id="L62"></a>EROFS        Error = Errno(syscall.EROFS);
+    <a id="L63"></a>EMLINK       Error = Errno(syscall.EMLINK);
+    <a id="L64"></a>EPIPE        Error = Errno(syscall.EPIPE);
+    <a id="L65"></a>EAGAIN       Error = Errno(syscall.EAGAIN);
+    <a id="L66"></a>EDOM         Error = Errno(syscall.EDOM);
+    <a id="L67"></a>ERANGE       Error = Errno(syscall.ERANGE);
+    <a id="L68"></a>EADDRINUSE   Error = Errno(syscall.EADDRINUSE);
+    <a id="L69"></a>ECONNREFUSED Error = Errno(syscall.ECONNREFUSED);
+    <a id="L70"></a>ENAMETOOLONG Error = Errno(syscall.ENAMETOOLONG);
+    <a id="L71"></a>EAFNOSUPPORT Error = Errno(syscall.EAFNOSUPPORT);
+<a id="L72"></a>)</pre>
+				<p>
+EOF is the Error returned by Read when no more input is available.
+Functions should return EOF only to signal a graceful end of input.
+If the EOF occurs unexpectedly in a structured data stream,
+the appropriate error is either io.ErrUnexpectedEOF or some other error
+giving more detail.
+</p>
+
+				<pre><a id="L109"></a>var EOF Error = eofError(0)</pre>
+				<h3>func <a href="../../src/pkg/os/error.go#L25">NewError</a></h3>
+				<p><code><a id="L25"></a>func NewError(s string) Error</code></p>
+				<p>
+NewError converts s to an ErrorString, which satisfies the Error interface.
+</p>
+
+				<h3>func <a href="../../src/pkg/os/error.go#L98">NewSyscallError</a></h3>
+				<p><code><a id="L98"></a>func NewSyscallError(syscall string, errno int) Error</code></p>
+				<p>
+NewSyscallError returns, as an Error, a new SyscallError
+with the given system call name and error number.
+As a convenience, if errno is 0, NewSyscallError returns nil.
+</p>
+
+			<h2>type <a href="../../src/pkg/os/error.go#L16"><a id="L16"></a>ErrorString</a></h2>
+			<p>
+A helper type that can be embedded or wrapped to simplify satisfying
+Error.
+</p>
+
+			<p><pre><a id="L16"></a>type ErrorString string</pre></p>
+				<h3>func (<a id="L18"></a>ErrorString) <a href="../../src/pkg/os/error.go#L18">String</a></h3>
+				<p><code><a id="L18"></a>func (e ErrorString) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/os/file.go#L21"><a id="L21"></a>File</a></h2>
+			<p>
+File represents an open file descriptor.
+</p>
+
+			<p><pre><a id="L21"></a>type File struct {
+    // contains unexported fields
+<a id="L26"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/os/file.go#L35">NewFile</a></h3>
+				<p><code><a id="L35"></a>func NewFile(fd int, name string) *File</code></p>
+				<p>
+NewFile returns a new File with the given file descriptor and name.
+</p>
+
+				<h3>func <a href="../../src/pkg/os/file.go#L71">Open</a></h3>
+				<p><code><a id="L71"></a>func Open(name string, flag int, perm int) (file *File, err Error)</code></p>
+				<p>
+Open opens the named file with specified flag (O_RDONLY etc.) and perm, (0666 etc.)
+if applicable.  If successful, methods on the returned File can be used for I/O.
+It returns the File and an Error, if any.
+</p>
+
+				<h3>func <a href="../../src/pkg/os/file.go#L225">Pipe</a></h3>
+				<p><code><a id="L225"></a>func Pipe() (r *File, w *File, err Error)</code></p>
+				<p>
+Pipe returns a connected pair of Files; reads from r return bytes written to w.
+It returns the files and an Error, if any.
+</p>
+
+				<h3>func (<a id="L333"></a>*File) <a href="../../src/pkg/os/file.go#L333">Chdir</a></h3>
+				<p><code><a id="L333"></a>func (f *File) Chdir() Error</code></p>
+				<p>
+Chdir changes the current working directory to the file,
+which must be a directory.
+</p>
+
+				<h3>func (<a id="L428"></a>*File) <a href="../../src/pkg/os/file.go#L428">Chmod</a></h3>
+				<p><code><a id="L428"></a>func (f *File) Chmod(mode int) Error</code></p>
+				<p>
+Chmod changes the mode of the file to mode.
+</p>
+
+				<h3>func (<a id="L454"></a>*File) <a href="../../src/pkg/os/file.go#L454">Chown</a></h3>
+				<p><code><a id="L454"></a>func (f *File) Chown(uid, gid int) Error</code></p>
+				<p>
+Chown changes the numeric uid and gid of the named file.
+</p>
+
+				<h3>func (<a id="L88"></a>*File) <a href="../../src/pkg/os/file.go#L88">Close</a></h3>
+				<p><code><a id="L88"></a>func (file *File) Close() Error</code></p>
+				<p>
+Close closes the File, rendering it unusable for I/O.
+It returns an Error, if any.
+</p>
+
+				<h3>func (<a id="L29"></a>*File) <a href="../../src/pkg/os/file.go#L29">Fd</a></h3>
+				<p><code><a id="L29"></a>func (file *File) Fd() int</code></p>
+				<p>
+Fd returns the integer Unix file descriptor referencing the open file.
+</p>
+
+				<h3>func (<a id="L32"></a>*File) <a href="../../src/pkg/os/file.go#L32">Name</a></h3>
+				<p><code><a id="L32"></a>func (file *File) Name() string</code></p>
+				<p>
+Name returns the name of the file as presented to Open.
+</p>
+
+				<h3>func (<a id="L114"></a>*File) <a href="../../src/pkg/os/file.go#L114">Read</a></h3>
+				<p><code><a id="L114"></a>func (file *File) Read(b []byte) (n int, err Error)</code></p>
+				<p>
+Read reads up to len(b) bytes from the File.
+It returns the number of bytes read and an Error, if any.
+EOF is signaled by a zero count with err set to EOF.
+</p>
+
+				<h3>func (<a id="L135"></a>*File) <a href="../../src/pkg/os/file.go#L135">ReadAt</a></h3>
+				<p><code><a id="L135"></a>func (file *File) ReadAt(b []byte, off int64) (n int, err Error)</code></p>
+				<p>
+ReadAt reads len(b) bytes from the File starting at byte offset off.
+It returns the number of bytes read and the Error, if any.
+EOF is signaled by a zero count with err set to EOF.
+ReadAt always returns a non-nil Error when n != len(b).
+</p>
+
+				<h3>func (<a id="L301"></a>*File) <a href="../../src/pkg/os/file.go#L301">Readdir</a></h3>
+				<p><code><a id="L301"></a>func (file *File) Readdir(count int) (dirs []Dir, err Error)</code></p>
+				<p>
+Readdir reads the contents of the directory associated with file and
+returns an array of up to count Dir structures, as would be returned
+by Stat, in directory order.  Subsequent calls on the same file will yield further Dirs.
+A negative count means to read until EOF.
+Readdir returns the array and an Error, if any.
+</p>
+
+				<h3>func (<a id="L21"></a>*File) <a href="../../src/pkg/os/dir_darwin.go#L21">Readdirnames</a></h3>
+				<p><code><a id="L21"></a>func (file *File) Readdirnames(count int) (names []string, err Error)</code></p>
+				<p>
+Readdirnames reads the contents of the directory associated with file and
+returns an array of up to count names, in directory order.  Subsequent
+calls on the same file will yield further names.
+A negative count means to read until EOF.
+Readdirnames returns the array and an Error, if any.
+</p>
+
+				<h3>func (<a id="L201"></a>*File) <a href="../../src/pkg/os/file.go#L201">Seek</a></h3>
+				<p><code><a id="L201"></a>func (file *File) Seek(offset int64, whence int) (ret int64, err Error)</code></p>
+				<p>
+Seek sets the offset for the next Read or Write on file to offset, interpreted
+according to whence: 0 means relative to the origin of the file, 1 means
+relative to the current offset, and 2 means relative to the end.
+It returns the new offset and an Error, if any.
+</p>
+
+				<h3>func (<a id="L275"></a>*File) <a href="../../src/pkg/os/file.go#L275">Stat</a></h3>
+				<p><code><a id="L275"></a>func (file *File) Stat() (dir *Dir, err Error)</code></p>
+				<p>
+Stat returns the Dir structure describing file.
+It returns the Dir and an error, if any.
+</p>
+
+				<h3>func (<a id="L472"></a>*File) <a href="../../src/pkg/os/file.go#L472">Truncate</a></h3>
+				<p><code><a id="L472"></a>func (f *File) Truncate(size int64) Error</code></p>
+				<p>
+Truncate changes the size of the file.
+It does not change the I/O offset.
+</p>
+
+				<h3>func (<a id="L155"></a>*File) <a href="../../src/pkg/os/file.go#L155">Write</a></h3>
+				<p><code><a id="L155"></a>func (file *File) Write(b []byte) (n int, err Error)</code></p>
+				<p>
+Write writes len(b) bytes to the File.
+It returns the number of bytes written and an Error, if any.
+Write returns a non-nil Error when n != len(b).
+</p>
+
+				<h3>func (<a id="L180"></a>*File) <a href="../../src/pkg/os/file.go#L180">WriteAt</a></h3>
+				<p><code><a id="L180"></a>func (file *File) WriteAt(b []byte, off int64) (n int, err Error)</code></p>
+				<p>
+WriteAt writes len(b) bytes to the File starting at byte offset off.
+It returns the number of bytes written and an Error, if any.
+WriteAt returns a non-nil Error when n != len(b).
+</p>
+
+				<h3>func (<a id="L214"></a>*File) <a href="../../src/pkg/os/file.go#L214">WriteString</a></h3>
+				<p><code><a id="L214"></a>func (file *File) WriteString(s string) (ret int, err Error)</code></p>
+				<p>
+WriteString is like Write, but writes the contents of string s rather than
+an array of bytes.
+</p>
+
+			<h2>type <a href="../../src/pkg/os/file.go#L372"><a id="L372"></a>LinkError</a></h2>
+			<p>
+LinkError records an error during a link or symlink
+system call and the paths that caused it.
+</p>
+
+			<p><pre><a id="L372"></a>type LinkError struct {
+    <a id="L373"></a>Op    string;
+    <a id="L374"></a>Old   string;
+    <a id="L375"></a>New   string;
+    <a id="L376"></a>Error Error;
+<a id="L377"></a>}</pre></p>
+				<h3>func (<a id="L379"></a>*LinkError) <a href="../../src/pkg/os/file.go#L379">String</a></h3>
+				<p><code><a id="L379"></a>func (e *LinkError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/os/error.go#L75"><a id="L75"></a>PathError</a></h2>
+			<p>
+PathError records an error and the operation and file path that caused it.
+</p>
+
+			<p><pre><a id="L75"></a>type PathError struct {
+    <a id="L76"></a>Op    string;
+    <a id="L77"></a>Path  string;
+    <a id="L78"></a>Error Error;
+<a id="L79"></a>}</pre></p>
+				<h3>func (<a id="L81"></a>*PathError) <a href="../../src/pkg/os/error.go#L81">String</a></h3>
+				<p><code><a id="L81"></a>func (e *PathError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/os/error.go#L84"><a id="L84"></a>SyscallError</a></h2>
+			<p>
+SyscallError records an error from a specific system call.
+</p>
+
+			<p><pre><a id="L84"></a>type SyscallError struct {
+    <a id="L85"></a>Syscall string;
+    <a id="L86"></a>Errno   Errno;
+<a id="L87"></a>}</pre></p>
+				<h3>func (<a id="L89"></a>*SyscallError) <a href="../../src/pkg/os/error.go#L89">String</a></h3>
+				<p><code><a id="L89"></a>func (e *SyscallError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/os/exec.go#L59"><a id="L59"></a>Waitmsg</a></h2>
+			<p>
+Waitmsg stores the information about an exited process as reported by Wait.
+</p>
+
+			<p><pre><a id="L59"></a>type Waitmsg struct {
+    <a id="L60"></a>Pid                 int;             // The process&#39;s id.
+    <a id="L61"></a>syscall.WaitStatus;                  // System-dependent status info.
+    <a id="L62"></a>Rusage              *syscall.Rusage; // System-dependent resource usage info.
+<a id="L63"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/os/exec.go#L80">Wait</a></h3>
+				<p><code><a id="L80"></a>func Wait(pid int, options int) (w *Waitmsg, err Error)</code></p>
+				<p>
+Wait waits for process pid to exit or stop, and then returns a
+Waitmsg describing its status and an Error, if any. The options
+(WNOHANG etc.) affect the behavior of the Wait call.
+</p>
+
+				<h3>func (<a id="L125"></a>Waitmsg) <a href="../../src/pkg/os/exec.go#L125">String</a></h3>
+				<p><code><a id="L125"></a>func (w Waitmsg) String() string</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

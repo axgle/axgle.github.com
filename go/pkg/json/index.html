@@ -1,0 +1,372 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package json</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:46:16 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package json</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "json"</code></p>
+	<p>
+The json package implements a simple parser and
+representation for JSON (JavaScript Object Notation),
+as defined at http://www.json.org/.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/json/generic.go">generic.go</a>
+				<a href="../../src/pkg/json/parse.go">parse.go</a>
+				<a href="../../src/pkg/json/struct.go">struct.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+Integers identifying the data type in the Json interface.
+</p>
+
+			<pre><a id="L18"></a>const (
+    <a id="L19"></a>StringKind = iota;
+    <a id="L20"></a>NumberKind;
+    <a id="L21"></a>MapKind; // JSON term is &#34;Object&#34;, but in Go, it&#39;s a map
+    <a id="L22"></a>ArrayKind;
+    <a id="L23"></a>BoolKind;
+    <a id="L24"></a>NullKind;
+<a id="L25"></a>)</pre>
+			<h2>func <a href="../../src/pkg/json/generic.go#L197">Equal</a></h2>
+			<p><code><a id="L197"></a>func Equal(a, b Json) bool</code></p>
+			<p>
+Equal returns whether a and b are indistinguishable JSON objects.
+</p>
+
+			<h2>func <a href="../../src/pkg/json/generic.go#L44">JsonToString</a></h2>
+			<p><code><a id="L44"></a>func JsonToString(j Json) string</code></p>
+			<p>
+JsonToString returns the textual JSON syntax representation
+for the JSON object j.
+</p>
+<p>
+JsonToString differs from j.String() in the handling
+of string objects.  If j represents the string abc,
+j.String() == `abc`, but JsonToString(j) == `&#34;abc&#34;`.
+</p>
+
+			<h2>func <a href="../../src/pkg/json/parse.go#L421">Parse</a></h2>
+			<p><code><a id="L421"></a>func Parse(s string, builder Builder) (ok bool, errindx int, errtok string)</code></p>
+			<p>
+Parse parses the JSON syntax string s and makes calls to
+the builder to construct a parsed representation.
+On success, it returns with ok set to true.
+On error, it returns with ok set to false, errindx set
+to the byte index in s where a syntax error occurred,
+and errtok set to the offending token.
+</p>
+
+			<h2>func <a href="../../src/pkg/json/parse.go#L132">Quote</a></h2>
+			<p><code><a id="L132"></a>func Quote(s string) string</code></p>
+			<p>
+Quote quotes the raw string s using JSON syntax,
+so that Unquote(Quote(s)) = s, true.
+</p>
+
+			<h2>func <a href="../../src/pkg/json/struct.go#L285">Unmarshal</a></h2>
+			<p><code><a id="L285"></a>func Unmarshal(s string, val interface{}) (ok bool, errtok string)</code></p>
+			<p>
+Unmarshal parses the JSON syntax string s and fills in
+an arbitrary struct or array pointed at by val.
+It uses the reflect package to assign to fields
+and arrays embedded in val.  Well-formed data that does not fit
+into the struct is discarded.
+</p>
+<p>
+For example, given these definitions:
+</p>
+<pre>type Email struct {
+	Where string;
+	Addr string;
+}
+
+type Result struct {
+	Name string;
+	Phone string;
+	Email []Email
+}
+
+var r = Result{ &#34;name&#34;, &#34;phone&#34;, nil }
+</pre>
+<p>
+unmarshalling the JSON syntax string
+</p>
+<pre>{
+  &#34;email&#34;: [
+    {
+      &#34;where&#34;: &#34;home&#34;,
+      &#34;addr&#34;: &#34;gre@example.com&#34;
+    },
+    {
+      &#34;where&#34;: &#34;work&#34;,
+      &#34;addr&#34;: &#34;gre@work.com&#34;
+    }
+  ],
+  &#34;name&#34;: &#34;Grace R. Emlin&#34;,
+  &#34;address&#34;: &#34;123 Main Street&#34;
+}
+</pre>
+<p>
+via Unmarshal(s, &amp;r) is equivalent to assigning
+</p>
+<pre>r = Result{
+	&#34;Grace R. Emlin&#34;,	// name
+	&#34;phone&#34;,		// no phone given
+	[]Email{
+		Email{ &#34;home&#34;, &#34;gre@example.com&#34; },
+		Email{ &#34;work&#34;, &#34;gre@work.com&#34; }
+	}
+}
+</pre>
+<p>
+Note that the field r.Phone has not been modified and
+that the JSON field &#34;address&#34; was discarded.
+</p>
+<p>
+Because Unmarshal uses the reflect package, it can only
+assign to upper case fields.  Unmarshal uses a case-insensitive
+comparison to match JSON field names to struct field names.
+</p>
+<p>
+On success, Unmarshal returns with ok set to true.
+On a syntax error, it returns with ok set to false and errtok
+set to the offending token.
+</p>
+
+			<h2>func <a href="../../src/pkg/json/parse.go#L57">Unquote</a></h2>
+			<p><code><a id="L57"></a>func Unquote(s string) (t string, ok bool)</code></p>
+			<p>
+Unquote unquotes the JSON-quoted string s,
+returning a raw string t.  If s is not a valid
+JSON-quoted string, Unquote returns with ok set to false.
+</p>
+
+			<h2>type <a href="../../src/pkg/json/parse.go#L298"><a id="L298"></a>Builder</a></h2>
+			<p>
+A Builder is an interface implemented by clients and passed
+to the JSON parser.  It gives clients full control over the
+eventual representation returned by the parser.
+</p>
+
+			<p><pre><a id="L298"></a>type Builder interface {
+    <a id="L299"></a>// Set value
+    <a id="L300"></a>Int64(i int64);
+    <a id="L301"></a>Uint64(i uint64);
+    <a id="L302"></a>Float64(f float64);
+    <a id="L303"></a>String(s string);
+    <a id="L304"></a>Bool(b bool);
+    <a id="L305"></a>Null();
+    <a id="L306"></a>Array();
+    <a id="L307"></a>Map();
+
+    <a id="L309"></a>// Create sub-Builders
+    <a id="L310"></a>Elem(i int) Builder;
+    <a id="L311"></a>Key(s string) Builder;
+
+    <a id="L313"></a>// Flush changes to parent Builder if necessary.
+    <a id="L314"></a>Flush();
+<a id="L315"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/json/generic.go#L28"><a id="L28"></a>Json</a></h2>
+			<p>
+The Json interface is implemented by all JSON objects.
+</p>
+
+			<p><pre><a id="L28"></a>type Json interface {
+    <a id="L29"></a>Kind() int;         // StringKind, NumberKind, etc.
+    <a id="L30"></a>String() string;    // a string form (any kind)
+    <a id="L31"></a>Number() float64;   // numeric form (NumberKind)
+    <a id="L32"></a>Bool() bool;        // boolean (BoolKind)
+    <a id="L33"></a>Get(s string) Json; // field lookup (MapKind)
+    <a id="L34"></a>Elem(i int) Json;   // element lookup (ArrayKind)
+    <a id="L35"></a>Len() int;          // length (ArrayKind, MapKind)
+<a id="L36"></a>}</pre></p>
+				<p>
+Null is the JSON object representing the null data object.
+</p>
+
+				<pre><a id="L57"></a>var Null Json = &amp;_Null{}</pre>
+				<h3>func <a href="../../src/pkg/json/generic.go#L324">StringToJson</a></h3>
+				<p><code><a id="L324"></a>func StringToJson(s string) (json Json, ok bool, errtok string)</code></p>
+				<p>
+StringToJson parses the string s as a JSON-syntax string
+and returns the generic JSON object representation.
+On success, StringToJson returns with ok set to true and errtok empty.
+If StringToJson encounters a syntax error, it returns with
+ok set to false and errtok set to a fragment of the offending syntax.
+</p>
+
+				<h3>func <a href="../../src/pkg/json/generic.go#L170">Walk</a></h3>
+				<p><code><a id="L170"></a>func Walk(j Json, path string) Json</code></p>
+				<p>
+Walk evaluates path relative to the JSON object j.
+Path is taken as a sequence of slash-separated field names
+or numbers that can be used to index into JSON map and
+array objects.
+</p>
+<p>
+For example, if j is the JSON object for
+{&#34;abc&#34;: [true, false]}, then Walk(j, &#34;abc/1&#34;) returns the
+JSON object for true.
+</p>
+
+		<h2>Bugs</h2>
+		<p>
+The json Builder interface needs to be
+reconciled with the xml Builder interface.
+</p>
+
+		<p>
+StringToJson should return an os.Error instead of a bool.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

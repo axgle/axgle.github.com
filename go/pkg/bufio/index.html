@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package bufio</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package bufio</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "bufio"</code></p>
+	<p>
+This package implements buffered I/O.  It wraps an io.Reader or io.Writer
+object, creating another object (Reader or Writer) that also implements
+the interface but provides buffering and some help for textual I/O.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/bufio/bufio.go">bufio.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			
+			<pre><a id="L27"></a>var (
+    <a id="L28"></a>ErrInvalidUnreadByte os.Error = &amp;Error{&#34;bufio: invalid use of UnreadByte&#34;};
+    <a id="L29"></a>ErrBufferFull        os.Error = &amp;Error{&#34;bufio: buffer full&#34;};
+<a id="L31"></a>)</pre>
+			<h2>type <a href="../../src/pkg/bufio/bufio.go#L34"><a id="L34"></a>BufSizeError</a></h2>
+			<p>
+BufSizeError is the error representing an invalid buffer size.
+</p>
+
+			<p><pre><a id="L34"></a>type BufSizeError int</pre></p>
+				<h3>func (<a id="L36"></a>BufSizeError) <a href="../../src/pkg/bufio/bufio.go#L36">String</a></h3>
+				<p><code><a id="L36"></a>func (b BufSizeError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/bufio/bufio.go#L23"><a id="L23"></a>Error</a></h2>
+			<p>
+Errors introduced by this package.
+</p>
+
+			<p><pre><a id="L23"></a>type Error struct {
+    <a id="L24"></a>os.ErrorString;
+<a id="L25"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/bufio/bufio.go#L479"><a id="L479"></a>ReadWriter</a></h2>
+			<p>
+ReadWriter stores pointers to a Reader and a Writer.
+It implements io.ReadWriter.
+</p>
+
+			<p><pre><a id="L479"></a>type ReadWriter struct {
+    <a id="L480"></a>*Reader;
+    <a id="L481"></a>*Writer;
+<a id="L482"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/bufio/bufio.go#L485">NewReadWriter</a></h3>
+				<p><code><a id="L485"></a>func NewReadWriter(r *Reader, w *Writer) *ReadWriter</code></p>
+				<p>
+NewReadWriter allocates a new ReadWriter that dispatches to r and w.
+</p>
+
+			<h2>type <a href="../../src/pkg/bufio/bufio.go#L50"><a id="L50"></a>Reader</a></h2>
+			<p>
+Reader implements buffering for an io.Reader object.
+</p>
+
+			<p><pre><a id="L50"></a>type Reader struct {
+    // contains unexported fields
+<a id="L56"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/bufio/bufio.go#L79">NewReader</a></h3>
+				<p><code><a id="L79"></a>func NewReader(rd io.Reader) *Reader</code></p>
+				<p>
+NewReader returns a new Reader whose buffer has the default size.
+</p>
+
+				<h3>func <a href="../../src/pkg/bufio/bufio.go#L62">NewReaderSize</a></h3>
+				<p><code><a id="L62"></a>func NewReaderSize(rd io.Reader, size int) (*Reader, os.Error)</code></p>
+				<p>
+NewReaderSize creates a new Reader whose buffer has the specified size,
+which must be greater than zero.  If the argument io.Reader is already a
+Reader with large enough size, it returns the underlying Reader.
+It returns the Reader and any error.
+</p>
+
+				<h3>func (<a id="L208"></a>*Reader) <a href="../../src/pkg/bufio/bufio.go#L208">Buffered</a></h3>
+				<p><code><a id="L208"></a>func (b *Reader) Buffered() int</code></p>
+				<p>
+Buffered returns the number of bytes that can be read from the current buffer.
+</p>
+
+				<h3>func (<a id="L112"></a>*Reader) <a href="../../src/pkg/bufio/bufio.go#L112">Read</a></h3>
+				<p><code><a id="L112"></a>func (b *Reader) Read(p []byte) (nn int, err os.Error)</code></p>
+				<p>
+Read reads data into p.
+It returns the number of bytes read into p.
+If nn &lt; len(p), also returns an error explaining
+why the read is short.  At EOF, the count will be
+zero and err will be os.EOF.
+</p>
+
+				<h3>func (<a id="L148"></a>*Reader) <a href="../../src/pkg/bufio/bufio.go#L148">ReadByte</a></h3>
+				<p><code><a id="L148"></a>func (b *Reader) ReadByte() (c byte, err os.Error)</code></p>
+				<p>
+ReadByte reads and returns a single byte.
+If no byte is available, returns an error.
+</p>
+
+				<h3>func (<a id="L259"></a>*Reader) <a href="../../src/pkg/bufio/bufio.go#L259">ReadBytes</a></h3>
+				<p><code><a id="L259"></a>func (b *Reader) ReadBytes(delim byte) (line []byte, err os.Error)</code></p>
+				<p>
+ReadBytes reads until the first occurrence of delim in the input,
+returning a string containing the data up to and including the delimiter.
+If ReadBytes encounters an error before finding a delimiter,
+it returns the data read before the error and the error itself (often os.EOF).
+ReadBytes returns err != nil if and only if line does not end in delim.
+</p>
+
+				<h3>func (<a id="L180"></a>*Reader) <a href="../../src/pkg/bufio/bufio.go#L180">ReadRune</a></h3>
+				<p><code><a id="L180"></a>func (b *Reader) ReadRune() (rune int, size int, err os.Error)</code></p>
+				<p>
+ReadRune reads a single UTF-8 encoded Unicode character and returns the
+rune and its size in bytes.
+</p>
+
+				<h3>func (<a id="L220"></a>*Reader) <a href="../../src/pkg/bufio/bufio.go#L220">ReadSlice</a></h3>
+				<p><code><a id="L220"></a>func (b *Reader) ReadSlice(delim byte) (line []byte, err os.Error)</code></p>
+				<p>
+ReadSlice reads until the first occurrence of delim in the input,
+returning a slice pointing at the bytes in the buffer.
+The bytes stop being valid at the next read call.
+If ReadSlice encounters an error before finding a delimiter,
+it returns all the data in the buffer and the error itself (often os.EOF).
+ReadSlice fails with error ErrBufferFull if the buffer fills without a delim.
+Because the data returned from ReadSlice will be overwritten
+by the next I/O operation, most clients should use
+ReadBytes or ReadString instead.
+ReadSlice returns err != nil if and only if line does not end in delim.
+</p>
+
+				<h3>func (<a id="L332"></a>*Reader) <a href="../../src/pkg/bufio/bufio.go#L332">ReadString</a></h3>
+				<p><code><a id="L332"></a>func (b *Reader) ReadString(delim byte) (line string, err os.Error)</code></p>
+				<p>
+ReadString reads until the first occurrence of delim in the input,
+returning a string containing the data up to and including the delimiter.
+If ReadString encounters an error before finding a delimiter,
+it returns the data read before the error and the error itself (often os.EOF).
+ReadString returns err != nil if and only if line does not end in delim.
+</p>
+
+				<h3>func (<a id="L162"></a>*Reader) <a href="../../src/pkg/bufio/bufio.go#L162">UnreadByte</a></h3>
+				<p><code><a id="L162"></a>func (b *Reader) UnreadByte() os.Error</code></p>
+				<p>
+UnreadByte unreads the last byte.  Only the most recently read byte can be unread.
+</p>
+
+			<h2>type <a href="../../src/pkg/bufio/bufio.go#L341"><a id="L341"></a>Writer</a></h2>
+			<p>
+Writer implements buffering for an io.Writer object.
+</p>
+
+			<p><pre><a id="L341"></a>type Writer struct {
+    // contains unexported fields
+<a id="L346"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/bufio/bufio.go#L368">NewWriter</a></h3>
+				<p><code><a id="L368"></a>func NewWriter(wr io.Writer) *Writer</code></p>
+				<p>
+NewWriter returns a new Writer whose buffer has the default size.
+</p>
+
+				<h3>func <a href="../../src/pkg/bufio/bufio.go#L352">NewWriterSize</a></h3>
+				<p><code><a id="L352"></a>func NewWriterSize(wr io.Writer, size int) (*Writer, os.Error)</code></p>
+				<p>
+NewWriterSize creates a new Writer whose buffer has the specified size,
+which must be greater than zero. If the argument io.Writer is already a
+Writer with large enough size, it returns the underlying Writer.
+It returns the Writer and any error.
+</p>
+
+				<h3>func (<a id="L399"></a>*Writer) <a href="../../src/pkg/bufio/bufio.go#L399">Available</a></h3>
+				<p><code><a id="L399"></a>func (b *Writer) Available() int</code></p>
+				<p>
+Available returns how many bytes are unused in the buffer.
+</p>
+
+				<h3>func (<a id="L402"></a>*Writer) <a href="../../src/pkg/bufio/bufio.go#L402">Buffered</a></h3>
+				<p><code><a id="L402"></a>func (b *Writer) Buffered() int</code></p>
+				<p>
+Buffered returns the number of bytes that have been written into the current buffer.
+</p>
+
+				<h3>func (<a id="L378"></a>*Writer) <a href="../../src/pkg/bufio/bufio.go#L378">Flush</a></h3>
+				<p><code><a id="L378"></a>func (b *Writer) Flush() os.Error</code></p>
+				<p>
+Flush writes any buffered data to the underlying io.Writer.
+</p>
+
+				<h3>func (<a id="L408"></a>*Writer) <a href="../../src/pkg/bufio/bufio.go#L408">Write</a></h3>
+				<p><code><a id="L408"></a>func (b *Writer) Write(p []byte) (nn int, err os.Error)</code></p>
+				<p>
+Write writes the contents of p into the buffer.
+It returns the number of bytes written.
+If nn &lt; len(p), also returns an error explaining
+why the write is short.
+</p>
+
+				<h3>func (<a id="L444"></a>*Writer) <a href="../../src/pkg/bufio/bufio.go#L444">WriteByte</a></h3>
+				<p><code><a id="L444"></a>func (b *Writer) WriteByte(c byte) os.Error</code></p>
+				<p>
+WriteByte writes a single byte.
+</p>
+
+				<h3>func (<a id="L457"></a>*Writer) <a href="../../src/pkg/bufio/bufio.go#L457">WriteString</a></h3>
+				<p><code><a id="L457"></a>func (b *Writer) WriteString(s string) os.Error</code></p>
+				<p>
+WriteString writes a string.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

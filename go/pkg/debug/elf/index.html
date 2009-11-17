@@ -1,0 +1,1373 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package elf</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package elf</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "debug/elf"</code></p>
+	<p>
+Package elf implements access to ELF object files.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/debug/elf/elf.go">elf.go</a>
+				<a href="../../../src/pkg/debug/elf/file.go">file.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+Indexes into the Header.Ident array.
+</p>
+
+			<pre><a id="L50"></a>const (
+    <a id="L51"></a>EI_CLASS      = 4;  /* Class of machine. */
+    <a id="L52"></a>EI_DATA       = 5;  /* Data format. */
+    <a id="L53"></a>EI_VERSION    = 6;  /* ELF format version. */
+    <a id="L54"></a>EI_OSABI      = 7;  /* Operating system / ABI identification */
+    <a id="L55"></a>EI_ABIVERSION = 8;  /* ABI version */
+    <a id="L56"></a>EI_PAD        = 9;  /* Start of padding (per SVR4 ABI). */
+    <a id="L57"></a>EI_NIDENT     = 16; /* Size of e_ident array. */
+<a id="L58"></a>)</pre>
+			<p>
+* Magic number for the elf trampoline, chosen wisely to be an immediate
+* value.
+</p>
+
+			<pre><a id="L1276"></a>const ARM_MAGIC_TRAMP_NUMBER = 0x5c000003</pre>
+			<p>
+Initial magic number for ELF files.
+</p>
+
+			<pre><a id="L61"></a>const ELFMAG = &#34;\177ELF&#34;</pre>
+			
+			<pre><a id="L1368"></a>const Sym32Size = 16</pre>
+			
+			<pre><a id="L1474"></a>const Sym64Size = 24</pre>
+			<h2>func <a href="../../../src/pkg/debug/elf/elf.go#L1459">R_INFO</a></h2>
+			<p><code><a id="L1459"></a>func R_INFO(sym, typ uint32) uint64</code></p>
+			
+			<h2>func <a href="../../../src/pkg/debug/elf/elf.go#L1356">R_INFO32</a></h2>
+			<p><code><a id="L1356"></a>func R_INFO32(sym, typ uint32) uint32</code></p>
+			
+			<h2>func <a href="../../../src/pkg/debug/elf/elf.go#L1354">R_SYM32</a></h2>
+			<p><code><a id="L1354"></a>func R_SYM32(info uint32) uint32</code></p>
+			
+			<h2>func <a href="../../../src/pkg/debug/elf/elf.go#L1457">R_SYM64</a></h2>
+			<p><code><a id="L1457"></a>func R_SYM64(info uint64) uint32</code></p>
+			
+			<h2>func <a href="../../../src/pkg/debug/elf/elf.go#L1355">R_TYPE32</a></h2>
+			<p><code><a id="L1355"></a>func R_TYPE32(info uint32) uint32</code></p>
+			
+			<h2>func <a href="../../../src/pkg/debug/elf/elf.go#L1458">R_TYPE64</a></h2>
+			<p><code><a id="L1458"></a>func R_TYPE64(info uint64) uint32</code></p>
+			
+			<h2>func <a href="../../../src/pkg/debug/elf/elf.go#L1371">ST_TYPE</a></h2>
+			<p><code><a id="L1371"></a>func ST_TYPE(bind SymBind, typ SymType) uint8</code></p>
+			
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L80"><a id="L80"></a>Class</a></h2>
+			<p>
+Class is found in Header.Ident[EI_CLASS] and Header.Class.
+</p>
+
+			<p><pre><a id="L80"></a>type Class byte</pre></p>
+				
+				<pre><a id="L82"></a>const (
+    <a id="L83"></a>ELFCLASSNONE Class = 0; /* Unknown class. */
+    <a id="L84"></a>ELFCLASS32   Class = 1; /* 32-bit architecture. */
+    <a id="L85"></a>ELFCLASS64   Class = 2; /* 64-bit architecture. */
+<a id="L86"></a>)</pre>
+				<h3>func (<a id="L95"></a>Class) <a href="../../../src/pkg/debug/elf/elf.go#L95">GoString</a></h3>
+				<p><code><a id="L95"></a>func (i Class) GoString() string</code></p>
+				
+				<h3>func (<a id="L94"></a>Class) <a href="../../../src/pkg/debug/elf/elf.go#L94">String</a></h3>
+				<p><code><a id="L94"></a>func (i Class) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L98"><a id="L98"></a>Data</a></h2>
+			<p>
+Data is found in Header.Ident[EI_DATA] and Header.Data.
+</p>
+
+			<p><pre><a id="L98"></a>type Data byte</pre></p>
+				
+				<pre><a id="L100"></a>const (
+    <a id="L101"></a>ELFDATANONE Data = 0; /* Unknown data format. */
+    <a id="L102"></a>ELFDATA2LSB Data = 1; /* 2&#39;s complement little-endian. */
+    <a id="L103"></a>ELFDATA2MSB Data = 2; /* 2&#39;s complement big-endian. */
+<a id="L104"></a>)</pre>
+				<h3>func (<a id="L113"></a>Data) <a href="../../../src/pkg/debug/elf/elf.go#L113">GoString</a></h3>
+				<p><code><a id="L113"></a>func (i Data) GoString() string</code></p>
+				
+				<h3>func (<a id="L112"></a>Data) <a href="../../../src/pkg/debug/elf/elf.go#L112">String</a></h3>
+				<p><code><a id="L112"></a>func (i Data) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1332"><a id="L1332"></a>Dyn32</a></h2>
+			<p>
+* ELF32 Dynamic structure.  The &#34;.dynamic&#34; section contains an array of them.
+</p>
+
+			<p><pre><a id="L1332"></a>type Dyn32 struct {
+    <a id="L1333"></a>Tag int32;  /* Entry type. */
+    <a id="L1334"></a>Val uint32; /* Integer/Address value. */
+<a id="L1335"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1435"><a id="L1435"></a>Dyn64</a></h2>
+			
+			<p><pre><a id="L1435"></a>type Dyn64 struct {
+    <a id="L1436"></a>Tag int64;  /* Entry type. */
+    <a id="L1437"></a>Val uint64; /* Integer/address value */
+<a id="L1438"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L570"><a id="L570"></a>DynFlag</a></h2>
+			<p>
+DT_FLAGS values.
+</p>
+
+			<p><pre><a id="L570"></a>type DynFlag int</pre></p>
+				
+				<pre><a id="L572"></a>const (
+    <a id="L573"></a>DF_ORIGIN     DynFlag = 0x0001; /* Indicates that the object being loaded may
+                     make reference to the
+                     $ORIGIN substitution string */
+    <a id="L576"></a>DF_SYMBOLIC   DynFlag = 0x0002; /* Indicates &#34;symbolic&#34; linking. */
+    <a id="L577"></a>DF_TEXTREL    DynFlag = 0x0004; /* Indicates there may be relocations in non-writable segments. */
+    <a id="L578"></a>DF_BIND_NOW   DynFlag = 0x0008; /* Indicates that the dynamic linker should
+                     process all relocations for the object
+                     containing this entry before transferring
+                     control to the program. */
+    <a id="L582"></a>DF_STATIC_TLS DynFlag = 0x0010; /* Indicates that the shared object or
+                     executable contains code using a static
+                     thread-local storage scheme. */
+<a id="L585"></a>)</pre>
+				<h3>func (<a id="L596"></a>DynFlag) <a href="../../../src/pkg/debug/elf/elf.go#L596">GoString</a></h3>
+				<p><code><a id="L596"></a>func (i DynFlag) GoString() string</code></p>
+				
+				<h3>func (<a id="L595"></a>DynFlag) <a href="../../../src/pkg/debug/elf/elf.go#L595">String</a></h3>
+				<p><code><a id="L595"></a>func (i DynFlag) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L478"><a id="L478"></a>DynTag</a></h2>
+			<p>
+Dyn.Tag
+</p>
+
+			<p><pre><a id="L478"></a>type DynTag int</pre></p>
+				
+				<pre><a id="L480"></a>const (
+    <a id="L481"></a>DT_NULL            DynTag = 0;  /* Terminating entry. */
+    <a id="L482"></a>DT_NEEDED          DynTag = 1;  /* String table offset of a needed shared library. */
+    <a id="L483"></a>DT_PLTRELSZ        DynTag = 2;  /* Total size in bytes of PLT relocations. */
+    <a id="L484"></a>DT_PLTGOT          DynTag = 3;  /* Processor-dependent address. */
+    <a id="L485"></a>DT_HASH            DynTag = 4;  /* Address of symbol hash table. */
+    <a id="L486"></a>DT_STRTAB          DynTag = 5;  /* Address of string table. */
+    <a id="L487"></a>DT_SYMTAB          DynTag = 6;  /* Address of symbol table. */
+    <a id="L488"></a>DT_RELA            DynTag = 7;  /* Address of ElfNN_Rela relocations. */
+    <a id="L489"></a>DT_RELASZ          DynTag = 8;  /* Total size of ElfNN_Rela relocations. */
+    <a id="L490"></a>DT_RELAENT         DynTag = 9;  /* Size of each ElfNN_Rela relocation entry. */
+    <a id="L491"></a>DT_STRSZ           DynTag = 10; /* Size of string table. */
+    <a id="L492"></a>DT_SYMENT          DynTag = 11; /* Size of each symbol table entry. */
+    <a id="L493"></a>DT_INIT            DynTag = 12; /* Address of initialization function. */
+    <a id="L494"></a>DT_FINI            DynTag = 13; /* Address of finalization function. */
+    <a id="L495"></a>DT_SONAME          DynTag = 14; /* String table offset of shared object name. */
+    <a id="L496"></a>DT_RPATH           DynTag = 15; /* String table offset of library path. [sup] */
+    <a id="L497"></a>DT_SYMBOLIC        DynTag = 16; /* Indicates &#34;symbolic&#34; linking. [sup] */
+    <a id="L498"></a>DT_REL             DynTag = 17; /* Address of ElfNN_Rel relocations. */
+    <a id="L499"></a>DT_RELSZ           DynTag = 18; /* Total size of ElfNN_Rel relocations. */
+    <a id="L500"></a>DT_RELENT          DynTag = 19; /* Size of each ElfNN_Rel relocation. */
+    <a id="L501"></a>DT_PLTREL          DynTag = 20; /* Type of relocation used for PLT. */
+    <a id="L502"></a>DT_DEBUG           DynTag = 21; /* Reserved (not used). */
+    <a id="L503"></a>DT_TEXTREL         DynTag = 22; /* Indicates there may be relocations in non-writable segments. [sup] */
+    <a id="L504"></a>DT_JMPREL          DynTag = 23; /* Address of PLT relocations. */
+    <a id="L505"></a>DT_BIND_NOW        DynTag = 24; /* [sup] */
+    <a id="L506"></a>DT_INIT_ARRAY      DynTag = 25; /* Address of the array of pointers to initialization functions */
+    <a id="L507"></a>DT_FINI_ARRAY      DynTag = 26; /* Address of the array of pointers to termination functions */
+    <a id="L508"></a>DT_INIT_ARRAYSZ    DynTag = 27; /* Size in bytes of the array of initialization functions. */
+    <a id="L509"></a>DT_FINI_ARRAYSZ    DynTag = 28; /* Size in bytes of the array of terminationfunctions. */
+    <a id="L510"></a>DT_RUNPATH         DynTag = 29; /* String table offset of a null-terminated library search path string. */
+    <a id="L511"></a>DT_FLAGS           DynTag = 30; /* Object specific flag values. */
+    <a id="L512"></a>DT_ENCODING        DynTag = 32; /* Values greater than or equal to DT_ENCODING
+                          and less than DT_LOOS follow the rules for
+                          the interpretation of the d_un union
+                          as follows: even == &#39;d_ptr&#39;, even == &#39;d_val&#39;
+                          or none */
+    <a id="L517"></a>DT_PREINIT_ARRAY   DynTag = 32;         /* Address of the array of pointers to pre-initialization functions. */
+    <a id="L518"></a>DT_PREINIT_ARRAYSZ DynTag = 33;         /* Size in bytes of the array of pre-initialization functions. */
+    <a id="L519"></a>DT_LOOS            DynTag = 0x6000000d; /* First OS-specific */
+    <a id="L520"></a>DT_HIOS            DynTag = 0x6ffff000; /* Last OS-specific */
+    <a id="L521"></a>DT_LOPROC          DynTag = 0x70000000; /* First processor-specific type. */
+    <a id="L522"></a>DT_HIPROC          DynTag = 0x7fffffff; /* Last processor-specific type. */
+<a id="L523"></a>)</pre>
+				<h3>func (<a id="L567"></a>DynTag) <a href="../../../src/pkg/debug/elf/elf.go#L567">GoString</a></h3>
+				<p><code><a id="L567"></a>func (i DynTag) GoString() string</code></p>
+				
+				<h3>func (<a id="L566"></a>DynTag) <a href="../../../src/pkg/debug/elf/elf.go#L566">String</a></h3>
+				<p><code><a id="L566"></a>func (i DynTag) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/file.go#L36"><a id="L36"></a>File</a></h2>
+			<p>
+A File represents an open ELF file.
+</p>
+
+			<p><pre><a id="L36"></a>type File struct {
+    <a id="L37"></a>FileHeader;
+    <a id="L38"></a>Sections []*Section;
+    <a id="L39"></a>Progs    []*Prog;
+    // contains unexported fields
+<a id="L41"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/debug/elf/file.go#L165">NewFile</a></h3>
+				<p><code><a id="L165"></a>func NewFile(r io.ReaderAt) (*File, os.Error)</code></p>
+				<p>
+NewFile creates a new File for acecssing an ELF binary in an underlying reader.
+The ELF binary is expected to start at position 0 in the ReaderAt.
+</p>
+
+				<h3>func <a href="../../../src/pkg/debug/elf/file.go#L137">Open</a></h3>
+				<p><code><a id="L137"></a>func Open(name string) (*File, os.Error)</code></p>
+				<p>
+Open opens the named file using os.Open and prepares it for use as an ELF binary.
+</p>
+
+				<h3>func (<a id="L154"></a>*File) <a href="../../../src/pkg/debug/elf/file.go#L154">Close</a></h3>
+				<p><code><a id="L154"></a>func (f *File) Close() os.Error</code></p>
+				<p>
+Close closes the File.
+If the File was created using NewFile directly instead of Open,
+Close has no effect.
+</p>
+
+				<h3>func (<a id="L445"></a>*File) <a href="../../../src/pkg/debug/elf/file.go#L445">DWARF</a></h3>
+				<p><code><a id="L445"></a>func (f *File) DWARF() (*dwarf.Data, os.Error)</code></p>
+				
+				<h3>func (<a id="L382"></a>*File) <a href="../../../src/pkg/debug/elf/file.go#L382">Section</a></h3>
+				<p><code><a id="L382"></a>func (f *File) Section(name string) *Section</code></p>
+				<p>
+Section returns a section with the given name, or nil if no such
+section exists.
+</p>
+
+			<h2>type <a href="../../../src/pkg/debug/elf/file.go#L24"><a id="L24"></a>FileHeader</a></h2>
+			<p>
+A FileHeader represents an ELF file header.
+</p>
+
+			<p><pre><a id="L24"></a>type FileHeader struct {
+    <a id="L25"></a>Class      Class;
+    <a id="L26"></a>Data       Data;
+    <a id="L27"></a>Version    Version;
+    <a id="L28"></a>OSABI      OSABI;
+    <a id="L29"></a>ABIVersion uint8;
+    <a id="L30"></a>ByteOrder  binary.ByteOrder;
+    <a id="L31"></a>Type       Type;
+    <a id="L32"></a>Machine    Machine;
+<a id="L33"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/file.go#L121"><a id="L121"></a>FormatError</a></h2>
+			
+			<p><pre><a id="L121"></a>type FormatError struct {
+    // contains unexported fields
+<a id="L125"></a>}</pre></p>
+				<h3>func (<a id="L127"></a>*FormatError) <a href="../../../src/pkg/debug/elf/file.go#L127">String</a></h3>
+				<p><code><a id="L127"></a>func (e *FormatError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1282"><a id="L1282"></a>Header32</a></h2>
+			<p>
+* ELF32 File header.
+</p>
+
+			<p><pre><a id="L1282"></a>type Header32 struct {
+    <a id="L1283"></a>Ident     [EI_NIDENT]byte; /* File identification. */
+    <a id="L1284"></a>Type      uint16;          /* File type. */
+    <a id="L1285"></a>Machine   uint16;          /* Machine architecture. */
+    <a id="L1286"></a>Version   uint32;          /* ELF format version. */
+    <a id="L1287"></a>Entry     uint32;          /* Entry point. */
+    <a id="L1288"></a>Phoff     uint32;          /* Program header file offset. */
+    <a id="L1289"></a>Shoff     uint32;          /* Section header file offset. */
+    <a id="L1290"></a>Flags     uint32;          /* Architecture-specific flags. */
+    <a id="L1291"></a>Ehsize    uint16;          /* Size of ELF header in bytes. */
+    <a id="L1292"></a>Phentsize uint16;          /* Size of program header entry. */
+    <a id="L1293"></a>Phnum     uint16;          /* Number of program header entries. */
+    <a id="L1294"></a>Shentsize uint16;          /* Size of section header entry. */
+    <a id="L1295"></a>Shnum     uint16;          /* Number of section header entries. */
+    <a id="L1296"></a>Shstrndx  uint16;          /* Section name strings section. */
+<a id="L1297"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1382"><a id="L1382"></a>Header64</a></h2>
+			
+			<p><pre><a id="L1382"></a>type Header64 struct {
+    <a id="L1383"></a>Ident     [EI_NIDENT]byte; /* File identification. */
+    <a id="L1384"></a>Type      uint16;          /* File type. */
+    <a id="L1385"></a>Machine   uint16;          /* Machine architecture. */
+    <a id="L1386"></a>Version   uint32;          /* ELF format version. */
+    <a id="L1387"></a>Entry     uint64;          /* Entry point. */
+    <a id="L1388"></a>Phoff     uint64;          /* Program header file offset. */
+    <a id="L1389"></a>Shoff     uint64;          /* Section header file offset. */
+    <a id="L1390"></a>Flags     uint32;          /* Architecture-specific flags. */
+    <a id="L1391"></a>Ehsize    uint16;          /* Size of ELF header in bytes. */
+    <a id="L1392"></a>Phentsize uint16;          /* Size of program header entry. */
+    <a id="L1393"></a>Phnum     uint16;          /* Number of program header entries. */
+    <a id="L1394"></a>Shentsize uint16;          /* Size of section header entry. */
+    <a id="L1395"></a>Shnum     uint16;          /* Number of section header entries. */
+    <a id="L1396"></a>Shstrndx  uint16;          /* Section name strings section. */
+<a id="L1397"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L192"><a id="L192"></a>Machine</a></h2>
+			<p>
+Machine is found in Header.Machine.
+</p>
+
+			<p><pre><a id="L192"></a>type Machine uint16</pre></p>
+				
+				<pre><a id="L194"></a>const (
+    <a id="L195"></a>EM_NONE        Machine = 0;  /* Unknown machine. */
+    <a id="L196"></a>EM_M32         Machine = 1;  /* AT&amp;T WE32100. */
+    <a id="L197"></a>EM_SPARC       Machine = 2;  /* Sun SPARC. */
+    <a id="L198"></a>EM_386         Machine = 3;  /* Intel i386. */
+    <a id="L199"></a>EM_68K         Machine = 4;  /* Motorola 68000. */
+    <a id="L200"></a>EM_88K         Machine = 5;  /* Motorola 88000. */
+    <a id="L201"></a>EM_860         Machine = 7;  /* Intel i860. */
+    <a id="L202"></a>EM_MIPS        Machine = 8;  /* MIPS R3000 Big-Endian only. */
+    <a id="L203"></a>EM_S370        Machine = 9;  /* IBM System/370. */
+    <a id="L204"></a>EM_MIPS_RS3_LE Machine = 10; /* MIPS R3000 Little-Endian. */
+    <a id="L205"></a>EM_PARISC      Machine = 15; /* HP PA-RISC. */
+    <a id="L206"></a>EM_VPP500      Machine = 17; /* Fujitsu VPP500. */
+    <a id="L207"></a>EM_SPARC32PLUS Machine = 18; /* SPARC v8plus. */
+    <a id="L208"></a>EM_960         Machine = 19; /* Intel 80960. */
+    <a id="L209"></a>EM_PPC         Machine = 20; /* PowerPC 32-bit. */
+    <a id="L210"></a>EM_PPC64       Machine = 21; /* PowerPC 64-bit. */
+    <a id="L211"></a>EM_S390        Machine = 22; /* IBM System/390. */
+    <a id="L212"></a>EM_V800        Machine = 36; /* NEC V800. */
+    <a id="L213"></a>EM_FR20        Machine = 37; /* Fujitsu FR20. */
+    <a id="L214"></a>EM_RH32        Machine = 38; /* TRW RH-32. */
+    <a id="L215"></a>EM_RCE         Machine = 39; /* Motorola RCE. */
+    <a id="L216"></a>EM_ARM         Machine = 40; /* ARM. */
+    <a id="L217"></a>EM_SH          Machine = 42; /* Hitachi SH. */
+    <a id="L218"></a>EM_SPARCV9     Machine = 43; /* SPARC v9 64-bit. */
+    <a id="L219"></a>EM_TRICORE     Machine = 44; /* Siemens TriCore embedded processor. */
+    <a id="L220"></a>EM_ARC         Machine = 45; /* Argonaut RISC Core. */
+    <a id="L221"></a>EM_H8_300      Machine = 46; /* Hitachi H8/300. */
+    <a id="L222"></a>EM_H8_300H     Machine = 47; /* Hitachi H8/300H. */
+    <a id="L223"></a>EM_H8S         Machine = 48; /* Hitachi H8S. */
+    <a id="L224"></a>EM_H8_500      Machine = 49; /* Hitachi H8/500. */
+    <a id="L225"></a>EM_IA_64       Machine = 50; /* Intel IA-64 Processor. */
+    <a id="L226"></a>EM_MIPS_X      Machine = 51; /* Stanford MIPS-X. */
+    <a id="L227"></a>EM_COLDFIRE    Machine = 52; /* Motorola ColdFire. */
+    <a id="L228"></a>EM_68HC12      Machine = 53; /* Motorola M68HC12. */
+    <a id="L229"></a>EM_MMA         Machine = 54; /* Fujitsu MMA. */
+    <a id="L230"></a>EM_PCP         Machine = 55; /* Siemens PCP. */
+    <a id="L231"></a>EM_NCPU        Machine = 56; /* Sony nCPU. */
+    <a id="L232"></a>EM_NDR1        Machine = 57; /* Denso NDR1 microprocessor. */
+    <a id="L233"></a>EM_STARCORE    Machine = 58; /* Motorola Star*Core processor. */
+    <a id="L234"></a>EM_ME16        Machine = 59; /* Toyota ME16 processor. */
+    <a id="L235"></a>EM_ST100       Machine = 60; /* STMicroelectronics ST100 processor. */
+    <a id="L236"></a>EM_TINYJ       Machine = 61; /* Advanced Logic Corp. TinyJ processor. */
+    <a id="L237"></a>EM_X86_64      Machine = 62; /* Advanced Micro Devices x86-64 */
+
+    <a id="L239"></a>/* Non-standard or deprecated. */
+    <a id="L240"></a>EM_486         Machine = 6;      /* Intel i486. */
+    <a id="L241"></a>EM_MIPS_RS4_BE Machine = 10;     /* MIPS R4000 Big-Endian */
+    <a id="L242"></a>EM_ALPHA_STD   Machine = 41;     /* Digital Alpha (standard value). */
+    <a id="L243"></a>EM_ALPHA       Machine = 0x9026; /* Alpha (written in the absence of an ABI) */
+<a id="L244"></a>)</pre>
+				<h3>func (<a id="L299"></a>Machine) <a href="../../../src/pkg/debug/elf/elf.go#L299">GoString</a></h3>
+				<p><code><a id="L299"></a>func (i Machine) GoString() string</code></p>
+				
+				<h3>func (<a id="L298"></a>Machine) <a href="../../../src/pkg/debug/elf/elf.go#L298">String</a></h3>
+				<p><code><a id="L298"></a>func (i Machine) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L599"><a id="L599"></a>NType</a></h2>
+			<p>
+NType values; used in core files.
+</p>
+
+			<p><pre><a id="L599"></a>type NType int</pre></p>
+				
+				<pre><a id="L601"></a>const (
+    <a id="L602"></a>NT_PRSTATUS NType = 1; /* Process status. */
+    <a id="L603"></a>NT_FPREGSET NType = 2; /* Floating point registers. */
+    <a id="L604"></a>NT_PRPSINFO NType = 3; /* Process state info. */
+<a id="L605"></a>)</pre>
+				<h3>func (<a id="L614"></a>NType) <a href="../../../src/pkg/debug/elf/elf.go#L614">GoString</a></h3>
+				<p><code><a id="L614"></a>func (i NType) GoString() string</code></p>
+				
+				<h3>func (<a id="L613"></a>NType) <a href="../../../src/pkg/debug/elf/elf.go#L613">String</a></h3>
+				<p><code><a id="L613"></a>func (i NType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L116"><a id="L116"></a>OSABI</a></h2>
+			<p>
+OSABI is found in Header.Ident[EI_OSABI] and Header.OSABI.
+</p>
+
+			<p><pre><a id="L116"></a>type OSABI byte</pre></p>
+				
+				<pre><a id="L118"></a>const (
+    <a id="L119"></a>ELFOSABI_NONE       OSABI = 0;   /* UNIX System V ABI */
+    <a id="L120"></a>ELFOSABI_HPUX       OSABI = 1;   /* HP-UX operating system */
+    <a id="L121"></a>ELFOSABI_NETBSD     OSABI = 2;   /* NetBSD */
+    <a id="L122"></a>ELFOSABI_LINUX      OSABI = 3;   /* GNU/Linux */
+    <a id="L123"></a>ELFOSABI_HURD       OSABI = 4;   /* GNU/Hurd */
+    <a id="L124"></a>ELFOSABI_86OPEN     OSABI = 5;   /* 86Open common IA32 ABI */
+    <a id="L125"></a>ELFOSABI_SOLARIS    OSABI = 6;   /* Solaris */
+    <a id="L126"></a>ELFOSABI_AIX        OSABI = 7;   /* AIX */
+    <a id="L127"></a>ELFOSABI_IRIX       OSABI = 8;   /* IRIX */
+    <a id="L128"></a>ELFOSABI_FREEBSD    OSABI = 9;   /* FreeBSD */
+    <a id="L129"></a>ELFOSABI_TRU64      OSABI = 10;  /* TRU64 UNIX */
+    <a id="L130"></a>ELFOSABI_MODESTO    OSABI = 11;  /* Novell Modesto */
+    <a id="L131"></a>ELFOSABI_OPENBSD    OSABI = 12;  /* OpenBSD */
+    <a id="L132"></a>ELFOSABI_OPENVMS    OSABI = 13;  /* Open VMS */
+    <a id="L133"></a>ELFOSABI_NSK        OSABI = 14;  /* HP Non-Stop Kernel */
+    <a id="L134"></a>ELFOSABI_ARM        OSABI = 97;  /* ARM */
+    <a id="L135"></a>ELFOSABI_STANDALONE OSABI = 255; /* Standalone (embedded) application */
+<a id="L136"></a>)</pre>
+				<h3>func (<a id="L159"></a>OSABI) <a href="../../../src/pkg/debug/elf/elf.go#L159">GoString</a></h3>
+				<p><code><a id="L159"></a>func (i OSABI) GoString() string</code></p>
+				
+				<h3>func (<a id="L158"></a>OSABI) <a href="../../../src/pkg/debug/elf/elf.go#L158">String</a></h3>
+				<p><code><a id="L158"></a>func (i OSABI) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/file.go#L93"><a id="L93"></a>Prog</a></h2>
+			<p>
+A Prog represents a single ELF program header in an ELF binary.
+</p>
+
+			<p><pre><a id="L93"></a>type Prog struct {
+    <a id="L94"></a>ProgHeader;
+
+    <a id="L96"></a>// Embed ReaderAt for ReadAt method.
+    <a id="L97"></a>// Do not embed SectionReader directly
+    <a id="L98"></a>// to avoid having Read and Seek.
+    <a id="L99"></a>// If a client wants Read and Seek it must use
+    <a id="L100"></a>// Open() to avoid fighting over the seek offset
+    <a id="L101"></a>// with other clients.
+    <a id="L102"></a>io.ReaderAt;
+    // contains unexported fields
+<a id="L104"></a>}</pre></p>
+				<h3>func (<a id="L107"></a>*Prog) <a href="../../../src/pkg/debug/elf/file.go#L107">Open</a></h3>
+				<p><code><a id="L107"></a>func (p *Prog) Open() io.ReadSeeker</code></p>
+				<p>
+Open returns a new ReadSeeker reading the ELF program body.
+</p>
+
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1318"><a id="L1318"></a>Prog32</a></h2>
+			<p>
+* ELF32 Program header.
+</p>
+
+			<p><pre><a id="L1318"></a>type Prog32 struct {
+    <a id="L1319"></a>Type   uint32; /* Entry type. */
+    <a id="L1320"></a>Off    uint32; /* File offset of contents. */
+    <a id="L1321"></a>Vaddr  uint32; /* Virtual address in memory image. */
+    <a id="L1322"></a>Paddr  uint32; /* Physical address (not used). */
+    <a id="L1323"></a>Filesz uint32; /* Size of contents in file. */
+    <a id="L1324"></a>Memsz  uint32; /* Size of contents in memory. */
+    <a id="L1325"></a>Flags  uint32; /* Access permission flags. */
+    <a id="L1326"></a>Align  uint32; /* Alignment in memory and file. */
+<a id="L1327"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1420"><a id="L1420"></a>Prog64</a></h2>
+			
+			<p><pre><a id="L1420"></a>type Prog64 struct {
+    <a id="L1421"></a>Type   uint32; /* Entry type. */
+    <a id="L1422"></a>Flags  uint32; /* Access permission flags. */
+    <a id="L1423"></a>Off    uint64; /* File offset of contents. */
+    <a id="L1424"></a>Vaddr  uint64; /* Virtual address in memory image. */
+    <a id="L1425"></a>Paddr  uint64; /* Physical address (not used). */
+    <a id="L1426"></a>Filesz uint64; /* Size of contents in file. */
+    <a id="L1427"></a>Memsz  uint64; /* Size of contents in memory. */
+    <a id="L1428"></a>Align  uint64; /* Alignment in memory and file. */
+<a id="L1429"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L458"><a id="L458"></a>ProgFlag</a></h2>
+			<p>
+Prog.Flag
+</p>
+
+			<p><pre><a id="L458"></a>type ProgFlag uint32</pre></p>
+				
+				<pre><a id="L460"></a>const (
+    <a id="L461"></a>PF_X        ProgFlag = 0x1;        /* Executable. */
+    <a id="L462"></a>PF_W        ProgFlag = 0x2;        /* Writable. */
+    <a id="L463"></a>PF_R        ProgFlag = 0x4;        /* Readable. */
+    <a id="L464"></a>PF_MASKOS   ProgFlag = 0x0ff00000; /* Operating system-specific. */
+    <a id="L465"></a>PF_MASKPROC ProgFlag = 0xf0000000; /* Processor-specific. */
+<a id="L466"></a>)</pre>
+				<h3>func (<a id="L475"></a>ProgFlag) <a href="../../../src/pkg/debug/elf/elf.go#L475">GoString</a></h3>
+				<p><code><a id="L475"></a>func (i ProgFlag) GoString() string</code></p>
+				
+				<h3>func (<a id="L474"></a>ProgFlag) <a href="../../../src/pkg/debug/elf/elf.go#L474">String</a></h3>
+				<p><code><a id="L474"></a>func (i ProgFlag) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/file.go#L82"><a id="L82"></a>ProgHeader</a></h2>
+			<p>
+A ProgHeader represents a single ELF program header.
+</p>
+
+			<p><pre><a id="L82"></a>type ProgHeader struct {
+    <a id="L83"></a>Type   ProgType;
+    <a id="L84"></a>Flags  ProgFlag;
+    <a id="L85"></a>Vaddr  uint64;
+    <a id="L86"></a>Paddr  uint64;
+    <a id="L87"></a>Filesz uint64;
+    <a id="L88"></a>Memsz  uint64;
+    <a id="L89"></a>Align  uint64;
+<a id="L90"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L422"><a id="L422"></a>ProgType</a></h2>
+			<p>
+Prog.Type
+</p>
+
+			<p><pre><a id="L422"></a>type ProgType int</pre></p>
+				
+				<pre><a id="L424"></a>const (
+    <a id="L425"></a>PT_NULL    ProgType = 0;          /* Unused entry. */
+    <a id="L426"></a>PT_LOAD    ProgType = 1;          /* Loadable segment. */
+    <a id="L427"></a>PT_DYNAMIC ProgType = 2;          /* Dynamic linking information segment. */
+    <a id="L428"></a>PT_INTERP  ProgType = 3;          /* Pathname of interpreter. */
+    <a id="L429"></a>PT_NOTE    ProgType = 4;          /* Auxiliary information. */
+    <a id="L430"></a>PT_SHLIB   ProgType = 5;          /* Reserved (not used). */
+    <a id="L431"></a>PT_PHDR    ProgType = 6;          /* Location of program header itself. */
+    <a id="L432"></a>PT_TLS     ProgType = 7;          /* Thread local storage segment */
+    <a id="L433"></a>PT_LOOS    ProgType = 0x60000000; /* First OS-specific. */
+    <a id="L434"></a>PT_HIOS    ProgType = 0x6fffffff; /* Last OS-specific. */
+    <a id="L435"></a>PT_LOPROC  ProgType = 0x70000000; /* First processor-specific type. */
+    <a id="L436"></a>PT_HIPROC  ProgType = 0x7fffffff; /* Last processor-specific type. */
+<a id="L437"></a>)</pre>
+				<h3>func (<a id="L455"></a>ProgType) <a href="../../../src/pkg/debug/elf/elf.go#L455">GoString</a></h3>
+				<p><code><a id="L455"></a>func (i ProgType) GoString() string</code></p>
+				
+				<h3>func (<a id="L454"></a>ProgType) <a href="../../../src/pkg/debug/elf/elf.go#L454">String</a></h3>
+				<p><code><a id="L454"></a>func (i ProgType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L907"><a id="L907"></a>R_386</a></h2>
+			<p>
+Relocation types for 386.
+</p>
+
+			<p><pre><a id="L907"></a>type R_386 int</pre></p>
+				
+				<pre><a id="L909"></a>const (
+    <a id="L910"></a>R_386_NONE         R_386 = 0;  /* No relocation. */
+    <a id="L911"></a>R_386_32           R_386 = 1;  /* Add symbol value. */
+    <a id="L912"></a>R_386_PC32         R_386 = 2;  /* Add PC-relative symbol value. */
+    <a id="L913"></a>R_386_GOT32        R_386 = 3;  /* Add PC-relative GOT offset. */
+    <a id="L914"></a>R_386_PLT32        R_386 = 4;  /* Add PC-relative PLT offset. */
+    <a id="L915"></a>R_386_COPY         R_386 = 5;  /* Copy data from shared object. */
+    <a id="L916"></a>R_386_GLOB_DAT     R_386 = 6;  /* Set GOT entry to data address. */
+    <a id="L917"></a>R_386_JMP_SLOT     R_386 = 7;  /* Set GOT entry to code address. */
+    <a id="L918"></a>R_386_RELATIVE     R_386 = 8;  /* Add load address of shared object. */
+    <a id="L919"></a>R_386_GOTOFF       R_386 = 9;  /* Add GOT-relative symbol address. */
+    <a id="L920"></a>R_386_GOTPC        R_386 = 10; /* Add PC-relative GOT table address. */
+    <a id="L921"></a>R_386_TLS_TPOFF    R_386 = 14; /* Negative offset in static TLS block */
+    <a id="L922"></a>R_386_TLS_IE       R_386 = 15; /* Absolute address of GOT for -ve static TLS */
+    <a id="L923"></a>R_386_TLS_GOTIE    R_386 = 16; /* GOT entry for negative static TLS block */
+    <a id="L924"></a>R_386_TLS_LE       R_386 = 17; /* Negative offset relative to static TLS */
+    <a id="L925"></a>R_386_TLS_GD       R_386 = 18; /* 32 bit offset to GOT (index,off) pair */
+    <a id="L926"></a>R_386_TLS_LDM      R_386 = 19; /* 32 bit offset to GOT (index,zero) pair */
+    <a id="L927"></a>R_386_TLS_GD_32    R_386 = 24; /* 32 bit offset to GOT (index,off) pair */
+    <a id="L928"></a>R_386_TLS_GD_PUSH  R_386 = 25; /* pushl instruction for Sun ABI GD sequence */
+    <a id="L929"></a>R_386_TLS_GD_CALL  R_386 = 26; /* call instruction for Sun ABI GD sequence */
+    <a id="L930"></a>R_386_TLS_GD_POP   R_386 = 27; /* popl instruction for Sun ABI GD sequence */
+    <a id="L931"></a>R_386_TLS_LDM_32   R_386 = 28; /* 32 bit offset to GOT (index,zero) pair */
+    <a id="L932"></a>R_386_TLS_LDM_PUSH R_386 = 29; /* pushl instruction for Sun ABI LD sequence */
+    <a id="L933"></a>R_386_TLS_LDM_CALL R_386 = 30; /* call instruction for Sun ABI LD sequence */
+    <a id="L934"></a>R_386_TLS_LDM_POP  R_386 = 31; /* popl instruction for Sun ABI LD sequence */
+    <a id="L935"></a>R_386_TLS_LDO_32   R_386 = 32; /* 32 bit offset from start of TLS block */
+    <a id="L936"></a>R_386_TLS_IE_32    R_386 = 33; /* 32 bit offset to GOT static TLS offset entry */
+    <a id="L937"></a>R_386_TLS_LE_32    R_386 = 34; /* 32 bit offset within static TLS block */
+    <a id="L938"></a>R_386_TLS_DTPMOD32 R_386 = 35; /* GOT entry containing TLS index */
+    <a id="L939"></a>R_386_TLS_DTPOFF32 R_386 = 36; /* GOT entry containing TLS offset */
+    <a id="L940"></a>R_386_TLS_TPOFF32  R_386 = 37; /* GOT entry of -ve static TLS offset */
+<a id="L941"></a>)</pre>
+				<h3>func (<a id="L978"></a>R_386) <a href="../../../src/pkg/debug/elf/elf.go#L978">GoString</a></h3>
+				<p><code><a id="L978"></a>func (i R_386) GoString() string</code></p>
+				
+				<h3>func (<a id="L977"></a>R_386) <a href="../../../src/pkg/debug/elf/elf.go#L977">String</a></h3>
+				<p><code><a id="L977"></a>func (i R_386) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L761"><a id="L761"></a>R_ALPHA</a></h2>
+			<p>
+Relocation types for Alpha.
+</p>
+
+			<p><pre><a id="L761"></a>type R_ALPHA int</pre></p>
+				
+				<pre><a id="L763"></a>const (
+    <a id="L764"></a>R_ALPHA_NONE           R_ALPHA = 0;  /* No reloc */
+    <a id="L765"></a>R_ALPHA_REFLONG        R_ALPHA = 1;  /* Direct 32 bit */
+    <a id="L766"></a>R_ALPHA_REFQUAD        R_ALPHA = 2;  /* Direct 64 bit */
+    <a id="L767"></a>R_ALPHA_GPREL32        R_ALPHA = 3;  /* GP relative 32 bit */
+    <a id="L768"></a>R_ALPHA_LITERAL        R_ALPHA = 4;  /* GP relative 16 bit w/optimization */
+    <a id="L769"></a>R_ALPHA_LITUSE         R_ALPHA = 5;  /* Optimization hint for LITERAL */
+    <a id="L770"></a>R_ALPHA_GPDISP         R_ALPHA = 6;  /* Add displacement to GP */
+    <a id="L771"></a>R_ALPHA_BRADDR         R_ALPHA = 7;  /* PC+4 relative 23 bit shifted */
+    <a id="L772"></a>R_ALPHA_HINT           R_ALPHA = 8;  /* PC+4 relative 16 bit shifted */
+    <a id="L773"></a>R_ALPHA_SREL16         R_ALPHA = 9;  /* PC relative 16 bit */
+    <a id="L774"></a>R_ALPHA_SREL32         R_ALPHA = 10; /* PC relative 32 bit */
+    <a id="L775"></a>R_ALPHA_SREL64         R_ALPHA = 11; /* PC relative 64 bit */
+    <a id="L776"></a>R_ALPHA_OP_PUSH        R_ALPHA = 12; /* OP stack push */
+    <a id="L777"></a>R_ALPHA_OP_STORE       R_ALPHA = 13; /* OP stack pop and store */
+    <a id="L778"></a>R_ALPHA_OP_PSUB        R_ALPHA = 14; /* OP stack subtract */
+    <a id="L779"></a>R_ALPHA_OP_PRSHIFT     R_ALPHA = 15; /* OP stack right shift */
+    <a id="L780"></a>R_ALPHA_GPVALUE        R_ALPHA = 16;
+    <a id="L781"></a>R_ALPHA_GPRELHIGH      R_ALPHA = 17;
+    <a id="L782"></a>R_ALPHA_GPRELLOW       R_ALPHA = 18;
+    <a id="L783"></a>R_ALPHA_IMMED_GP_16    R_ALPHA = 19;
+    <a id="L784"></a>R_ALPHA_IMMED_GP_HI32  R_ALPHA = 20;
+    <a id="L785"></a>R_ALPHA_IMMED_SCN_HI32 R_ALPHA = 21;
+    <a id="L786"></a>R_ALPHA_IMMED_BR_HI32  R_ALPHA = 22;
+    <a id="L787"></a>R_ALPHA_IMMED_LO32     R_ALPHA = 23;
+    <a id="L788"></a>R_ALPHA_COPY           R_ALPHA = 24; /* Copy symbol at runtime */
+    <a id="L789"></a>R_ALPHA_GLOB_DAT       R_ALPHA = 25; /* Create GOT entry */
+    <a id="L790"></a>R_ALPHA_JMP_SLOT       R_ALPHA = 26; /* Create PLT entry */
+    <a id="L791"></a>R_ALPHA_RELATIVE       R_ALPHA = 27; /* Adjust by program base */
+<a id="L792"></a>)</pre>
+				<h3>func (<a id="L826"></a>R_ALPHA) <a href="../../../src/pkg/debug/elf/elf.go#L826">GoString</a></h3>
+				<p><code><a id="L826"></a>func (i R_ALPHA) GoString() string</code></p>
+				
+				<h3>func (<a id="L825"></a>R_ALPHA) <a href="../../../src/pkg/debug/elf/elf.go#L825">String</a></h3>
+				<p><code><a id="L825"></a>func (i R_ALPHA) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L829"><a id="L829"></a>R_ARM</a></h2>
+			<p>
+Relocation types for ARM.
+</p>
+
+			<p><pre><a id="L829"></a>type R_ARM int</pre></p>
+				
+				<pre><a id="L831"></a>const (
+    <a id="L832"></a>R_ARM_NONE          R_ARM = 0; /* No relocation. */
+    <a id="L833"></a>R_ARM_PC24          R_ARM = 1;
+    <a id="L834"></a>R_ARM_ABS32         R_ARM = 2;
+    <a id="L835"></a>R_ARM_REL32         R_ARM = 3;
+    <a id="L836"></a>R_ARM_PC13          R_ARM = 4;
+    <a id="L837"></a>R_ARM_ABS16         R_ARM = 5;
+    <a id="L838"></a>R_ARM_ABS12         R_ARM = 6;
+    <a id="L839"></a>R_ARM_THM_ABS5      R_ARM = 7;
+    <a id="L840"></a>R_ARM_ABS8          R_ARM = 8;
+    <a id="L841"></a>R_ARM_SBREL32       R_ARM = 9;
+    <a id="L842"></a>R_ARM_THM_PC22      R_ARM = 10;
+    <a id="L843"></a>R_ARM_THM_PC8       R_ARM = 11;
+    <a id="L844"></a>R_ARM_AMP_VCALL9    R_ARM = 12;
+    <a id="L845"></a>R_ARM_SWI24         R_ARM = 13;
+    <a id="L846"></a>R_ARM_THM_SWI8      R_ARM = 14;
+    <a id="L847"></a>R_ARM_XPC25         R_ARM = 15;
+    <a id="L848"></a>R_ARM_THM_XPC22     R_ARM = 16;
+    <a id="L849"></a>R_ARM_COPY          R_ARM = 20; /* Copy data from shared object. */
+    <a id="L850"></a>R_ARM_GLOB_DAT      R_ARM = 21; /* Set GOT entry to data address. */
+    <a id="L851"></a>R_ARM_JUMP_SLOT     R_ARM = 22; /* Set GOT entry to code address. */
+    <a id="L852"></a>R_ARM_RELATIVE      R_ARM = 23; /* Add load address of shared object. */
+    <a id="L853"></a>R_ARM_GOTOFF        R_ARM = 24; /* Add GOT-relative symbol address. */
+    <a id="L854"></a>R_ARM_GOTPC         R_ARM = 25; /* Add PC-relative GOT table address. */
+    <a id="L855"></a>R_ARM_GOT32         R_ARM = 26; /* Add PC-relative GOT offset. */
+    <a id="L856"></a>R_ARM_PLT32         R_ARM = 27; /* Add PC-relative PLT offset. */
+    <a id="L857"></a>R_ARM_GNU_VTENTRY   R_ARM = 100;
+    <a id="L858"></a>R_ARM_GNU_VTINHERIT R_ARM = 101;
+    <a id="L859"></a>R_ARM_RSBREL32      R_ARM = 250;
+    <a id="L860"></a>R_ARM_THM_RPC22     R_ARM = 251;
+    <a id="L861"></a>R_ARM_RREL32        R_ARM = 252;
+    <a id="L862"></a>R_ARM_RABS32        R_ARM = 253;
+    <a id="L863"></a>R_ARM_RPC24         R_ARM = 254;
+    <a id="L864"></a>R_ARM_RBASE         R_ARM = 255;
+<a id="L865"></a>)</pre>
+				<h3>func (<a id="L904"></a>R_ARM) <a href="../../../src/pkg/debug/elf/elf.go#L904">GoString</a></h3>
+				<p><code><a id="L904"></a>func (i R_ARM) GoString() string</code></p>
+				
+				<h3>func (<a id="L903"></a>R_ARM) <a href="../../../src/pkg/debug/elf/elf.go#L903">String</a></h3>
+				<p><code><a id="L903"></a>func (i R_ARM) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L981"><a id="L981"></a>R_PPC</a></h2>
+			<p>
+Relocation types for PowerPC.
+</p>
+
+			<p><pre><a id="L981"></a>type R_PPC int</pre></p>
+				
+				<pre><a id="L983"></a>const (
+    <a id="L984"></a>R_PPC_NONE            R_PPC = 0; /* No relocation. */
+    <a id="L985"></a>R_PPC_ADDR32          R_PPC = 1;
+    <a id="L986"></a>R_PPC_ADDR24          R_PPC = 2;
+    <a id="L987"></a>R_PPC_ADDR16          R_PPC = 3;
+    <a id="L988"></a>R_PPC_ADDR16_LO       R_PPC = 4;
+    <a id="L989"></a>R_PPC_ADDR16_HI       R_PPC = 5;
+    <a id="L990"></a>R_PPC_ADDR16_HA       R_PPC = 6;
+    <a id="L991"></a>R_PPC_ADDR14          R_PPC = 7;
+    <a id="L992"></a>R_PPC_ADDR14_BRTAKEN  R_PPC = 8;
+    <a id="L993"></a>R_PPC_ADDR14_BRNTAKEN R_PPC = 9;
+    <a id="L994"></a>R_PPC_REL24           R_PPC = 10;
+    <a id="L995"></a>R_PPC_REL14           R_PPC = 11;
+    <a id="L996"></a>R_PPC_REL14_BRTAKEN   R_PPC = 12;
+    <a id="L997"></a>R_PPC_REL14_BRNTAKEN  R_PPC = 13;
+    <a id="L998"></a>R_PPC_GOT16           R_PPC = 14;
+    <a id="L999"></a>R_PPC_GOT16_LO        R_PPC = 15;
+    <a id="L1000"></a>R_PPC_GOT16_HI        R_PPC = 16;
+    <a id="L1001"></a>R_PPC_GOT16_HA        R_PPC = 17;
+    <a id="L1002"></a>R_PPC_PLTREL24        R_PPC = 18;
+    <a id="L1003"></a>R_PPC_COPY            R_PPC = 19;
+    <a id="L1004"></a>R_PPC_GLOB_DAT        R_PPC = 20;
+    <a id="L1005"></a>R_PPC_JMP_SLOT        R_PPC = 21;
+    <a id="L1006"></a>R_PPC_RELATIVE        R_PPC = 22;
+    <a id="L1007"></a>R_PPC_LOCAL24PC       R_PPC = 23;
+    <a id="L1008"></a>R_PPC_UADDR32         R_PPC = 24;
+    <a id="L1009"></a>R_PPC_UADDR16         R_PPC = 25;
+    <a id="L1010"></a>R_PPC_REL32           R_PPC = 26;
+    <a id="L1011"></a>R_PPC_PLT32           R_PPC = 27;
+    <a id="L1012"></a>R_PPC_PLTREL32        R_PPC = 28;
+    <a id="L1013"></a>R_PPC_PLT16_LO        R_PPC = 29;
+    <a id="L1014"></a>R_PPC_PLT16_HI        R_PPC = 30;
+    <a id="L1015"></a>R_PPC_PLT16_HA        R_PPC = 31;
+    <a id="L1016"></a>R_PPC_SDAREL16        R_PPC = 32;
+    <a id="L1017"></a>R_PPC_SECTOFF         R_PPC = 33;
+    <a id="L1018"></a>R_PPC_SECTOFF_LO      R_PPC = 34;
+    <a id="L1019"></a>R_PPC_SECTOFF_HI      R_PPC = 35;
+    <a id="L1020"></a>R_PPC_SECTOFF_HA      R_PPC = 36;
+    <a id="L1021"></a>R_PPC_TLS             R_PPC = 67;
+    <a id="L1022"></a>R_PPC_DTPMOD32        R_PPC = 68;
+    <a id="L1023"></a>R_PPC_TPREL16         R_PPC = 69;
+    <a id="L1024"></a>R_PPC_TPREL16_LO      R_PPC = 70;
+    <a id="L1025"></a>R_PPC_TPREL16_HI      R_PPC = 71;
+    <a id="L1026"></a>R_PPC_TPREL16_HA      R_PPC = 72;
+    <a id="L1027"></a>R_PPC_TPREL32         R_PPC = 73;
+    <a id="L1028"></a>R_PPC_DTPREL16        R_PPC = 74;
+    <a id="L1029"></a>R_PPC_DTPREL16_LO     R_PPC = 75;
+    <a id="L1030"></a>R_PPC_DTPREL16_HI     R_PPC = 76;
+    <a id="L1031"></a>R_PPC_DTPREL16_HA     R_PPC = 77;
+    <a id="L1032"></a>R_PPC_DTPREL32        R_PPC = 78;
+    <a id="L1033"></a>R_PPC_GOT_TLSGD16     R_PPC = 79;
+    <a id="L1034"></a>R_PPC_GOT_TLSGD16_LO  R_PPC = 80;
+    <a id="L1035"></a>R_PPC_GOT_TLSGD16_HI  R_PPC = 81;
+    <a id="L1036"></a>R_PPC_GOT_TLSGD16_HA  R_PPC = 82;
+    <a id="L1037"></a>R_PPC_GOT_TLSLD16     R_PPC = 83;
+    <a id="L1038"></a>R_PPC_GOT_TLSLD16_LO  R_PPC = 84;
+    <a id="L1039"></a>R_PPC_GOT_TLSLD16_HI  R_PPC = 85;
+    <a id="L1040"></a>R_PPC_GOT_TLSLD16_HA  R_PPC = 86;
+    <a id="L1041"></a>R_PPC_GOT_TPREL16     R_PPC = 87;
+    <a id="L1042"></a>R_PPC_GOT_TPREL16_LO  R_PPC = 88;
+    <a id="L1043"></a>R_PPC_GOT_TPREL16_HI  R_PPC = 89;
+    <a id="L1044"></a>R_PPC_GOT_TPREL16_HA  R_PPC = 90;
+    <a id="L1045"></a>R_PPC_EMB_NADDR32     R_PPC = 101;
+    <a id="L1046"></a>R_PPC_EMB_NADDR16     R_PPC = 102;
+    <a id="L1047"></a>R_PPC_EMB_NADDR16_LO  R_PPC = 103;
+    <a id="L1048"></a>R_PPC_EMB_NADDR16_HI  R_PPC = 104;
+    <a id="L1049"></a>R_PPC_EMB_NADDR16_HA  R_PPC = 105;
+    <a id="L1050"></a>R_PPC_EMB_SDAI16      R_PPC = 106;
+    <a id="L1051"></a>R_PPC_EMB_SDA2I16     R_PPC = 107;
+    <a id="L1052"></a>R_PPC_EMB_SDA2REL     R_PPC = 108;
+    <a id="L1053"></a>R_PPC_EMB_SDA21       R_PPC = 109;
+    <a id="L1054"></a>R_PPC_EMB_MRKREF      R_PPC = 110;
+    <a id="L1055"></a>R_PPC_EMB_RELSEC16    R_PPC = 111;
+    <a id="L1056"></a>R_PPC_EMB_RELST_LO    R_PPC = 112;
+    <a id="L1057"></a>R_PPC_EMB_RELST_HI    R_PPC = 113;
+    <a id="L1058"></a>R_PPC_EMB_RELST_HA    R_PPC = 114;
+    <a id="L1059"></a>R_PPC_EMB_BIT_FLD     R_PPC = 115;
+    <a id="L1060"></a>R_PPC_EMB_RELSDA      R_PPC = 116;
+<a id="L1061"></a>)</pre>
+				<h3>func (<a id="L1146"></a>R_PPC) <a href="../../../src/pkg/debug/elf/elf.go#L1146">GoString</a></h3>
+				<p><code><a id="L1146"></a>func (i R_PPC) GoString() string</code></p>
+				
+				<h3>func (<a id="L1145"></a>R_PPC) <a href="../../../src/pkg/debug/elf/elf.go#L1145">String</a></h3>
+				<p><code><a id="L1145"></a>func (i R_PPC) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1149"><a id="L1149"></a>R_SPARC</a></h2>
+			<p>
+Relocation types for SPARC.
+</p>
+
+			<p><pre><a id="L1149"></a>type R_SPARC int</pre></p>
+				
+				<pre><a id="L1151"></a>const (
+    <a id="L1152"></a>R_SPARC_NONE     R_SPARC = 0;
+    <a id="L1153"></a>R_SPARC_8        R_SPARC = 1;
+    <a id="L1154"></a>R_SPARC_16       R_SPARC = 2;
+    <a id="L1155"></a>R_SPARC_32       R_SPARC = 3;
+    <a id="L1156"></a>R_SPARC_DISP8    R_SPARC = 4;
+    <a id="L1157"></a>R_SPARC_DISP16   R_SPARC = 5;
+    <a id="L1158"></a>R_SPARC_DISP32   R_SPARC = 6;
+    <a id="L1159"></a>R_SPARC_WDISP30  R_SPARC = 7;
+    <a id="L1160"></a>R_SPARC_WDISP22  R_SPARC = 8;
+    <a id="L1161"></a>R_SPARC_HI22     R_SPARC = 9;
+    <a id="L1162"></a>R_SPARC_22       R_SPARC = 10;
+    <a id="L1163"></a>R_SPARC_13       R_SPARC = 11;
+    <a id="L1164"></a>R_SPARC_LO10     R_SPARC = 12;
+    <a id="L1165"></a>R_SPARC_GOT10    R_SPARC = 13;
+    <a id="L1166"></a>R_SPARC_GOT13    R_SPARC = 14;
+    <a id="L1167"></a>R_SPARC_GOT22    R_SPARC = 15;
+    <a id="L1168"></a>R_SPARC_PC10     R_SPARC = 16;
+    <a id="L1169"></a>R_SPARC_PC22     R_SPARC = 17;
+    <a id="L1170"></a>R_SPARC_WPLT30   R_SPARC = 18;
+    <a id="L1171"></a>R_SPARC_COPY     R_SPARC = 19;
+    <a id="L1172"></a>R_SPARC_GLOB_DAT R_SPARC = 20;
+    <a id="L1173"></a>R_SPARC_JMP_SLOT R_SPARC = 21;
+    <a id="L1174"></a>R_SPARC_RELATIVE R_SPARC = 22;
+    <a id="L1175"></a>R_SPARC_UA32     R_SPARC = 23;
+    <a id="L1176"></a>R_SPARC_PLT32    R_SPARC = 24;
+    <a id="L1177"></a>R_SPARC_HIPLT22  R_SPARC = 25;
+    <a id="L1178"></a>R_SPARC_LOPLT10  R_SPARC = 26;
+    <a id="L1179"></a>R_SPARC_PCPLT32  R_SPARC = 27;
+    <a id="L1180"></a>R_SPARC_PCPLT22  R_SPARC = 28;
+    <a id="L1181"></a>R_SPARC_PCPLT10  R_SPARC = 29;
+    <a id="L1182"></a>R_SPARC_10       R_SPARC = 30;
+    <a id="L1183"></a>R_SPARC_11       R_SPARC = 31;
+    <a id="L1184"></a>R_SPARC_64       R_SPARC = 32;
+    <a id="L1185"></a>R_SPARC_OLO10    R_SPARC = 33;
+    <a id="L1186"></a>R_SPARC_HH22     R_SPARC = 34;
+    <a id="L1187"></a>R_SPARC_HM10     R_SPARC = 35;
+    <a id="L1188"></a>R_SPARC_LM22     R_SPARC = 36;
+    <a id="L1189"></a>R_SPARC_PC_HH22  R_SPARC = 37;
+    <a id="L1190"></a>R_SPARC_PC_HM10  R_SPARC = 38;
+    <a id="L1191"></a>R_SPARC_PC_LM22  R_SPARC = 39;
+    <a id="L1192"></a>R_SPARC_WDISP16  R_SPARC = 40;
+    <a id="L1193"></a>R_SPARC_WDISP19  R_SPARC = 41;
+    <a id="L1194"></a>R_SPARC_GLOB_JMP R_SPARC = 42;
+    <a id="L1195"></a>R_SPARC_7        R_SPARC = 43;
+    <a id="L1196"></a>R_SPARC_5        R_SPARC = 44;
+    <a id="L1197"></a>R_SPARC_6        R_SPARC = 45;
+    <a id="L1198"></a>R_SPARC_DISP64   R_SPARC = 46;
+    <a id="L1199"></a>R_SPARC_PLT64    R_SPARC = 47;
+    <a id="L1200"></a>R_SPARC_HIX22    R_SPARC = 48;
+    <a id="L1201"></a>R_SPARC_LOX10    R_SPARC = 49;
+    <a id="L1202"></a>R_SPARC_H44      R_SPARC = 50;
+    <a id="L1203"></a>R_SPARC_M44      R_SPARC = 51;
+    <a id="L1204"></a>R_SPARC_L44      R_SPARC = 52;
+    <a id="L1205"></a>R_SPARC_REGISTER R_SPARC = 53;
+    <a id="L1206"></a>R_SPARC_UA64     R_SPARC = 54;
+    <a id="L1207"></a>R_SPARC_UA16     R_SPARC = 55;
+<a id="L1208"></a>)</pre>
+				<h3>func (<a id="L1270"></a>R_SPARC) <a href="../../../src/pkg/debug/elf/elf.go#L1270">GoString</a></h3>
+				<p><code><a id="L1270"></a>func (i R_SPARC) GoString() string</code></p>
+				
+				<h3>func (<a id="L1269"></a>R_SPARC) <a href="../../../src/pkg/debug/elf/elf.go#L1269">String</a></h3>
+				<p><code><a id="L1269"></a>func (i R_SPARC) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L701"><a id="L701"></a>R_X86_64</a></h2>
+			<p>
+Relocation types for x86-64.
+</p>
+
+			<p><pre><a id="L701"></a>type R_X86_64 int</pre></p>
+				
+				<pre><a id="L703"></a>const (
+    <a id="L704"></a>R_X86_64_NONE     R_X86_64 = 0;  /* No relocation. */
+    <a id="L705"></a>R_X86_64_64       R_X86_64 = 1;  /* Add 64 bit symbol value. */
+    <a id="L706"></a>R_X86_64_PC32     R_X86_64 = 2;  /* PC-relative 32 bit signed sym value. */
+    <a id="L707"></a>R_X86_64_GOT32    R_X86_64 = 3;  /* PC-relative 32 bit GOT offset. */
+    <a id="L708"></a>R_X86_64_PLT32    R_X86_64 = 4;  /* PC-relative 32 bit PLT offset. */
+    <a id="L709"></a>R_X86_64_COPY     R_X86_64 = 5;  /* Copy data from shared object. */
+    <a id="L710"></a>R_X86_64_GLOB_DAT R_X86_64 = 6;  /* Set GOT entry to data address. */
+    <a id="L711"></a>R_X86_64_JMP_SLOT R_X86_64 = 7;  /* Set GOT entry to code address. */
+    <a id="L712"></a>R_X86_64_RELATIVE R_X86_64 = 8;  /* Add load address of shared object. */
+    <a id="L713"></a>R_X86_64_GOTPCREL R_X86_64 = 9;  /* Add 32 bit signed pcrel offset to GOT. */
+    <a id="L714"></a>R_X86_64_32       R_X86_64 = 10; /* Add 32 bit zero extended symbol value */
+    <a id="L715"></a>R_X86_64_32S      R_X86_64 = 11; /* Add 32 bit sign extended symbol value */
+    <a id="L716"></a>R_X86_64_16       R_X86_64 = 12; /* Add 16 bit zero extended symbol value */
+    <a id="L717"></a>R_X86_64_PC16     R_X86_64 = 13; /* Add 16 bit signed extended pc relative symbol value */
+    <a id="L718"></a>R_X86_64_8        R_X86_64 = 14; /* Add 8 bit zero extended symbol value */
+    <a id="L719"></a>R_X86_64_PC8      R_X86_64 = 15; /* Add 8 bit signed extended pc relative symbol value */
+    <a id="L720"></a>R_X86_64_DTPMOD64 R_X86_64 = 16; /* ID of module containing symbol */
+    <a id="L721"></a>R_X86_64_DTPOFF64 R_X86_64 = 17; /* Offset in TLS block */
+    <a id="L722"></a>R_X86_64_TPOFF64  R_X86_64 = 18; /* Offset in static TLS block */
+    <a id="L723"></a>R_X86_64_TLSGD    R_X86_64 = 19; /* PC relative offset to GD GOT entry */
+    <a id="L724"></a>R_X86_64_TLSLD    R_X86_64 = 20; /* PC relative offset to LD GOT entry */
+    <a id="L725"></a>R_X86_64_DTPOFF32 R_X86_64 = 21; /* Offset in TLS block */
+    <a id="L726"></a>R_X86_64_GOTTPOFF R_X86_64 = 22; /* PC relative offset to IE GOT entry */
+    <a id="L727"></a>R_X86_64_TPOFF32  R_X86_64 = 23; /* Offset in static TLS block */
+<a id="L728"></a>)</pre>
+				<h3>func (<a id="L758"></a>R_X86_64) <a href="../../../src/pkg/debug/elf/elf.go#L758">GoString</a></h3>
+				<p><code><a id="L758"></a>func (i R_X86_64) GoString() string</code></p>
+				
+				<h3>func (<a id="L757"></a>R_X86_64) <a href="../../../src/pkg/debug/elf/elf.go#L757">String</a></h3>
+				<p><code><a id="L757"></a>func (i R_X86_64) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1342"><a id="L1342"></a>Rel32</a></h2>
+			<p>
+ELF32 Relocations that don&#39;t need an addend field.
+</p>
+
+			<p><pre><a id="L1342"></a>type Rel32 struct {
+    <a id="L1343"></a>Off  uint32; /* Location to be relocated. */
+    <a id="L1344"></a>Info uint32; /* Relocation type and symbol index. */
+<a id="L1345"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1445"><a id="L1445"></a>Rel64</a></h2>
+			<p>
+ELF64 relocations that don&#39;t need an addend field.
+</p>
+
+			<p><pre><a id="L1445"></a>type Rel64 struct {
+    <a id="L1446"></a>Off  uint64; /* Location to be relocated. */
+    <a id="L1447"></a>Info uint64; /* Relocation type and symbol index. */
+<a id="L1448"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1348"><a id="L1348"></a>Rela32</a></h2>
+			<p>
+ELF32 Relocations that need an addend field.
+</p>
+
+			<p><pre><a id="L1348"></a>type Rela32 struct {
+    <a id="L1349"></a>Off    uint32; /* Location to be relocated. */
+    <a id="L1350"></a>Info   uint32; /* Relocation type and symbol index. */
+    <a id="L1351"></a>Addend int32;  /* Addend. */
+<a id="L1352"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1451"><a id="L1451"></a>Rela64</a></h2>
+			<p>
+ELF64 relocations that need an addend field.
+</p>
+
+			<p><pre><a id="L1451"></a>type Rela64 struct {
+    <a id="L1452"></a>Off    uint64; /* Location to be relocated. */
+    <a id="L1453"></a>Info   uint64; /* Relocation type and symbol index. */
+    <a id="L1454"></a>Addend int64;  /* Addend. */
+<a id="L1455"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/file.go#L58"><a id="L58"></a>Section</a></h2>
+			<p>
+A Section represents a single section in an ELF file.
+</p>
+
+			<p><pre><a id="L58"></a>type Section struct {
+    <a id="L59"></a>SectionHeader;
+
+    <a id="L61"></a>// Embed ReaderAt for ReadAt method.
+    <a id="L62"></a>// Do not embed SectionReader directly
+    <a id="L63"></a>// to avoid having Read and Seek.
+    <a id="L64"></a>// If a client wants Read and Seek it must use
+    <a id="L65"></a>// Open() to avoid fighting over the seek offset
+    <a id="L66"></a>// with other clients.
+    <a id="L67"></a>io.ReaderAt;
+    // contains unexported fields
+<a id="L69"></a>}</pre></p>
+				<h3>func (<a id="L72"></a>*Section) <a href="../../../src/pkg/debug/elf/file.go#L72">Data</a></h3>
+				<p><code><a id="L72"></a>func (s *Section) Data() ([]byte, os.Error)</code></p>
+				<p>
+Data reads and returns the contents of the ELF section.
+</p>
+
+				<h3>func (<a id="L79"></a>*Section) <a href="../../../src/pkg/debug/elf/file.go#L79">Open</a></h3>
+				<p><code><a id="L79"></a>func (s *Section) Open() io.ReadSeeker</code></p>
+				<p>
+Open returns a new ReadSeeker reading the ELF section.
+</p>
+
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1302"><a id="L1302"></a>Section32</a></h2>
+			<p>
+* ELF32 Section header.
+</p>
+
+			<p><pre><a id="L1302"></a>type Section32 struct {
+    <a id="L1303"></a>Name      uint32; /* Section name (index into the section header string table). */
+    <a id="L1304"></a>Type      uint32; /* Section type. */
+    <a id="L1305"></a>Flags     uint32; /* Section flags. */
+    <a id="L1306"></a>Addr      uint32; /* Address in memory image. */
+    <a id="L1307"></a>Off       uint32; /* Offset in file. */
+    <a id="L1308"></a>Size      uint32; /* Size in bytes. */
+    <a id="L1309"></a>Link      uint32; /* Index of a related section. */
+    <a id="L1310"></a>Info      uint32; /* Depends on section type. */
+    <a id="L1311"></a>Addralign uint32; /* Alignment in bytes. */
+    <a id="L1312"></a>Entsize   uint32; /* Size of each entry in section. */
+<a id="L1313"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1403"><a id="L1403"></a>Section64</a></h2>
+			
+			<p><pre><a id="L1403"></a>type Section64 struct {
+    <a id="L1404"></a>Name      uint32; /* Section name (index into the section header string table). */
+    <a id="L1405"></a>Type      uint32; /* Section type. */
+    <a id="L1406"></a>Flags     uint64; /* Section flags. */
+    <a id="L1407"></a>Addr      uint64; /* Address in memory image. */
+    <a id="L1408"></a>Off       uint64; /* Offset in file. */
+    <a id="L1409"></a>Size      uint64; /* Size in bytes. */
+    <a id="L1410"></a>Link      uint32; /* Index of a related section. */
+    <a id="L1411"></a>Info      uint32; /* Depends on section type. */
+    <a id="L1412"></a>Addralign uint64; /* Alignment in bytes. */
+    <a id="L1413"></a>Entsize   uint64; /* Size of each entry in section. */
+<a id="L1414"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L388"><a id="L388"></a>SectionFlag</a></h2>
+			<p>
+Section flags.
+</p>
+
+			<p><pre><a id="L388"></a>type SectionFlag uint32</pre></p>
+				
+				<pre><a id="L390"></a>const (
+    <a id="L391"></a>SHF_WRITE            SectionFlag = 0x1;        /* Section contains writable data. */
+    <a id="L392"></a>SHF_ALLOC            SectionFlag = 0x2;        /* Section occupies memory. */
+    <a id="L393"></a>SHF_EXECINSTR        SectionFlag = 0x4;        /* Section contains instructions. */
+    <a id="L394"></a>SHF_MERGE            SectionFlag = 0x10;       /* Section may be merged. */
+    <a id="L395"></a>SHF_STRINGS          SectionFlag = 0x20;       /* Section contains strings. */
+    <a id="L396"></a>SHF_INFO_LINK        SectionFlag = 0x40;       /* sh_info holds section index. */
+    <a id="L397"></a>SHF_LINK_ORDER       SectionFlag = 0x80;       /* Special ordering requirements. */
+    <a id="L398"></a>SHF_OS_NONCONFORMING SectionFlag = 0x100;      /* OS-specific processing required. */
+    <a id="L399"></a>SHF_GROUP            SectionFlag = 0x200;      /* Member of section group. */
+    <a id="L400"></a>SHF_TLS              SectionFlag = 0x400;      /* Section contains TLS data. */
+    <a id="L401"></a>SHF_MASKOS           SectionFlag = 0x0ff00000; /* OS-specific semantics. */
+    <a id="L402"></a>SHF_MASKPROC         SectionFlag = 0xf0000000; /* Processor-specific semantics. */
+<a id="L403"></a>)</pre>
+				<h3>func (<a id="L419"></a>SectionFlag) <a href="../../../src/pkg/debug/elf/elf.go#L419">GoString</a></h3>
+				<p><code><a id="L419"></a>func (i SectionFlag) GoString() string</code></p>
+				
+				<h3>func (<a id="L418"></a>SectionFlag) <a href="../../../src/pkg/debug/elf/elf.go#L418">String</a></h3>
+				<p><code><a id="L418"></a>func (i SectionFlag) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/file.go#L44"><a id="L44"></a>SectionHeader</a></h2>
+			<p>
+A SectionHeader represents a single ELF section header.
+</p>
+
+			<p><pre><a id="L44"></a>type SectionHeader struct {
+    <a id="L45"></a>Name      string;
+    <a id="L46"></a>Type      SectionType;
+    <a id="L47"></a>Flags     SectionFlag;
+    <a id="L48"></a>Addr      uint64;
+    <a id="L49"></a>Offset    uint64;
+    <a id="L50"></a>Size      uint64;
+    <a id="L51"></a>Link      uint32;
+    <a id="L52"></a>Info      uint32;
+    <a id="L53"></a>Addralign uint64;
+    <a id="L54"></a>Entsize   uint64;
+<a id="L55"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L302"><a id="L302"></a>SectionIndex</a></h2>
+			<p>
+Special section indices.
+</p>
+
+			<p><pre><a id="L302"></a>type SectionIndex int</pre></p>
+				
+				<pre><a id="L304"></a>const (
+    <a id="L305"></a>SHN_UNDEF     SectionIndex = 0;      /* Undefined, missing, irrelevant. */
+    <a id="L306"></a>SHN_LORESERVE SectionIndex = 0xff00; /* First of reserved range. */
+    <a id="L307"></a>SHN_LOPROC    SectionIndex = 0xff00; /* First processor-specific. */
+    <a id="L308"></a>SHN_HIPROC    SectionIndex = 0xff1f; /* Last processor-specific. */
+    <a id="L309"></a>SHN_LOOS      SectionIndex = 0xff20; /* First operating system-specific. */
+    <a id="L310"></a>SHN_HIOS      SectionIndex = 0xff3f; /* Last operating system-specific. */
+    <a id="L311"></a>SHN_ABS       SectionIndex = 0xfff1; /* Absolute values. */
+    <a id="L312"></a>SHN_COMMON    SectionIndex = 0xfff2; /* Common data. */
+    <a id="L313"></a>SHN_XINDEX    SectionIndex = 0xffff; /* Escape -- index stored elsewhere. */
+    <a id="L314"></a>SHN_HIRESERVE SectionIndex = 0xffff; /* Last of reserved range. */
+<a id="L315"></a>)</pre>
+				<h3>func (<a id="L327"></a>SectionIndex) <a href="../../../src/pkg/debug/elf/elf.go#L327">GoString</a></h3>
+				<p><code><a id="L327"></a>func (i SectionIndex) GoString() string</code></p>
+				
+				<h3>func (<a id="L326"></a>SectionIndex) <a href="../../../src/pkg/debug/elf/elf.go#L326">String</a></h3>
+				<p><code><a id="L326"></a>func (i SectionIndex) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L330"><a id="L330"></a>SectionType</a></h2>
+			<p>
+Section type.
+</p>
+
+			<p><pre><a id="L330"></a>type SectionType uint32</pre></p>
+				
+				<pre><a id="L332"></a>const (
+    <a id="L333"></a>SHT_NULL          SectionType = 0;          /* inactive */
+    <a id="L334"></a>SHT_PROGBITS      SectionType = 1;          /* program defined information */
+    <a id="L335"></a>SHT_SYMTAB        SectionType = 2;          /* symbol table section */
+    <a id="L336"></a>SHT_STRTAB        SectionType = 3;          /* string table section */
+    <a id="L337"></a>SHT_RELA          SectionType = 4;          /* relocation section with addends */
+    <a id="L338"></a>SHT_HASH          SectionType = 5;          /* symbol hash table section */
+    <a id="L339"></a>SHT_DYNAMIC       SectionType = 6;          /* dynamic section */
+    <a id="L340"></a>SHT_NOTE          SectionType = 7;          /* note section */
+    <a id="L341"></a>SHT_NOBITS        SectionType = 8;          /* no space section */
+    <a id="L342"></a>SHT_REL           SectionType = 9;          /* relocation section - no addends */
+    <a id="L343"></a>SHT_SHLIB         SectionType = 10;         /* reserved - purpose unknown */
+    <a id="L344"></a>SHT_DYNSYM        SectionType = 11;         /* dynamic symbol table section */
+    <a id="L345"></a>SHT_INIT_ARRAY    SectionType = 14;         /* Initialization function pointers. */
+    <a id="L346"></a>SHT_FINI_ARRAY    SectionType = 15;         /* Termination function pointers. */
+    <a id="L347"></a>SHT_PREINIT_ARRAY SectionType = 16;         /* Pre-initialization function ptrs. */
+    <a id="L348"></a>SHT_GROUP         SectionType = 17;         /* Section group. */
+    <a id="L349"></a>SHT_SYMTAB_SHNDX  SectionType = 18;         /* Section indexes (see SHN_XINDEX). */
+    <a id="L350"></a>SHT_LOOS          SectionType = 0x60000000; /* First of OS specific semantics */
+    <a id="L351"></a>SHT_HIOS          SectionType = 0x6fffffff; /* Last of OS specific semantics */
+    <a id="L352"></a>SHT_LOPROC        SectionType = 0x70000000; /* reserved range for processor */
+    <a id="L353"></a>SHT_HIPROC        SectionType = 0x7fffffff; /* specific section header types */
+    <a id="L354"></a>SHT_LOUSER        SectionType = 0x80000000; /* reserved range for application */
+    <a id="L355"></a>SHT_HIUSER        SectionType = 0xffffffff; /* specific indexes */
+<a id="L356"></a>)</pre>
+				<h3>func (<a id="L385"></a>SectionType) <a href="../../../src/pkg/debug/elf/elf.go#L385">GoString</a></h3>
+				<p><code><a id="L385"></a>func (i SectionType) GoString() string</code></p>
+				
+				<h3>func (<a id="L384"></a>SectionType) <a href="../../../src/pkg/debug/elf/elf.go#L384">String</a></h3>
+				<p><code><a id="L384"></a>func (i SectionType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1359"><a id="L1359"></a>Sym32</a></h2>
+			<p>
+ELF32 Symbol.
+</p>
+
+			<p><pre><a id="L1359"></a>type Sym32 struct {
+    <a id="L1360"></a>Name  uint32;
+    <a id="L1361"></a>Value uint32;
+    <a id="L1362"></a>Size  uint32;
+    <a id="L1363"></a>Info  uint8;
+    <a id="L1364"></a>Other uint8;
+    <a id="L1365"></a>Shndx uint16;
+<a id="L1366"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L1465"><a id="L1465"></a>Sym64</a></h2>
+			<p>
+* ELF64 symbol table entries.
+</p>
+
+			<p><pre><a id="L1465"></a>type Sym64 struct {
+    <a id="L1466"></a>Name  uint32; /* String table index of name. */
+    <a id="L1467"></a>Info  uint8;  /* Type and binding information. */
+    <a id="L1468"></a>Other uint8;  /* Reserved (not used). */
+    <a id="L1469"></a>Shndx uint16; /* Section index of symbol. */
+    <a id="L1470"></a>Value uint64; /* Symbol value. */
+    <a id="L1471"></a>Size  uint64; /* Size of associated object. */
+<a id="L1472"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L617"><a id="L617"></a>SymBind</a></h2>
+			<p>
+Symbol Binding - ELFNN_ST_BIND - st_info
+</p>
+
+			<p><pre><a id="L617"></a>type SymBind int</pre></p>
+				
+				<pre><a id="L619"></a>const (
+    <a id="L620"></a>STB_LOCAL  SymBind = 0;  /* Local symbol */
+    <a id="L621"></a>STB_GLOBAL SymBind = 1;  /* Global symbol */
+    <a id="L622"></a>STB_WEAK   SymBind = 2;  /* like global - lower precedence */
+    <a id="L623"></a>STB_LOOS   SymBind = 10; /* Reserved range for operating system */
+    <a id="L624"></a>STB_HIOS   SymBind = 12; /*   specific semantics. */
+    <a id="L625"></a>STB_LOPROC SymBind = 13; /* reserved range for processor */
+    <a id="L626"></a>STB_HIPROC SymBind = 15; /*   specific semantics. */
+<a id="L627"></a>)</pre>
+				<h3>func <a href="../../../src/pkg/debug/elf/elf.go#L1370">ST_BIND</a></h3>
+				<p><code><a id="L1370"></a>func ST_BIND(info uint8) SymBind</code></p>
+				
+				<h3>func (<a id="L640"></a>SymBind) <a href="../../../src/pkg/debug/elf/elf.go#L640">GoString</a></h3>
+				<p><code><a id="L640"></a>func (i SymBind) GoString() string</code></p>
+				
+				<h3>func (<a id="L639"></a>SymBind) <a href="../../../src/pkg/debug/elf/elf.go#L639">String</a></h3>
+				<p><code><a id="L639"></a>func (i SymBind) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L643"><a id="L643"></a>SymType</a></h2>
+			<p>
+Symbol type - ELFNN_ST_TYPE - st_info
+</p>
+
+			<p><pre><a id="L643"></a>type SymType int</pre></p>
+				
+				<pre><a id="L645"></a>const (
+    <a id="L646"></a>STT_NOTYPE  SymType = 0;  /* Unspecified type. */
+    <a id="L647"></a>STT_OBJECT  SymType = 1;  /* Data object. */
+    <a id="L648"></a>STT_FUNC    SymType = 2;  /* Function. */
+    <a id="L649"></a>STT_SECTION SymType = 3;  /* Section. */
+    <a id="L650"></a>STT_FILE    SymType = 4;  /* Source file. */
+    <a id="L651"></a>STT_COMMON  SymType = 5;  /* Uninitialized common block. */
+    <a id="L652"></a>STT_TLS     SymType = 6;  /* TLS object. */
+    <a id="L653"></a>STT_LOOS    SymType = 10; /* Reserved range for operating system */
+    <a id="L654"></a>STT_HIOS    SymType = 12; /*   specific semantics. */
+    <a id="L655"></a>STT_LOPROC  SymType = 13; /* reserved range for processor */
+    <a id="L656"></a>STT_HIPROC  SymType = 15; /*   specific semantics. */
+<a id="L657"></a>)</pre>
+				<h3>func (<a id="L674"></a>SymType) <a href="../../../src/pkg/debug/elf/elf.go#L674">GoString</a></h3>
+				<p><code><a id="L674"></a>func (i SymType) GoString() string</code></p>
+				
+				<h3>func (<a id="L673"></a>SymType) <a href="../../../src/pkg/debug/elf/elf.go#L673">String</a></h3>
+				<p><code><a id="L673"></a>func (i SymType) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L677"><a id="L677"></a>SymVis</a></h2>
+			<p>
+Symbol visibility - ELFNN_ST_VISIBILITY - st_other
+</p>
+
+			<p><pre><a id="L677"></a>type SymVis int</pre></p>
+				
+				<pre><a id="L679"></a>const (
+    <a id="L680"></a>STV_DEFAULT   SymVis = 0x0; /* Default visibility (see binding). */
+    <a id="L681"></a>STV_INTERNAL  SymVis = 0x1; /* Special meaning in relocatable objects. */
+    <a id="L682"></a>STV_HIDDEN    SymVis = 0x2; /* Not visible. */
+    <a id="L683"></a>STV_PROTECTED SymVis = 0x3; /* Visible but not preemptible. */
+<a id="L684"></a>)</pre>
+				<h3>func <a href="../../../src/pkg/debug/elf/elf.go#L1372">ST_VISIBILITY</a></h3>
+				<p><code><a id="L1372"></a>func ST_VISIBILITY(other uint8) SymVis</code></p>
+				
+				<h3>func (<a id="L694"></a>SymVis) <a href="../../../src/pkg/debug/elf/elf.go#L694">GoString</a></h3>
+				<p><code><a id="L694"></a>func (i SymVis) GoString() string</code></p>
+				
+				<h3>func (<a id="L693"></a>SymVis) <a href="../../../src/pkg/debug/elf/elf.go#L693">String</a></h3>
+				<p><code><a id="L693"></a>func (i SymVis) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/file.go#L110"><a id="L110"></a>Symbol</a></h2>
+			<p>
+A Symbol represents an entry in an ELF symbol table section.
+</p>
+
+			<p><pre><a id="L110"></a>type Symbol struct {
+    <a id="L111"></a>Name        uint32;
+    <a id="L112"></a>Info, Other byte;
+    <a id="L113"></a>Section     uint32;
+    <a id="L114"></a>Value, Size uint64;
+<a id="L115"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L162"><a id="L162"></a>Type</a></h2>
+			<p>
+Type is found in Header.Type.
+</p>
+
+			<p><pre><a id="L162"></a>type Type uint16</pre></p>
+				
+				<pre><a id="L164"></a>const (
+    <a id="L165"></a>ET_NONE   Type = 0;      /* Unknown type. */
+    <a id="L166"></a>ET_REL    Type = 1;      /* Relocatable. */
+    <a id="L167"></a>ET_EXEC   Type = 2;      /* Executable. */
+    <a id="L168"></a>ET_DYN    Type = 3;      /* Shared object. */
+    <a id="L169"></a>ET_CORE   Type = 4;      /* Core file. */
+    <a id="L170"></a>ET_LOOS   Type = 0xfe00; /* First operating system specific. */
+    <a id="L171"></a>ET_HIOS   Type = 0xfeff; /* Last operating system-specific. */
+    <a id="L172"></a>ET_LOPROC Type = 0xff00; /* First processor-specific. */
+    <a id="L173"></a>ET_HIPROC Type = 0xffff; /* Last processor-specific. */
+<a id="L174"></a>)</pre>
+				<h3>func (<a id="L189"></a>Type) <a href="../../../src/pkg/debug/elf/elf.go#L189">GoString</a></h3>
+				<p><code><a id="L189"></a>func (i Type) GoString() string</code></p>
+				
+				<h3>func (<a id="L188"></a>Type) <a href="../../../src/pkg/debug/elf/elf.go#L188">String</a></h3>
+				<p><code><a id="L188"></a>func (i Type) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/elf/elf.go#L64"><a id="L64"></a>Version</a></h2>
+			<p>
+Version is found in Header.Ident[EI_VERSION] and Header.Version.
+</p>
+
+			<p><pre><a id="L64"></a>type Version byte</pre></p>
+				
+				<pre><a id="L66"></a>const (
+    <a id="L67"></a>EV_NONE    Version = 0;
+    <a id="L68"></a>EV_CURRENT Version = 1;
+<a id="L69"></a>)</pre>
+				<h3>func (<a id="L77"></a>Version) <a href="../../../src/pkg/debug/elf/elf.go#L77">GoString</a></h3>
+				<p><code><a id="L77"></a>func (i Version) GoString() string</code></p>
+				
+				<h3>func (<a id="L76"></a>Version) <a href="../../../src/pkg/debug/elf/elf.go#L76">String</a></h3>
+				<p><code><a id="L76"></a>func (i Version) String() string</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

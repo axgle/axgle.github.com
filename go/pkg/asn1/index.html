@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package asn1</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package asn1</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "asn1"</code></p>
+	<p>
+The asn1 package implements parsing of DER-encoded ASN.1 data structures,
+as defined in ITU-T Rec X.690.
+</p>
+<p>
+See also &ldquo;A Layman&#39;s Guide to a Subset of ASN.1, BER, and DER,&rdquo;
+http://luca.ntop.org/Teaching/Appunti/asn1.html.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/asn1/asn1.go">asn1.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/asn1/asn1.go#L874">Unmarshal</a></h2>
+			<p><code><a id="L874"></a>func Unmarshal(val interface{}, b []byte) os.Error</code></p>
+			<p>
+Unmarshal parses the DER-encoded ASN.1 data structure b
+and uses the reflect package to fill in an arbitrary value pointed at by val.
+Because Unmarshal uses the reflect package, the structs
+being written to must use upper case field names.
+</p>
+<p>
+An ASN.1 INTEGER can be written to an int or int64.
+If the encoded value does not fit in the Go type,
+Unmarshal returns a parse error.
+</p>
+<p>
+An ASN.1 BIT STRING can be written to a BitString.
+</p>
+<p>
+An ASN.1 OCTET STRING can be written to a []byte.
+</p>
+<p>
+An ASN.1 OBJECT IDENTIFIER can be written to an
+ObjectIdentifier.
+</p>
+<p>
+An ASN.1 PrintableString or IA5String can be written to a string.
+</p>
+<p>
+Any of the above ASN.1 values can be written to an interface{}.
+The value stored in the interface has the corresponding Go type.
+For integers, that type is int64.
+</p>
+<p>
+An ASN.1 SEQUENCE OF x or SET OF x can be written
+to a slice if an x can be written to the slice&#39;s element type.
+</p>
+<p>
+An ASN.1 SEQUENCE or SET can be written to a struct
+if each of the elements in the sequence can be
+written to the corresponding element in the struct.
+</p>
+<p>
+The following tags on struct fields have special meaning to Unmarshal:
+</p>
+<pre>optional		marks the field as ASN.1 OPTIONAL
+[explicit] tag:x	specifies the ASN.1 tag number; implies ASN.1 CONTEXT SPECIFIC
+default:x		sets the default value for optional integer fields
+</pre>
+<p>
+Other ASN.1 types are not supported; if it encounters them,
+Unmarshal returns a parse error.
+</p>
+
+			<h2>type <a href="../../src/pkg/asn1/asn1.go#L98"><a id="L98"></a>BitString</a></h2>
+			<p>
+BitString is the structure to use when you want an ASN.1 BIT STRING type. A
+bit string is padded up to the nearest byte in memory and the number of
+valid bits is recorded. Padding bits will be zero.
+</p>
+
+			<p><pre><a id="L98"></a>type BitString struct {
+    <a id="L99"></a>Bytes     []byte; // bits packed into bytes.
+    <a id="L100"></a>BitLength int;    // length in bits.
+<a id="L101"></a>}</pre></p>
+				<h3>func (<a id="L105"></a>BitString) <a href="../../src/pkg/asn1/asn1.go#L105">At</a></h3>
+				<p><code><a id="L105"></a>func (b BitString) At(i int) int</code></p>
+				<p>
+At returns the bit at the given index. If the index is out of range it
+returns false.
+</p>
+
+			<h2>type <a href="../../src/pkg/asn1/asn1.go#L135"><a id="L135"></a>ObjectIdentifier</a></h2>
+			<p>
+An ObjectIdentifier represents an ASN.1 OBJECT IDENTIFIER.
+</p>
+
+			<p><pre><a id="L135"></a>type ObjectIdentifier []int</pre></p>
+			<h2>type <a href="../../src/pkg/asn1/asn1.go#L328"><a id="L328"></a>RawValue</a></h2>
+			<p>
+A RawValue represents an undecoded ASN.1 object.
+</p>
+
+			<p><pre><a id="L328"></a>type RawValue struct {
+    <a id="L329"></a>Class, Tag int;
+    <a id="L330"></a>IsCompound bool;
+    <a id="L331"></a>Bytes      []byte;
+<a id="L332"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/asn1/asn1.go#L33"><a id="L33"></a>StructuralError</a></h2>
+			<p>
+A StructuralError suggests that the ASN.1 data is valid, but the Go type
+which is receiving it doesn&#39;t match.
+</p>
+
+			<p><pre><a id="L33"></a>type StructuralError struct {
+    <a id="L34"></a>Msg string;
+<a id="L35"></a>}</pre></p>
+				<h3>func (<a id="L37"></a>StructuralError) <a href="../../src/pkg/asn1/asn1.go#L37">String</a></h3>
+				<p><code><a id="L37"></a>func (e StructuralError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/asn1/asn1.go#L40"><a id="L40"></a>SyntaxError</a></h2>
+			<p>
+A SyntaxError suggests that the ASN.1 data is invalid.
+</p>
+
+			<p><pre><a id="L40"></a>type SyntaxError struct {
+    <a id="L41"></a>Msg string;
+<a id="L42"></a>}</pre></p>
+				<h3>func (<a id="L44"></a>SyntaxError) <a href="../../src/pkg/asn1/asn1.go#L44">String</a></h3>
+				<p><code><a id="L44"></a>func (e SyntaxError) String() string</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

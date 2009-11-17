@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package block</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 16:00:43 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package block</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "crypto/block"</code></p>
+	<p>
+The block package implements standard block cipher modes
+that can be wrapped around low-level block cipher implementations.
+See http://csrc.nist.gov/groups/ST/toolkit/BCM/current_modes.html
+and NIST Special Publication 800-38A.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/crypto/block/cbc.go">cbc.go</a>
+				<a href="../../../src/pkg/crypto/block/cfb.go">cfb.go</a>
+				<a href="../../../src/pkg/crypto/block/cipher.go">cipher.go</a>
+				<a href="../../../src/pkg/crypto/block/cmac.go">cmac.go</a>
+				<a href="../../../src/pkg/crypto/block/ctr.go">ctr.go</a>
+				<a href="../../../src/pkg/crypto/block/eax.go">eax.go</a>
+				<a href="../../../src/pkg/crypto/block/ecb.go">ecb.go</a>
+				<a href="../../../src/pkg/crypto/block/ofb.go">ofb.go</a>
+				<a href="../../../src/pkg/crypto/block/xor.go">xor.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../../src/pkg/crypto/block/cbc.go#L60">NewCBCDecrypter</a></h2>
+			<p><code><a id="L60"></a>func NewCBCDecrypter(c Cipher, iv []byte, r io.Reader) io.Reader</code></p>
+			<p>
+NewCBCDecrypter returns a reader that reads data from r and decrypts it using c
+in cipher block chaining (CBC) mode with the initialization vector iv.
+The returned Reader does not buffer or read ahead except
+as required by the cipher&#39;s block size.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/cbc.go#L69">NewCBCEncrypter</a></h2>
+			<p><code><a id="L69"></a>func NewCBCEncrypter(c Cipher, iv []byte, w io.Writer) io.Writer</code></p>
+			<p>
+NewCBCEncrypter returns a writer that encrypts data using c
+in cipher block chaining (CBC) mode with the initialization vector iv
+and writes the encrypted data to w.
+The returned Writer does no buffering except as required
+by the cipher&#39;s block size, so there is no need for a Flush method.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/cfb.go#L84">NewCFBDecrypter</a></h2>
+			<p><code><a id="L84"></a>func NewCFBDecrypter(c Cipher, s int, iv []byte, r io.Reader) io.Reader</code></p>
+			<p>
+NewCFBDecrypter returns a reader that reads data from r and decrypts it using c
+in s-bit cipher feedback (CFB) mode with the initialization vector iv.
+The returned Reader does not buffer or read ahead except
+as required by the cipher&#39;s block size.
+Modes for s not a multiple of 8 are unimplemented.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/cfb.go#L94">NewCFBEncrypter</a></h2>
+			<p><code><a id="L94"></a>func NewCFBEncrypter(c Cipher, s int, iv []byte, w io.Writer) io.Writer</code></p>
+			<p>
+NewCFBEncrypter returns a writer that encrypts data using c
+in s-bit cipher feedback (CFB) mode with the initialization vector iv
+and writes the encrypted data to w.
+The returned Writer does no buffering except as required
+by the cipher&#39;s block size, so there is no need for a Flush method.
+Modes for s not a multiple of 8 are unimplemented.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/cmac.go#L31">NewCMAC</a></h2>
+			<p><code><a id="L31"></a>func NewCMAC(c Cipher) hash.Hash</code></p>
+			<p>
+NewCMAC returns a new instance of a CMAC message authentication code
+digest using the given Cipher.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/ctr.go#L54">NewCTRReader</a></h2>
+			<p><code><a id="L54"></a>func NewCTRReader(c Cipher, iv []byte, r io.Reader) io.Reader</code></p>
+			<p>
+NewCTRReader returns a reader that reads data from r, decrypts (or encrypts)
+it using c in counter (CTR) mode with the initialization vector iv.
+The returned Reader does not buffer and has no block size.
+In CTR mode, encryption and decryption are the same operation:
+a CTR reader applied to an encrypted stream produces a decrypted
+stream and vice versa.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/ctr.go#L65">NewCTRWriter</a></h2>
+			<p><code><a id="L65"></a>func NewCTRWriter(c Cipher, iv []byte, w io.Writer) io.Writer</code></p>
+			<p>
+NewCTRWriter returns a writer that encrypts (or decrypts) data using c
+in counter (CTR) mode with the initialization vector iv
+and writes the encrypted data to w.
+The returned Writer does not buffer and has no block size.
+In CTR mode, encryption and decryption are the same operation:
+a CTR writer applied to an decrypted stream produces an encrypted
+stream and vice versa.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/eax.go#L222">NewEAXDecrypter</a></h2>
+			<p><code><a id="L222"></a>func NewEAXDecrypter(c Cipher, iv []byte, hdr []byte, tagBytes int, r io.Reader) io.Reader</code></p>
+			<p>
+NewEAXDecrypter creates and returns a new EAX decrypter
+using the given cipher c, initialization vector iv, associated data hdr,
+and tag length tagBytes.  The encrypter&#39;s Read method decrypts and
+returns data read from r.  At r&#39;s EOF, the encrypter checks the final
+authenticating tag and returns an EAXTagError if the tag is invalid.
+In that case, the message should be discarded.
+Note that the data stream returned from Read cannot be
+assumed to be valid, authenticated data until Read returns
+0, nil to signal the end of the data.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/eax.go#L100">NewEAXEncrypter</a></h2>
+			<p><code><a id="L100"></a>func NewEAXEncrypter(c Cipher, iv []byte, hdr []byte, tagBytes int, w io.Writer) io.WriteCloser</code></p>
+			<p>
+NewEAXEncrypter creates and returns a new EAX encrypter
+using the given cipher c, initialization vector iv, associated data hdr,
+and tag length tagBytes.  The encrypter&#39;s Write method encrypts
+the data it receives and writes that data to w.
+The encrypter&#39;s Close method writes a final authenticating tag to w.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/ecb.go#L145">NewECBDecrypter</a></h2>
+			<p><code><a id="L145"></a>func NewECBDecrypter(c Cipher, r io.Reader) io.Reader</code></p>
+			<p>
+NewECBDecrypter returns a reader that reads data from r and decrypts it using c.
+It decrypts by calling c.Decrypt on each block in sequence;
+this mode is known as electronic codebook mode, or ECB.
+The returned Reader does not buffer or read ahead except
+as required by the cipher&#39;s block size.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/ecb.go#L267">NewECBEncrypter</a></h2>
+			<p><code><a id="L267"></a>func NewECBEncrypter(c Cipher, w io.Writer) io.Writer</code></p>
+			<p>
+NewECBEncrypter returns a writer that encrypts data using c and writes it to w.
+It encrypts by calling c.Encrypt on each block in sequence;
+this mode is known as electronic codebook mode, or ECB.
+The returned Writer does no buffering except as required
+by the cipher&#39;s block size, so there is no need for a Flush method.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/ofb.go#L46">NewOFBReader</a></h2>
+			<p><code><a id="L46"></a>func NewOFBReader(c Cipher, iv []byte, r io.Reader) io.Reader</code></p>
+			<p>
+NewOFBReader returns a reader that reads data from r, decrypts (or encrypts)
+it using c in output feedback (OFB) mode with the initialization vector iv.
+The returned Reader does not buffer and has no block size.
+In OFB mode, encryption and decryption are the same operation:
+an OFB reader applied to an encrypted stream produces a decrypted
+stream and vice versa.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/block/ofb.go#L57">NewOFBWriter</a></h2>
+			<p><code><a id="L57"></a>func NewOFBWriter(c Cipher, iv []byte, w io.Writer) io.Writer</code></p>
+			<p>
+NewOFBWriter returns a writer that encrypts (or decrypts) data using c
+in cipher feedback (OFB) mode with the initialization vector iv
+and writes the encrypted data to w.
+The returned Writer does not buffer and has no block size.
+In OFB mode, encryption and decryption are the same operation:
+an OFB writer applied to an decrypted stream produces an encrypted
+stream and vice versa.
+</p>
+
+			<h2>type <a href="../../../src/pkg/crypto/block/cipher.go#L15"><a id="L15"></a>Cipher</a></h2>
+			<p>
+A Cipher represents an implementation of block cipher
+using a given key.  It provides the capability to encrypt
+or decrypt individual blocks.  The mode implementations
+extend that capability to streams of blocks.
+</p>
+
+			<p><pre><a id="L15"></a>type Cipher interface {
+    <a id="L16"></a>// BlockSize returns the cipher&#39;s block size.
+    <a id="L17"></a>BlockSize() int;
+
+    <a id="L19"></a>// Encrypt encrypts the first block in src into dst.
+    <a id="L20"></a>// Src and dst may point at the same memory.
+    <a id="L21"></a>Encrypt(src, dst []byte);
+
+    <a id="L23"></a>// Decrypt decrypts the first block in src into dst.
+    <a id="L24"></a>// Src and dst may point at the same memory.
+    <a id="L25"></a>Decrypt(src, dst []byte);
+<a id="L26"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/crypto/block/eax.go#L27"><a id="L27"></a>EAXTagError</a></h2>
+			<p>
+An EAXTagError is returned when the message has failed to authenticate,
+because the tag at the end of the message stream (Read) does not match
+the tag computed from the message itself (Computed).
+</p>
+
+			<p><pre><a id="L27"></a>type EAXTagError struct {
+    <a id="L28"></a>Read     []byte;
+    <a id="L29"></a>Computed []byte;
+<a id="L30"></a>}</pre></p>
+				<h3>func (<a id="L32"></a>*EAXTagError) <a href="../../../src/pkg/crypto/block/eax.go#L32">String</a></h3>
+				<p><code><a id="L32"></a>func (e *EAXTagError) String() string</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

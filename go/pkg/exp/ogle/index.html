@@ -1,0 +1,592 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package ogle</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:47:27 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package ogle</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "exp/ogle"</code></p>
+	<p>
+Ogle is the beginning of a debugger for Go.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/exp/ogle/abort.go">abort.go</a>
+				<a href="../../../src/pkg/exp/ogle/arch.go">arch.go</a>
+				<a href="../../../src/pkg/exp/ogle/cmd.go">cmd.go</a>
+				<a href="../../../src/pkg/exp/ogle/event.go">event.go</a>
+				<a href="../../../src/pkg/exp/ogle/frame.go">frame.go</a>
+				<a href="../../../src/pkg/exp/ogle/goroutine.go">goroutine.go</a>
+				<a href="../../../src/pkg/exp/ogle/process.go">process.go</a>
+				<a href="../../../src/pkg/exp/ogle/rruntime.go">rruntime.go</a>
+				<a href="../../../src/pkg/exp/ogle/rtype.go">rtype.go</a>
+				<a href="../../../src/pkg/exp/ogle/rvalue.go">rvalue.go</a>
+				<a href="../../../src/pkg/exp/ogle/vars.go">vars.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			
+			<pre><a id="L125"></a>var Amd64 = &amp;amd64{gReg: -1}</pre>
+			<h2>func <a href="../../../src/pkg/exp/ogle/cmd.go#L24">Main</a></h2>
+			<p><code><a id="L24"></a>func Main()</code></p>
+			
+			<h2>type <a href="../../../src/pkg/exp/ogle/arch.go#L12"><a id="L12"></a>Arch</a></h2>
+			
+			<p><pre><a id="L12"></a>type Arch interface {
+    <a id="L13"></a>// ToWord converts an array of up to 8 bytes in memory order
+    <a id="L14"></a>// to a word.
+    <a id="L15"></a>ToWord(data []byte) proc.Word;
+
+    <a id="L16"></a>// FromWord converts a word to an array of up to 8 bytes in
+    <a id="L17"></a>// memory order.
+    <a id="L18"></a>FromWord(v proc.Word, out []byte);
+
+    <a id="L19"></a>// ToFloat32 converts a word to a float.  The order of this
+    <a id="L20"></a>// word will be the order returned by ToWord on the memory
+    <a id="L21"></a>// representation of a float, and thus may require reversing.
+    <a id="L22"></a>ToFloat32(bits uint32) float32;
+
+    <a id="L23"></a>// FromFloat32 converts a float to a word.  This should return
+    <a id="L24"></a>// a word that can be passed to FromWord to get the memory
+    <a id="L25"></a>// representation of a float on this architecture.
+    <a id="L26"></a>FromFloat32(f float32) uint32;
+
+    <a id="L27"></a>// ToFloat64 is to float64 as ToFloat32 is to float32.
+    <a id="L28"></a>ToFloat64(bits uint64) float64;
+
+    <a id="L29"></a>// FromFloat64 is to float64 as FromFloat32 is to float32.
+    <a id="L30"></a>FromFloat64(f float64) uint64;
+
+    <a id="L32"></a>// IntSize returns the number of bytes in an &#39;int&#39;.
+    <a id="L33"></a>IntSize() int;
+
+    <a id="L34"></a>// PtrSize returns the number of bytes in a &#39;uintptr&#39;.
+    <a id="L35"></a>PtrSize() int;
+
+    <a id="L36"></a>// FloatSize returns the number of bytes in a &#39;float&#39;.
+    <a id="L37"></a>FloatSize() int;
+
+    <a id="L38"></a>// Align rounds offset up to the appropriate offset for a
+    <a id="L39"></a>// basic type with the given width.
+    <a id="L40"></a>Align(offset, width int) int;
+
+    <a id="L42"></a>// G returns the current G pointer.
+    <a id="L43"></a>G(regs proc.Regs) proc.Word;
+
+    <a id="L45"></a>// ClosureSize returns the number of bytes expected by
+    <a id="L46"></a>// ParseClosure.
+    <a id="L47"></a>ClosureSize() int;
+
+    <a id="L48"></a>// ParseClosure takes ClosureSize bytes read from a return PC
+    <a id="L49"></a>// in a remote process, determines if the code is a closure,
+    <a id="L50"></a>// and returns the frame size of the closure if it is.
+    <a id="L51"></a>ParseClosure(data []byte) (frame int, ok bool);
+<a id="L52"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/ogle/arch.go#L83"><a id="L83"></a>ArchAlignedMultiple</a></h2>
+			
+			<p><pre><a id="L83"></a>type ArchAlignedMultiple struct{}</pre></p>
+				<h3>func (<a id="L85"></a>ArchAlignedMultiple) <a href="../../../src/pkg/exp/ogle/arch.go#L85">Align</a></h3>
+				<p><code><a id="L85"></a>func (ArchAlignedMultiple) Align(offset, width int) int</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/arch.go#L54"><a id="L54"></a>ArchLSB</a></h2>
+			
+			<p><pre><a id="L54"></a>type ArchLSB struct{}</pre></p>
+				<h3>func (<a id="L77"></a>ArchLSB) <a href="../../../src/pkg/exp/ogle/arch.go#L77">FromFloat32</a></h3>
+				<p><code><a id="L77"></a>func (ArchLSB) FromFloat32(f float32) uint32</code></p>
+				
+				<h3>func (<a id="L81"></a>ArchLSB) <a href="../../../src/pkg/exp/ogle/arch.go#L81">FromFloat64</a></h3>
+				<p><code><a id="L81"></a>func (ArchLSB) FromFloat64(f float64) uint64</code></p>
+				
+				<h3>func (<a id="L64"></a>ArchLSB) <a href="../../../src/pkg/exp/ogle/arch.go#L64">FromWord</a></h3>
+				<p><code><a id="L64"></a>func (ArchLSB) FromWord(v proc.Word, out []byte)</code></p>
+				
+				<h3>func (<a id="L71"></a>ArchLSB) <a href="../../../src/pkg/exp/ogle/arch.go#L71">ToFloat32</a></h3>
+				<p><code><a id="L71"></a>func (ArchLSB) ToFloat32(bits uint32) float32</code></p>
+				
+				<h3>func (<a id="L79"></a>ArchLSB) <a href="../../../src/pkg/exp/ogle/arch.go#L79">ToFloat64</a></h3>
+				<p><code><a id="L79"></a>func (ArchLSB) ToFloat64(bits uint64) float64</code></p>
+				
+				<h3>func (<a id="L56"></a>ArchLSB) <a href="../../../src/pkg/exp/ogle/arch.go#L56">ToWord</a></h3>
+				<p><code><a id="L56"></a>func (ArchLSB) ToWord(data []byte) proc.Word</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/event.go#L186"><a id="L186"></a>Breakpoint</a></h2>
+			<p>
+A Breakpoint event occurs when a process reaches a particular
+program counter.  When this event is handled, the current goroutine
+will be the goroutine that reached the program counter.
+</p>
+
+			<p><pre><a id="L186"></a>type Breakpoint struct {
+    // contains unexported fields
+<a id="L190"></a>}</pre></p>
+				<h3>func (<a id="L226"></a>*Breakpoint) <a href="../../../src/pkg/exp/ogle/event.go#L226">PC</a></h3>
+				<p><code><a id="L226"></a>func (b *Breakpoint) PC() proc.Word</code></p>
+				
+				<h3>func (<a id="L228"></a>*Breakpoint) <a href="../../../src/pkg/exp/ogle/event.go#L228">String</a></h3>
+				<p><code><a id="L228"></a>func (b *Breakpoint) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/event.go#L55"><a id="L55"></a>Event</a></h2>
+			
+			<p><pre><a id="L55"></a>type Event interface {
+    <a id="L56"></a>Process() *Process;
+    <a id="L57"></a>Goroutine() *Goroutine;
+    <a id="L58"></a>String() string;
+<a id="L59"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/ogle/event.go#L32"><a id="L32"></a>EventAction</a></h2>
+			<p>
+An EventAction is an event handler&#39;s response to an event.  If all
+of an event&#39;s handlers execute without returning errors, their
+results are combined as follows: If any handler returned
+EAContinue, then the process resumes (without returning from
+WaitStop); otherwise, if any handler returned EAStop, the process
+remains stopped; otherwise, if all handlers returned EADefault, the
+process resumes.  A handler may return EARemoveSelf bit-wise or&#39;d
+with any other action to indicate that the handler should be
+removed from the hook.
+</p>
+
+			<p><pre><a id="L32"></a>type EventAction int</pre></p>
+				
+				<pre><a id="L34"></a>const (
+    <a id="L35"></a>EARemoveSelf EventAction = 0x100;
+    <a id="L36"></a>EADefault    EventAction = iota;
+    <a id="L37"></a>EAStop;
+    <a id="L38"></a>EAContinue;
+<a id="L39"></a>)</pre>
+				<h3>func <a href="../../../src/pkg/exp/ogle/event.go#L162">EventPrint</a></h3>
+				<p><code><a id="L162"></a>func EventPrint(ev Event) (EventAction, os.Error)</code></p>
+				<p>
+EventPrint is a standard event handler that prints events as they
+occur.  It will not cause the process to stop.
+</p>
+
+				<h3>func <a href="../../../src/pkg/exp/ogle/event.go#L169">EventStop</a></h3>
+				<p><code><a id="L169"></a>func EventStop(ev Event) (EventAction, os.Error)</code></p>
+				<p>
+EventStop is a standard event handler that causes the process to stop.
+</p>
+
+			<h2>type <a href="../../../src/pkg/exp/ogle/event.go#L21"><a id="L21"></a>EventHandler</a></h2>
+			<p>
+An EventHandler is a function that takes an event and returns a
+response to that event and possibly an error.  If an event handler
+returns an error, the process stops and no other handlers for that
+event are executed.
+</p>
+
+			<p><pre><a id="L21"></a>type EventHandler func(e Event) (EventAction, os.Error)</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/ogle/event.go#L42"><a id="L42"></a>EventHook</a></h2>
+			<p>
+A EventHook allows event handlers to be added and removed.
+</p>
+
+			<p><pre><a id="L42"></a>type EventHook interface {
+    <a id="L43"></a>AddHandler(EventHandler);
+    <a id="L44"></a>RemoveHandler(EventHandler);
+    <a id="L45"></a>NumHandler() int;
+
+    <a id="L47"></a>String() string;
+    // contains unexported methods
+<a id="L48"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/ogle/process.go#L21"><a id="L21"></a>FormatError</a></h2>
+			<p>
+A FormatError indicates a failure to process information in or
+about a remote process, such as unexpected or missing information
+in the object file or runtime structures.
+</p>
+
+			<p><pre><a id="L21"></a>type FormatError string</pre></p>
+				<h3>func (<a id="L23"></a>FormatError) <a href="../../../src/pkg/exp/ogle/process.go#L23">String</a></h3>
+				<p><code><a id="L23"></a>func (e FormatError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/frame.go#L15"><a id="L15"></a>Frame</a></h2>
+			<p>
+A Frame represents a single frame on a remote call stack.
+</p>
+
+			<p><pre><a id="L15"></a>type Frame struct {
+    // contains unexported fields
+<a id="L31"></a>}</pre></p>
+				<h3>func (<a id="L204"></a>*Frame) <a href="../../../src/pkg/exp/ogle/frame.go#L204">Inner</a></h3>
+				<p><code><a id="L204"></a>func (f *Frame) Inner() *Frame</code></p>
+				<p>
+Inner returns the Frame called by this Frame, or nil if this is the
+innermost frame.
+</p>
+
+				<h3>func (<a id="L168"></a>*Frame) <a href="../../../src/pkg/exp/ogle/frame.go#L168">Outer</a></h3>
+				<p><code><a id="L168"></a>func (f *Frame) Outer() (*Frame, os.Error)</code></p>
+				<p>
+Outer returns the Frame that called this Frame, or nil if this is
+the outermost frame.
+</p>
+
+				<h3>func (<a id="L206"></a>*Frame) <a href="../../../src/pkg/exp/ogle/frame.go#L206">String</a></h3>
+				<p><code><a id="L206"></a>func (f *Frame) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/goroutine.go#L15"><a id="L15"></a>Goroutine</a></h2>
+			<p>
+A Goroutine represents a goroutine in a remote process.
+</p>
+
+			<p><pre><a id="L15"></a>type Goroutine struct {
+    // contains unexported fields
+<a id="L19"></a>}</pre></p>
+				<h3>func (<a id="L50"></a>*Goroutine) <a href="../../../src/pkg/exp/ogle/goroutine.go#L50">In</a></h3>
+				<p><code><a id="L50"></a>func (t *Goroutine) In() os.Error</code></p>
+				<p>
+In selects the frame called by the current frame.
+</p>
+
+				<h3>func (<a id="L41"></a>*Goroutine) <a href="../../../src/pkg/exp/ogle/goroutine.go#L41">Out</a></h3>
+				<p><code><a id="L41"></a>func (t *Goroutine) Out() os.Error</code></p>
+				<p>
+Out selects the caller frame of the current frame.
+</p>
+
+				<h3>func (<a id="L21"></a>*Goroutine) <a href="../../../src/pkg/exp/ogle/goroutine.go#L21">String</a></h3>
+				<p><code><a id="L21"></a>func (t *Goroutine) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/event.go#L247"><a id="L247"></a>GoroutineCreate</a></h2>
+			<p>
+A GoroutineCreate event occurs when a process creates a new
+goroutine.  When this event is handled, the current goroutine will
+be the newly created goroutine.
+</p>
+
+			<p><pre><a id="L247"></a>type GoroutineCreate struct {
+    // contains unexported fields
+<a id="L250"></a>}</pre></p>
+				<h3>func (<a id="L254"></a>*GoroutineCreate) <a href="../../../src/pkg/exp/ogle/event.go#L254">Parent</a></h3>
+				<p><code><a id="L254"></a>func (e *GoroutineCreate) Parent() *Goroutine</code></p>
+				<p>
+Parent returns the goroutine that created this goroutine.  May be
+nil if this event is the creation of the first goroutine.
+</p>
+
+				<h3>func (<a id="L256"></a>*GoroutineCreate) <a href="../../../src/pkg/exp/ogle/event.go#L256">String</a></h3>
+				<p><code><a id="L256"></a>func (e *GoroutineCreate) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/event.go#L271"><a id="L271"></a>GoroutineExit</a></h2>
+			<p>
+A GoroutineExit event occurs when a Go goroutine exits.
+</p>
+
+			<p><pre><a id="L271"></a>type GoroutineExit struct {
+    // contains unexported fields
+<a id="L273"></a>}</pre></p>
+				<h3>func (<a id="L275"></a>*GoroutineExit) <a href="../../../src/pkg/exp/ogle/event.go#L275">String</a></h3>
+				<p><code><a id="L275"></a>func (e *GoroutineExit) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/process.go#L53"><a id="L53"></a>NoCurrentGoroutine</a></h2>
+			<p>
+A NoCurrentGoroutine error occurs when no goroutine is currently
+selected in a process (or when there are no goroutines in a
+process).
+</p>
+
+			<p><pre><a id="L53"></a>type NoCurrentGoroutine struct{}</pre></p>
+				<h3>func (<a id="L55"></a>NoCurrentGoroutine) <a href="../../../src/pkg/exp/ogle/process.go#L55">String</a></h3>
+				<p><code><a id="L55"></a>func (e NoCurrentGoroutine) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/vars.go#L21"><a id="L21"></a>NotOnStack</a></h2>
+			<p>
+A NotOnStack error occurs when attempting to access a variable in a
+remote frame where that remote frame is not on the current stack.
+</p>
+
+			<p><pre><a id="L21"></a>type NotOnStack struct {
+    <a id="L22"></a>Fn        *gosym.Func;
+    <a id="L23"></a>Goroutine *Goroutine;
+<a id="L24"></a>}</pre></p>
+				<h3>func (<a id="L26"></a>NotOnStack) <a href="../../../src/pkg/exp/ogle/vars.go#L26">String</a></h3>
+				<p><code><a id="L26"></a>func (e NotOnStack) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/process.go#L58"><a id="L58"></a>Process</a></h2>
+			<p>
+A Process represents a remote attached process.
+</p>
+
+			<p><pre><a id="L58"></a>type Process struct {
+    <a id="L59"></a>Arch;
+    // contains unexported fields
+<a id="L99"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/exp/ogle/process.go#L107">NewProcess</a></h3>
+				<p><code><a id="L107"></a>func NewProcess(tproc proc.Process, arch Arch, syms *gosym.Table) (*Process, os.Error)</code></p>
+				<p>
+NewProcess constructs a new remote process around a traced
+process, an architecture, and a symbol table.
+</p>
+
+				<h3>func <a href="../../../src/pkg/exp/ogle/process.go#L190">NewProcessElf</a></h3>
+				<p><code><a id="L190"></a>func NewProcessElf(tproc proc.Process, f *elf.File) (*Process, os.Error)</code></p>
+				<p>
+NewProcessElf constructs a new remote process around a traced
+process and the process&#39; ELF object.
+</p>
+
+				<h3>func (<a id="L490"></a>*Process) <a href="../../../src/pkg/exp/ogle/process.go#L490">ContWait</a></h3>
+				<p><code><a id="L490"></a>func (p *Process) ContWait() os.Error</code></p>
+				<p>
+ContWait resumes process execution and waits for an event to occur
+that stops the process.
+</p>
+
+				<h3>func (<a id="L470"></a>*Process) <a href="../../../src/pkg/exp/ogle/process.go#L470">Event</a></h3>
+				<p><code><a id="L470"></a>func (p *Process) Event() Event</code></p>
+				<p>
+Event returns the last event that caused the process to stop.  This
+may return nil if the process has never been stopped by an event.
+</p>
+<p>
+TODO(austin) Return nil if the user calls p.Stop()?
+</p>
+
+				<h3>func (<a id="L526"></a>*Process) <a href="../../../src/pkg/exp/ogle/process.go#L526">In</a></h3>
+				<p><code><a id="L526"></a>func (p *Process) In() os.Error</code></p>
+				<p>
+In selects the frame called by the current frame.
+</p>
+
+				<h3>func (<a id="L321"></a>*Process) <a href="../../../src/pkg/exp/ogle/process.go#L321">OnBreakpoint</a></h3>
+				<p><code><a id="L321"></a>func (p *Process) OnBreakpoint(pc proc.Word) EventHook</code></p>
+				<p>
+OnBreakpoint returns the hook that is run when the program reaches
+the given program counter.
+</p>
+
+				<h3>func (<a id="L330"></a>*Process) <a href="../../../src/pkg/exp/ogle/process.go#L330">OnGoroutineCreate</a></h3>
+				<p><code><a id="L330"></a>func (p *Process) OnGoroutineCreate() EventHook</code></p>
+				<p>
+OnGoroutineCreate returns the hook that is run when a goroutine is created.
+</p>
+
+				<h3>func (<a id="L335"></a>*Process) <a href="../../../src/pkg/exp/ogle/process.go#L335">OnGoroutineExit</a></h3>
+				<p><code><a id="L335"></a>func (p *Process) OnGoroutineExit() EventHook</code></p>
+				<p>
+OnGoroutineExit returns the hook that is run when a goroutine exits.
+</p>
+
+				<h3>func (<a id="L518"></a>*Process) <a href="../../../src/pkg/exp/ogle/process.go#L518">Out</a></h3>
+				<p><code><a id="L518"></a>func (p *Process) Out() os.Error</code></p>
+				<p>
+Out selects the caller frame of the current frame.
+</p>
+
+				<h3>func (<a id="L295"></a>*Process) <a href="../../../src/pkg/exp/ogle/process.go#L295">Peek</a></h3>
+				<p><code><a id="L295"></a>func (p *Process) Peek(addr proc.Word, out []byte) (int, os.Error)</code></p>
+				
+				<h3>func (<a id="L303"></a>*Process) <a href="../../../src/pkg/exp/ogle/process.go#L303">Poke</a></h3>
+				<p><code><a id="L303"></a>func (p *Process) Poke(addr proc.Word, b []byte) (int, os.Error)</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/process.go#L35"><a id="L35"></a>ProcessNotStopped</a></h2>
+			<p>
+A ProcessNotStopped error occurs when attempting to read or write
+memory or registers of a process that is not stopped.
+</p>
+
+			<p><pre><a id="L35"></a>type ProcessNotStopped struct{}</pre></p>
+				<h3>func (<a id="L37"></a>ProcessNotStopped) <a href="../../../src/pkg/exp/ogle/process.go#L37">String</a></h3>
+				<p><code><a id="L37"></a>func (e ProcessNotStopped) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/rvalue.go#L23"><a id="L23"></a>ReadOnlyError</a></h2>
+			<p>
+A ReadOnlyError occurs when attempting to set or assign to a
+read-only value.
+</p>
+
+			<p><pre><a id="L23"></a>type ReadOnlyError string</pre></p>
+				<h3>func (<a id="L25"></a>ReadOnlyError) <a href="../../../src/pkg/exp/ogle/rvalue.go#L25">String</a></h3>
+				<p><code><a id="L25"></a>func (e ReadOnlyError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/rvalue.go#L17"><a id="L17"></a>RemoteMismatchError</a></h2>
+			<p>
+A RemoteMismatchError occurs when an operation that requires two
+identical remote processes is given different process.  For
+example, this occurs when trying to set a pointer in one process to
+point to something in another process.
+</p>
+
+			<p><pre><a id="L17"></a>type RemoteMismatchError string</pre></p>
+				<h3>func (<a id="L19"></a>RemoteMismatchError) <a href="../../../src/pkg/exp/ogle/rvalue.go#L19">String</a></h3>
+				<p><code><a id="L19"></a>func (e RemoteMismatchError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/process.go#L27"><a id="L27"></a>UnknownArchitecture</a></h2>
+			<p>
+An UnknownArchitecture occurs when trying to load an object file
+that indicates an architecture not supported by the debugger.
+</p>
+
+			<p><pre><a id="L27"></a>type UnknownArchitecture elf.Machine</pre></p>
+				<h3>func (<a id="L29"></a>UnknownArchitecture) <a href="../../../src/pkg/exp/ogle/process.go#L29">String</a></h3>
+				<p><code><a id="L29"></a>func (e UnknownArchitecture) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/process.go#L41"><a id="L41"></a>UnknownGoroutine</a></h2>
+			<p>
+An UnknownGoroutine error is an internal error representing an
+unrecognized G structure pointer.
+</p>
+
+			<p><pre><a id="L41"></a>type UnknownGoroutine struct {
+    <a id="L42"></a>OSThread  proc.Thread;
+    <a id="L43"></a>Goroutine proc.Word;
+<a id="L44"></a>}</pre></p>
+				<h3>func (<a id="L46"></a>UnknownGoroutine) <a href="../../../src/pkg/exp/ogle/process.go#L46">String</a></h3>
+				<p><code><a id="L46"></a>func (e UnknownGoroutine) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/ogle/cmd.go#L77"><a id="L77"></a>UsageError</a></h2>
+			<p>
+A UsageError occurs when a command is called with illegal arguments.
+</p>
+
+			<p><pre><a id="L77"></a>type UsageError string</pre></p>
+				<h3>func (<a id="L79"></a>UsageError) <a href="../../../src/pkg/exp/ogle/cmd.go#L79">String</a></h3>
+				<p><code><a id="L79"></a>func (e UsageError) String() string</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

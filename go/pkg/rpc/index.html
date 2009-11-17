@@ -1,0 +1,403 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package rpc</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package rpc</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "rpc"</code></p>
+	<p>
+The rpc package provides access to the public methods of an object across a
+network or other I/O connection.  A server registers an object, making it visible
+as a service with the name of the type of the object.  After registration, public
+methods of the object will be accessible remotely.  A server may register multiple
+objects (services) of different types but it is an error to register multiple
+objects of the same type.
+</p>
+<p>
+Only methods that satisfy these criteria will be made available for remote access;
+other methods will be ignored:
+</p>
+<pre>- the method name is publicly visible, that is, begins with an upper case letter.
+- the method has two arguments, both pointers to publicly visible structs.
+- the method has return type os.Error.
+</pre>
+<p>
+The method&#39;s first argument represents the arguments provided by the caller; the
+second argument represents the result parameters to be returned to the caller.
+The method&#39;s return value, if non-nil, is passed back as a string that the client
+sees as an os.ErrorString.
+</p>
+<p>
+The server may handle requests on a single connection by calling ServeConn.  More
+typically it will create a network listener and call Accept or, for an HTTP
+listener, HandleHTTP and http.Serve.
+</p>
+<p>
+A client wishing to use the service establishes a connection and then invokes
+NewClient on the connection.  The convenience function Dial (DialHTTP) performs
+both steps for a raw network connection (an HTTP connection).  The resulting
+Client object has two methods, Call and Go, that specify the service and method to
+call, a structure containing the arguments, and a structure to receive the result
+parameters.
+</p>
+<p>
+Call waits for the remote call to complete; Go launches the call asynchronously
+and returns a channel that will signal completion.
+</p>
+<p>
+Package &#34;gob&#34; is used to transport the data.
+</p>
+<p>
+Here is a simple example.  A server wishes to export an object of type Arith:
+</p>
+<pre>package server
+
+type Args struct {
+	A, B int
+}
+
+type Reply struct {
+	C int
+}
+
+type Arith int
+
+func (t *Arith) Multiply(args *Args, reply *Reply) os.Error {
+	reply.C = args.A * args.B;
+	return nil
+}
+
+func (t *Arith) Divide(args *Args, reply *Reply) os.Error {
+	if args.B == 0 {
+		return os.ErrorString(&#34;divide by zero&#34;);
+	}
+	reply.C = args.A / args.B;
+	return nil
+}
+</pre>
+<p>
+The server calls (for HTTP service):
+</p>
+<pre>arith := new(Arith);
+rpc.Register(arith);
+rpc.HandleHTTP();
+l, e := net.Listen(&#34;tcp&#34;, &#34;:1234&#34;);
+if e != nil {
+	log.Exit(&#34;listen error:&#34;, e);
+}
+go http.Serve(l, nil);
+</pre>
+<p>
+At this point, clients can see a service &#34;Arith&#34; with methods &#34;Arith.Multiply&#34; and
+&#34;Arith.Divide&#34;.  To invoke one, a client first dials the server:
+</p>
+<pre>client, err := rpc.DialHTTP(&#34;tcp&#34;, serverAddress + &#34;:1234&#34;);
+if err != nil {
+	log.Exit(&#34;dialing:&#34;, err);
+}
+</pre>
+<p>
+Then it can make a remote call:
+</p>
+<pre>// Synchronous call
+args := &amp;server.Args{7,8};
+reply := new(server.Reply);
+err = client.Call(&#34;Arith.Multiply&#34;, args, reply);
+if err != nil {
+	log.Exit(&#34;arith error:&#34;, err);
+}
+fmt.Printf(&#34;Arith: %d*%d=%d&#34;, args.A, args.B, reply.C);
+</pre>
+<p>
+or
+</p>
+<pre>// Asynchronous call
+divCall := client.Go(&#34;Arith.Divide&#34;, args, reply, nil);
+replyCall := &lt;-divCall.Done;	// will be equal to divCall
+// check errors, print, etc.
+</pre>
+<p>
+A server implementation will often provide a simple, type-safe wrapper for the
+client.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/rpc/client.go">client.go</a>
+				<a href="../../src/pkg/rpc/debug.go">debug.go</a>
+				<a href="../../src/pkg/rpc/server.go">server.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/rpc/server.go#L383">Accept</a></h2>
+			<p><code><a id="L383"></a>func Accept(lis net.Listener)</code></p>
+			<p>
+Accept accepts connections on the listener and serves requests
+for each incoming connection.  Accept blocks; the caller typically
+invokes it in a go statement.
+</p>
+
+			<h2>func <a href="../../src/pkg/rpc/server.go#L408">HandleHTTP</a></h2>
+			<p><code><a id="L408"></a>func HandleHTTP()</code></p>
+			<p>
+HandleHTTP registers an HTTP handler for RPC messages.
+It is still necessary to invoke http.Serve(), typically in a go statement.
+</p>
+
+			<h2>func <a href="../../src/pkg/rpc/server.go#L373">Register</a></h2>
+			<p><code><a id="L373"></a>func Register(rcvr interface{}) os.Error</code></p>
+			<p>
+Register publishes in the server the set of methods of the
+receiver value that satisfy the following conditions:
+</p>
+<pre>- public method
+- two arguments, both pointers to public structs
+- one return value of type os.Error
+</pre>
+<p>
+It returns an error if the receiver is not public or has no
+suitable methods.
+</p>
+
+			<h2>func <a href="../../src/pkg/rpc/server.go#L378">ServeConn</a></h2>
+			<p><code><a id="L378"></a>func ServeConn(conn io.ReadWriteCloser)</code></p>
+			<p>
+ServeConn runs the server on a single connection.  When the connection
+completes, service terminates.  ServeConn blocks; the caller typically
+invokes it in a go statement.
+</p>
+
+			<h2>type <a href="../../src/pkg/rpc/client.go#L19"><a id="L19"></a>Call</a></h2>
+			<p>
+Call represents an active RPC.
+</p>
+
+			<p><pre><a id="L19"></a>type Call struct {
+    <a id="L20"></a>ServiceMethod string;      // The name of the service and method to call.
+    <a id="L21"></a>Args          interface{}; // The argument to the function (*struct).
+    <a id="L22"></a>Reply         interface{}; // The reply from the function (*struct).
+    <a id="L23"></a>Error         os.Error;    // After completion, the error status.
+    <a id="L24"></a>Done          chan *Call;  // Strobes when call is complete; value is the error status.
+    // contains unexported fields
+<a id="L26"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/rpc/client.go#L31"><a id="L31"></a>Client</a></h2>
+			<p>
+Client represents an RPC Client.
+There may be multiple outstanding Calls associated
+with a single Client.
+</p>
+
+			<p><pre><a id="L31"></a>type Client struct {
+    // contains unexported fields
+<a id="L40"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/rpc/client.go#L136">Dial</a></h3>
+				<p><code><a id="L136"></a>func Dial(network, address string) (*Client, os.Error)</code></p>
+				<p>
+Dial connects to an RPC server at the specified network address.
+</p>
+
+				<h3>func <a href="../../src/pkg/rpc/client.go#L115">DialHTTP</a></h3>
+				<p><code><a id="L115"></a>func DialHTTP(network, address string) (*Client, os.Error)</code></p>
+				<p>
+DialHTTP connects to an HTTP RPC server at the specified network address.
+</p>
+
+				<h3>func <a href="../../src/pkg/rpc/client.go#L104">NewClient</a></h3>
+				<p><code><a id="L104"></a>func NewClient(conn io.ReadWriteCloser) *Client</code></p>
+				<p>
+NewClient returns a new Client to handle requests to the
+set of services at the other end of the connection.
+</p>
+
+				<h3>func (<a id="L175"></a>*Client) <a href="../../src/pkg/rpc/client.go#L175">Call</a></h3>
+				<p><code><a id="L175"></a>func (client *Client) Call(serviceMethod string, args interface{}, reply interface{}) os.Error</code></p>
+				<p>
+Call invokes the named function, waits for it to complete, and returns its error status.
+</p>
+
+				<h3>func (<a id="L148"></a>*Client) <a href="../../src/pkg/rpc/client.go#L148">Go</a></h3>
+				<p><code><a id="L148"></a>func (client *Client) Go(serviceMethod string, args interface{}, reply interface{}, done chan *Call) *Call</code></p>
+				<p>
+Go invokes the function asynchronously.  It returns the Call structure representing
+the invocation.  The done channel will signal when the call is complete by returning
+the same Call object.  If done is nil, Go will allocate a new channel.
+If non-nil, done must be buffered or Go will deliberately crash.
+</p>
+
+			<h2>type <a href="../../src/pkg/rpc/server.go#L263"><a id="L263"></a>InvalidRequest</a></h2>
+			<p>
+A value sent as a placeholder for the response when the server receives an invalid request.
+</p>
+
+			<p><pre><a id="L263"></a>type InvalidRequest struct {
+    // contains unexported fields
+<a id="L265"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/rpc/server.go#L147"><a id="L147"></a>Request</a></h2>
+			<p>
+Request is a header written before every RPC call.  It is used internally
+but documented here as an aid to debugging, such as when analyzing
+network traffic.
+</p>
+
+			<p><pre><a id="L147"></a>type Request struct {
+    <a id="L148"></a>ServiceMethod string; // format: &#34;Service.Method&#34;
+    <a id="L149"></a>Seq           uint64; // sequence number chosen by client
+<a id="L150"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/rpc/server.go#L155"><a id="L155"></a>Response</a></h2>
+			<p>
+Response is a header written before every RPC return.  It is used internally
+but documented here as an aid to debugging, such as when analyzing
+network traffic.
+</p>
+
+			<p><pre><a id="L155"></a>type Response struct {
+    <a id="L156"></a>ServiceMethod string; // echoes that of the Request
+    <a id="L157"></a>Seq           uint64; // echoes that of the request
+    <a id="L158"></a>Error         string; // error, if any.
+<a id="L159"></a>}</pre></p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

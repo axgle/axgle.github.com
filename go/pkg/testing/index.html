@@ -1,0 +1,415 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package testing</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Sun Nov 15 20:28:13 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package testing</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "testing"</code></p>
+	<p>
+The testing package provides support for automated testing of Go packages.
+It is intended to be used in concert with the &ldquo;gotest&rdquo; utility, which automates
+execution of any function of the form
+</p>
+<pre>func TestXxx(*testing.T)
+</pre>
+<p>
+where Xxx can by any alphanumeric string (but the first letter must not be in
+[a-z]) and serves to identify the test routine.
+These TestXxx routines should be declared within the package they are testing.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/testing/regexp.go">regexp.go</a>
+				<a href="../../src/pkg/testing/testing.go">testing.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			<p>
+Error codes returned by failures to parse an expression.
+</p>
+
+			<pre><a id="L35"></a>var (
+    <a id="L36"></a>ErrInternal            = &#34;internal error&#34;;
+    <a id="L37"></a>ErrUnmatchedLpar       = &#34;unmatched &#39;&#39;&#34;;
+    <a id="L38"></a>ErrUnmatchedRpar       = &#34;unmatched &#39;&#39;&#34;;
+    <a id="L39"></a>ErrUnmatchedLbkt       = &#34;unmatched &#39;[&#39;&#34;;
+    <a id="L40"></a>ErrUnmatchedRbkt       = &#34;unmatched &#39;]&#39;&#34;;
+    <a id="L41"></a>ErrBadRange            = &#34;bad range in character class&#34;;
+    <a id="L42"></a>ErrExtraneousBackslash = &#34;extraneous backslash&#34;;
+    <a id="L43"></a>ErrBadClosure          = &#34;repeated closure **, ++, etc.&#34;;
+    <a id="L44"></a>ErrBareClosure         = &#34;closure applies to nothing&#34;;
+    <a id="L45"></a>ErrBadBackslash        = &#34;illegal backslash escape&#34;;
+<a id="L46"></a>)</pre>
+			<h2>func <a href="../../src/pkg/testing/testing.go#L111">Main</a></h2>
+			<p><code><a id="L111"></a>func Main(tests []Test)</code></p>
+			<p>
+An internal function but exported because it is cross-package; part of the implementation
+of gotest.
+</p>
+
+			<h2>func <a href="../../src/pkg/testing/regexp.go#L850">Match</a></h2>
+			<p><code><a id="L850"></a>func Match(pattern string, b []byte) (matched bool, error string)</code></p>
+			<p>
+Match checks whether a textual regular expression
+matches a byte slice.  More complicated queries need
+to use Compile and the full Regexp interface.
+</p>
+
+			<h2>func <a href="../../src/pkg/testing/regexp.go#L839">MatchString</a></h2>
+			<p><code><a id="L839"></a>func MatchString(pattern string, s string) (matched bool, error string)</code></p>
+			<p>
+MatchString checks whether a textual regular expression
+matches a string.  More complicated queries need
+to use Compile and the full Regexp interface.
+</p>
+
+			<h2>type <a href="../../src/pkg/testing/regexp.go#L71"><a id="L71"></a>Regexp</a></h2>
+			<p>
+The representation of a compiled regular expression.
+The public interface is entirely through methods.
+</p>
+
+			<p><pre><a id="L71"></a>type Regexp struct {
+    // contains unexported fields
+<a id="L76"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/testing/regexp.go#L614">CompileRegexp</a></h3>
+				<p><code><a id="L614"></a>func CompileRegexp(str string) (regexp *Regexp, error string)</code></p>
+				<p>
+CompileRegexp parses a regular expression and returns, if successful, a Regexp
+object that can be used to match against text.
+</p>
+
+				<h3>func <a href="../../src/pkg/testing/regexp.go#L625">MustCompile</a></h3>
+				<p><code><a id="L625"></a>func MustCompile(str string) *Regexp</code></p>
+				<p>
+MustCompileRegexp is like CompileRegexp but panics if the expression cannot be parsed.
+It simplifies safe initialization of global variables holding compiled regular
+expressions.
+</p>
+
+				<h3>func (<a id="L785"></a>*Regexp) <a href="../../src/pkg/testing/regexp.go#L785">Execute</a></h3>
+				<p><code><a id="L785"></a>func (re *Regexp) Execute(b []byte) (a []int)</code></p>
+				<p>
+Execute matches the Regexp against the byte slice b.
+The return value is an array of integers, in pairs, identifying the positions of
+subslices matched by the expression.
+</p>
+<pre>b[a[0]:a[1]] is the subslice matched by the entire expression.
+b[a[2*i]:a[2*i+1]] for i &gt; 0 is the subslice matched by the ith parenthesized subexpression.
+</pre>
+<p>
+A negative value means the subexpression did not match any element of the slice.
+An empty array means &#34;no match&#34;.
+</p>
+
+				<h3>func (<a id="L773"></a>*Regexp) <a href="../../src/pkg/testing/regexp.go#L773">ExecuteString</a></h3>
+				<p><code><a id="L773"></a>func (re *Regexp) ExecuteString(s string) (a []int)</code></p>
+				<p>
+ExecuteString matches the Regexp against the string s.
+The return value is an array of integers, in pairs, identifying the positions of
+substrings matched by the expression.
+</p>
+<pre>s[a[0]:a[1]] is the substring matched by the entire expression.
+s[a[2*i]:a[2*i+1]] for i &gt; 0 is the substring matched by the ith parenthesized subexpression.
+</pre>
+<p>
+A negative value means the subexpression did not match any element of the string.
+An empty array means &#34;no match&#34;.
+</p>
+
+				<h3>func (<a id="L795"></a>*Regexp) <a href="../../src/pkg/testing/regexp.go#L795">Match</a></h3>
+				<p><code><a id="L795"></a>func (re *Regexp) Match(b []byte) bool</code></p>
+				<p>
+Match returns whether the Regexp matches the byte slice b.
+The return value is a boolean: true for match, false for no match.
+</p>
+
+				<h3>func (<a id="L822"></a>*Regexp) <a href="../../src/pkg/testing/regexp.go#L822">MatchSlices</a></h3>
+				<p><code><a id="L822"></a>func (re *Regexp) MatchSlices(b []byte) (a [][]byte)</code></p>
+				<p>
+MatchSlices matches the Regexp against the byte slice b.
+The return value is an array of subslices matched by the expression.
+</p>
+<pre>a[0] is the subslice matched by the entire expression.
+a[i] for i &gt; 0 is the subslice matched by the ith parenthesized subexpression.
+</pre>
+<p>
+An empty array means &ldquo;no match&rdquo;.
+</p>
+
+				<h3>func (<a id="L790"></a>*Regexp) <a href="../../src/pkg/testing/regexp.go#L790">MatchString</a></h3>
+				<p><code><a id="L790"></a>func (re *Regexp) MatchString(s string) bool</code></p>
+				<p>
+MatchString returns whether the Regexp matches the string s.
+The return value is a boolean: true for match, false for no match.
+</p>
+
+				<h3>func (<a id="L803"></a>*Regexp) <a href="../../src/pkg/testing/regexp.go#L803">MatchStrings</a></h3>
+				<p><code><a id="L803"></a>func (re *Regexp) MatchStrings(s string) (a []string)</code></p>
+				<p>
+MatchStrings matches the Regexp against the string s.
+The return value is an array of strings matched by the expression.
+</p>
+<pre>a[0] is the substring matched by the entire expression.
+a[i] for i &gt; 0 is the substring matched by the ith parenthesized subexpression.
+</pre>
+<p>
+An empty array means &ldquo;no match&rdquo;.
+</p>
+
+			<h2>type <a href="../../src/pkg/testing/testing.go#L43"><a id="L43"></a>T</a></h2>
+			<p>
+T is a type passed to Test functions to manage test state and support formatted test logs.
+Logs are accumulated during execution and dumped to standard error when done.
+</p>
+
+			<p><pre><a id="L43"></a>type T struct {
+    // contains unexported fields
+<a id="L47"></a>}</pre></p>
+				<h3>func (<a id="L74"></a>*T) <a href="../../src/pkg/testing/testing.go#L74">Error</a></h3>
+				<p><code><a id="L74"></a>func (t *T) Error(args ...)</code></p>
+				<p>
+Error is equivalent to Log() followed by Fail().
+</p>
+
+				<h3>func (<a id="L80"></a>*T) <a href="../../src/pkg/testing/testing.go#L80">Errorf</a></h3>
+				<p><code><a id="L80"></a>func (t *T) Errorf(format string, args ...)</code></p>
+				<p>
+Errorf is equivalent to Logf() followed by Fail().
+</p>
+
+				<h3>func (<a id="L50"></a>*T) <a href="../../src/pkg/testing/testing.go#L50">Fail</a></h3>
+				<p><code><a id="L50"></a>func (t *T) Fail()</code></p>
+				<p>
+Fail marks the Test function as having failed but continues execution.
+</p>
+
+				<h3>func (<a id="L57"></a>*T) <a href="../../src/pkg/testing/testing.go#L57">FailNow</a></h3>
+				<p><code><a id="L57"></a>func (t *T) FailNow()</code></p>
+				<p>
+FailNow marks the Test function as having failed and stops its execution.
+Execution will continue at the next Test.
+</p>
+
+				<h3>func (<a id="L53"></a>*T) <a href="../../src/pkg/testing/testing.go#L53">Failed</a></h3>
+				<p><code><a id="L53"></a>func (t *T) Failed() bool</code></p>
+				<p>
+Failed returns whether the Test function has failed.
+</p>
+
+				<h3>func (<a id="L86"></a>*T) <a href="../../src/pkg/testing/testing.go#L86">Fatal</a></h3>
+				<p><code><a id="L86"></a>func (t *T) Fatal(args ...)</code></p>
+				<p>
+Fatal is equivalent to Log() followed by FailNow().
+</p>
+
+				<h3>func (<a id="L92"></a>*T) <a href="../../src/pkg/testing/testing.go#L92">Fatalf</a></h3>
+				<p><code><a id="L92"></a>func (t *T) Fatalf(format string, args ...)</code></p>
+				<p>
+Fatalf is equivalent to Logf() followed by FailNow().
+</p>
+
+				<h3>func (<a id="L65"></a>*T) <a href="../../src/pkg/testing/testing.go#L65">Log</a></h3>
+				<p><code><a id="L65"></a>func (t *T) Log(args ...)</code></p>
+				<p>
+Log formats its arguments using default formatting, analogous to Print(),
+and records the text in the error log.
+</p>
+
+				<h3>func (<a id="L69"></a>*T) <a href="../../src/pkg/testing/testing.go#L69">Logf</a></h3>
+				<p><code><a id="L69"></a>func (t *T) Logf(format string, args ...)</code></p>
+				<p>
+Log formats its arguments according to the format, analogous to Printf(),
+and records the text in the error log.
+</p>
+
+			<h2>type <a href="../../src/pkg/testing/testing.go#L99"><a id="L99"></a>Test</a></h2>
+			<p>
+An internal type but exported because it is cross-package; part of the implementation
+of gotest.
+</p>
+
+			<p><pre><a id="L99"></a>type Test struct {
+    <a id="L100"></a>Name string;
+    <a id="L101"></a>F    func(*T);
+<a id="L102"></a>}</pre></p>
+	<h2>Subdirectories</h2>
+	<p>
+	<table class="layout">
+	<tr>
+	<th align="left" colspan="1">Name</th>
+	<td width="25">&nbsp;</td>
+	<th align="left">Synopsis</th>
+	</tr>
+	<tr>
+	<th align="left"><a href="../index.html">..<a></th>
+	</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="iotest/index.html">iotest<a></td>
+		<td></td>
+		<td align="left">The iotest package implements Readers and Writers
+useful only for testing.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="quick/index.html">quick<a></td>
+		<td></td>
+		<td align="left">This package implements utility functions to help with black box testing.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="script/index.html">script<a></td>
+		<td></td>
+		<td align="left">This package aids in the testing of code that uses channels.</td>
+		</tr>
+	</table>
+	</p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

@@ -1,0 +1,306 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package tabwriter</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:51 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package tabwriter</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "tabwriter"</code></p>
+	<p>
+The tabwriter package implements a write filter (tabwriter.Writer)
+that translates tabbed columns in input into properly aligned text.
+</p>
+<p>
+The package is using the Elastic Tabstops algorithm described at
+http://nickgravgaard.com/elastictabstops/index.html.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/tabwriter/tabwriter.go">tabwriter.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+Formatting can be controlled with these flags.
+</p>
+
+			<pre><a id="L139"></a>const (
+    <a id="L140"></a>// Ignore html tags and treat entities (starting with &#39;&amp;&#39;
+    <a id="L141"></a>// and ending in &#39;;&#39;) as single characters (width = 1).
+    <a id="L142"></a>FilterHTML uint = 1 &lt;&lt; iota;
+
+    <a id="L144"></a>// Force right-alignment of cell content.
+    <a id="L145"></a>// Default is left-alignment.
+    <a id="L146"></a>AlignRight;
+
+    <a id="L148"></a>// Handle empty columns as if they were not present in
+    <a id="L149"></a>// the input in the first place.
+    <a id="L150"></a>DiscardEmptyColumns;
+
+    <a id="L152"></a>// Print a vertical bar (&#39;|&#39;) between columns (after formatting).
+    <a id="L153"></a>// Discarded colums appear as zero-width columns (&#34;||&#34;).
+    <a id="L154"></a>Debug;
+<a id="L155"></a>)</pre>
+			<p>
+To escape a text segment, bracket it with Escape characters.
+For instance, the tab in this string &#34;Ignore this tab: \xff\t\xff&#34;
+does not terminate a cell and constitutes a single character of
+width one for formatting purposes.
+</p>
+<p>
+The value 0xff was chosen because it cannot appear in a valid UTF-8 sequence.
+</p>
+
+			<pre><a id="L408"></a>const Escape = &#39;\xff&#39;</pre>
+			<h2>type <a href="../../src/pkg/tabwriter/tabwriter.go#L78"><a id="L78"></a>Writer</a></h2>
+			<p>
+A Writer is a filter that inserts padding around
+tab-delimited columns in its input to align them
+in the output.
+</p>
+<p>
+The Writer treats incoming bytes as UTF-8 encoded text
+consisting of tab-terminated cells. Cells in adjacent lines
+constitute a column. The Writer inserts padding as needed
+to make all cells in a column have the same width, effectively
+aligning the columns. Note that cells are tab-terminated,
+not tab-separated: trailing non-tab text at the end of a line
+is not part of any cell.
+</p>
+<p>
+Horizontal and vertical tabs may be used to terminate a cell.
+If DiscardEmptyColumns is set, empty columns that are terminated
+entirely by vertical (or &#34;soft&#34;) tabs are discarded. Columns
+terminated by horizontal (or &#34;hard&#34;) tabs are not affected by
+this flag.
+</p>
+<p>
+A segment of text may be escaped by bracketing it with Escape
+characters. The tabwriter strips the Escape characters but otherwise
+passes escaped text segments through unchanged. In particular, it
+does not interpret any tabs or line breaks within the segment.
+</p>
+<p>
+The Writer assumes that all characters have the same width;
+this may not be true in some fonts, especially with certain
+UTF-8 characters.
+</p>
+<p>
+If a Writer is configured to filter HTML, HTML tags and entities
+are simply passed through. The widths of tags and entities are
+assumed to be zero (tags) and one (entities) for formatting purposes.
+</p>
+<p>
+The formfeed character (&#39;\f&#39;) acts like a newline but it also
+terminates all columns in the current line (effectively calling
+Flush). Cells in the next line start new columns. Unless found
+inside an HTML tag or inside an escaped text segment, formfeed
+characters appear as newlines in the output.
+</p>
+<p>
+The Writer must buffer input internally, because proper spacing
+of one line may depend on the cells in future lines. Clients must
+call Flush when done calling Write.
+</p>
+
+			<p><pre><a id="L78"></a>type Writer struct {
+    // contains unexported fields
+<a id="L93"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/tabwriter/tabwriter.go#L554">NewWriter</a></h3>
+				<p><code><a id="L554"></a>func NewWriter(output io.Writer, cellwidth, padding int, padchar byte, flags uint) *Writer</code></p>
+				<p>
+NewWriter allocates and initializes a new tabwriter.Writer.
+The parameters are the same as for the the Init function.
+</p>
+
+				<h3>func (<a id="L459"></a>*Writer) <a href="../../src/pkg/tabwriter/tabwriter.go#L459">Flush</a></h3>
+				<p><code><a id="L459"></a>func (b *Writer) Flush() os.Error</code></p>
+				<p>
+Flush should be called after the last call to Write to ensure
+that any data buffered in the Writer is written to output. Any
+incomplete escape sequence at the end is simply considered
+complete for formatting purposes.
+</p>
+
+				<h3>func (<a id="L177"></a>*Writer) <a href="../../src/pkg/tabwriter/tabwriter.go#L177">Init</a></h3>
+				<p><code><a id="L177"></a>func (b *Writer) Init(output io.Writer, cellwidth, padding int, padchar byte, flags uint) *Writer</code></p>
+				<p>
+A Writer must be initialized with a call to Init. The first parameter (output)
+specifies the filter output. The remaining parameters control the formatting:
+</p>
+<pre>cellwidth	minimal cell width
+padding		cell padding added to cell before computing its width
+padchar		ASCII char used for padding
+		if padchar == &#39;\t&#39;, the Writer will assume that the
+		width of a &#39;\t&#39; in the formatted output is cellwidth,
+		and cells are left-aligned independent of align_left
+		(for correct-looking results, cellwidth must correspond
+		to the tab width in the viewer displaying the result)
+flags		formatting control
+</pre>
+<p>
+To format in tab-separated columns with a tab stop of 8:
+</p>
+<pre>b.Init(w, 8, 1, &#39;\t&#39;, 0);
+</pre>
+<p>
+To format in space-separated columns with at least 4 spaces between columns:
+</p>
+<pre>b.Init(w, 1, 4, &#39; &#39;, 0);
+</pre>
+
+				<h3>func (<a id="L483"></a>*Writer) <a href="../../src/pkg/tabwriter/tabwriter.go#L483">Write</a></h3>
+				<p><code><a id="L483"></a>func (b *Writer) Write(buf []byte) (n int, err os.Error)</code></p>
+				<p>
+Write writes buf to the writer b.
+The only errors returned are ones encountered
+while writing to the underlying output stream.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

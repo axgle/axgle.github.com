@@ -1,0 +1,703 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package fmt</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:47:27 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package fmt</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "fmt"</code></p>
+	<p>
+Package fmt implements formatted I/O with functions analogous
+to C&#39;s printf.  The format &#39;verbs&#39; are derived from C&#39;s but
+are simpler.
+</p>
+<p>
+The verbs:
+</p>
+<p>
+General:
+</p>
+<pre>%v	the value in a default format.
+	when printing structs, the plus flag (%+v) adds field names
+%#v	a Go-syntax representation of the value
+%T	a Go-syntax representation of the type of the value
+</pre>
+<p>
+Boolean:
+</p>
+<pre>%t	the word true or false
+</pre>
+<p>
+Integer:
+</p>
+<pre>%b	base 2
+%c	the character represented by the corresponding Unicode code point
+%d	base 10
+%o	base 8
+%x	base 16, with lower-case letters for a-f
+%X	base 16, with upper-case letters for A-F
+</pre>
+<p>
+Floating-point:
+</p>
+<pre>%e	scientific notation, e.g. -1234.456e+78
+%E	scientific notation, e.g. -1234.456E+78
+%f	decimal point but no exponent, e.g. 123.456
+%g	whichever of %e or %f produces more compact output
+%G	whichever of %E or %f produces more compact output
+</pre>
+<p>
+String and slice of bytes:
+</p>
+<pre>%s	the uninterpreted bytes of the string or slice
+%q	a double-quoted string safely escaped with Go syntax
+%x	base 16 notation with two characters per byte
+</pre>
+<p>
+Pointer:
+</p>
+<pre>%p	base 16 notation, with leading 0x
+</pre>
+<p>
+There is no &#39;u&#39; flag.  Integers are printed unsigned if they have unsigned type.
+Similarly, there is no need to specify the size of the operand (int8, int64).
+</p>
+<p>
+For numeric values, the width and precision flags control
+formatting; width sets the width of the field, precision the
+number of places after the decimal, if appropriate.  The
+format %6.2f prints 123.45.
+</p>
+<p>
+Other flags:
+</p>
+<pre>+	always print a sign for numeric values
+-	pad with spaces on the right rather than the left (left-justify the field)
+#	alternate format: add leading 0 for octal (%#o), 0x for hex (%#x);
+	suppress 0x for %p (%#p);
+	print a raw (backquoted) string if possible for %q (%#q)
+&#39; &#39;	(space) leave a space for elided sign in numbers (% d);
+	put spaces between bytes printing strings or slices in hex (% x)
+0	pad with leading zeros rather than spaces
+</pre>
+<p>
+For each Printf-like function, there is also a Print function
+that takes no format and is equivalent to saying %v for every
+operand.  Another variant Println inserts blanks between
+operands and appends a newline.
+</p>
+<p>
+Regardless of the verb, if an operand is an interface value,
+the internal concrete value is used, not the interface itself.
+Thus:
+</p>
+<pre>var i interface{} = 23;
+fmt.Printf(&#34;%v\n&#34;, i);
+</pre>
+<p>
+will print 23.
+</p>
+<p>
+If an operand implements interface Formatter, that interface
+can be used for fine control of formatting.
+</p>
+<p>
+If an operand implements method String() string that method
+will be used for %v, %s, or Print etc.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/fmt/format.go">format.go</a>
+				<a href="../../src/pkg/fmt/print.go">print.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/fmt/print.go#L237">Fprint</a></h2>
+			<p><code><a id="L237"></a>func Fprint(w io.Writer, a ...) (n int, error os.Error)</code></p>
+			<p>
+Fprint formats using the default formats for its operands and writes to w.
+Spaces are added between operands when neither is a string.
+</p>
+
+			<h2>func <a href="../../src/pkg/fmt/print.go#L210">Fprintf</a></h2>
+			<p><code><a id="L210"></a>func Fprintf(w io.Writer, format string, a ...) (n int, error os.Error)</code></p>
+			<p>
+Fprintf formats according to a format specifier and writes to w.
+</p>
+
+			<h2>func <a href="../../src/pkg/fmt/print.go#L268">Fprintln</a></h2>
+			<p><code><a id="L268"></a>func Fprintln(w io.Writer, a ...) (n int, error os.Error)</code></p>
+			<p>
+Fprintln formats using the default formats for its operands and writes to w.
+Spaces are always added between operands and a newline is appended.
+</p>
+
+			<h2>func <a href="../../src/pkg/fmt/print.go#L247">Print</a></h2>
+			<p><code><a id="L247"></a>func Print(v ...) (n int, errno os.Error)</code></p>
+			<p>
+Print formats using the default formats for its operands and writes to standard output.
+Spaces are added between operands when neither is a string.
+</p>
+
+			<h2>func <a href="../../src/pkg/fmt/print.go#L219">Printf</a></h2>
+			<p><code><a id="L219"></a>func Printf(format string, v ...) (n int, errno os.Error)</code></p>
+			<p>
+Printf formats according to a format specifier and writes to standard output.
+</p>
+
+			<h2>func <a href="../../src/pkg/fmt/print.go#L278">Println</a></h2>
+			<p><code><a id="L278"></a>func Println(v ...) (n int, errno os.Error)</code></p>
+			<p>
+Println formats using the default formats for its operands and writes to standard output.
+Spaces are always added between operands and a newline is appended.
+</p>
+
+			<h2>func <a href="../../src/pkg/fmt/print.go#L254">Sprint</a></h2>
+			<p><code><a id="L254"></a>func Sprint(a ...) string</code></p>
+			<p>
+Sprint formats using the default formats for its operands and returns the resulting string.
+Spaces are added between operands when neither is a string.
+</p>
+
+			<h2>func <a href="../../src/pkg/fmt/print.go#L225">Sprintf</a></h2>
+			<p><code><a id="L225"></a>func Sprintf(format string, a ...) string</code></p>
+			<p>
+Sprintf formats according to a format specifier and returns the resulting string.
+</p>
+
+			<h2>func <a href="../../src/pkg/fmt/print.go#L285">Sprintln</a></h2>
+			<p><code><a id="L285"></a>func Sprintln(a ...) string</code></p>
+			<p>
+Sprintln formats using the default formats for its operands and returns the resulting string.
+Spaces are always added between operands and a newline is appended.
+</p>
+
+			<h2>type <a href="../../src/pkg/fmt/format.go#L31"><a id="L31"></a>Fmt</a></h2>
+			<p>
+Fmt is the raw formatter used by Printf etc.  Not meant for normal use.
+See print.go for a more palatable interface.
+</p>
+<p>
+The model is to accumulate operands into an internal buffer and then
+retrieve the buffer in one hit using Str(), Putnl(), etc.  The formatting
+methods return &ldquo;self&rdquo; so the operations can be chained.
+</p>
+<pre>f := fmt.New();
+print(f.Fmt_d(1234).Fmt_s(&#34;\n&#34;).Str());  // create string, print it
+f.Fmt_d(-1234).Fmt_s(&#34;\n&#34;).Put();  // print string
+f.Fmt_ud(1&lt;&lt;63).Putnl();  // print string with automatic newline
+</pre>
+
+			<p><pre><a id="L31"></a>type Fmt struct {
+    // contains unexported fields
+<a id="L43"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/fmt/format.go#L65">New</a></h3>
+				<p><code><a id="L65"></a>func New() *Fmt</code></p>
+				<p>
+New returns a new initialized Fmt
+</p>
+
+				<h3>func (<a id="L463"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L463">Fmt_E32</a></h3>
+				<p><code><a id="L463"></a>func (f *Fmt) Fmt_E32(v float32) *Fmt</code></p>
+				<p>
+Fmt_E32 formats a float32 in the form -1.23E+12.
+</p>
+
+				<h3>func (<a id="L431"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L431">Fmt_E64</a></h3>
+				<p><code><a id="L431"></a>func (f *Fmt) Fmt_E64(v float64) *Fmt</code></p>
+				<p>
+Fmt_E64 formats a float64 in the form -1.23E+12.
+</p>
+
+				<h3>func (<a id="L478"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L478">Fmt_G32</a></h3>
+				<p><code><a id="L478"></a>func (f *Fmt) Fmt_G32(v float32) *Fmt</code></p>
+				<p>
+Fmt_G32 formats a float32 in the &#39;f&#39; or &#39;E&#39; form according to size.
+</p>
+
+				<h3>func (<a id="L446"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L446">Fmt_G64</a></h3>
+				<p><code><a id="L446"></a>func (f *Fmt) Fmt_G64(v float64) *Fmt</code></p>
+				<p>
+Fmt_g64 formats a float64 in the &#39;f&#39; or &#39;E&#39; form according to size.
+</p>
+
+				<h3>func (<a id="L295"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L295">Fmt_X</a></h3>
+				<p><code><a id="L295"></a>func (f *Fmt) Fmt_X(v int) *Fmt</code></p>
+				<p>
+Fmt_X formats an int in upper case hexadecimal.
+</p>
+
+				<h3>func (<a id="L292"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L292">Fmt_X32</a></h3>
+				<p><code><a id="L292"></a>func (f *Fmt) Fmt_X32(v int32) *Fmt</code></p>
+				<p>
+Fmt_X32 formats an int32 in upper case hexadecimal.
+</p>
+
+				<h3>func (<a id="L285"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L285">Fmt_X64</a></h3>
+				<p><code><a id="L285"></a>func (f *Fmt) Fmt_X64(v int64) *Fmt</code></p>
+				<p>
+Fmt_X64 formats an int64 in upper case hexadecimal.
+</p>
+
+				<h3>func (<a id="L347"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L347">Fmt_b</a></h3>
+				<p><code><a id="L347"></a>func (f *Fmt) Fmt_b(v uint) *Fmt</code></p>
+				<p>
+Fmt_b formats a uint in binary.
+</p>
+
+				<h3>func (<a id="L344"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L344">Fmt_b32</a></h3>
+				<p><code><a id="L344"></a>func (f *Fmt) Fmt_b32(v uint32) *Fmt</code></p>
+				<p>
+Fmt_b32 formats a uint32 in binary.
+</p>
+
+				<h3>func (<a id="L337"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L337">Fmt_b64</a></h3>
+				<p><code><a id="L337"></a>func (f *Fmt) Fmt_b64(v uint64) *Fmt</code></p>
+				<p>
+Fmt_b64 formats a uint64 in binary.
+</p>
+
+				<h3>func (<a id="L167"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L167">Fmt_boolean</a></h3>
+				<p><code><a id="L167"></a>func (f *Fmt) Fmt_boolean(v bool) *Fmt</code></p>
+				<p>
+Fmt_boolean formats a boolean.
+</p>
+
+				<h3>func (<a id="L350"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L350">Fmt_c</a></h3>
+				<p><code><a id="L350"></a>func (f *Fmt) Fmt_c(v int) *Fmt</code></p>
+				<p>
+Fmt_c formats a Unicode character.
+</p>
+
+				<h3>func (<a id="L243"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L243">Fmt_d</a></h3>
+				<p><code><a id="L243"></a>func (f *Fmt) Fmt_d(v int) *Fmt</code></p>
+				<p>
+Fmt_d formats an int in decimal.
+</p>
+
+				<h3>func (<a id="L240"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L240">Fmt_d32</a></h3>
+				<p><code><a id="L240"></a>func (f *Fmt) Fmt_d32(v int32) *Fmt</code></p>
+				<p>
+Fmt_d32 formats an int32 in decimal.
+</p>
+
+				<h3>func (<a id="L233"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L233">Fmt_d64</a></h3>
+				<p><code><a id="L233"></a>func (f *Fmt) Fmt_d64(v int64) *Fmt</code></p>
+				<p>
+Fmt_d64 formats an int64 in decimal.
+</p>
+
+				<h3>func (<a id="L458"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L458">Fmt_e32</a></h3>
+				<p><code><a id="L458"></a>func (f *Fmt) Fmt_e32(v float32) *Fmt</code></p>
+				<p>
+Fmt_e32 formats a float32 in the form -1.23e+12.
+</p>
+
+				<h3>func (<a id="L426"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L426">Fmt_e64</a></h3>
+				<p><code><a id="L426"></a>func (f *Fmt) Fmt_e64(v float64) *Fmt</code></p>
+				<p>
+Fmt_e64 formats a float64 in the form -1.23e+12.
+</p>
+
+				<h3>func (<a id="L468"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L468">Fmt_f32</a></h3>
+				<p><code><a id="L468"></a>func (f *Fmt) Fmt_f32(v float32) *Fmt</code></p>
+				<p>
+Fmt_f32 formats a float32 in the form -1.23.
+</p>
+
+				<h3>func (<a id="L436"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L436">Fmt_f64</a></h3>
+				<p><code><a id="L436"></a>func (f *Fmt) Fmt_f64(v float64) *Fmt</code></p>
+				<p>
+Fmt_f64 formats a float64 in the form -1.23.
+</p>
+
+				<h3>func (<a id="L483"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L483">Fmt_fb32</a></h3>
+				<p><code><a id="L483"></a>func (f *Fmt) Fmt_fb32(v float32) *Fmt</code></p>
+				<p>
+Fmt_fb32 formats a float32 in the form -123p3 (exponent is power of 2).
+</p>
+
+				<h3>func (<a id="L451"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L451">Fmt_fb64</a></h3>
+				<p><code><a id="L451"></a>func (f *Fmt) Fmt_fb64(v float64) *Fmt</code></p>
+				<p>
+Fmt_fb64 formats a float64 in the form -123p3 (exponent is power of 2).
+</p>
+
+				<h3>func (<a id="L473"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L473">Fmt_g32</a></h3>
+				<p><code><a id="L473"></a>func (f *Fmt) Fmt_g32(v float32) *Fmt</code></p>
+				<p>
+Fmt_g32 formats a float32 in the &#39;f&#39; or &#39;e&#39; form according to size.
+</p>
+
+				<h3>func (<a id="L441"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L441">Fmt_g64</a></h3>
+				<p><code><a id="L441"></a>func (f *Fmt) Fmt_g64(v float64) *Fmt</code></p>
+				<p>
+Fmt_g64 formats a float64 in the &#39;f&#39; or &#39;e&#39; form according to size.
+</p>
+
+				<h3>func (<a id="L321"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L321">Fmt_o</a></h3>
+				<p><code><a id="L321"></a>func (f *Fmt) Fmt_o(v int) *Fmt</code></p>
+				<p>
+Fmt_o formats an int in octal.
+</p>
+
+				<h3>func (<a id="L318"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L318">Fmt_o32</a></h3>
+				<p><code><a id="L318"></a>func (f *Fmt) Fmt_o32(v int32) *Fmt</code></p>
+				<p>
+Fmt_o32 formats an int32 in octal.
+</p>
+
+				<h3>func (<a id="L311"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L311">Fmt_o64</a></h3>
+				<p><code><a id="L311"></a>func (f *Fmt) Fmt_o64(v int64) *Fmt</code></p>
+				<p>
+Fmt_o64 formats an int64 in octal.
+</p>
+
+				<h3>func (<a id="L398"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L398">Fmt_q</a></h3>
+				<p><code><a id="L398"></a>func (f *Fmt) Fmt_q(s string) *Fmt</code></p>
+				<p>
+Fmt_q formats a string as a double-quoted, escaped Go string constant.
+</p>
+
+				<h3>func (<a id="L357"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L357">Fmt_s</a></h3>
+				<p><code><a id="L357"></a>func (f *Fmt) Fmt_s(s string) *Fmt</code></p>
+				<p>
+Fmt_s formats a string.
+</p>
+
+				<h3>func (<a id="L385"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L385">Fmt_sX</a></h3>
+				<p><code><a id="L385"></a>func (f *Fmt) Fmt_sX(s string) *Fmt</code></p>
+				<p>
+Fmt_sX formats a string as an uppercase hexadecimal encoding of its bytes.
+</p>
+
+				<h3>func (<a id="L369"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L369">Fmt_sx</a></h3>
+				<p><code><a id="L369"></a>func (f *Fmt) Fmt_sx(s string) *Fmt</code></p>
+				<p>
+Fmt_sx formats a string as a hexadecimal encoding of its bytes.
+</p>
+
+				<h3>func (<a id="L308"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L308">Fmt_uX</a></h3>
+				<p><code><a id="L308"></a>func (f *Fmt) Fmt_uX(v uint) *Fmt</code></p>
+				<p>
+Fmt_uX formats a uint in upper case hexadecimal.
+</p>
+
+				<h3>func (<a id="L305"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L305">Fmt_uX32</a></h3>
+				<p><code><a id="L305"></a>func (f *Fmt) Fmt_uX32(v uint32) *Fmt</code></p>
+				<p>
+Fmt_uX32 formats a uint32 in upper case hexadecimal.
+</p>
+
+				<h3>func (<a id="L298"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L298">Fmt_uX64</a></h3>
+				<p><code><a id="L298"></a>func (f *Fmt) Fmt_uX64(v uint64) *Fmt</code></p>
+				<p>
+Fmt_uX64 formats a uint64 in upper case hexadecimal.
+</p>
+
+				<h3>func (<a id="L256"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L256">Fmt_ud</a></h3>
+				<p><code><a id="L256"></a>func (f *Fmt) Fmt_ud(v uint) *Fmt</code></p>
+				<p>
+Fmt_ud formats a uint in decimal.
+</p>
+
+				<h3>func (<a id="L253"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L253">Fmt_ud32</a></h3>
+				<p><code><a id="L253"></a>func (f *Fmt) Fmt_ud32(v uint32) *Fmt</code></p>
+				<p>
+Fmt_ud32 formats a uint32 in decimal.
+</p>
+
+				<h3>func (<a id="L246"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L246">Fmt_ud64</a></h3>
+				<p><code><a id="L246"></a>func (f *Fmt) Fmt_ud64(v uint64) *Fmt</code></p>
+				<p>
+Fmt_ud64 formats a uint64 in decimal.
+</p>
+
+				<h3>func (<a id="L334"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L334">Fmt_uo</a></h3>
+				<p><code><a id="L334"></a>func (f *Fmt) Fmt_uo(v uint) *Fmt</code></p>
+				<p>
+Fmt_uo formats a uint in octal.
+</p>
+
+				<h3>func (<a id="L331"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L331">Fmt_uo32</a></h3>
+				<p><code><a id="L331"></a>func (f *Fmt) Fmt_uo32(v uint32) *Fmt</code></p>
+				<p>
+Fmt_uo32 formats a uint32 in octal.
+</p>
+
+				<h3>func (<a id="L324"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L324">Fmt_uo64</a></h3>
+				<p><code><a id="L324"></a>func (f *Fmt) Fmt_uo64(v uint64) *Fmt</code></p>
+				<p>
+Fmt_uo64 formats a uint64 in octal.
+</p>
+
+				<h3>func (<a id="L282"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L282">Fmt_ux</a></h3>
+				<p><code><a id="L282"></a>func (f *Fmt) Fmt_ux(v uint) *Fmt</code></p>
+				<p>
+Fmt_ux formats a uint in hexadecimal.
+</p>
+
+				<h3>func (<a id="L279"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L279">Fmt_ux32</a></h3>
+				<p><code><a id="L279"></a>func (f *Fmt) Fmt_ux32(v uint32) *Fmt</code></p>
+				<p>
+Fmt_ux32 formats a uint32 in hexadecimal.
+</p>
+
+				<h3>func (<a id="L272"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L272">Fmt_ux64</a></h3>
+				<p><code><a id="L272"></a>func (f *Fmt) Fmt_ux64(v uint64) *Fmt</code></p>
+				<p>
+Fmt_ux64 formats a uint64 in hexadecimal.
+</p>
+
+				<h3>func (<a id="L269"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L269">Fmt_x</a></h3>
+				<p><code><a id="L269"></a>func (f *Fmt) Fmt_x(v int) *Fmt</code></p>
+				<p>
+Fmt_x formats an int in hexadecimal.
+</p>
+
+				<h3>func (<a id="L266"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L266">Fmt_x32</a></h3>
+				<p><code><a id="L266"></a>func (f *Fmt) Fmt_x32(v int32) *Fmt</code></p>
+				<p>
+Fmt_x32 formats an int32 in hexadecimal.
+</p>
+
+				<h3>func (<a id="L259"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L259">Fmt_x64</a></h3>
+				<p><code><a id="L259"></a>func (f *Fmt) Fmt_x64(v int64) *Fmt</code></p>
+				<p>
+Fmt_x64 formats an int64 in hexadecimal.
+</p>
+
+				<h3>func (<a id="L104"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L104">P</a></h3>
+				<p><code><a id="L104"></a>func (f *Fmt) P(p int) *Fmt</code></p>
+				<p>
+P sets the precision for formatting the next item.
+</p>
+
+				<h3>func (<a id="L81"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L81">Put</a></h3>
+				<p><code><a id="L81"></a>func (f *Fmt) Put()</code></p>
+				<p>
+Put writes the buffered contents to stdout and resets the Fmt.
+</p>
+
+				<h3>func (<a id="L88"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L88">Putnl</a></h3>
+				<p><code><a id="L88"></a>func (f *Fmt) Putnl()</code></p>
+				<p>
+Putnl writes the buffered contents to stdout, followed by a newline, and resets the Fmt.
+</p>
+
+				<h3>func (<a id="L72"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L72">Str</a></h3>
+				<p><code><a id="L72"></a>func (f *Fmt) Str() string</code></p>
+				<p>
+Str returns the buffered contents as a string and resets the Fmt.
+</p>
+
+				<h3>func (<a id="L111"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L111">W</a></h3>
+				<p><code><a id="L111"></a>func (f *Fmt) W(x int) *Fmt</code></p>
+				<p>
+W sets the width for formatting the next item.
+</p>
+
+				<h3>func (<a id="L95"></a>*Fmt) <a href="../../src/pkg/fmt/format.go#L95">Wp</a></h3>
+				<p><code><a id="L95"></a>func (f *Fmt) Wp(w, p int) *Fmt</code></p>
+				<p>
+Wp sets the width and precision for formatting the next item.
+</p>
+
+			<h2>type <a href="../../src/pkg/fmt/print.go#L104"><a id="L104"></a>Formatter</a></h2>
+			<p>
+Formatter is the interface implemented by values with a custom formatter.
+The implementation of Format may call Sprintf or Fprintf(f) etc.
+to generate its output.
+</p>
+
+			<p><pre><a id="L104"></a>type Formatter interface {
+    <a id="L105"></a>Format(f State, c int);
+<a id="L106"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/fmt/print.go#L120"><a id="L120"></a>GoStringer</a></h2>
+			<p>
+GoStringer is implemented by any value that has a GoString() method,
+which defines the Go syntax for that value.
+The GoString method is used to print values passed as an operand
+to a %#v format.
+</p>
+
+			<p><pre><a id="L120"></a>type GoStringer interface {
+    <a id="L121"></a>GoString() string;
+<a id="L122"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/fmt/print.go#L89"><a id="L89"></a>State</a></h2>
+			<p>
+State represents the printer state passed to custom formatters.
+It provides access to the io.Writer interface plus information about
+the flags and options for the operand&#39;s format specifier.
+</p>
+
+			<p><pre><a id="L89"></a>type State interface {
+    <a id="L90"></a>// Write is the function to call to emit formatted output to be printed.
+    <a id="L91"></a>Write(b []byte) (ret int, err os.Error);
+
+    <a id="L92"></a>// Width returns the value of the width option and whether it has been set.
+    <a id="L93"></a>Width() (wid int, ok bool);
+
+    <a id="L94"></a>// Precision returns the value of the precision option and whether it has been set.
+    <a id="L95"></a>Precision() (prec int, ok bool);
+
+    <a id="L97"></a>// Flag returns whether the flag c, a character, has been set.
+    <a id="L98"></a>Flag(int) bool;
+<a id="L99"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/fmt/print.go#L112"><a id="L112"></a>Stringer</a></h2>
+			<p>
+Stringer is implemented by any value that has a String method(),
+which defines the &ldquo;native&rdquo; format for that value.
+The String method is used to print values passed as an operand
+to a %s or %v format or to an unformatted printer such as Print.
+</p>
+
+			<p><pre><a id="L112"></a>type Stringer interface {
+    <a id="L113"></a>String() string;
+<a id="L114"></a>}</pre></p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

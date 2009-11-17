@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package rsa</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:51:13 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package rsa</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "crypto/rsa"</code></p>
+	<p>
+This package implements RSA encryption as specified in PKCS#1.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/crypto/rsa/pkcs1v15.go">pkcs1v15.go</a>
+				<a href="../../../src/pkg/crypto/rsa/rsa.go">rsa.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../../src/pkg/crypto/rsa/rsa.go#L351">DecryptOAEP</a></h2>
+			<p><code><a id="L351"></a>func DecryptOAEP(hash hash.Hash, rand io.Reader, priv *PrivateKey, ciphertext []byte, label []byte) (msg []byte, err os.Error)</code></p>
+			<p>
+DecryptOAEP decrypts ciphertext using RSA-OAEP.
+If rand != nil, DecryptOAEP uses RSA blinding to avoid timing side-channel attacks.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/rsa/pkcs1v15.go#L47">DecryptPKCS1v15</a></h2>
+			<p><code><a id="L47"></a>func DecryptPKCS1v15(rand io.Reader, priv *PrivateKey, ciphertext []byte) (out []byte, err os.Error)</code></p>
+			<p>
+DecryptPKCS1v15 decrypts a plaintext using RSA and the padding scheme from PKCS#1 v1.5.
+If rand != nil, it uses RSA blinding to avoid timing side-channel attacks.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/rsa/pkcs1v15.go#L69">DecryptPKCS1v15SessionKey</a></h2>
+			<p><code><a id="L69"></a>func DecryptPKCS1v15SessionKey(rand io.Reader, priv *PrivateKey, ciphertext []byte, key []byte) (err os.Error)</code></p>
+			<p>
+DecryptPKCS1v15SessionKey decrypts a session key using RSA and the padding scheme from PKCS#1 v1.5.
+If rand != nil, it uses RSA blinding to avoid timing side-channel attacks.
+It returns an error if the ciphertext is the wrong length or if the
+ciphertext is greater than the public modulus. Otherwise, no error is
+returned. If the padding is valid, the resulting plaintext message is copied
+into key. Otherwise, key is unchanged. These alternatives occur in constant
+time. It is intended that the user of this function generate a random
+session key beforehand and continue the protocol with the resulting value.
+This will remove any possibility that an attacker can learn any information
+about the plaintext.
+See &ldquo;Chosen Ciphertext Attacks Against Protocols Based on the RSA
+Encryption Standard PKCS #1&rdquo;, Daniel Bleichenbacher, Advances in Cryptology
+(Crypto &#39;98),
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/rsa/rsa.go#L250">EncryptOAEP</a></h2>
+			<p><code><a id="L250"></a>func EncryptOAEP(hash hash.Hash, rand io.Reader, pub *PublicKey, msg []byte, label []byte) (out []byte, err os.Error)</code></p>
+			<p>
+EncryptOAEP encrypts the given message with RSA-OAEP.
+The message must be no longer than the length of the public modulus less
+twice the hash length plus 2.
+</p>
+
+			<h2>func <a href="../../../src/pkg/crypto/rsa/pkcs1v15.go#L21">EncryptPKCS1v15</a></h2>
+			<p><code><a id="L21"></a>func EncryptPKCS1v15(rand io.Reader, pub *PublicKey, msg []byte) (out []byte, err os.Error)</code></p>
+			<p>
+EncryptPKCS1v15 encrypts the given message with RSA and the padding scheme from PKCS#1 v1.5.
+The message must be no longer than the length of the public modulus minus 11 bytes.
+WARNING: use of this function to encrypt plaintexts other than session keys
+is dangerous. Use RSA OAEP in new protocols.
+</p>
+
+			<h2>type <a href="../../../src/pkg/crypto/rsa/rsa.go#L287"><a id="L287"></a>DecryptionError</a></h2>
+			<p>
+A DecryptionError represents a failure to decrypt a message.
+It is deliberately vague to avoid adaptive attacks.
+</p>
+
+			<p><pre><a id="L287"></a>type DecryptionError struct{}</pre></p>
+				<h3>func (<a id="L289"></a>DecryptionError) <a href="../../../src/pkg/crypto/rsa/rsa.go#L289">String</a></h3>
+				<p><code><a id="L289"></a>func (DecryptionError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/crypto/rsa/rsa.go#L235"><a id="L235"></a>MessageTooLongError</a></h2>
+			<p>
+MessageTooLongError is returned when attempting to encrypt a message which
+is too large for the size of the public key.
+</p>
+
+			<p><pre><a id="L235"></a>type MessageTooLongError struct{}</pre></p>
+				<h3>func (<a id="L237"></a>MessageTooLongError) <a href="../../../src/pkg/crypto/rsa/rsa.go#L237">String</a></h3>
+				<p><code><a id="L237"></a>func (MessageTooLongError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/crypto/rsa/rsa.go#L96"><a id="L96"></a>PrivateKey</a></h2>
+			<p>
+A PrivateKey represents an RSA key
+</p>
+
+			<p><pre><a id="L96"></a>type PrivateKey struct {
+    <a id="L97"></a>PublicKey;           // public part.
+    <a id="L98"></a>D          *big.Int; // private exponent
+    <a id="L99"></a>P, Q       *big.Int; // prime factors of N
+<a id="L100"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/crypto/rsa/rsa.go#L144">GenerateKey</a></h3>
+				<p><code><a id="L144"></a>func GenerateKey(rand io.Reader, bits int) (priv *PrivateKey, err os.Error)</code></p>
+				<p>
+GenerateKeyPair generates an RSA keypair of the given bit size.
+</p>
+
+				<h3>func (<a id="L105"></a>PrivateKey) <a href="../../../src/pkg/crypto/rsa/rsa.go#L105">Validate</a></h3>
+				<p><code><a id="L105"></a>func (priv PrivateKey) Validate() os.Error</code></p>
+				
+			<h2>type <a href="../../../src/pkg/crypto/rsa/rsa.go#L90"><a id="L90"></a>PublicKey</a></h2>
+			<p>
+A PublicKey represents the public part of an RSA key.
+</p>
+
+			<p><pre><a id="L90"></a>type PublicKey struct {
+    <a id="L91"></a>N   *big.Int; // modulus
+    <a id="L92"></a>E   int;      // public exponent
+<a id="L93"></a>}</pre></p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

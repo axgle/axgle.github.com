@@ -1,0 +1,453 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package draw</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Sun Nov 15 20:28:13 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package draw</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "exp/draw"</code></p>
+	<p>
+Package draw provides basic graphics and drawing primitives,
+in the style of the Plan 9 graphics library
+(see http://plan9.bell-labs.com/magic/man2html/2/draw)
+and the X Render extension.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/exp/draw/arith.go">arith.go</a>
+				<a href="../../../src/pkg/exp/draw/color.go">color.go</a>
+				<a href="../../../src/pkg/exp/draw/draw.go">draw.go</a>
+				<a href="../../../src/pkg/exp/draw/event.go">event.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../../src/pkg/exp/draw/draw.go#L108">Border</a></h2>
+			<p><code><a id="L108"></a>func Border(dst Image, r Rectangle, w int, src image.Image, sp Point)</code></p>
+			<p>
+Border aligns r.Min in dst with sp in src and then replaces pixels
+in a w-pixel border around r in dst with the result of the Porter-Duff compositing
+operation &ldquo;src over dst.&rdquo;  If w is positive, the border extends w pixels inside r.
+If w is negative, the border extends w pixels outside r.
+</p>
+
+			<h2>func <a href="../../../src/pkg/exp/draw/draw.go#L27">Draw</a></h2>
+			<p><code><a id="L27"></a>func Draw(dst Image, r Rectangle, src, mask image.Image, pt Point)</code></p>
+			<p>
+Draw aligns r.Min in dst with pt in src and mask
+and then replaces the rectangle r in dst with the
+result of the Porter-Duff compositing operation
+&ldquo;(src in mask) over dst.&rdquo;  If mask is nil, the operation
+simplifies to &ldquo;src over dst.&rdquo;
+The implementation is simple and slow.
+</p>
+
+			<h2>type <a href="../../../src/pkg/exp/draw/color.go#L15"><a id="L15"></a>Color</a></h2>
+			<p>
+A Color represents a color with 8-bit R, G, B, and A values,
+packed into a uint32—0xRRGGBBAA—so that comparison
+is defined on colors.
+Color implements image.Color.
+Color also implements image.Image: it is a
+10⁹x10⁹-pixel image of uniform color.
+</p>
+
+			<p><pre><a id="L15"></a>type Color uint32</pre></p>
+				
+				<pre><a id="L21"></a>var (
+    <a id="L22"></a>Opaque        Color = 0xFFFFFFFF;
+    <a id="L23"></a>Transparent   Color = 0x00000000;
+    <a id="L24"></a>Black         Color = 0x000000FF;
+    <a id="L25"></a>White         Color = 0xFFFFFFFF;
+    <a id="L26"></a>Red           Color = 0xFF0000FF;
+    <a id="L27"></a>Green         Color = 0x00FF00FF;
+    <a id="L28"></a>Blue          Color = 0x0000FFFF;
+    <a id="L29"></a>Cyan          Color = 0x00FFFFFF;
+    <a id="L30"></a>Magenta       Color = 0xFF00FFFF;
+    <a id="L31"></a>Yellow        Color = 0xFFFF00FF;
+    <a id="L32"></a>PaleYellow    Color = 0xFFFFAAFF;
+    <a id="L33"></a>DarkYellow    Color = 0xEEEE9EFF;
+    <a id="L34"></a>DarkGreen     Color = 0x448844FF;
+    <a id="L35"></a>PaleGreen     Color = 0xAAFFAAFF;
+    <a id="L36"></a>MedGreen      Color = 0x88CC88FF;
+    <a id="L37"></a>DarkBlue      Color = 0x000055FF;
+    <a id="L38"></a>PaleBlueGreen Color = 0xAAFFFFFF;
+    <a id="L39"></a>PaleBlue      Color = 0x0000BBFF;
+    <a id="L40"></a>BlueGreen     Color = 0x008888FF;
+    <a id="L41"></a>GreyGreen     Color = 0x55AAAAFF;
+    <a id="L42"></a>PaleGreyGreen Color = 0x9EEEEEFF;
+    <a id="L43"></a>YellowGreen   Color = 0x99994CFF;
+    <a id="L44"></a>MedBlue       Color = 0x000099FF;
+    <a id="L45"></a>GreyBlue      Color = 0x005DBBFF;
+    <a id="L46"></a>PaleGreyBlue  Color = 0x4993DDFF;
+    <a id="L47"></a>PurpleBlue    Color = 0x8888CCFF;
+<a id="L48"></a>)</pre>
+				<h3>func (<a id="L99"></a>Color) <a href="../../../src/pkg/exp/draw/color.go#L99">At</a></h3>
+				<p><code><a id="L99"></a>func (c Color) At(x, y int) image.Color</code></p>
+				
+				<h3>func (<a id="L109"></a>Color) <a href="../../../src/pkg/exp/draw/color.go#L109">ColorModel</a></h3>
+				<p><code><a id="L109"></a>func (c Color) ColorModel() image.ColorModel</code></p>
+				
+				<h3>func (<a id="L97"></a>Color) <a href="../../../src/pkg/exp/draw/color.go#L97">Height</a></h3>
+				<p><code><a id="L97"></a>func (c Color) Height() int</code></p>
+				
+				<h3>func (<a id="L50"></a>Color) <a href="../../../src/pkg/exp/draw/color.go#L50">RGBA</a></h3>
+				<p><code><a id="L50"></a>func (c Color) RGBA() (r, g, b, a uint32)</code></p>
+				
+				<h3>func (<a id="L66"></a>Color) <a href="../../../src/pkg/exp/draw/color.go#L66">SetAlpha</a></h3>
+				<p><code><a id="L66"></a>func (c Color) SetAlpha(a uint8) Color</code></p>
+				<p>
+SetAlpha returns the color obtained by changing
+c&#39;s alpha value to a and scaling r, g, and b appropriately.
+</p>
+
+				<h3>func (<a id="L95"></a>Color) <a href="../../../src/pkg/exp/draw/color.go#L95">Width</a></h3>
+				<p><code><a id="L95"></a>func (c Color) Width() int</code></p>
+				
+			<h2>type <a href="../../../src/pkg/exp/draw/event.go#L8"><a id="L8"></a>Context</a></h2>
+			<p>
+A Context represents a single graphics window.
+</p>
+
+			<p><pre><a id="L8"></a>type Context interface {
+    <a id="L9"></a>// Screen returns an editable Image of window.
+    <a id="L10"></a>Screen() Image;
+
+    <a id="L12"></a>// FlushImage flushes changes made to Screen() back to screen.
+    <a id="L13"></a>FlushImage();
+
+    <a id="L15"></a>// KeyboardChan returns a channel carrying keystrokes.
+    <a id="L16"></a>// An event is sent each time a key is pressed or released.
+    <a id="L17"></a>// The value k represents key k being pressed.
+    <a id="L18"></a>// The value -k represents key k being released.
+    <a id="L19"></a>// The specific set of key values is not specified,
+    <a id="L20"></a>// but ordinary character represent themselves.
+    <a id="L21"></a>KeyboardChan() &lt;-chan int;
+
+    <a id="L23"></a>// MouseChan returns a channel carrying mouse events.
+    <a id="L24"></a>// A new event is sent each time the mouse moves or a
+    <a id="L25"></a>// button is pressed or released.
+    <a id="L26"></a>MouseChan() &lt;-chan Mouse;
+
+    <a id="L28"></a>// ResizeChan returns a channel carrying resize events.
+    <a id="L29"></a>// An event is sent each time the window is resized;
+    <a id="L30"></a>// the client should respond by calling Screen() to obtain
+    <a id="L31"></a>// the new screen image.
+    <a id="L32"></a>// The value sent on the channel is always ``true&#39;&#39; and can be ignored.
+    <a id="L33"></a>ResizeChan() &lt;-chan bool;
+
+    <a id="L35"></a>// QuitChan returns a channel carrying quit requests.
+    <a id="L36"></a>// After reading a value from the quit channel, the application
+    <a id="L37"></a>// should exit.
+    <a id="L38"></a>QuitChan() &lt;-chan bool;
+<a id="L39"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/draw/draw.go#L16"><a id="L16"></a>Image</a></h2>
+			<p>
+A draw.Image is an image.Image with a Set method to change a single pixel.
+</p>
+
+			<p><pre><a id="L16"></a>type Image interface {
+    <a id="L17"></a>image.Image;
+    <a id="L18"></a>Set(x, y int, c image.Color);
+<a id="L19"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/draw/event.go#L42"><a id="L42"></a>Mouse</a></h2>
+			<p>
+A Mouse represents the state of the mouse.
+</p>
+
+			<p><pre><a id="L42"></a>type Mouse struct {
+    <a id="L43"></a>Buttons int;   // bit mask of buttons: 1&lt;&lt;0 is left, 1&lt;&lt;1 middle, 1&lt;&lt;2 right
+    <a id="L44"></a>Point;         // location of cursor
+    <a id="L45"></a>Nsec    int64; // time stamp
+<a id="L46"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/exp/draw/arith.go#L8"><a id="L8"></a>Point</a></h2>
+			<p>
+A Point is an X, Y coordinate pair.
+</p>
+
+			<p><pre><a id="L8"></a>type Point struct {
+    <a id="L9"></a>X, Y int;
+<a id="L10"></a>}</pre></p>
+				<p>
+ZP is the zero Point.
+</p>
+
+				<pre><a id="L13"></a>var ZP Point</pre>
+				<h3>func <a href="../../../src/pkg/exp/draw/arith.go#L24">Pt</a></h3>
+				<p><code><a id="L24"></a>func Pt(X, Y int) Point</code></p>
+				<p>
+Pt is shorthand for Point{X, Y}.
+</p>
+
+				<h3>func (<a id="L33"></a>Point) <a href="../../../src/pkg/exp/draw/arith.go#L33">Add</a></h3>
+				<p><code><a id="L33"></a>func (p Point) Add(q Point) Point</code></p>
+				<p>
+Add returns the sum of p and q: Pt(p.X+q.X, p.Y+q.Y).
+</p>
+
+				<h3>func (<a id="L42"></a>Point) <a href="../../../src/pkg/exp/draw/arith.go#L42">Div</a></h3>
+				<p><code><a id="L42"></a>func (p Point) Div(k int) Point</code></p>
+				<p>
+Div returns p divided by k: Pt(p.X/k, p.Y/k).
+</p>
+
+				<h3>func (<a id="L45"></a>Point) <a href="../../../src/pkg/exp/draw/arith.go#L45">Eq</a></h3>
+				<p><code><a id="L45"></a>func (p Point) Eq(q Point) bool</code></p>
+				<p>
+Eq returns true if p and q are equal.
+</p>
+
+				<h3>func (<a id="L39"></a>Point) <a href="../../../src/pkg/exp/draw/arith.go#L39">Mul</a></h3>
+				<p><code><a id="L39"></a>func (p Point) Mul(k int) Point</code></p>
+				<p>
+Mul returns p scaled by k: Pt(p.X*k p.Y*k).
+</p>
+
+				<h3>func (<a id="L36"></a>Point) <a href="../../../src/pkg/exp/draw/arith.go#L36">Sub</a></h3>
+				<p><code><a id="L36"></a>func (p Point) Sub(q Point) Point</code></p>
+				<p>
+Sub returns the difference of p and q: Pt(p.X-q.X, p.Y-q.Y).
+</p>
+
+			<h2>type <a href="../../../src/pkg/exp/draw/arith.go#L16"><a id="L16"></a>Rectangle</a></h2>
+			<p>
+A Rectangle contains the Points with Min.X &lt;= X &lt; Max.X, Min.Y &lt;= Y &lt; Max.Y.
+</p>
+
+			<p><pre><a id="L16"></a>type Rectangle struct {
+    <a id="L17"></a>Min, Max Point;
+<a id="L18"></a>}</pre></p>
+				<p>
+ZR is the zero Rectangle.
+</p>
+
+				<pre><a id="L21"></a>var ZR Rectangle</pre>
+				<h3>func <a href="../../../src/pkg/exp/draw/arith.go#L27">Rect</a></h3>
+				<p><code><a id="L27"></a>func Rect(x0, y0, x1, y1 int) Rectangle</code></p>
+				<p>
+Rect is shorthand for Rectangle{Pt(x0, y0), Pt(x1, y1)}.
+</p>
+
+				<h3>func <a href="../../../src/pkg/exp/draw/arith.go#L30">Rpt</a></h3>
+				<p><code><a id="L30"></a>func Rpt(min, max Point) Rectangle</code></p>
+				<p>
+Rpt is shorthand for Rectangle{min, max}.
+</p>
+
+				<h3>func (<a id="L53"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L53">Add</a></h3>
+				<p><code><a id="L53"></a>func (r Rectangle) Add(p Point) Rectangle</code></p>
+				<p>
+Add returns the rectangle r translated by p: Rpt(r.Min.Add(p), r.Max.Add(p)).
+</p>
+
+				<h3>func (<a id="L60"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L60">Canon</a></h3>
+				<p><code><a id="L60"></a>func (r Rectangle) Canon() Rectangle</code></p>
+				<p>
+Canon returns a canonical version of r: the returned rectangle
+has Min.X &lt;= Max.X and Min.Y &lt;= Max.Y.
+</p>
+
+				<h3>func (<a id="L115"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L115">Clip</a></h3>
+				<p><code><a id="L115"></a>func (r Rectangle) Clip(r1 Rectangle) Rectangle</code></p>
+				<p>
+Clip returns the largest rectangle containing only points shared by r and r1.
+</p>
+
+				<h3>func (<a id="L92"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L92">Combine</a></h3>
+				<p><code><a id="L92"></a>func (r Rectangle) Combine(r1 Rectangle) Rectangle</code></p>
+				<p>
+Combine returns the smallest rectangle containing all points from r and from r1.
+</p>
+
+				<h3>func (<a id="L138"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L138">Dx</a></h3>
+				<p><code><a id="L138"></a>func (r Rectangle) Dx() int</code></p>
+				<p>
+Dx returns the width of the rectangle r: r.Max.X - r.Min.X.
+</p>
+
+				<h3>func (<a id="L141"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L141">Dy</a></h3>
+				<p><code><a id="L141"></a>func (r Rectangle) Dy() int</code></p>
+				<p>
+Dy returns the width of the rectangle r: r.Max.Y - r.Min.Y.
+</p>
+
+				<h3>func (<a id="L77"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L77">Empty</a></h3>
+				<p><code><a id="L77"></a>func (r Rectangle) Empty() bool</code></p>
+				<p>
+Empty retruns true if r contains no points.
+</p>
+
+				<h3>func (<a id="L80"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L80">In</a></h3>
+				<p><code><a id="L80"></a>func (r Rectangle) In(r1 Rectangle) bool</code></p>
+				<p>
+InRect returns true if all the points in r are also in r1.
+</p>
+
+				<h3>func (<a id="L48"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L48">Inset</a></h3>
+				<p><code><a id="L48"></a>func (r Rectangle) Inset(n int) Rectangle</code></p>
+				<p>
+Inset returns the rectangle r inset by n: Rect(r.Min.X+n, r.Min.Y+n, r.Max.X-n, r.Max.Y-n).
+</p>
+
+				<h3>func (<a id="L71"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L71">Overlaps</a></h3>
+				<p><code><a id="L71"></a>func (r Rectangle) Overlaps(r1 Rectangle) bool</code></p>
+				<p>
+Overlaps returns true if r and r1 cross; that is, it returns true if they share any point.
+</p>
+
+				<h3>func (<a id="L56"></a>Rectangle) <a href="../../../src/pkg/exp/draw/arith.go#L56">Sub</a></h3>
+				<p><code><a id="L56"></a>func (r Rectangle) Sub(p Point) Rectangle</code></p>
+				<p>
+Sub returns the rectangle r translated by -p: Rpt(r.Min.Sub(p), r.Max.Sub(p)).
+</p>
+
+		<h2>Bugs</h2>
+		<p>
+This is a toy library and not ready for production use.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package script</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:51 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package script</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "testing/script"</code></p>
+	<p>
+This package aids in the testing of code that uses channels.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/testing/script/script.go">script.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../../src/pkg/testing/script/script.go#L222">Perform</a></h2>
+			<p><code><a id="L222"></a>func Perform(seed int64, events []*Event) (err os.Error)</code></p>
+			<p>
+Given a set of Events, Perform repeatedly iterates over the set and finds the
+subset of ready Events (that is, all of their predecessors have
+occurred). From that subset, it pseudo-randomly selects an Event to perform.
+If the Event is a send event, the send occurs and Perform recalculates the ready
+set. If the event is a receive event, Perform waits for a value from any of the
+channels that are contained in any of the events. That value is then matched
+against the ready events. The first event that matches is considered to
+have occurred and Perform recalculates the ready set.
+</p>
+<p>
+Perform continues this until all Events have occurred.
+</p>
+<p>
+Note that uncollected goroutines may still be reading from any of the
+channels read from after Perform returns.
+</p>
+<p>
+For example, consider the problem of testing a function that reads values on
+one channel and echos them to two output channels. To test this we would
+create three events: a send event and two receive events. Each of the
+receive events must list the send event as a predecessor but there is no
+ordering between the receive events.
+</p>
+<pre>send := NewEvent(&#34;send&#34;, nil, Send{c, 1});
+recv1 := NewEvent(&#34;recv 1&#34;, []*Event{send}, Recv{c, 1});
+recv2 := NewEvent(&#34;recv 2&#34;, []*Event{send}, Recv{c, 1});
+Perform(0, []*Event{send, recv1, recv2});
+</pre>
+<p>
+At first, only the send event would be in the ready set and thus Perform will
+send a value to the input channel. Now the two receive events are ready and
+Perform will match each of them against the values read from the output channels.
+</p>
+<p>
+It would be invalid to list one of the receive events as a predecessor of
+the other. At each receive step, all the receive channels are considered,
+thus Perform may see a value from a channel that is not in the current ready
+set and fail.
+</p>
+
+			<h2>type <a href="../../../src/pkg/testing/script/script.go#L151"><a id="L151"></a>Close</a></h2>
+			<p>
+A Close action closes the given channel.
+</p>
+
+			<p><pre><a id="L151"></a>type Close struct {
+    <a id="L152"></a>Channel interface{};
+<a id="L153"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/testing/script/script.go#L100"><a id="L100"></a>Closed</a></h2>
+			<p>
+A Closed action matches if the given channel is closed. The closing is
+treated as an event, not a state, thus Closed will only match once for a
+given channel.
+</p>
+
+			<p><pre><a id="L100"></a>type Closed struct {
+    <a id="L101"></a>Channel interface{};
+<a id="L102"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/testing/script/script.go#L18"><a id="L18"></a>Event</a></h2>
+			<p>
+An Event is an element in a partially ordered set that either sends a value
+to a channel or expects a value from a channel.
+</p>
+
+			<p><pre><a id="L18"></a>type Event struct {
+    // contains unexported fields
+<a id="L23"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/testing/script/script.go#L184">NewEvent</a></h3>
+				<p><code><a id="L184"></a>func NewEvent(name string, predecessors []*Event, action action) *Event</code></p>
+				
+			<h2>type <a href="../../../src/pkg/testing/script/script.go#L165"><a id="L165"></a>ReceivedUnexpected</a></h2>
+			<p>
+A ReceivedUnexpected error results if no active Events match a value
+received from a channel.
+</p>
+
+			<p><pre><a id="L165"></a>type ReceivedUnexpected struct {
+    <a id="L166"></a>Value interface{};
+    // contains unexported fields
+<a id="L168"></a>}</pre></p>
+				<h3>func (<a id="L170"></a>ReceivedUnexpected) <a href="../../../src/pkg/testing/script/script.go#L170">String</a></h3>
+				<p><code><a id="L170"></a>func (r ReceivedUnexpected) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/testing/script/script.go#L55"><a id="L55"></a>Recv</a></h2>
+			<p>
+A Recv action reads a value from a channel and uses reflect.DeepMatch to
+compare it with an expected value.
+</p>
+
+			<p><pre><a id="L55"></a>type Recv struct {
+    <a id="L56"></a>Channel  interface{};
+    <a id="L57"></a>Expected interface{};
+<a id="L58"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/testing/script/script.go#L77"><a id="L77"></a>RecvMatch</a></h2>
+			<p>
+A RecvMatch action reads a value from a channel and calls a function to
+determine if the value matches.
+</p>
+
+			<p><pre><a id="L77"></a>type RecvMatch struct {
+    <a id="L78"></a>Channel interface{};
+    <a id="L79"></a>Match   func(interface{}) bool;
+<a id="L80"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/testing/script/script.go#L121"><a id="L121"></a>Send</a></h2>
+			<p>
+A Send action sends a value to a channel. The value must match the
+type of the channel exactly unless the channel if of type chan interface{}.
+</p>
+
+			<p><pre><a id="L121"></a>type Send struct {
+    <a id="L122"></a>Channel interface{};
+    <a id="L123"></a>Value   interface{};
+<a id="L124"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/testing/script/script.go#L180"><a id="L180"></a>SetupError</a></h2>
+			<p>
+A SetupError results if there is a error with the configuration of a set of
+Events.
+</p>
+
+			<p><pre><a id="L180"></a>type SetupError string</pre></p>
+				<h3>func (<a id="L182"></a>SetupError) <a href="../../../src/pkg/testing/script/script.go#L182">String</a></h3>
+				<p><code><a id="L182"></a>func (s SetupError) String() string</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

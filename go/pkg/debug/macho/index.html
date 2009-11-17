@@ -1,0 +1,531 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package macho</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package macho</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "debug/macho"</code></p>
+	<p>
+Package macho implements access to Mach-O object files, as defined by
+http://developer.apple.com/mac/library/documentation/DeveloperTools/Conceptual/MachORuntime/Reference/reference.html.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/debug/macho/file.go">file.go</a>
+				<a href="../../../src/pkg/debug/macho/macho.go">macho.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			
+			<pre><a id="L28"></a>const (
+    <a id="L29"></a>Magic32 uint32 = 0xfeedface;
+    <a id="L30"></a>Magic64 uint32 = 0xfeedfacf;
+<a id="L31"></a>)</pre>
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L42"><a id="L42"></a>Cpu</a></h2>
+			<p>
+A Cpu is a Mach-O cpu type.
+</p>
+
+			<p><pre><a id="L42"></a>type Cpu uint32</pre></p>
+				
+				<pre><a id="L44"></a>const (
+    <a id="L45"></a>Cpu386   Cpu = 7;
+    <a id="L46"></a>CpuAmd64 Cpu = Cpu386 + 1&lt;&lt;24;
+<a id="L47"></a>)</pre>
+				<h3>func (<a id="L55"></a>Cpu) <a href="../../../src/pkg/debug/macho/macho.go#L55">GoString</a></h3>
+				<p><code><a id="L55"></a>func (i Cpu) GoString() string</code></p>
+				
+				<h3>func (<a id="L54"></a>Cpu) <a href="../../../src/pkg/debug/macho/macho.go#L54">String</a></h3>
+				<p><code><a id="L54"></a>func (i Cpu) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/macho/file.go#L21"><a id="L21"></a>File</a></h2>
+			<p>
+A File represents an open Mach-O file.
+</p>
+
+			<p><pre><a id="L21"></a>type File struct {
+    <a id="L22"></a>FileHeader;
+    <a id="L23"></a>ByteOrder binary.ByteOrder;
+    <a id="L24"></a>Loads     []Load;
+    <a id="L25"></a>Sections  []*Section;
+    // contains unexported fields
+<a id="L28"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/debug/macho/file.go#L164">NewFile</a></h3>
+				<p><code><a id="L164"></a>func NewFile(r io.ReaderAt) (*File, os.Error)</code></p>
+				<p>
+NewFile creates a new File for acecssing a Mach-O binary in an underlying reader.
+The Mach-O binary is expected to start at position 0 in the ReaderAt.
+</p>
+
+				<h3>func <a href="../../../src/pkg/debug/macho/file.go#L136">Open</a></h3>
+				<p><code><a id="L136"></a>func Open(name string) (*File, os.Error)</code></p>
+				<p>
+Open opens the named file using os.Open and prepares it for use as a Mach-O binary.
+</p>
+
+				<h3>func (<a id="L153"></a>*File) <a href="../../../src/pkg/debug/macho/file.go#L153">Close</a></h3>
+				<p><code><a id="L153"></a>func (f *File) Close() os.Error</code></p>
+				<p>
+Close closes the File.
+If the File was created using NewFile directly instead of Open,
+Close has no effect.
+</p>
+
+				<h3>func (<a id="L347"></a>*File) <a href="../../../src/pkg/debug/macho/file.go#L347">DWARF</a></h3>
+				<p><code><a id="L347"></a>func (f *File) DWARF() (*dwarf.Data, os.Error)</code></p>
+				<p>
+DWARF returns the DWARF debug information for the Mach-O file.
+</p>
+
+				<h3>func (<a id="L337"></a>*File) <a href="../../../src/pkg/debug/macho/file.go#L337">Section</a></h3>
+				<p><code><a id="L337"></a>func (f *File) Section(name string) *Section</code></p>
+				<p>
+Section returns the first section with the given name, or nil if no such
+section exists.
+</p>
+
+				<h3>func (<a id="L326"></a>*File) <a href="../../../src/pkg/debug/macho/file.go#L326">Segment</a></h3>
+				<p><code><a id="L326"></a>func (f *File) Segment(name string) *Segment</code></p>
+				<p>
+Segment returns the first Segment with the given name, or nil if no such segment exists.
+</p>
+
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L13"><a id="L13"></a>FileHeader</a></h2>
+			<p>
+A FileHeader represents a Mach-O file header.
+</p>
+
+			<p><pre><a id="L13"></a>type FileHeader struct {
+    <a id="L14"></a>Magic  uint32;
+    <a id="L15"></a>Cpu    Cpu;
+    <a id="L16"></a>SubCpu uint32;
+    <a id="L17"></a>Type   Type;
+    <a id="L18"></a>Ncmd   uint32;
+    <a id="L19"></a>Cmdsz  uint32;
+    <a id="L20"></a>Flags  uint32;
+<a id="L21"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/file.go#L120"><a id="L120"></a>FormatError</a></h2>
+			
+			<p><pre><a id="L120"></a>type FormatError struct {
+    // contains unexported fields
+<a id="L124"></a>}</pre></p>
+				<h3>func (<a id="L126"></a>*FormatError) <a href="../../../src/pkg/debug/macho/file.go#L126">String</a></h3>
+				<p><code><a id="L126"></a>func (e *FormatError) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/macho/file.go#L31"><a id="L31"></a>Load</a></h2>
+			<p>
+A Load represents any Mach-O load command.
+</p>
+
+			<p><pre><a id="L31"></a>type Load interface {
+    <a id="L32"></a>Raw() []byte;
+<a id="L33"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/file.go#L36"><a id="L36"></a>LoadBytes</a></h2>
+			<p>
+A LoadBytes is the uninterpreted bytes of a Mach-O load command.
+</p>
+
+			<p><pre><a id="L36"></a>type LoadBytes []byte</pre></p>
+				<h3>func (<a id="L38"></a>LoadBytes) <a href="../../../src/pkg/debug/macho/file.go#L38">Raw</a></h3>
+				<p><code><a id="L38"></a>func (b LoadBytes) Raw() []byte</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L58"><a id="L58"></a>LoadCmd</a></h2>
+			<p>
+A LoadCmd is a Mach-O load command.
+</p>
+
+			<p><pre><a id="L58"></a>type LoadCmd uint32</pre></p>
+				
+				<pre><a id="L60"></a>const (
+    <a id="L61"></a>LoadCmdSegment    LoadCmd = 1;
+    <a id="L62"></a>LoadCmdSegment64  LoadCmd = 25;
+    <a id="L63"></a>LoadCmdThread     LoadCmd = 4;
+    <a id="L64"></a>LoadCmdUnixThread LoadCmd = 5; // thread+stack
+<a id="L65"></a>)</pre>
+				<h3>func (<a id="L75"></a>LoadCmd) <a href="../../../src/pkg/debug/macho/macho.go#L75">GoString</a></h3>
+				<p><code><a id="L75"></a>func (i LoadCmd) GoString() string</code></p>
+				
+				<h3>func (<a id="L74"></a>LoadCmd) <a href="../../../src/pkg/debug/macho/macho.go#L74">String</a></h3>
+				<p><code><a id="L74"></a>func (i LoadCmd) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L147"><a id="L147"></a>Regs386</a></h2>
+			<p>
+Regs386 is the Mach-O 386 register structure.
+</p>
+
+			<p><pre><a id="L147"></a>type Regs386 struct {
+    <a id="L148"></a>AX    uint32;
+    <a id="L149"></a>BX    uint32;
+    <a id="L150"></a>CX    uint32;
+    <a id="L151"></a>DX    uint32;
+    <a id="L152"></a>DI    uint32;
+    <a id="L153"></a>SI    uint32;
+    <a id="L154"></a>BP    uint32;
+    <a id="L155"></a>SP    uint32;
+    <a id="L156"></a>SS    uint32;
+    <a id="L157"></a>FLAGS uint32;
+    <a id="L158"></a>IP    uint32;
+    <a id="L159"></a>CS    uint32;
+    <a id="L160"></a>DS    uint32;
+    <a id="L161"></a>ES    uint32;
+    <a id="L162"></a>FS    uint32;
+    <a id="L163"></a>GS    uint32;
+<a id="L164"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L167"><a id="L167"></a>RegsAMD64</a></h2>
+			<p>
+RegsAMD64 is the Mach-O AMD64 register structure.
+</p>
+
+			<p><pre><a id="L167"></a>type RegsAMD64 struct {
+    <a id="L168"></a>AX    uint64;
+    <a id="L169"></a>BX    uint64;
+    <a id="L170"></a>CX    uint64;
+    <a id="L171"></a>DX    uint64;
+    <a id="L172"></a>DI    uint64;
+    <a id="L173"></a>SI    uint64;
+    <a id="L174"></a>BP    uint64;
+    <a id="L175"></a>SP    uint64;
+    <a id="L176"></a>R8    uint64;
+    <a id="L177"></a>R9    uint64;
+    <a id="L178"></a>R10   uint64;
+    <a id="L179"></a>R11   uint64;
+    <a id="L180"></a>R12   uint64;
+    <a id="L181"></a>R13   uint64;
+    <a id="L182"></a>R14   uint64;
+    <a id="L183"></a>R15   uint64;
+    <a id="L184"></a>IP    uint64;
+    <a id="L185"></a>FLAGS uint64;
+    <a id="L186"></a>CS    uint64;
+    <a id="L187"></a>FS    uint64;
+    <a id="L188"></a>GS    uint64;
+<a id="L189"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/file.go#L92"><a id="L92"></a>Section</a></h2>
+			
+			<p><pre><a id="L92"></a>type Section struct {
+    <a id="L93"></a>SectionHeader;
+
+    <a id="L95"></a>// Embed ReaderAt for ReadAt method.
+    <a id="L96"></a>// Do not embed SectionReader directly
+    <a id="L97"></a>// to avoid having Read and Seek.
+    <a id="L98"></a>// If a client wants Read and Seek it must use
+    <a id="L99"></a>// Open() to avoid fighting over the seek offset
+    <a id="L100"></a>// with other clients.
+    <a id="L101"></a>io.ReaderAt;
+    // contains unexported fields
+<a id="L103"></a>}</pre></p>
+				<h3>func (<a id="L106"></a>*Section) <a href="../../../src/pkg/debug/macho/file.go#L106">Data</a></h3>
+				<p><code><a id="L106"></a>func (s *Section) Data() ([]byte, os.Error)</code></p>
+				<p>
+Data reads and returns the contents of the Mach-O section.
+</p>
+
+				<h3>func (<a id="L113"></a>*Section) <a href="../../../src/pkg/debug/macho/file.go#L113">Open</a></h3>
+				<p><code><a id="L113"></a>func (s *Section) Open() io.ReadSeeker</code></p>
+				<p>
+Open returns a new ReadSeeker reading the Mach-O section.
+</p>
+
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L108"><a id="L108"></a>Section32</a></h2>
+			<p>
+A Section32 is a 32-bit Mach-O section header.
+</p>
+
+			<p><pre><a id="L108"></a>type Section32 struct {
+    <a id="L109"></a>Name     [16]byte;
+    <a id="L110"></a>Seg      [16]byte;
+    <a id="L111"></a>Addr     uint32;
+    <a id="L112"></a>Size     uint32;
+    <a id="L113"></a>Offset   uint32;
+    <a id="L114"></a>Align    uint32;
+    <a id="L115"></a>Reloff   uint32;
+    <a id="L116"></a>Nreloc   uint32;
+    <a id="L117"></a>Flags    uint32;
+    <a id="L118"></a>Reserve1 uint32;
+    <a id="L119"></a>Reserve2 uint32;
+<a id="L120"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L123"><a id="L123"></a>Section64</a></h2>
+			<p>
+A Section32 is a 64-bit Mach-O section header.
+</p>
+
+			<p><pre><a id="L123"></a>type Section64 struct {
+    <a id="L124"></a>Name     [16]byte;
+    <a id="L125"></a>Seg      [16]byte;
+    <a id="L126"></a>Addr     uint64;
+    <a id="L127"></a>Size     uint64;
+    <a id="L128"></a>Offset   uint32;
+    <a id="L129"></a>Align    uint32;
+    <a id="L130"></a>Reloff   uint32;
+    <a id="L131"></a>Nreloc   uint32;
+    <a id="L132"></a>Flags    uint32;
+    <a id="L133"></a>Reserve1 uint32;
+    <a id="L134"></a>Reserve2 uint32;
+    <a id="L135"></a>Reserve3 uint32;
+<a id="L136"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/file.go#L80"><a id="L80"></a>SectionHeader</a></h2>
+			
+			<p><pre><a id="L80"></a>type SectionHeader struct {
+    <a id="L81"></a>Name   string;
+    <a id="L82"></a>Seg    string;
+    <a id="L83"></a>Addr   uint64;
+    <a id="L84"></a>Size   uint64;
+    <a id="L85"></a>Offset uint32;
+    <a id="L86"></a>Align  uint32;
+    <a id="L87"></a>Reloff uint32;
+    <a id="L88"></a>Nreloc uint32;
+    <a id="L89"></a>Flags  uint32;
+<a id="L90"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/file.go#L56"><a id="L56"></a>Segment</a></h2>
+			<p>
+A Segment represents a Mach-O 32-bit or 64-bit load segment command.
+</p>
+
+			<p><pre><a id="L56"></a>type Segment struct {
+    <a id="L57"></a>LoadBytes;
+    <a id="L58"></a>SegmentHeader;
+
+    <a id="L60"></a>// Embed ReaderAt for ReadAt method.
+    <a id="L61"></a>// Do not embed SectionReader directly
+    <a id="L62"></a>// to avoid having Read and Seek.
+    <a id="L63"></a>// If a client wants Read and Seek it must use
+    <a id="L64"></a>// Open() to avoid fighting over the seek offset
+    <a id="L65"></a>// with other clients.
+    <a id="L66"></a>io.ReaderAt;
+    // contains unexported fields
+<a id="L68"></a>}</pre></p>
+				<h3>func (<a id="L71"></a>*Segment) <a href="../../../src/pkg/debug/macho/file.go#L71">Data</a></h3>
+				<p><code><a id="L71"></a>func (s *Segment) Data() ([]byte, os.Error)</code></p>
+				<p>
+Data reads and returns the contents of the segment.
+</p>
+
+				<h3>func (<a id="L78"></a>*Segment) <a href="../../../src/pkg/debug/macho/file.go#L78">Open</a></h3>
+				<p><code><a id="L78"></a>func (s *Segment) Open() io.ReadSeeker</code></p>
+				<p>
+Open returns a new ReadSeeker reading the segment.
+</p>
+
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L93"><a id="L93"></a>Segment32</a></h2>
+			<p>
+A Segment32 is a 32-bit Mach-O segment load command.
+</p>
+
+			<p><pre><a id="L93"></a>type Segment32 struct {
+    <a id="L94"></a>Cmd     LoadCmd;
+    <a id="L95"></a>Len     uint32;
+    <a id="L96"></a>Name    [16]byte;
+    <a id="L97"></a>Addr    uint32;
+    <a id="L98"></a>Memsz   uint32;
+    <a id="L99"></a>Offset  uint32;
+    <a id="L100"></a>Filesz  uint32;
+    <a id="L101"></a>Maxprot uint32;
+    <a id="L102"></a>Prot    uint32;
+    <a id="L103"></a>Nsect   uint32;
+    <a id="L104"></a>Flag    uint32;
+<a id="L105"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L78"><a id="L78"></a>Segment64</a></h2>
+			<p>
+A Segment64 is a 64-bit Mach-O segment load command.
+</p>
+
+			<p><pre><a id="L78"></a>type Segment64 struct {
+    <a id="L79"></a>Cmd     LoadCmd;
+    <a id="L80"></a>Len     uint32;
+    <a id="L81"></a>Name    [16]byte;
+    <a id="L82"></a>Addr    uint64;
+    <a id="L83"></a>Memsz   uint64;
+    <a id="L84"></a>Offset  uint64;
+    <a id="L85"></a>Filesz  uint64;
+    <a id="L86"></a>Maxprot uint32;
+    <a id="L87"></a>Prot    uint32;
+    <a id="L88"></a>Nsect   uint32;
+    <a id="L89"></a>Flag    uint32;
+<a id="L90"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/file.go#L41"><a id="L41"></a>SegmentHeader</a></h2>
+			<p>
+A SegmentHeader is the header for a Mach-O 32-bit or 64-bit load segment command.
+</p>
+
+			<p><pre><a id="L41"></a>type SegmentHeader struct {
+    <a id="L42"></a>Cmd     LoadCmd;
+    <a id="L43"></a>Len     uint32;
+    <a id="L44"></a>Name    string;
+    <a id="L45"></a>Addr    uint64;
+    <a id="L46"></a>Memsz   uint64;
+    <a id="L47"></a>Offset  uint64;
+    <a id="L48"></a>Filesz  uint64;
+    <a id="L49"></a>Maxprot uint32;
+    <a id="L50"></a>Prot    uint32;
+    <a id="L51"></a>Nsect   uint32;
+    <a id="L52"></a>Flag    uint32;
+<a id="L53"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L139"><a id="L139"></a>Thread</a></h2>
+			<p>
+A Thread is a Mach-O thread state command.
+</p>
+
+			<p><pre><a id="L139"></a>type Thread struct {
+    <a id="L140"></a>Cmd  LoadCmd;
+    <a id="L141"></a>Len  uint32;
+    <a id="L142"></a>Type uint32;
+    <a id="L143"></a>Data []uint32;
+<a id="L144"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/debug/macho/macho.go#L34"><a id="L34"></a>Type</a></h2>
+			<p>
+A Type is a Mach-O file type, either an object or an executable.
+</p>
+
+			<p><pre><a id="L34"></a>type Type uint32</pre></p>
+				
+				<pre><a id="L36"></a>const (
+    <a id="L37"></a>TypeObj  Type = 1;
+    <a id="L38"></a>TypeExec Type = 2;
+<a id="L39"></a>)</pre>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

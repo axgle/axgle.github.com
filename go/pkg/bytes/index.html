@@ -1,0 +1,386 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package bytes</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:47:27 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package bytes</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "bytes"</code></p>
+	<p>
+The bytes package implements functions for the manipulation of byte slices.
+Analagous to the facilities of the strings package.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/bytes/buffer.go">buffer.go</a>
+				<a href="../../src/pkg/bytes/bytes.go">bytes.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L300">Add</a></h2>
+			<p><code><a id="L300"></a>func Add(s, t []byte) []byte</code></p>
+			<p>
+Add appends the contents of t to the end of s and returns the result.
+If s has enough capacity, it is extended in place; otherwise a
+new array is allocated and returned.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L317">AddByte</a></h2>
+			<p><code><a id="L317"></a>func AddByte(s []byte, t byte) []byte</code></p>
+			<p>
+AddByte appends byte b to the end of s and returns the result.
+If s has enough capacity, it is extended in place; otherwise a
+new array is allocated and returned.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L16">Compare</a></h2>
+			<p><code><a id="L16"></a>func Compare(a, b []byte) int</code></p>
+			<p>
+Compare returns an integer comparing the two byte arrays lexicographically.
+The result will be 0 if a==b, -1 if a &lt; b, and +1 if a &gt; b
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L51">Copy</a></h2>
+			<p><code><a id="L51"></a>func Copy(dst, src []byte) int</code></p>
+			<p>
+Copy copies bytes from src to dst,
+stopping when either all of src has been copied
+or all of dst has been filled.
+It returns the number of bytes copied.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L85">Count</a></h2>
+			<p><code><a id="L85"></a>func Count(s, sep []byte) int</code></p>
+			<p>
+Count counts the number of non-overlapping instances of sep in s.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L35">Equal</a></h2>
+			<p><code><a id="L35"></a>func Equal(a, b []byte) bool</code></p>
+			<p>
+Equal returns a boolean reporting whether a == b.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L202">HasPrefix</a></h2>
+			<p><code><a id="L202"></a>func HasPrefix(s, prefix []byte) bool</code></p>
+			<p>
+HasPrefix tests whether the byte array s begins with prefix.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L207">HasSuffix</a></h2>
+			<p><code><a id="L207"></a>func HasSuffix(s, suffix []byte) bool</code></p>
+			<p>
+HasSuffix tests whether the byte array s ends with suffix.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L101">Index</a></h2>
+			<p><code><a id="L101"></a>func Index(s, sep []byte) int</code></p>
+			<p>
+Index returns the index of the first instance of sep in s, or -1 if sep is not present in s.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L170">Join</a></h2>
+			<p><code><a id="L170"></a>func Join(a [][]byte, sep []byte) []byte</code></p>
+			<p>
+Join concatenates the elements of a to create a single byte array.   The separator
+sep is placed between elements in the resulting array.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L116">LastIndex</a></h2>
+			<p><code><a id="L116"></a>func LastIndex(s, sep []byte) int</code></p>
+			<p>
+LastIndex returns the index of the last instance of sep in s, or -1 if sep is not present in s.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L213">Map</a></h2>
+			<p><code><a id="L213"></a>func Map(mapping func(rune int) int, s []byte) []byte</code></p>
+			<p>
+Map returns a copy of the byte array s with all its characters modified
+according to the mapping function.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L158">Split</a></h2>
+			<p><code><a id="L158"></a>func Split(s, sep []byte, n int) [][]byte</code></p>
+			<p>
+Split splits the array s around each instance of sep, returning an array of subarrays of s.
+If sep is empty, Split splits s after each UTF-8 sequence.
+If n &gt; 0, Split splits s into at most n subarrays; the last subarray will contain an unsplit remainder.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L164">SplitAfter</a></h2>
+			<p><code><a id="L164"></a>func SplitAfter(s, sep []byte, n int) [][]byte</code></p>
+			<p>
+SplitAfter splits the array s after each instance of sep, returning an array of subarrays of s.
+If sep is empty, SplitAfter splits s after each UTF-8 sequence.
+If n &gt; 0, SplitAfter splits s into at most n subarrays; the last subarray will contain an
+unsplit remainder.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L248">ToLower</a></h2>
+			<p><code><a id="L248"></a>func ToLower(s []byte) []byte</code></p>
+			<p>
+ToUpper returns a copy of the byte array s with all Unicode letters mapped to their lower case.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L251">ToTitle</a></h2>
+			<p><code><a id="L251"></a>func ToTitle(s []byte) []byte</code></p>
+			<p>
+ToTitle returns a copy of the byte array s with all Unicode letters mapped to their title case.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L245">ToUpper</a></h2>
+			<p><code><a id="L245"></a>func ToUpper(s []byte) []byte</code></p>
+			<p>
+ToUpper returns a copy of the byte array s with all Unicode letters mapped to their upper case.
+</p>
+
+			<h2>func <a href="../../src/pkg/bytes/bytes.go#L255">TrimSpace</a></h2>
+			<p><code><a id="L255"></a>func TrimSpace(s []byte) []byte</code></p>
+			<p>
+Trim returns a slice of the string s, with all leading and trailing white space
+removed, as defined by Unicode.
+</p>
+
+			<h2>type <a href="../../src/pkg/bytes/buffer.go#L32"><a id="L32"></a>Buffer</a></h2>
+			<p>
+A Buffer is a variable-sized buffer of bytes
+with Read and Write methods.
+The zero value for Buffer is an empty buffer ready to use.
+</p>
+
+			<p><pre><a id="L32"></a>type Buffer struct {
+    // contains unexported fields
+<a id="L36"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/bytes/buffer.go#L163">NewBuffer</a></h3>
+				<p><code><a id="L163"></a>func NewBuffer(buf []byte) *Buffer</code></p>
+				<p>
+NewBuffer creates and initializes a new Buffer
+using buf as its initial contents.
+</p>
+
+				<h3>func <a href="../../src/pkg/bytes/buffer.go#L167">NewBufferString</a></h3>
+				<p><code><a id="L167"></a>func NewBufferString(s string) *Buffer</code></p>
+				<p>
+NewBufferString creates and initializes a new Buffer
+using string s as its initial contents.
+</p>
+
+				<h3>func (<a id="L40"></a>*Buffer) <a href="../../src/pkg/bytes/buffer.go#L40">Bytes</a></h3>
+				<p><code><a id="L40"></a>func (b *Buffer) Bytes() []byte</code></p>
+				<p>
+Bytes returns the contents of the unread portion of the buffer;
+len(b.Bytes()) == b.Len().
+</p>
+
+				<h3>func (<a id="L54"></a>*Buffer) <a href="../../src/pkg/bytes/buffer.go#L54">Len</a></h3>
+				<p><code><a id="L54"></a>func (b *Buffer) Len() int</code></p>
+				<p>
+Len returns the number of bytes of the unread portion of the buffer;
+b.Len() == len(b.Bytes()).
+</p>
+
+				<h3>func (<a id="L133"></a>*Buffer) <a href="../../src/pkg/bytes/buffer.go#L133">Read</a></h3>
+				<p><code><a id="L133"></a>func (b *Buffer) Read(p []byte) (n int, err os.Error)</code></p>
+				<p>
+Read reads the next len(p) bytes from the buffer or until the buffer
+is drained.  The return value n is the number of bytes read.  If the
+buffer has no data to return, err is os.EOF even if len(p) is zero;
+otherwise it is nil.
+</p>
+
+				<h3>func (<a id="L152"></a>*Buffer) <a href="../../src/pkg/bytes/buffer.go#L152">ReadByte</a></h3>
+				<p><code><a id="L152"></a>func (b *Buffer) ReadByte() (c byte, err os.Error)</code></p>
+				<p>
+ReadByte reads and returns the next byte from the buffer.
+If no byte is available, it returns error os.EOF.
+</p>
+
+				<h3>func (<a id="L68"></a>*Buffer) <a href="../../src/pkg/bytes/buffer.go#L68">Reset</a></h3>
+				<p><code><a id="L68"></a>func (b *Buffer) Reset()</code></p>
+				<p>
+Reset resets the buffer so it has no content.
+b.Reset() is the same as b.Truncate(0).
+</p>
+
+				<h3>func (<a id="L44"></a>*Buffer) <a href="../../src/pkg/bytes/buffer.go#L44">String</a></h3>
+				<p><code><a id="L44"></a>func (b *Buffer) String() string</code></p>
+				<p>
+String returns the contents of the unread portion of the buffer
+as a string.  If the Buffer is a nil pointer, it returns &#34;&lt;nil&gt;&#34;.
+</p>
+
+				<h3>func (<a id="L58"></a>*Buffer) <a href="../../src/pkg/bytes/buffer.go#L58">Truncate</a></h3>
+				<p><code><a id="L58"></a>func (b *Buffer) Truncate(n int)</code></p>
+				<p>
+Truncate discards all but the first n unread bytes from the buffer.
+It is an error to call b.Truncate(n) with n &gt; b.Len().
+</p>
+
+				<h3>func (<a id="L72"></a>*Buffer) <a href="../../src/pkg/bytes/buffer.go#L72">Write</a></h3>
+				<p><code><a id="L72"></a>func (b *Buffer) Write(p []byte) (n int, err os.Error)</code></p>
+				<p>
+Write appends the contents of p to the buffer.  The return
+value n is the length of p; err is always nil.
+</p>
+
+				<h3>func (<a id="L119"></a>*Buffer) <a href="../../src/pkg/bytes/buffer.go#L119">WriteByte</a></h3>
+				<p><code><a id="L119"></a>func (b *Buffer) WriteByte(c byte) os.Error</code></p>
+				<p>
+WriteByte appends the byte c to the buffer.
+The returned error is always nil, but is included
+to match bufio.Writer&#39;s WriteByte.
+</p>
+
+				<h3>func (<a id="L95"></a>*Buffer) <a href="../../src/pkg/bytes/buffer.go#L95">WriteString</a></h3>
+				<p><code><a id="L95"></a>func (b *Buffer) WriteString(s string) (n int, err os.Error)</code></p>
+				<p>
+WriteString appends the contents of s to the buffer.  The return
+value n is the length of s; err is always nil.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package token</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:50:16 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package token</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "go/token"</code></p>
+	<p>
+This package defines constants representing the lexical
+tokens of the Go programming language and basic operations
+on tokens (printing, predicates).
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/go/token/token.go">token.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+A set of constants for precedence-based expression parsing.
+Non-operators have lowest precedence, followed by operators
+starting with precedence 1 up to unary operators. The highest
+precedence corresponds serves as &#34;catch-all&#34; precedence for
+selector, indexing, and other operator and delimiter tokens.
+</p>
+
+			<pre><a id="L254"></a>const (
+    <a id="L255"></a>LowestPrec  = 0; // non-operators
+    <a id="L256"></a>UnaryPrec   = 7;
+    <a id="L257"></a>HighestPrec = 8;
+<a id="L258"></a>)</pre>
+			<h2>type <a href="../../../src/pkg/go/token/token.go#L327"><a id="L327"></a>Position</a></h2>
+			<p>
+Token source positions are represented by a Position value.
+A Position is valid if the line number is &gt; 0.
+</p>
+
+			<p><pre><a id="L327"></a>type Position struct {
+    <a id="L328"></a>Filename string; // filename, if any
+    <a id="L329"></a>Offset   int;    // byte offset, starting at 0
+    <a id="L330"></a>Line     int;    // line number, starting at 1
+    <a id="L331"></a>Column   int;    // column number, starting at 1 (character count)
+<a id="L332"></a>}</pre></p>
+				<h3>func (<a id="L342"></a>*Position) <a href="../../../src/pkg/go/token/token.go#L342">IsValid</a></h3>
+				<p><code><a id="L342"></a>func (pos *Position) IsValid() bool</code></p>
+				<p>
+IsValid returns true if the position is valid.
+</p>
+
+				<h3>func (<a id="L338"></a>*Position) <a href="../../../src/pkg/go/token/token.go#L338">Pos</a></h3>
+				<p><code><a id="L338"></a>func (pos *Position) Pos() Position</code></p>
+				<p>
+Pos is an accessor method for anonymous Position fields.
+It returns its receiver.
+</p>
+
+				<h3>func (<a id="L345"></a>Position) <a href="../../../src/pkg/go/token/token.go#L345">String</a></h3>
+				<p><code><a id="L345"></a>func (pos Position) String() string</code></p>
+				
+			<h2>type <a href="../../../src/pkg/go/token/token.go#L18"><a id="L18"></a>Token</a></h2>
+			<p>
+Token is the set of lexical tokens of the Go programming language.
+</p>
+
+			<p><pre><a id="L18"></a>type Token int</pre></p>
+				<p>
+The list of tokens.
+</p>
+
+				<pre><a id="L21"></a>const (
+    <a id="L22"></a>// Special tokens
+    <a id="L23"></a>ILLEGAL Token = iota;
+    <a id="L24"></a>EOF;
+    <a id="L25"></a>COMMENT;
+
+    <a id="L28"></a>// Identifiers and basic type literals
+    <a id="L29"></a>// (these tokens stand for classes of literals)
+    <a id="L30"></a>IDENT;  // main
+    <a id="L31"></a>INT;    // 12345
+    <a id="L32"></a>FLOAT;  // 123.45
+    <a id="L33"></a>CHAR;   // &#39;a&#39;
+    <a id="L34"></a>STRING; // &#34;abc&#34;
+
+    <a id="L38"></a>// Operators and delimiters
+    <a id="L39"></a>ADD; // +
+    <a id="L40"></a>SUB; // -
+    <a id="L41"></a>MUL; // *
+    <a id="L42"></a>QUO; // /
+    <a id="L43"></a>REM; // %
+
+    <a id="L45"></a>AND;     // &amp;
+    <a id="L46"></a>OR;      // |
+    <a id="L47"></a>XOR;     // ^
+    <a id="L48"></a>SHL;     // &lt;&lt;
+    <a id="L49"></a>SHR;     // &gt;&gt;
+    <a id="L50"></a>AND_NOT; // &amp;^
+
+    <a id="L52"></a>ADD_ASSIGN; // +=
+    <a id="L53"></a>SUB_ASSIGN; // -=
+    <a id="L54"></a>MUL_ASSIGN; // *=
+    <a id="L55"></a>QUO_ASSIGN; // /=
+    <a id="L56"></a>REM_ASSIGN; // %=
+
+    <a id="L58"></a>AND_ASSIGN;     // &amp;=
+    <a id="L59"></a>OR_ASSIGN;      // |=
+    <a id="L60"></a>XOR_ASSIGN;     // ^=
+    <a id="L61"></a>SHL_ASSIGN;     // &lt;&lt;=
+    <a id="L62"></a>SHR_ASSIGN;     // &gt;&gt;=
+    <a id="L63"></a>AND_NOT_ASSIGN; // &amp;^=
+
+    <a id="L65"></a>LAND;  // &amp;&amp;
+    <a id="L66"></a>LOR;   // ||
+    <a id="L67"></a>ARROW; // &lt;-
+    <a id="L68"></a>INC;   // ++
+    <a id="L69"></a>DEC;   // --
+
+    <a id="L71"></a>EQL;    // ==
+    <a id="L72"></a>LSS;    // &lt;
+    <a id="L73"></a>GTR;    // &gt;
+    <a id="L74"></a>ASSIGN; // =
+    <a id="L75"></a>NOT;    // !
+
+    <a id="L77"></a>NEQ;      // !=
+    <a id="L78"></a>LEQ;      // &lt;=
+    <a id="L79"></a>GEQ;      // &gt;=
+    <a id="L80"></a>DEFINE;   // :=
+    <a id="L81"></a>ELLIPSIS; // ...
+
+    <a id="L83"></a>LPAREN; // (
+    <a id="L84"></a>LBRACK; // [
+    <a id="L85"></a>LBRACE; // {
+    <a id="L86"></a>COMMA;  // ,
+    <a id="L87"></a>PERIOD; // .
+
+    <a id="L89"></a>RPAREN;    // )
+    <a id="L90"></a>RBRACK;    // ]
+    <a id="L91"></a>RBRACE;    // }
+    <a id="L92"></a>SEMICOLON; // ;
+    <a id="L93"></a>COLON;     // :
+
+    <a id="L97"></a>// Keywords
+    <a id="L98"></a>BREAK;
+    <a id="L99"></a>CASE;
+    <a id="L100"></a>CHAN;
+    <a id="L101"></a>CONST;
+    <a id="L102"></a>CONTINUE;
+
+    <a id="L104"></a>DEFAULT;
+    <a id="L105"></a>DEFER;
+    <a id="L106"></a>ELSE;
+    <a id="L107"></a>FALLTHROUGH;
+    <a id="L108"></a>FOR;
+
+    <a id="L110"></a>FUNC;
+    <a id="L111"></a>GO;
+    <a id="L112"></a>GOTO;
+    <a id="L113"></a>IF;
+    <a id="L114"></a>IMPORT;
+
+    <a id="L116"></a>INTERFACE;
+    <a id="L117"></a>MAP;
+    <a id="L118"></a>PACKAGE;
+    <a id="L119"></a>RANGE;
+    <a id="L120"></a>RETURN;
+
+    <a id="L122"></a>SELECT;
+    <a id="L123"></a>STRUCT;
+    <a id="L124"></a>SWITCH;
+    <a id="L125"></a>TYPE;
+    <a id="L126"></a>VAR;
+<a id="L128"></a>)</pre>
+				<h3>func <a href="../../../src/pkg/go/token/token.go#L296">Lookup</a></h3>
+				<p><code><a id="L296"></a>func Lookup(ident []byte) Token</code></p>
+				<p>
+Lookup maps an identifier to its keyword token or IDENT (if not a keyword).
+</p>
+
+				<h3>func (<a id="L321"></a>Token) <a href="../../../src/pkg/go/token/token.go#L321">IsKeyword</a></h3>
+				<p><code><a id="L321"></a>func (tok Token) IsKeyword() bool</code></p>
+				<p>
+IsKeyword returns true for tokens corresponding to keywords;
+returns false otherwise.
+</p>
+
+				<h3>func (<a id="L311"></a>Token) <a href="../../../src/pkg/go/token/token.go#L311">IsLiteral</a></h3>
+				<p><code><a id="L311"></a>func (tok Token) IsLiteral() bool</code></p>
+				<p>
+IsLiteral returns true for tokens corresponding to identifiers
+and basic type literals; returns false otherwise.
+</p>
+
+				<h3>func (<a id="L316"></a>Token) <a href="../../../src/pkg/go/token/token.go#L316">IsOperator</a></h3>
+				<p><code><a id="L316"></a>func (tok Token) IsOperator() bool</code></p>
+				<p>
+IsOperator returns true for tokens corresponding to operators and
+delimiters; returns false otherwise.
+</p>
+
+				<h3>func (<a id="L265"></a>Token) <a href="../../../src/pkg/go/token/token.go#L265">Precedence</a></h3>
+				<p><code><a id="L265"></a>func (op Token) Precedence() int</code></p>
+				<p>
+Precedence returns the operator precedence of the binary
+operator op. If op is not a binary operator, the result
+is LowestPrecedence.
+</p>
+
+				<h3>func (<a id="L240"></a>Token) <a href="../../../src/pkg/go/token/token.go#L240">String</a></h3>
+				<p><code><a id="L240"></a>func (tok Token) String() string</code></p>
+				<p>
+String returns the string corresponding to the token tok.
+For operators, delimiters, and keywords the string is the actual
+token character sequence (e.g., for the token ADD, the string is
+&#34;+&#34;). For all other tokens the string corresponds to the token
+constant name (e.g. for the token IDENT, the string is &#34;IDENT&#34;).
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

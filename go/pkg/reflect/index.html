@@ -1,0 +1,1556 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package reflect</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:47:27 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package reflect</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "reflect"</code></p>
+	<p>
+The reflect package implements run-time reflection, allowing a program to
+manipulate objects with arbitrary types.  The typical use is to take a
+value with static type interface{} and extract its dynamic type
+information by calling Typeof, which returns an object with interface
+type Type.  That contains a pointer to a struct of type *StructType,
+*IntType, etc. representing the details of the underlying type.  A type
+switch or type assertion can reveal which.
+</p>
+<p>
+A call to NewValue creates a Value representing the run-time data; it
+contains a *StructValue, *IntValue, etc.  MakeZero takes a Type and
+returns a Value representing a zero value for that type.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/reflect/deepequal.go">deepequal.go</a>
+				<a href="../../src/pkg/reflect/type.go">type.go</a>
+				<a href="../../src/pkg/reflect/value.go">value.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/reflect/value.go#L465">ArrayCopy</a></h2>
+			<p><code><a id="L465"></a>func ArrayCopy(dst, src ArrayOrSliceValue) int</code></p>
+			<p>
+ArrayCopy copies the contents of src into dst until either
+dst has been filled or src has been exhausted.
+It returns the number of elements copied.
+The arrays dst and src must have the same element type.
+</p>
+
+			<h2>func <a href="../../src/pkg/reflect/deepequal.go#L125">DeepEqual</a></h2>
+			<p><code><a id="L125"></a>func DeepEqual(a1, a2 interface{}) bool</code></p>
+			<p>
+DeepEqual tests for deep equality. It uses normal == equality where possible
+but will scan members of arrays, slices, and fields of structs. It correctly
+handles recursive types.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L628"><a id="L628"></a>ArrayOrSliceType</a></h2>
+			<p>
+ArrayOrSliceType is the common interface implemented
+by both ArrayType and SliceType.
+</p>
+
+			<p><pre><a id="L628"></a>type ArrayOrSliceType interface {
+    <a id="L629"></a>Type;
+    <a id="L630"></a>Elem() Type;
+<a id="L631"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L453"><a id="L453"></a>ArrayOrSliceValue</a></h2>
+			<p>
+ArrayOrSliceValue is the common interface
+implemented by both ArrayValue and SliceValue.
+</p>
+
+			<p><pre><a id="L453"></a>type ArrayOrSliceValue interface {
+    <a id="L454"></a>Value;
+    <a id="L455"></a>Len() int;
+    <a id="L456"></a>Cap() int;
+    <a id="L457"></a>Elem(i int) Value;
+    // contains unexported methods
+<a id="L459"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/type.go#L154"><a id="L154"></a>ArrayType</a></h2>
+			<p>
+ArrayType represents a fixed array type.
+</p>
+
+			<p><pre><a id="L154"></a>type ArrayType struct {
+    // contains unexported fields
+<a id="L158"></a>}</pre></p>
+				<h3>func (<a id="L352"></a>*ArrayType) <a href="../../src/pkg/reflect/type.go#L352">Elem</a></h3>
+				<p><code><a id="L352"></a>func (t *ArrayType) Elem() Type</code></p>
+				<p>
+Elem returns the type of the array&#39;s elements.
+</p>
+
+				<h3>func (<a id="L349"></a>*ArrayType) <a href="../../src/pkg/reflect/type.go#L349">Len</a></h3>
+				<p><code><a id="L349"></a>func (t *ArrayType) Len() int</code></p>
+				<p>
+Len returns the number of elements in the array.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/value.go#L480"><a id="L480"></a>ArrayValue</a></h2>
+			<p>
+An ArrayValue represents an array.
+</p>
+
+			<p><pre><a id="L480"></a>type ArrayValue struct {
+    // contains unexported fields
+<a id="L482"></a>}</pre></p>
+				<h3>func (<a id="L488"></a>*ArrayValue) <a href="../../src/pkg/reflect/value.go#L488">Cap</a></h3>
+				<p><code><a id="L488"></a>func (v *ArrayValue) Cap() int</code></p>
+				<p>
+Cap returns the capacity of the array (equal to Len()).
+</p>
+
+				<h3>func (<a id="L507"></a>*ArrayValue) <a href="../../src/pkg/reflect/value.go#L507">Elem</a></h3>
+				<p><code><a id="L507"></a>func (v *ArrayValue) Elem(i int) Value</code></p>
+				<p>
+Elem returns the i&#39;th element of v.
+</p>
+
+				<h3>func (<a id="L485"></a>*ArrayValue) <a href="../../src/pkg/reflect/value.go#L485">Len</a></h3>
+				<p><code><a id="L485"></a>func (v *ArrayValue) Len() int</code></p>
+				<p>
+Len returns the length of the array.
+</p>
+
+				<h3>func (<a id="L495"></a>*ArrayValue) <a href="../../src/pkg/reflect/value.go#L495">Set</a></h3>
+				<p><code><a id="L495"></a>func (v *ArrayValue) Set(x *ArrayValue)</code></p>
+				<p>
+Set assigns x to v.
+The new value x must have the same type as v.
+</p>
+
+				<h3>func (<a id="L504"></a>*ArrayValue) <a href="../../src/pkg/reflect/value.go#L504">SetValue</a></h3>
+				<p><code><a id="L504"></a>func (v *ArrayValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L63"><a id="L63"></a>BoolType</a></h2>
+			<p>
+BoolType represents a boolean type.
+</p>
+
+			<p><pre><a id="L63"></a>type BoolType struct {
+    // contains unexported fields
+<a id="L65"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L114"><a id="L114"></a>BoolValue</a></h2>
+			<p>
+BoolValue represents a bool value.
+</p>
+
+			<p><pre><a id="L114"></a>type BoolValue struct {
+    // contains unexported fields
+<a id="L116"></a>}</pre></p>
+				<h3>func (<a id="L119"></a>*BoolValue) <a href="../../src/pkg/reflect/value.go#L119">Get</a></h3>
+				<p><code><a id="L119"></a>func (v *BoolValue) Get() bool</code></p>
+				<p>
+Get returns the underlying bool value.
+</p>
+
+				<h3>func (<a id="L122"></a>*BoolValue) <a href="../../src/pkg/reflect/value.go#L122">Set</a></h3>
+				<p><code><a id="L122"></a>func (v *BoolValue) Set(x bool)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L130"></a>*BoolValue) <a href="../../src/pkg/reflect/value.go#L130">SetValue</a></h3>
+				<p><code><a id="L130"></a>func (v *BoolValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L161"><a id="L161"></a>ChanDir</a></h2>
+			<p>
+ChanDir represents a channel type&#39;s direction.
+</p>
+
+			<p><pre><a id="L161"></a>type ChanDir int</pre></p>
+				
+				<pre><a id="L163"></a>const (
+    <a id="L164"></a>RecvDir ChanDir = 1 &lt;&lt; iota;
+    <a id="L165"></a>SendDir;
+    <a id="L166"></a>BothDir = RecvDir | SendDir;
+<a id="L167"></a>)</pre>
+				<h3>func (<a id="L360"></a>ChanDir) <a href="../../src/pkg/reflect/type.go#L360">String</a></h3>
+				<p><code><a id="L360"></a>func (d ChanDir) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/reflect/type.go#L170"><a id="L170"></a>ChanType</a></h2>
+			<p>
+ChanType represents a channel type.
+</p>
+
+			<p><pre><a id="L170"></a>type ChanType struct {
+    // contains unexported fields
+<a id="L174"></a>}</pre></p>
+				<h3>func (<a id="L355"></a>*ChanType) <a href="../../src/pkg/reflect/type.go#L355">Dir</a></h3>
+				<p><code><a id="L355"></a>func (t *ChanType) Dir() ChanDir</code></p>
+				<p>
+Dir returns the channel direction.
+</p>
+
+				<h3>func (<a id="L358"></a>*ChanType) <a href="../../src/pkg/reflect/type.go#L358">Elem</a></h3>
+				<p><code><a id="L358"></a>func (t *ChanType) Elem() Type</code></p>
+				<p>
+Elem returns the channel&#39;s element type.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/value.go#L615"><a id="L615"></a>ChanValue</a></h2>
+			<p>
+A ChanValue represents a chan.
+</p>
+
+			<p><pre><a id="L615"></a>type ChanValue struct {
+    // contains unexported fields
+<a id="L617"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/reflect/value.go#L719">MakeChan</a></h3>
+				<p><code><a id="L719"></a>func MakeChan(typ *ChanType, buffer int) *ChanValue</code></p>
+				<p>
+MakeChan creates a new channel with the specified type and buffer size.
+</p>
+
+				<h3>func (<a id="L665"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L665">Cap</a></h3>
+				<p><code><a id="L665"></a>func (v *ChanValue) Cap() int</code></p>
+				
+				<h3>func (<a id="L655"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L655">Close</a></h3>
+				<p><code><a id="L655"></a>func (v *ChanValue) Close()</code></p>
+				<p>
+Close closes the channel.
+</p>
+
+				<h3>func (<a id="L649"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L649">Closed</a></h3>
+				<p><code><a id="L649"></a>func (v *ChanValue) Closed() bool</code></p>
+				<p>
+Closed returns the result of closed(c) on the underlying channel.
+</p>
+
+				<h3>func (<a id="L637"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L637">Get</a></h3>
+				<p><code><a id="L637"></a>func (v *ChanValue) Get() uintptr</code></p>
+				<p>
+Get returns the uintptr value of v.
+It is mainly useful for printing.
+</p>
+
+				<h3>func (<a id="L620"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L620">IsNil</a></h3>
+				<p><code><a id="L620"></a>func (v *ChanValue) IsNil() bool</code></p>
+				<p>
+IsNil returns whether v is a nil channel.
+</p>
+
+				<h3>func (<a id="L660"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L660">Len</a></h3>
+				<p><code><a id="L660"></a>func (v *ChanValue) Len() int</code></p>
+				
+				<h3>func (<a id="L697"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L697">Recv</a></h3>
+				<p><code><a id="L697"></a>func (v *ChanValue) Recv() Value</code></p>
+				<p>
+Recv receives and returns a value from the channel v.
+</p>
+
+				<h3>func (<a id="L694"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L694">Send</a></h3>
+				<p><code><a id="L694"></a>func (v *ChanValue) Send(x Value)</code></p>
+				<p>
+Send sends x on the channel v.
+</p>
+
+				<h3>func (<a id="L624"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L624">Set</a></h3>
+				<p><code><a id="L624"></a>func (v *ChanValue) Set(x *ChanValue)</code></p>
+				<p>
+Set assigns x to v.
+The new value x must have the same type as v.
+</p>
+
+				<h3>func (<a id="L633"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L633">SetValue</a></h3>
+				<p><code><a id="L633"></a>func (v *ChanValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L709"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L709">TryRecv</a></h3>
+				<p><code><a id="L709"></a>func (v *ChanValue) TryRecv() Value</code></p>
+				<p>
+TryRecv attempts to receive a value from the channel v but will not block.
+It returns the value if one is received, nil otherwise.
+</p>
+
+				<h3>func (<a id="L701"></a>*ChanValue) <a href="../../src/pkg/reflect/value.go#L701">TrySend</a></h3>
+				<p><code><a id="L701"></a>func (v *ChanValue) TrySend(x Value) bool</code></p>
+				<p>
+TrySend attempts to sends x on the channel v but will not block.
+It returns true if the value was sent, false otherwise.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L144"><a id="L144"></a>DotDotDotType</a></h2>
+			<p>
+DotDotDotType represents the ... that can
+be used as the type of the final function parameter.
+</p>
+
+			<p><pre><a id="L144"></a>type DotDotDotType struct {
+    // contains unexported fields
+<a id="L146"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/type.go#L68"><a id="L68"></a>Float32Type</a></h2>
+			<p>
+Float32Type represents a float32 type.
+</p>
+
+			<p><pre><a id="L68"></a>type Float32Type struct {
+    // contains unexported fields
+<a id="L70"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L152"><a id="L152"></a>Float32Value</a></h2>
+			<p>
+Float32Value represents a float32 value.
+</p>
+
+			<p><pre><a id="L152"></a>type Float32Value struct {
+    // contains unexported fields
+<a id="L154"></a>}</pre></p>
+				<h3>func (<a id="L157"></a>*Float32Value) <a href="../../src/pkg/reflect/value.go#L157">Get</a></h3>
+				<p><code><a id="L157"></a>func (v *Float32Value) Get() float32</code></p>
+				<p>
+Get returns the underlying float32 value.
+</p>
+
+				<h3>func (<a id="L160"></a>*Float32Value) <a href="../../src/pkg/reflect/value.go#L160">Set</a></h3>
+				<p><code><a id="L160"></a>func (v *Float32Value) Set(x float32)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L168"></a>*Float32Value) <a href="../../src/pkg/reflect/value.go#L168">SetValue</a></h3>
+				<p><code><a id="L168"></a>func (v *Float32Value) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L73"><a id="L73"></a>Float64Type</a></h2>
+			<p>
+Float64Type represents a float64 type.
+</p>
+
+			<p><pre><a id="L73"></a>type Float64Type struct {
+    // contains unexported fields
+<a id="L75"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L171"><a id="L171"></a>Float64Value</a></h2>
+			<p>
+Float64Value represents a float64 value.
+</p>
+
+			<p><pre><a id="L171"></a>type Float64Value struct {
+    // contains unexported fields
+<a id="L173"></a>}</pre></p>
+				<h3>func (<a id="L176"></a>*Float64Value) <a href="../../src/pkg/reflect/value.go#L176">Get</a></h3>
+				<p><code><a id="L176"></a>func (v *Float64Value) Get() float64</code></p>
+				<p>
+Get returns the underlying float64 value.
+</p>
+
+				<h3>func (<a id="L179"></a>*Float64Value) <a href="../../src/pkg/reflect/value.go#L179">Set</a></h3>
+				<p><code><a id="L179"></a>func (v *Float64Value) Set(x float64)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L187"></a>*Float64Value) <a href="../../src/pkg/reflect/value.go#L187">SetValue</a></h3>
+				<p><code><a id="L187"></a>func (v *Float64Value) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L78"><a id="L78"></a>FloatType</a></h2>
+			<p>
+FloatType represents a float type.
+</p>
+
+			<p><pre><a id="L78"></a>type FloatType struct {
+    // contains unexported fields
+<a id="L80"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L133"><a id="L133"></a>FloatValue</a></h2>
+			<p>
+FloatValue represents a float value.
+</p>
+
+			<p><pre><a id="L133"></a>type FloatValue struct {
+    // contains unexported fields
+<a id="L135"></a>}</pre></p>
+				<h3>func (<a id="L138"></a>*FloatValue) <a href="../../src/pkg/reflect/value.go#L138">Get</a></h3>
+				<p><code><a id="L138"></a>func (v *FloatValue) Get() float</code></p>
+				<p>
+Get returns the underlying float value.
+</p>
+
+				<h3>func (<a id="L141"></a>*FloatValue) <a href="../../src/pkg/reflect/value.go#L141">Set</a></h3>
+				<p><code><a id="L141"></a>func (v *FloatValue) Set(x float)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L149"></a>*FloatValue) <a href="../../src/pkg/reflect/value.go#L149">SetValue</a></h3>
+				<p><code><a id="L149"></a>func (v *FloatValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L177"><a id="L177"></a>FuncType</a></h2>
+			<p>
+FuncType represents a function type.
+</p>
+
+			<p><pre><a id="L177"></a>type FuncType struct {
+    // contains unexported fields
+<a id="L181"></a>}</pre></p>
+				<h3>func (<a id="L373"></a>*FuncType) <a href="../../src/pkg/reflect/type.go#L373">In</a></h3>
+				<p><code><a id="L373"></a>func (t *FuncType) In(i int) Type</code></p>
+				<p>
+In returns the type of the i&#39;th function input parameter.
+</p>
+
+				<h3>func (<a id="L381"></a>*FuncType) <a href="../../src/pkg/reflect/type.go#L381">NumIn</a></h3>
+				<p><code><a id="L381"></a>func (t *FuncType) NumIn() int</code></p>
+				<p>
+NumIn returns the number of input parameters.
+</p>
+
+				<h3>func (<a id="L392"></a>*FuncType) <a href="../../src/pkg/reflect/type.go#L392">NumOut</a></h3>
+				<p><code><a id="L392"></a>func (t *FuncType) NumOut() int</code></p>
+				<p>
+NumOut returns the number of function output parameters.
+</p>
+
+				<h3>func (<a id="L384"></a>*FuncType) <a href="../../src/pkg/reflect/type.go#L384">Out</a></h3>
+				<p><code><a id="L384"></a>func (t *FuncType) Out(i int) Type</code></p>
+				<p>
+Out returns the type of the i&#39;th function output parameter.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/value.go#L736"><a id="L736"></a>FuncValue</a></h2>
+			<p>
+A FuncValue represents a function value.
+</p>
+
+			<p><pre><a id="L736"></a>type FuncValue struct {
+    // contains unexported fields
+<a id="L740"></a>}</pre></p>
+				<h3>func (<a id="L786"></a>*FuncValue) <a href="../../src/pkg/reflect/value.go#L786">Call</a></h3>
+				<p><code><a id="L786"></a>func (fv *FuncValue) Call(in []Value) []Value</code></p>
+				<p>
+Call calls the function v with input parameters in.
+It returns the function&#39;s output parameters as Values.
+</p>
+
+				<h3>func (<a id="L747"></a>*FuncValue) <a href="../../src/pkg/reflect/value.go#L747">Get</a></h3>
+				<p><code><a id="L747"></a>func (v *FuncValue) Get() uintptr</code></p>
+				<p>
+Get returns the uintptr value of v.
+It is mainly useful for printing.
+</p>
+
+				<h3>func (<a id="L743"></a>*FuncValue) <a href="../../src/pkg/reflect/value.go#L743">IsNil</a></h3>
+				<p><code><a id="L743"></a>func (v *FuncValue) IsNil() bool</code></p>
+				<p>
+IsNil returns whether v is a nil function.
+</p>
+
+				<h3>func (<a id="L751"></a>*FuncValue) <a href="../../src/pkg/reflect/value.go#L751">Set</a></h3>
+				<p><code><a id="L751"></a>func (v *FuncValue) Set(x *FuncValue)</code></p>
+				<p>
+Set assigns x to v.
+The new value x must have the same type as v.
+</p>
+
+				<h3>func (<a id="L760"></a>*FuncValue) <a href="../../src/pkg/reflect/value.go#L760">SetValue</a></h3>
+				<p><code><a id="L760"></a>func (v *FuncValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L83"><a id="L83"></a>Int16Type</a></h2>
+			<p>
+Int16Type represents an int16 type.
+</p>
+
+			<p><pre><a id="L83"></a>type Int16Type struct {
+    // contains unexported fields
+<a id="L85"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L228"><a id="L228"></a>Int16Value</a></h2>
+			<p>
+Int16Value represents an int16 value.
+</p>
+
+			<p><pre><a id="L228"></a>type Int16Value struct {
+    // contains unexported fields
+<a id="L230"></a>}</pre></p>
+				<h3>func (<a id="L233"></a>*Int16Value) <a href="../../src/pkg/reflect/value.go#L233">Get</a></h3>
+				<p><code><a id="L233"></a>func (v *Int16Value) Get() int16</code></p>
+				<p>
+Get returns the underlying int16 value.
+</p>
+
+				<h3>func (<a id="L236"></a>*Int16Value) <a href="../../src/pkg/reflect/value.go#L236">Set</a></h3>
+				<p><code><a id="L236"></a>func (v *Int16Value) Set(x int16)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L244"></a>*Int16Value) <a href="../../src/pkg/reflect/value.go#L244">SetValue</a></h3>
+				<p><code><a id="L244"></a>func (v *Int16Value) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L88"><a id="L88"></a>Int32Type</a></h2>
+			<p>
+Int32Type represents an int32 type.
+</p>
+
+			<p><pre><a id="L88"></a>type Int32Type struct {
+    // contains unexported fields
+<a id="L90"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L247"><a id="L247"></a>Int32Value</a></h2>
+			<p>
+Int32Value represents an int32 value.
+</p>
+
+			<p><pre><a id="L247"></a>type Int32Value struct {
+    // contains unexported fields
+<a id="L249"></a>}</pre></p>
+				<h3>func (<a id="L252"></a>*Int32Value) <a href="../../src/pkg/reflect/value.go#L252">Get</a></h3>
+				<p><code><a id="L252"></a>func (v *Int32Value) Get() int32</code></p>
+				<p>
+Get returns the underlying int32 value.
+</p>
+
+				<h3>func (<a id="L255"></a>*Int32Value) <a href="../../src/pkg/reflect/value.go#L255">Set</a></h3>
+				<p><code><a id="L255"></a>func (v *Int32Value) Set(x int32)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L263"></a>*Int32Value) <a href="../../src/pkg/reflect/value.go#L263">SetValue</a></h3>
+				<p><code><a id="L263"></a>func (v *Int32Value) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L93"><a id="L93"></a>Int64Type</a></h2>
+			<p>
+Int64Type represents an int64 type.
+</p>
+
+			<p><pre><a id="L93"></a>type Int64Type struct {
+    // contains unexported fields
+<a id="L95"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L266"><a id="L266"></a>Int64Value</a></h2>
+			<p>
+Int64Value represents an int64 value.
+</p>
+
+			<p><pre><a id="L266"></a>type Int64Value struct {
+    // contains unexported fields
+<a id="L268"></a>}</pre></p>
+				<h3>func (<a id="L271"></a>*Int64Value) <a href="../../src/pkg/reflect/value.go#L271">Get</a></h3>
+				<p><code><a id="L271"></a>func (v *Int64Value) Get() int64</code></p>
+				<p>
+Get returns the underlying int64 value.
+</p>
+
+				<h3>func (<a id="L274"></a>*Int64Value) <a href="../../src/pkg/reflect/value.go#L274">Set</a></h3>
+				<p><code><a id="L274"></a>func (v *Int64Value) Set(x int64)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L282"></a>*Int64Value) <a href="../../src/pkg/reflect/value.go#L282">SetValue</a></h3>
+				<p><code><a id="L282"></a>func (v *Int64Value) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L98"><a id="L98"></a>Int8Type</a></h2>
+			<p>
+Int8Type represents an int8 type.
+</p>
+
+			<p><pre><a id="L98"></a>type Int8Type struct {
+    // contains unexported fields
+<a id="L100"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L209"><a id="L209"></a>Int8Value</a></h2>
+			<p>
+Int8Value represents an int8 value.
+</p>
+
+			<p><pre><a id="L209"></a>type Int8Value struct {
+    // contains unexported fields
+<a id="L211"></a>}</pre></p>
+				<h3>func (<a id="L214"></a>*Int8Value) <a href="../../src/pkg/reflect/value.go#L214">Get</a></h3>
+				<p><code><a id="L214"></a>func (v *Int8Value) Get() int8</code></p>
+				<p>
+Get returns the underlying int8 value.
+</p>
+
+				<h3>func (<a id="L217"></a>*Int8Value) <a href="../../src/pkg/reflect/value.go#L217">Set</a></h3>
+				<p><code><a id="L217"></a>func (v *Int8Value) Set(x int8)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L225"></a>*Int8Value) <a href="../../src/pkg/reflect/value.go#L225">SetValue</a></h3>
+				<p><code><a id="L225"></a>func (v *Int8Value) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L103"><a id="L103"></a>IntType</a></h2>
+			<p>
+IntType represents an int type.
+</p>
+
+			<p><pre><a id="L103"></a>type IntType struct {
+    // contains unexported fields
+<a id="L105"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L190"><a id="L190"></a>IntValue</a></h2>
+			<p>
+IntValue represents an int value.
+</p>
+
+			<p><pre><a id="L190"></a>type IntValue struct {
+    // contains unexported fields
+<a id="L192"></a>}</pre></p>
+				<h3>func (<a id="L195"></a>*IntValue) <a href="../../src/pkg/reflect/value.go#L195">Get</a></h3>
+				<p><code><a id="L195"></a>func (v *IntValue) Get() int</code></p>
+				<p>
+Get returns the underlying int value.
+</p>
+
+				<h3>func (<a id="L198"></a>*IntValue) <a href="../../src/pkg/reflect/value.go#L198">Set</a></h3>
+				<p><code><a id="L198"></a>func (v *IntValue) Set(x int)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L206"></a>*IntValue) <a href="../../src/pkg/reflect/value.go#L206">SetValue</a></h3>
+				<p><code><a id="L206"></a>func (v *IntValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L193"><a id="L193"></a>InterfaceType</a></h2>
+			<p>
+InterfaceType represents an interface type.
+</p>
+
+			<p><pre><a id="L193"></a>type InterfaceType struct {
+    // contains unexported fields
+<a id="L196"></a>}</pre></p>
+				<h3>func (<a id="L395"></a>*InterfaceType) <a href="../../src/pkg/reflect/type.go#L395">Method</a></h3>
+				<p><code><a id="L395"></a>func (t *InterfaceType) Method(i int) (m Method)</code></p>
+				<p>
+Method returns the i&#39;th interface method.
+</p>
+
+				<h3>func (<a id="L409"></a>*InterfaceType) <a href="../../src/pkg/reflect/type.go#L409">NumMethod</a></h3>
+				<p><code><a id="L409"></a>func (t *InterfaceType) NumMethod() int</code></p>
+				<p>
+NumMethod returns the number of interface methods.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/value.go#L892"><a id="L892"></a>InterfaceValue</a></h2>
+			<p>
+An InterfaceValue represents an interface value.
+</p>
+
+			<p><pre><a id="L892"></a>type InterfaceValue struct {
+    // contains unexported fields
+<a id="L894"></a>}</pre></p>
+				<h3>func (<a id="L902"></a>*InterfaceValue) <a href="../../src/pkg/reflect/value.go#L902">Elem</a></h3>
+				<p><code><a id="L902"></a>func (v *InterfaceValue) Elem() Value</code></p>
+				<p>
+Elem returns the concrete value stored in the interface value v.
+</p>
+
+				<h3>func (<a id="L899"></a>*InterfaceValue) <a href="../../src/pkg/reflect/value.go#L899">IsNil</a></h3>
+				<p><code><a id="L899"></a>func (v *InterfaceValue) IsNil() bool</code></p>
+				<p>
+IsNil returns whether v is a nil interface value.
+</p>
+
+				<h3>func (<a id="L932"></a>*InterfaceValue) <a href="../../src/pkg/reflect/value.go#L932">Method</a></h3>
+				<p><code><a id="L932"></a>func (v *InterfaceValue) Method(i int) *FuncValue</code></p>
+				<p>
+Method returns a FuncValue corresponding to v&#39;s i&#39;th method.
+The arguments to a Call on the returned FuncValue
+should not include a receiver; the FuncValue will use v
+as the receiver.
+</p>
+
+				<h3>func (<a id="L908"></a>*InterfaceValue) <a href="../../src/pkg/reflect/value.go#L908">Set</a></h3>
+				<p><code><a id="L908"></a>func (v *InterfaceValue) Set(x Value)</code></p>
+				<p>
+Set assigns x to v.
+</p>
+
+				<h3>func (<a id="L926"></a>*InterfaceValue) <a href="../../src/pkg/reflect/value.go#L926">SetValue</a></h3>
+				<p><code><a id="L926"></a>func (v *InterfaceValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L199"><a id="L199"></a>MapType</a></h2>
+			<p>
+MapType represents a map type.
+</p>
+
+			<p><pre><a id="L199"></a>type MapType struct {
+    // contains unexported fields
+<a id="L203"></a>}</pre></p>
+				<h3>func (<a id="L415"></a>*MapType) <a href="../../src/pkg/reflect/type.go#L415">Elem</a></h3>
+				<p><code><a id="L415"></a>func (t *MapType) Elem() Type</code></p>
+				<p>
+Elem returns the map element type.
+</p>
+
+				<h3>func (<a id="L412"></a>*MapType) <a href="../../src/pkg/reflect/type.go#L412">Key</a></h3>
+				<p><code><a id="L412"></a>func (t *MapType) Key() Type</code></p>
+				<p>
+Key returns the map key type.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/value.go#L954"><a id="L954"></a>MapValue</a></h2>
+			<p>
+A MapValue represents a map value.
+</p>
+
+			<p><pre><a id="L954"></a>type MapValue struct {
+    // contains unexported fields
+<a id="L956"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/reflect/value.go#L1046">MakeMap</a></h3>
+				<p><code><a id="L1046"></a>func MakeMap(typ *MapType) *MapValue</code></p>
+				<p>
+MakeMap creates a new map of the specified type.
+</p>
+
+				<h3>func (<a id="L985"></a>*MapValue) <a href="../../src/pkg/reflect/value.go#L985">Elem</a></h3>
+				<p><code><a id="L985"></a>func (v *MapValue) Elem(key Value) Value</code></p>
+				<p>
+Elem returns the value associated with key in the map v.
+It returns nil if key is not found in the map.
+</p>
+
+				<h3>func (<a id="L959"></a>*MapValue) <a href="../../src/pkg/reflect/value.go#L959">IsNil</a></h3>
+				<p><code><a id="L959"></a>func (v *MapValue) IsNil() bool</code></p>
+				<p>
+IsNil returns whether v is a nil map value.
+</p>
+
+				<h3>func (<a id="L1024"></a>*MapValue) <a href="../../src/pkg/reflect/value.go#L1024">Keys</a></h3>
+				<p><code><a id="L1024"></a>func (v *MapValue) Keys() []Value</code></p>
+				<p>
+Keys returns a slice containing all the keys present in the map,
+in unspecified order.
+</p>
+
+				<h3>func (<a id="L1014"></a>*MapValue) <a href="../../src/pkg/reflect/value.go#L1014">Len</a></h3>
+				<p><code><a id="L1014"></a>func (v *MapValue) Len() int</code></p>
+				<p>
+Len returns the number of keys in the map v.
+</p>
+
+				<h3>func (<a id="L963"></a>*MapValue) <a href="../../src/pkg/reflect/value.go#L963">Set</a></h3>
+				<p><code><a id="L963"></a>func (v *MapValue) Set(x *MapValue)</code></p>
+				<p>
+Set assigns x to v.
+The new value x must have the same type as v.
+</p>
+
+				<h3>func (<a id="L1001"></a>*MapValue) <a href="../../src/pkg/reflect/value.go#L1001">SetElem</a></h3>
+				<p><code><a id="L1001"></a>func (v *MapValue) SetElem(key, val Value)</code></p>
+				<p>
+SetElem sets the value associated with key in the map v to val.
+If val is nil, Put deletes the key from map.
+</p>
+
+				<h3>func (<a id="L972"></a>*MapValue) <a href="../../src/pkg/reflect/value.go#L972">SetValue</a></h3>
+				<p><code><a id="L972"></a>func (v *MapValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L239"><a id="L239"></a>Method</a></h2>
+			<p>
+Method represents a single method.
+</p>
+
+			<p><pre><a id="L239"></a>type Method struct {
+    <a id="L240"></a>PkgPath string; // empty for uppercase Name
+    <a id="L241"></a>Name    string;
+    <a id="L242"></a>Type    *FuncType;
+    <a id="L243"></a>Func    *FuncValue;
+<a id="L244"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/type.go#L206"><a id="L206"></a>PtrType</a></h2>
+			<p>
+PtrType represents a pointer type.
+</p>
+
+			<p><pre><a id="L206"></a>type PtrType struct {
+    // contains unexported fields
+<a id="L209"></a>}</pre></p>
+				<h3>func (<a id="L418"></a>*PtrType) <a href="../../src/pkg/reflect/type.go#L418">Elem</a></h3>
+				<p><code><a id="L418"></a>func (t *PtrType) Elem() Type</code></p>
+				<p>
+Elem returns the pointer element type.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/value.go#L1057"><a id="L1057"></a>PtrValue</a></h2>
+			<p>
+A PtrValue represents a pointer.
+</p>
+
+			<p><pre><a id="L1057"></a>type PtrValue struct {
+    // contains unexported fields
+<a id="L1059"></a>}</pre></p>
+				<h3>func (<a id="L1096"></a>*PtrValue) <a href="../../src/pkg/reflect/value.go#L1096">Elem</a></h3>
+				<p><code><a id="L1096"></a>func (v *PtrValue) Elem() Value</code></p>
+				<p>
+Elem returns the value that v points to.
+If v is a nil pointer, Elem returns a nil Value.
+</p>
+
+				<h3>func (<a id="L1066"></a>*PtrValue) <a href="../../src/pkg/reflect/value.go#L1066">Get</a></h3>
+				<p><code><a id="L1066"></a>func (v *PtrValue) Get() uintptr</code></p>
+				<p>
+Get returns the uintptr value of v.
+It is mainly useful for printing.
+</p>
+
+				<h3>func (<a id="L1062"></a>*PtrValue) <a href="../../src/pkg/reflect/value.go#L1062">IsNil</a></h3>
+				<p><code><a id="L1062"></a>func (v *PtrValue) IsNil() bool</code></p>
+				<p>
+IsNil returns whether v is a nil pointer.
+</p>
+
+				<h3>func (<a id="L1084"></a>*PtrValue) <a href="../../src/pkg/reflect/value.go#L1084">PointTo</a></h3>
+				<p><code><a id="L1084"></a>func (v *PtrValue) PointTo(x Value)</code></p>
+				<p>
+PointTo changes v to point to x.
+</p>
+
+				<h3>func (<a id="L1070"></a>*PtrValue) <a href="../../src/pkg/reflect/value.go#L1070">Set</a></h3>
+				<p><code><a id="L1070"></a>func (v *PtrValue) Set(x *PtrValue)</code></p>
+				<p>
+Set assigns x to v.
+The new value x must have the same type as v.
+</p>
+
+				<h3>func (<a id="L1081"></a>*PtrValue) <a href="../../src/pkg/reflect/value.go#L1081">SetValue</a></h3>
+				<p><code><a id="L1081"></a>func (v *PtrValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/value.go#L522"><a id="L522"></a>SliceHeader</a></h2>
+			<p>
+runtime representation of slice
+</p>
+
+			<p><pre><a id="L522"></a>type SliceHeader struct {
+    <a id="L523"></a>Data uintptr;
+    <a id="L524"></a>Len  int;
+    <a id="L525"></a>Cap  int;
+<a id="L526"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/type.go#L212"><a id="L212"></a>SliceType</a></h2>
+			<p>
+SliceType represents a slice type.
+</p>
+
+			<p><pre><a id="L212"></a>type SliceType struct {
+    // contains unexported fields
+<a id="L215"></a>}</pre></p>
+				<h3>func (<a id="L421"></a>*SliceType) <a href="../../src/pkg/reflect/type.go#L421">Elem</a></h3>
+				<p><code><a id="L421"></a>func (t *SliceType) Elem() Type</code></p>
+				<p>
+Elem returns the type of the slice&#39;s elements.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/value.go#L529"><a id="L529"></a>SliceValue</a></h2>
+			<p>
+A SliceValue represents a slice.
+</p>
+
+			<p><pre><a id="L529"></a>type SliceValue struct {
+    // contains unexported fields
+<a id="L531"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/reflect/value.go#L597">MakeSlice</a></h3>
+				<p><code><a id="L597"></a>func MakeSlice(typ *SliceType, len, cap int) *SliceValue</code></p>
+				<p>
+MakeSlice creates a new zero-initialized slice value
+for the specified slice type, length, and capacity.
+</p>
+
+				<h3>func (<a id="L542"></a>*SliceValue) <a href="../../src/pkg/reflect/value.go#L542">Cap</a></h3>
+				<p><code><a id="L542"></a>func (v *SliceValue) Cap() int</code></p>
+				<p>
+Cap returns the capacity of the slice.
+</p>
+
+				<h3>func (<a id="L585"></a>*SliceValue) <a href="../../src/pkg/reflect/value.go#L585">Elem</a></h3>
+				<p><code><a id="L585"></a>func (v *SliceValue) Elem(i int) Value</code></p>
+				<p>
+Elem returns the i&#39;th element of v.
+</p>
+
+				<h3>func (<a id="L536"></a>*SliceValue) <a href="../../src/pkg/reflect/value.go#L536">IsNil</a></h3>
+				<p><code><a id="L536"></a>func (v *SliceValue) IsNil() bool</code></p>
+				<p>
+IsNil returns whether v is a nil slice.
+</p>
+
+				<h3>func (<a id="L539"></a>*SliceValue) <a href="../../src/pkg/reflect/value.go#L539">Len</a></h3>
+				<p><code><a id="L539"></a>func (v *SliceValue) Len() int</code></p>
+				<p>
+Len returns the length of the slice.
+</p>
+
+				<h3>func (<a id="L559"></a>*SliceValue) <a href="../../src/pkg/reflect/value.go#L559">Set</a></h3>
+				<p><code><a id="L559"></a>func (v *SliceValue) Set(x *SliceValue)</code></p>
+				<p>
+Set assigns x to v.
+The new value x must have the same type as v.
+</p>
+
+				<h3>func (<a id="L549"></a>*SliceValue) <a href="../../src/pkg/reflect/value.go#L549">SetLen</a></h3>
+				<p><code><a id="L549"></a>func (v *SliceValue) SetLen(n int)</code></p>
+				<p>
+SetLen changes the length of v.
+The new length n must be between 0 and the capacity, inclusive.
+</p>
+
+				<h3>func (<a id="L568"></a>*SliceValue) <a href="../../src/pkg/reflect/value.go#L568">SetValue</a></h3>
+				<p><code><a id="L568"></a>func (v *SliceValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L571"></a>*SliceValue) <a href="../../src/pkg/reflect/value.go#L571">Slice</a></h3>
+				<p><code><a id="L571"></a>func (v *SliceValue) Slice(beg, end int) *SliceValue</code></p>
+				<p>
+Slice returns a sub-slice of the slice v.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L133"><a id="L133"></a>StringType</a></h2>
+			<p>
+StringType represents a string type.
+</p>
+
+			<p><pre><a id="L133"></a>type StringType struct {
+    // contains unexported fields
+<a id="L135"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L285"><a id="L285"></a>StringValue</a></h2>
+			<p>
+StringValue represents a string value.
+</p>
+
+			<p><pre><a id="L285"></a>type StringValue struct {
+    // contains unexported fields
+<a id="L287"></a>}</pre></p>
+				<h3>func (<a id="L290"></a>*StringValue) <a href="../../src/pkg/reflect/value.go#L290">Get</a></h3>
+				<p><code><a id="L290"></a>func (v *StringValue) Get() string</code></p>
+				<p>
+Get returns the underlying string value.
+</p>
+
+				<h3>func (<a id="L293"></a>*StringValue) <a href="../../src/pkg/reflect/value.go#L293">Set</a></h3>
+				<p><code><a id="L293"></a>func (v *StringValue) Set(x string)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L301"></a>*StringValue) <a href="../../src/pkg/reflect/value.go#L301">SetValue</a></h3>
+				<p><code><a id="L301"></a>func (v *StringValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L423"><a id="L423"></a>StructField</a></h2>
+			
+			<p><pre><a id="L423"></a>type StructField struct {
+    <a id="L424"></a>PkgPath   string; // empty for uppercase Name
+    <a id="L425"></a>Name      string;
+    <a id="L426"></a>Type      Type;
+    <a id="L427"></a>Tag       string;
+    <a id="L428"></a>Offset    uintptr;
+    <a id="L429"></a>Index     []int;
+    <a id="L430"></a>Anonymous bool;
+<a id="L431"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/type.go#L227"><a id="L227"></a>StructType</a></h2>
+			<p>
+StructType represents a struct type.
+</p>
+
+			<p><pre><a id="L227"></a>type StructType struct {
+    // contains unexported fields
+<a id="L230"></a>}</pre></p>
+				<h3>func (<a id="L434"></a>*StructType) <a href="../../src/pkg/reflect/type.go#L434">Field</a></h3>
+				<p><code><a id="L434"></a>func (t *StructType) Field(i int) (f StructField)</code></p>
+				<p>
+Field returns the i&#39;th struct field.
+</p>
+
+				<h3>func (<a id="L465"></a>*StructType) <a href="../../src/pkg/reflect/type.go#L465">FieldByIndex</a></h3>
+				<p><code><a id="L465"></a>func (t *StructType) FieldByIndex(index []int) (f StructField)</code></p>
+				<p>
+FieldByIndex returns the nested field corresponding to index.
+</p>
+
+				<h3>func (<a id="L555"></a>*StructType) <a href="../../src/pkg/reflect/type.go#L555">FieldByName</a></h3>
+				<p><code><a id="L555"></a>func (t *StructType) FieldByName(name string) (f StructField, present bool)</code></p>
+				<p>
+FieldByName returns the struct field with the given name
+and a boolean to indicate if the field was found.
+</p>
+
+				<h3>func (<a id="L564"></a>*StructType) <a href="../../src/pkg/reflect/type.go#L564">NumField</a></h3>
+				<p><code><a id="L564"></a>func (t *StructType) NumField() int</code></p>
+				<p>
+NumField returns the number of struct fields.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/value.go#L1118"><a id="L1118"></a>StructValue</a></h2>
+			<p>
+A StructValue represents a struct value.
+</p>
+
+			<p><pre><a id="L1118"></a>type StructValue struct {
+    // contains unexported fields
+<a id="L1120"></a>}</pre></p>
+				<h3>func (<a id="L1138"></a>*StructValue) <a href="../../src/pkg/reflect/value.go#L1138">Field</a></h3>
+				<p><code><a id="L1138"></a>func (v *StructValue) Field(i int) Value</code></p>
+				<p>
+Field returns the i&#39;th field of the struct.
+</p>
+
+				<h3>func (<a id="L1148"></a>*StructValue) <a href="../../src/pkg/reflect/value.go#L1148">FieldByIndex</a></h3>
+				<p><code><a id="L1148"></a>func (t *StructValue) FieldByIndex(index []int) (v Value)</code></p>
+				<p>
+FieldByIndex returns the nested field corresponding to index.
+</p>
+
+				<h3>func (<a id="L1169"></a>*StructValue) <a href="../../src/pkg/reflect/value.go#L1169">FieldByName</a></h3>
+				<p><code><a id="L1169"></a>func (t *StructValue) FieldByName(name string) Value</code></p>
+				<p>
+FieldByName returns the struct field with the given name.
+The result is nil if no field was found.
+</p>
+
+				<h3>func (<a id="L1177"></a>*StructValue) <a href="../../src/pkg/reflect/value.go#L1177">NumField</a></h3>
+				<p><code><a id="L1177"></a>func (v *StructValue) NumField() int</code></p>
+				<p>
+NumField returns the number of fields in the struct.
+</p>
+
+				<h3>func (<a id="L1124"></a>*StructValue) <a href="../../src/pkg/reflect/value.go#L1124">Set</a></h3>
+				<p><code><a id="L1124"></a>func (v *StructValue) Set(x *StructValue)</code></p>
+				<p>
+Set assigns x to v.
+The new value x must have the same type as v.
+</p>
+
+				<h3>func (<a id="L1135"></a>*StructValue) <a href="../../src/pkg/reflect/value.go#L1135">SetValue</a></h3>
+				<p><code><a id="L1135"></a>func (v *StructValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L252"><a id="L252"></a>Type</a></h2>
+			<p>
+Type is the runtime representation of a Go type.
+Every type implements the methods listed here.
+Some types implement additional interfaces;
+use a type switch to find out what kind of type a Type is.
+Each type in a program has a unique Type, so == on Types
+corresponds to Go&#39;s type equality.
+</p>
+
+			<p><pre><a id="L252"></a>type Type interface {
+    <a id="L253"></a>// PkgPath returns the type&#39;s package path.
+    <a id="L254"></a>// The package path is a full package import path like &#34;container/vector&#34;.
+    <a id="L255"></a>PkgPath() string;
+
+    <a id="L257"></a>// Name returns the type&#39;s name within its package.
+    <a id="L258"></a>Name() string;
+
+    <a id="L260"></a>// String returns a string representation of the type.
+    <a id="L261"></a>// The string representation may use shortened package names
+    <a id="L262"></a>// (e.g., vector instead of &#34;container/vector&#34;) and is not
+    <a id="L263"></a>// guaranteed to be unique among types.  To test for equality,
+    <a id="L264"></a>// compare the Types directly.
+    <a id="L265"></a>String() string;
+
+    <a id="L267"></a>// Size returns the number of bytes needed to store
+    <a id="L268"></a>// a value of the given type; it is analogous to unsafe.Sizeof.
+    <a id="L269"></a>Size() uintptr;
+
+    <a id="L271"></a>// Align returns the alignment of a value of this type
+    <a id="L272"></a>// when allocated in memory.
+    <a id="L273"></a>Align() int;
+
+    <a id="L275"></a>// FieldAlign returns the alignment of a value of this type
+    <a id="L276"></a>// when used as a field in a struct.
+    <a id="L277"></a>FieldAlign() int;
+
+    <a id="L279"></a>// For non-interface types, Method returns the i&#39;th method with receiver T.
+    <a id="L280"></a>// For interface types, Method returns the i&#39;th method in the interface.
+    <a id="L281"></a>// NumMethod returns the number of such methods.
+    <a id="L282"></a>Method(int) Method;
+    <a id="L283"></a>NumMethod() int;
+    // contains unexported methods
+<a id="L285"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/reflect/type.go#L634">Typeof</a></h3>
+				<p><code><a id="L634"></a>func Typeof(i interface{}) Type</code></p>
+				<p>
+Typeof returns the reflection Type of the value in the interface{}.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L108"><a id="L108"></a>Uint16Type</a></h2>
+			<p>
+Uint16Type represents a uint16 type.
+</p>
+
+			<p><pre><a id="L108"></a>type Uint16Type struct {
+    // contains unexported fields
+<a id="L110"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L342"><a id="L342"></a>Uint16Value</a></h2>
+			<p>
+Uint16Value represents a uint16 value.
+</p>
+
+			<p><pre><a id="L342"></a>type Uint16Value struct {
+    // contains unexported fields
+<a id="L344"></a>}</pre></p>
+				<h3>func (<a id="L347"></a>*Uint16Value) <a href="../../src/pkg/reflect/value.go#L347">Get</a></h3>
+				<p><code><a id="L347"></a>func (v *Uint16Value) Get() uint16</code></p>
+				<p>
+Get returns the underlying uint16 value.
+</p>
+
+				<h3>func (<a id="L350"></a>*Uint16Value) <a href="../../src/pkg/reflect/value.go#L350">Set</a></h3>
+				<p><code><a id="L350"></a>func (v *Uint16Value) Set(x uint16)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L358"></a>*Uint16Value) <a href="../../src/pkg/reflect/value.go#L358">SetValue</a></h3>
+				<p><code><a id="L358"></a>func (v *Uint16Value) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L113"><a id="L113"></a>Uint32Type</a></h2>
+			<p>
+Uint32Type represents a uint32 type.
+</p>
+
+			<p><pre><a id="L113"></a>type Uint32Type struct {
+    // contains unexported fields
+<a id="L115"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L361"><a id="L361"></a>Uint32Value</a></h2>
+			<p>
+Uint32Value represents a uint32 value.
+</p>
+
+			<p><pre><a id="L361"></a>type Uint32Value struct {
+    // contains unexported fields
+<a id="L363"></a>}</pre></p>
+				<h3>func (<a id="L366"></a>*Uint32Value) <a href="../../src/pkg/reflect/value.go#L366">Get</a></h3>
+				<p><code><a id="L366"></a>func (v *Uint32Value) Get() uint32</code></p>
+				<p>
+Get returns the underlying uint32 value.
+</p>
+
+				<h3>func (<a id="L369"></a>*Uint32Value) <a href="../../src/pkg/reflect/value.go#L369">Set</a></h3>
+				<p><code><a id="L369"></a>func (v *Uint32Value) Set(x uint32)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L377"></a>*Uint32Value) <a href="../../src/pkg/reflect/value.go#L377">SetValue</a></h3>
+				<p><code><a id="L377"></a>func (v *Uint32Value) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L118"><a id="L118"></a>Uint64Type</a></h2>
+			<p>
+Uint64Type represents a uint64 type.
+</p>
+
+			<p><pre><a id="L118"></a>type Uint64Type struct {
+    // contains unexported fields
+<a id="L120"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L380"><a id="L380"></a>Uint64Value</a></h2>
+			<p>
+Uint64Value represents a uint64 value.
+</p>
+
+			<p><pre><a id="L380"></a>type Uint64Value struct {
+    // contains unexported fields
+<a id="L382"></a>}</pre></p>
+				<h3>func (<a id="L385"></a>*Uint64Value) <a href="../../src/pkg/reflect/value.go#L385">Get</a></h3>
+				<p><code><a id="L385"></a>func (v *Uint64Value) Get() uint64</code></p>
+				<p>
+Get returns the underlying uint64 value.
+</p>
+
+				<h3>func (<a id="L388"></a>*Uint64Value) <a href="../../src/pkg/reflect/value.go#L388">Set</a></h3>
+				<p><code><a id="L388"></a>func (v *Uint64Value) Set(x uint64)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L396"></a>*Uint64Value) <a href="../../src/pkg/reflect/value.go#L396">SetValue</a></h3>
+				<p><code><a id="L396"></a>func (v *Uint64Value) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L123"><a id="L123"></a>Uint8Type</a></h2>
+			<p>
+Uint8Type represents a uint8 type.
+</p>
+
+			<p><pre><a id="L123"></a>type Uint8Type struct {
+    // contains unexported fields
+<a id="L125"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L323"><a id="L323"></a>Uint8Value</a></h2>
+			<p>
+Uint8Value represents a uint8 value.
+</p>
+
+			<p><pre><a id="L323"></a>type Uint8Value struct {
+    // contains unexported fields
+<a id="L325"></a>}</pre></p>
+				<h3>func (<a id="L328"></a>*Uint8Value) <a href="../../src/pkg/reflect/value.go#L328">Get</a></h3>
+				<p><code><a id="L328"></a>func (v *Uint8Value) Get() uint8</code></p>
+				<p>
+Get returns the underlying uint8 value.
+</p>
+
+				<h3>func (<a id="L331"></a>*Uint8Value) <a href="../../src/pkg/reflect/value.go#L331">Set</a></h3>
+				<p><code><a id="L331"></a>func (v *Uint8Value) Set(x uint8)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L339"></a>*Uint8Value) <a href="../../src/pkg/reflect/value.go#L339">SetValue</a></h3>
+				<p><code><a id="L339"></a>func (v *Uint8Value) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L128"><a id="L128"></a>UintType</a></h2>
+			<p>
+UintType represents a uint type.
+</p>
+
+			<p><pre><a id="L128"></a>type UintType struct {
+    // contains unexported fields
+<a id="L130"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L304"><a id="L304"></a>UintValue</a></h2>
+			<p>
+UintValue represents a uint value.
+</p>
+
+			<p><pre><a id="L304"></a>type UintValue struct {
+    // contains unexported fields
+<a id="L306"></a>}</pre></p>
+				<h3>func (<a id="L309"></a>*UintValue) <a href="../../src/pkg/reflect/value.go#L309">Get</a></h3>
+				<p><code><a id="L309"></a>func (v *UintValue) Get() uint</code></p>
+				<p>
+Get returns the underlying uint value.
+</p>
+
+				<h3>func (<a id="L312"></a>*UintValue) <a href="../../src/pkg/reflect/value.go#L312">Set</a></h3>
+				<p><code><a id="L312"></a>func (v *UintValue) Set(x uint)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L320"></a>*UintValue) <a href="../../src/pkg/reflect/value.go#L320">SetValue</a></h3>
+				<p><code><a id="L320"></a>func (v *UintValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L138"><a id="L138"></a>UintptrType</a></h2>
+			<p>
+UintptrType represents a uintptr type.
+</p>
+
+			<p><pre><a id="L138"></a>type UintptrType struct {
+    // contains unexported fields
+<a id="L140"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L399"><a id="L399"></a>UintptrValue</a></h2>
+			<p>
+UintptrValue represents a uintptr value.
+</p>
+
+			<p><pre><a id="L399"></a>type UintptrValue struct {
+    // contains unexported fields
+<a id="L401"></a>}</pre></p>
+				<h3>func (<a id="L404"></a>*UintptrValue) <a href="../../src/pkg/reflect/value.go#L404">Get</a></h3>
+				<p><code><a id="L404"></a>func (v *UintptrValue) Get() uintptr</code></p>
+				<p>
+Get returns the underlying uintptr value.
+</p>
+
+				<h3>func (<a id="L407"></a>*UintptrValue) <a href="../../src/pkg/reflect/value.go#L407">Set</a></h3>
+				<p><code><a id="L407"></a>func (v *UintptrValue) Set(x uintptr)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L415"></a>*UintptrValue) <a href="../../src/pkg/reflect/value.go#L415">SetValue</a></h3>
+				<p><code><a id="L415"></a>func (v *UintptrValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/type.go#L149"><a id="L149"></a>UnsafePointerType</a></h2>
+			<p>
+UnsafePointerType represents an unsafe.Pointer type.
+</p>
+
+			<p><pre><a id="L149"></a>type UnsafePointerType struct {
+    // contains unexported fields
+<a id="L151"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/reflect/value.go#L418"><a id="L418"></a>UnsafePointerValue</a></h2>
+			<p>
+UnsafePointerValue represents an unsafe.Pointer value.
+</p>
+
+			<p><pre><a id="L418"></a>type UnsafePointerValue struct {
+    // contains unexported fields
+<a id="L420"></a>}</pre></p>
+				<h3>func (<a id="L426"></a>*UnsafePointerValue) <a href="../../src/pkg/reflect/value.go#L426">Get</a></h3>
+				<p><code><a id="L426"></a>func (v *UnsafePointerValue) Get() uintptr</code></p>
+				<p>
+Get returns the underlying uintptr value.
+Get returns uintptr, not unsafe.Pointer, so that
+programs that do not import &#34;unsafe&#34; cannot
+obtain a value of unsafe.Pointer type from &#34;reflect&#34;.
+</p>
+
+				<h3>func (<a id="L429"></a>*UnsafePointerValue) <a href="../../src/pkg/reflect/value.go#L429">Set</a></h3>
+				<p><code><a id="L429"></a>func (v *UnsafePointerValue) Set(x unsafe.Pointer)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+				<h3>func (<a id="L437"></a>*UnsafePointerValue) <a href="../../src/pkg/reflect/value.go#L437">SetValue</a></h3>
+				<p><code><a id="L437"></a>func (v *UnsafePointerValue) SetValue(x Value)</code></p>
+				<p>
+Set sets v to the value x.
+</p>
+
+			<h2>type <a href="../../src/pkg/reflect/value.go#L46"><a id="L46"></a>Value</a></h2>
+			<p>
+Value is the common interface to reflection values.
+The implementations of Value (e.g., ArrayValue, StructValue)
+have additional type-specific methods.
+</p>
+
+			<p><pre><a id="L46"></a>type Value interface {
+    <a id="L47"></a>// Type returns the value&#39;s type.
+    <a id="L48"></a>Type() Type;
+
+    <a id="L50"></a>// Interface returns the value as an interface{}.
+    <a id="L51"></a>Interface() interface{};
+
+    <a id="L53"></a>// CanSet returns whether the value can be changed.
+    <a id="L54"></a>// Values obtained by the use of non-exported struct fields
+    <a id="L55"></a>// can be used in Get but not Set.
+    <a id="L56"></a>// If CanSet() returns false, calling the type-specific Set
+    <a id="L57"></a>// will cause a crash.
+    <a id="L58"></a>CanSet() bool;
+
+    <a id="L60"></a>// SetValue assigns v to the value; v must have the same type as the value.
+    <a id="L61"></a>SetValue(v Value);
+
+    <a id="L63"></a>// Addr returns a pointer to the underlying data.
+    <a id="L64"></a>// It is for advanced clients that also
+    <a id="L65"></a>// import the &#34;unsafe&#34; package.
+    <a id="L66"></a>Addr() uintptr;
+
+    <a id="L68"></a>// Method returns a FuncValue corresponding to the value&#39;s i&#39;th method.
+    <a id="L69"></a>// The arguments to a Call on the returned FuncValue
+    <a id="L70"></a>// should not include a receiver; the FuncValue will use
+    <a id="L71"></a>// the value as the receiver.
+    <a id="L72"></a>Method(i int) *FuncValue;
+    // contains unexported methods
+<a id="L75"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/reflect/value.go#L1106">Indirect</a></h3>
+				<p><code><a id="L1106"></a>func Indirect(v Value) Value</code></p>
+				<p>
+Indirect returns the value that v points to.
+If v is a nil pointer, Indirect returns a nil Value.
+If v is not a pointer, Indirect returns v.
+</p>
+
+				<h3>func <a href="../../src/pkg/reflect/value.go#L1269">MakeZero</a></h3>
+				<p><code><a id="L1269"></a>func MakeZero(typ Type) Value</code></p>
+				<p>
+MakeZero returns a zero Value for the specified Type.
+</p>
+
+				<h3>func <a href="../../src/pkg/reflect/value.go#L1185">NewValue</a></h3>
+				<p><code><a id="L1185"></a>func NewValue(i interface{}) Value</code></p>
+				<p>
+NewValue returns a new Value initialized to the concrete value
+stored in the interface i.  NewValue(nil) returns nil.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

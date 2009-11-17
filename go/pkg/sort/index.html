@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package sort</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package sort</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "sort"</code></p>
+	<p>
+The sort package provides primitives for sorting arrays
+and user-defined collections.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/sort/sort.go">sort.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/sort/sort.go#L196">FloatsAreSorted</a></h2>
+			<p><code><a id="L196"></a>func FloatsAreSorted(a []float) bool</code></p>
+			<p>
+FloatsAreSorted tests whether an array of floats is sorted in increasing order.
+</p>
+
+			<h2>func <a href="../../src/pkg/sort/sort.go#L194">IntsAreSorted</a></h2>
+			<p><code><a id="L194"></a>func IntsAreSorted(a []int) bool</code></p>
+			<p>
+IntsAreSorted tests whether an array of ints is sorted in increasing order.
+</p>
+
+			<h2>func <a href="../../src/pkg/sort/sort.go#L137">IsSorted</a></h2>
+			<p><code><a id="L137"></a>func IsSorted(data Interface) bool</code></p>
+			
+			<h2>func <a href="../../src/pkg/sort/sort.go#L134">Sort</a></h2>
+			<p><code><a id="L134"></a>func Sort(data Interface)</code></p>
+			
+			<h2>func <a href="../../src/pkg/sort/sort.go#L188">SortFloats</a></h2>
+			<p><code><a id="L188"></a>func SortFloats(a []float)</code></p>
+			<p>
+SortFloats sorts an array of floats in increasing order.
+</p>
+
+			<h2>func <a href="../../src/pkg/sort/sort.go#L186">SortInts</a></h2>
+			<p><code><a id="L186"></a>func SortInts(a []int)</code></p>
+			<p>
+SortInts sorts an array of ints in increasing order.
+</p>
+
+			<h2>func <a href="../../src/pkg/sort/sort.go#L190">SortStrings</a></h2>
+			<p><code><a id="L190"></a>func SortStrings(a []string)</code></p>
+			<p>
+SortStrings sorts an array of strings in increasing order.
+</p>
+
+			<h2>func <a href="../../src/pkg/sort/sort.go#L198">StringsAreSorted</a></h2>
+			<p><code><a id="L198"></a>func StringsAreSorted(a []string) bool</code></p>
+			<p>
+StringsAreSorted tests whether an array of strings is sorted in increasing order.
+</p>
+
+			<h2>type <a href="../../src/pkg/sort/sort.go#L162"><a id="L162"></a>FloatArray</a></h2>
+			<p>
+FloatArray attaches the methods of Interface to []float, sorting in increasing order.
+</p>
+
+			<p><pre><a id="L162"></a>type FloatArray []float</pre></p>
+				<h3>func (<a id="L164"></a>FloatArray) <a href="../../src/pkg/sort/sort.go#L164">Len</a></h3>
+				<p><code><a id="L164"></a>func (p FloatArray) Len() int</code></p>
+				
+				<h3>func (<a id="L165"></a>FloatArray) <a href="../../src/pkg/sort/sort.go#L165">Less</a></h3>
+				<p><code><a id="L165"></a>func (p FloatArray) Less(i, j int) bool</code></p>
+				
+				<h3>func (<a id="L169"></a>FloatArray) <a href="../../src/pkg/sort/sort.go#L169">Sort</a></h3>
+				<p><code><a id="L169"></a>func (p FloatArray) Sort()</code></p>
+				<p>
+Sort is a convenience method.
+</p>
+
+				<h3>func (<a id="L166"></a>FloatArray) <a href="../../src/pkg/sort/sort.go#L166">Swap</a></h3>
+				<p><code><a id="L166"></a>func (p FloatArray) Swap(i, j int)</code></p>
+				
+			<h2>type <a href="../../src/pkg/sort/sort.go#L151"><a id="L151"></a>IntArray</a></h2>
+			<p>
+IntArray attaches the methods of Interface to []int, sorting in increasing order.
+</p>
+
+			<p><pre><a id="L151"></a>type IntArray []int</pre></p>
+				<h3>func (<a id="L153"></a>IntArray) <a href="../../src/pkg/sort/sort.go#L153">Len</a></h3>
+				<p><code><a id="L153"></a>func (p IntArray) Len() int</code></p>
+				
+				<h3>func (<a id="L154"></a>IntArray) <a href="../../src/pkg/sort/sort.go#L154">Less</a></h3>
+				<p><code><a id="L154"></a>func (p IntArray) Less(i, j int) bool</code></p>
+				
+				<h3>func (<a id="L158"></a>IntArray) <a href="../../src/pkg/sort/sort.go#L158">Sort</a></h3>
+				<p><code><a id="L158"></a>func (p IntArray) Sort()</code></p>
+				<p>
+Sort is a convenience method.
+</p>
+
+				<h3>func (<a id="L155"></a>IntArray) <a href="../../src/pkg/sort/sort.go#L155">Swap</a></h3>
+				<p><code><a id="L155"></a>func (p IntArray) Swap(i, j int)</code></p>
+				
+			<h2>type <a href="../../src/pkg/sort/sort.go#L12"><a id="L12"></a>Interface</a></h2>
+			<p>
+A type, typically a collection, that satisfies sort.Interface can be
+sorted by the routines in this package.  The methods require that the
+elements of the collection be enumerated by an integer index.
+</p>
+
+			<p><pre><a id="L12"></a>type Interface interface {
+    <a id="L13"></a>// Len is the number of elements in the collection.
+    <a id="L14"></a>Len() int;
+
+    <a id="L15"></a>// Less returns whether the element with index i is should sort
+    <a id="L16"></a>// before the element with index j.
+    <a id="L17"></a>Less(i, j int) bool;
+
+    <a id="L18"></a>// Swap swaps the elements with indexes i and j.
+    <a id="L19"></a>Swap(i, j int);
+<a id="L20"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/sort/sort.go#L173"><a id="L173"></a>StringArray</a></h2>
+			<p>
+StringArray attaches the methods of Interface to []string, sorting in increasing order.
+</p>
+
+			<p><pre><a id="L173"></a>type StringArray []string</pre></p>
+				<h3>func (<a id="L175"></a>StringArray) <a href="../../src/pkg/sort/sort.go#L175">Len</a></h3>
+				<p><code><a id="L175"></a>func (p StringArray) Len() int</code></p>
+				
+				<h3>func (<a id="L176"></a>StringArray) <a href="../../src/pkg/sort/sort.go#L176">Less</a></h3>
+				<p><code><a id="L176"></a>func (p StringArray) Less(i, j int) bool</code></p>
+				
+				<h3>func (<a id="L180"></a>StringArray) <a href="../../src/pkg/sort/sort.go#L180">Sort</a></h3>
+				<p><code><a id="L180"></a>func (p StringArray) Sort()</code></p>
+				<p>
+Sort is a convenience method.
+</p>
+
+				<h3>func (<a id="L177"></a>StringArray) <a href="../../src/pkg/sort/sort.go#L177">Swap</a></h3>
+				<p><code><a id="L177"></a>func (p StringArray) Swap(i, j int)</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

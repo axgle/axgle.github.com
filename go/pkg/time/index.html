@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package time</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:58:03 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package time</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "time"</code></p>
+	<p>
+The time package provides functionality for measuring and
+displaying time.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/time/sleep.go">sleep.go</a>
+				<a href="../../src/pkg/time/tick.go">tick.go</a>
+				<a href="../../src/pkg/time/time.go">time.go</a>
+				<a href="../../src/pkg/time/zoneinfo.go">zoneinfo.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+Days of the week.
+</p>
+
+			<pre><a id="L34"></a>const (
+    <a id="L35"></a>Sunday = iota;
+    <a id="L36"></a>Monday;
+    <a id="L37"></a>Tuesday;
+    <a id="L38"></a>Wednesday;
+    <a id="L39"></a>Thursday;
+    <a id="L40"></a>Friday;
+    <a id="L41"></a>Saturday;
+<a id="L42"></a>)</pre>
+			<h2>func <a href="../../src/pkg/time/time.go#L25">Nanoseconds</a></h2>
+			<p><code><a id="L25"></a>func Nanoseconds() int64</code></p>
+			<p>
+Nanoseconds reports the number of nanoseconds since the Unix epoch,
+January 1, 1970 00:00:00 UTC.
+</p>
+
+			<h2>func <a href="../../src/pkg/time/time.go#L15">Seconds</a></h2>
+			<p><code><a id="L15"></a>func Seconds() int64</code></p>
+			<p>
+Seconds reports the number of seconds since the Unix epoch,
+January 1, 1970 00:00:00 UTC.
+</p>
+
+			<h2>func <a href="../../src/pkg/time/sleep.go#L14">Sleep</a></h2>
+			<p><code><a id="L14"></a>func Sleep(ns int64) os.Error</code></p>
+			<p>
+Sleep pauses the current goroutine for ns nanoseconds.
+It returns os.EINTR if interrupted.
+</p>
+
+			<h2>func <a href="../../src/pkg/time/tick.go#L61">Tick</a></h2>
+			<p><code><a id="L61"></a>func Tick(ns int64) &lt;-chan int64</code></p>
+			<p>
+Tick is a convenience wrapper for NewTicker providing access to the ticking
+channel only.  Useful for clients that have no need to shut down the ticker.
+</p>
+
+			<h2>type <a href="../../src/pkg/time/tick.go#L25"><a id="L25"></a>Ticker</a></h2>
+			<p>
+A Ticker holds a synchronous channel that delivers `ticks&#39; of a clock
+at intervals.
+</p>
+
+			<p><pre><a id="L25"></a>type Ticker struct {
+    <a id="L26"></a>C &lt;-chan int64; // The channel on which the ticks are delivered.
+    // contains unexported fields
+<a id="L29"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/time/tick.go#L71">NewTicker</a></h3>
+				<p><code><a id="L71"></a>func NewTicker(ns int64) *Ticker</code></p>
+				<p>
+Ticker returns a new Ticker containing a synchronous channel that will
+send the time, in nanoseconds, every ns nanoseconds.  It adjusts the
+intervals to make up for pauses in delivery of the ticks.
+</p>
+
+				<h3>func (<a id="L32"></a>*Ticker) <a href="../../src/pkg/time/tick.go#L32">Stop</a></h3>
+				<p><code><a id="L32"></a>func (t *Ticker) Stop()</code></p>
+				<p>
+Stop turns off a ticker.  After Stop, no more ticks will be delivered.
+</p>
+
+			<h2>type <a href="../../src/pkg/time/time.go#L45"><a id="L45"></a>Time</a></h2>
+			<p>
+Time is the struct representing a parsed time value.
+</p>
+
+			<p><pre><a id="L45"></a>type Time struct {
+    <a id="L46"></a>Year                 int64; // 2008 is 2008
+    <a id="L47"></a>Month, Day           int;   // Sep-17 is 9, 17
+    <a id="L48"></a>Hour, Minute, Second int;   // 10:43:12 is 10, 43, 12
+    <a id="L49"></a>Weekday              int;   // Sunday, Monday, ...
+    <a id="L50"></a>ZoneOffset           int;   // seconds east of UTC
+    <a id="L51"></a>Zone                 string;
+<a id="L52"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/time/time.go#L161">LocalTime</a></h3>
+				<p><code><a id="L161"></a>func LocalTime() *Time</code></p>
+				<p>
+LocalTime returns the current time as a parsed Time value in the local time zone.
+</p>
+
+				<h3>func <a href="../../src/pkg/time/time.go#L152">SecondsToLocalTime</a></h3>
+				<p><code><a id="L152"></a>func SecondsToLocalTime(sec int64) *Time</code></p>
+				<p>
+SecondsToLocalTime converts sec, in number of seconds since the Unix epoch,
+into a parsed Time value in the local time zone.
+</p>
+
+				<h3>func <a href="../../src/pkg/time/time.go#L74">SecondsToUTC</a></h3>
+				<p><code><a id="L74"></a>func SecondsToUTC(sec int64) *Time</code></p>
+				<p>
+SecondsToUTC converts sec, in number of seconds since the Unix epoch,
+into a parsed Time value in the UTC time zone.
+</p>
+
+				<h3>func <a href="../../src/pkg/time/time.go#L148">UTC</a></h3>
+				<p><code><a id="L148"></a>func UTC() *Time</code></p>
+				<p>
+UTC returns the current time as a parsed Time value in the UTC time zone.
+</p>
+
+				<h3>func (<a id="L339"></a>*Time) <a href="../../src/pkg/time/time.go#L339">Asctime</a></h3>
+				<p><code><a id="L339"></a>func (t *Time) Asctime() string</code></p>
+				<p>
+Asctime formats the parsed time value in the style of
+ANSI C asctime: Sun Nov  6 08:49:37 1994
+</p>
+
+				<h3>func (<a id="L347"></a>*Time) <a href="../../src/pkg/time/time.go#L347">RFC1123</a></h3>
+				<p><code><a id="L347"></a>func (t *Time) RFC1123() string</code></p>
+				<p>
+RFC1123 formats the parsed time value in the style of
+RFC 1123: Sun, 06 Nov 1994 08:49:37 UTC
+</p>
+
+				<h3>func (<a id="L343"></a>*Time) <a href="../../src/pkg/time/time.go#L343">RFC850</a></h3>
+				<p><code><a id="L343"></a>func (t *Time) RFC850() string</code></p>
+				<p>
+RFC850 formats the parsed time value in the style of
+RFC 850: Sunday, 06-Nov-94 08:49:37 UTC
+</p>
+
+				<h3>func (<a id="L165"></a>*Time) <a href="../../src/pkg/time/time.go#L165">Seconds</a></h3>
+				<p><code><a id="L165"></a>func (t *Time) Seconds() int64</code></p>
+				<p>
+Seconds returns the number of seconds since January 1, 1970 represented by the
+parsed Time value.
+</p>
+
+				<h3>func (<a id="L351"></a>*Time) <a href="../../src/pkg/time/time.go#L351">String</a></h3>
+				<p><code><a id="L351"></a>func (t *Time) String() string</code></p>
+				<p>
+String formats the parsed time value in the style of
+date(1) - Sun Nov  6 08:49:37 UTC 1994
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

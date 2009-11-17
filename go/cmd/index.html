@@ -1,0 +1,328 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Directory .</title>
+
+  <link rel="stylesheet" type="text/css" href="../doc/style.css">
+  <script type="text/javascript" src="../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../index.html"><img src="../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../doc/install.html">Install Go</a></li>
+    <li><a href="../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="index.html">Command documentation</a></li>
+    <li><a href="../pkg/index.html">Package documentation</a></li>
+    <li><a href="../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:47:27 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Directory .</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<h2>Subdirectories</h2>
+	<p>
+	<table class="layout">
+	<tr>
+	<th align="left" colspan="1">Name</th>
+	<td width="25">&nbsp;</td>
+	<th align="left">Synopsis</th>
+	</tr>
+	<tr>
+	<th align="left"><a href="../index.html">..<a></th>
+	</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="5a/index.html">5a<a></td>
+		<td></td>
+		<td align="left">5a is a version of the Plan 9 assembler.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="5c/index.html">5c<a></td>
+		<td></td>
+		<td align="left">5c is a version of the Plan 9 C compiler.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="5g/index.html">5g<a></td>
+		<td></td>
+		<td align="left">5g is the version of the gc compiler for the ARM.
+The $GOARCH for these tools is arm.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="5l/index.html">5l<a></td>
+		<td></td>
+		<td align="left">5l is a modified version of the Plan 9 linker.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="6a/index.html">6a<a></td>
+		<td></td>
+		<td align="left">6a is a version of the Plan 9 assembler.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="6c/index.html">6c<a></td>
+		<td></td>
+		<td align="left">6c is a version of the Plan 9 C compiler.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="6g/index.html">6g<a></td>
+		<td></td>
+		<td align="left">6g is the version of the gc compiler for the x86-64.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="6l/index.html">6l<a></td>
+		<td></td>
+		<td align="left">6l is a modified version of the Plan 9 linker.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="8a/index.html">8a<a></td>
+		<td></td>
+		<td align="left">8a is a version of the Plan 9 assembler.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="8c/index.html">8c<a></td>
+		<td></td>
+		<td align="left">8c is a version of the Plan 9 C compiler.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="8g/index.html">8g<a></td>
+		<td></td>
+		<td align="left">8g is the version of the gc compiler for the x86.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="8l/index.html">8l<a></td>
+		<td></td>
+		<td align="left">8l is a modified version of the Plan 9 linker.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="cc/index.html">cc<a></td>
+		<td></td>
+		<td align="left">This directory contains the portable section of the Plan 9 C compilers.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="cgo/index.html">cgo<a></td>
+		<td></td>
+		<td align="left">Cgo enables the creation of Go packages that call C code.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="cov/index.html">cov<a></td>
+		<td></td>
+		<td align="left">Cov is a rudimentary code coverage tool.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="ebnflint/index.html">ebnflint<a></td>
+		<td></td>
+		<td align="left">Ebnflint verifies that EBNF productions are consistent and gramatically correct.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="gc/index.html">gc<a></td>
+		<td></td>
+		<td align="left">Gc is the generic label for the family of Go compilers
+that function as part of the (modified) Plan 9 tool chain.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="godefs/index.html">godefs<a></td>
+		<td></td>
+		<td align="left">Godefs is a bootstrapping tool for porting the Go runtime to new systems.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="godoc/index.html">godoc<a></td>
+		<td></td>
+		<td align="left">Godoc extracts and generates documentation for Go programs.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="gofmt/index.html">gofmt<a></td>
+		<td></td>
+		<td align="left">Gofmt formats Go programs.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="gopack/index.html">gopack<a></td>
+		<td></td>
+		<td align="left">Gopack program is a variant of the Plan 9 ar tool.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="gotest/index.html">gotest<a></td>
+		<td></td>
+		<td align="left">Gotest is an automated testing tool for Go packages.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="goyacc/index.html">goyacc<a></td>
+		<td></td>
+		<td align="left">Goyacc is a version of yacc for Go.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="hgpatch/index.html">hgpatch<a></td>
+		<td></td>
+		<td align="left">Hgpatch applies a patch to the local Mercurial repository.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="ld/index.html">ld<a></td>
+		<td></td>
+		<td align="left">This directory contains the portable section of the Plan 9 C linkers.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="nm/index.html">nm<a></td>
+		<td></td>
+		<td align="left">Nm is a version of the Plan 9 nm command.</td>
+		</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="prof/index.html">prof<a></td>
+		<td></td>
+		<td align="left">Prof is a rudimentary real-time profiler.</td>
+		</tr>
+	</table>
+	</p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

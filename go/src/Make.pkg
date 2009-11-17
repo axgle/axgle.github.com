@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Text file src/Make.pkg</title>
+
+  <link rel="stylesheet" type="text/css" href="../doc/style.css">
+  <script type="text/javascript" src="../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../index.html"><img src="../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../doc/install.html">Install Go</a></li>
+    <li><a href="../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../cmd/index.html">Command documentation</a></li>
+    <li><a href="../pkg/index.html">Package documentation</a></li>
+    <li><a href="index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Text file src/Make.pkg</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <pre>
+# Copyright 2009 The Go Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+all: package
+package: _obj/$(TARG).a
+testpackage: _test/$(TARG).a
+
+# GNU Make 3.80 has a bug in lastword
+# elem=$(lastword $(subst /, ,$(TARG)))
+TARG_words=$(subst /, ,$(TARG))
+elem=$(word $(words $(TARG_words)),$(TARG_words))
+
+dir=$(patsubst %/$(elem),%,./$(TARG))
+pkgdir=$(GOROOT)/pkg/$(GOOS)_$(GOARCH)
+
+INSTALLFILES=$(pkgdir)/$(TARG).a
+
+# The rest of the cgo rules are below, but these variable updates
+# must be done here so they apply to the main rules.
+GOFILES+=$(patsubst %.go,%.cgo1.go,$(CGOFILES))
+GOFILES+=$(patsubst %.go,%.cgo2.go,$(CGOFILES))
+OFILES+=$(patsubst %.go,%.cgo3.$O,$(CGOFILES))
+INSTALLFILES+=$(patsubst %.go,$(pkgdir)/$(dir)/$(elem)_%.so,$(CGOFILES))
+PREREQ+=$(patsubst %,%.make,$(DEPS))
+
+coverage:
+	gotest
+	6cov -g $(shell pwd) | grep -v &#39;_test\.go:&#39;
+
+clean:
+	rm -rf *.[$(OS)o] *.a [$(OS)].out *.cgo[12].go *.cgo[34].c *.so _obj _test _testmain.go $(CLEANFILES)
+
+test:
+	gotest
+
+nuke: clean
+	rm -f $(pkgdir)/$(TARG).a
+
+testpackage-clean:
+	rm -f _test/$(TARG).a _gotest_.$O
+
+install: $(INSTALLFILES)
+
+$(pkgdir)/$(TARG).a: package
+	@test -d $(GOROOT)/pkg &amp;&amp; mkdir -p $(pkgdir)/$(dir)
+	cp _obj/$(TARG).a $@
+
+_go_.$O: $(GOFILES) $(PREREQ)
+	$(GC) -o $@ $(GOFILES)
+
+_gotest_.$O: $(GOFILES) $(GOTESTFILES) $(PREREQ)
+	$(GC) -o $@ $(GOFILES) $(GOTESTFILES)
+
+_obj/$(TARG).a: _go_.$O $(OFILES)
+	@mkdir -p _obj/$(dir)
+	rm -f _obj/$(TARG).a
+	gopack grc $@ _go_.$O $(OFILES)
+
+_test/$(TARG).a: _gotest_.$O $(OFILES)
+	@mkdir -p _test/$(dir)
+	rm -f _test/$(TARG).a
+	gopack grc $@ _gotest_.$O $(OFILES)
+
+importpath:
+	@echo $(TARG)
+
+dir:
+	@echo $(dir)
+
+%.make:
+	(cd $* &amp;&amp; make)
+
+# To use cgo in a Go package, add a line
+#
+#	CGOFILES=x.go
+#
+# to the main Makefile.  This signals that cgo should process x.go.
+# There are two optional variables to set, CGO_CFLAGS and CGO_LDFLAGS,
+# which specify compiler and linker flags to use when compiling
+# (using gcc) the C support for x.go.
+
+# Cgo translates each x.go file listed in $(CGOFILES) into
+#
+#	x.cgo1.go - basic translation of x.go
+#	x.cgo2.go - declarations needed for x.cgo1.go; imports &#34;unsafe&#34;
+#	x.cgo3.c - C trampoline code to be compiled with 6c and linked into the package
+#	x.cgo4.c - C implementations compiled with gcc to create dynamic library
+#
+%.cgo1.go %.cgo2.go %.cgo3.c %.cgo4.c: %.go
+	cgo $(CGO_CFLAGS) $*.go
+
+# The rules above added x.cgo1.go and x.cgo2.go to $(GOFILES),
+# added x.cgo3.$O to $OFILES, and added the installed copy of
+# package_x.so (built from x.cgo4.c) to $(INSTALLFILES).
+
+# Compile x.cgo3.c with 6c; needs access to the runtime headers.
+RUNTIME_CFLAGS_amd64=-D_64BIT
+RUNTIME_CFLAGS=-I$(GOROOT)/src/pkg/runtime $(RUNTIME_CFLAGS_$(GOARCH))
+%.cgo3.$O: %.cgo3.c
+	$(CC) $(CFLAGS) $(RUNTIME_CFLAGS) $*.cgo3.c
+
+# Have to run gcc with the right size argument on hybrid 32/64 machines.
+_CGO_CFLAGS_386=-m32
+_CGO_CFLAGS_amd64=-m64
+_CGO_LDFLAGS_linux=-shared -lpthread -lm
+_CGO_LDFLAGS_darwin=-dynamiclib -Wl,-undefined,dynamic_lookup
+
+
+# Compile x.cgo4.c with gcc to make package_x.so.
+%.cgo4.o: %.cgo4.c
+	gcc $(_CGO_CFLAGS_$(GOARCH)) -fPIC -O2 -o $@ -c $(CGO_CFLAGS) $*.cgo4.c
+
+$(elem)_%.so: %.cgo4.o
+	gcc $(_CGO_CFLAGS_$(GOARCH)) $(_CGO_LDFLAGS_$(GOOS)) -o $@ $*.cgo4.o $(CGO_LDFLAGS)
+
+$(pkgdir)/$(dir)/$(elem)_%.so: $(elem)_%.so
+	@test -d $(GOROOT)/pkg &amp;&amp; mkdir -p $(pkgdir)/$(dir)
+	cp $(elem)_$*.so $@
+
+# Generic build rules.
+# These come last so that the rules above can override them
+# for more specific file names.
+%.$O: %.c
+	$(CC) $(CFLAGS) $*.c
+
+%.$O: %.s
+	$(AS) $*.s
+
+%.$O: $(HFILES)
+
+</pre>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

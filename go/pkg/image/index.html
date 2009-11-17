@@ -1,0 +1,456 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package image</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:50:16 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package image</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "image"</code></p>
+	<p>
+The image package implements a basic 2-D image library.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/image/color.go">color.go</a>
+				<a href="../../src/pkg/image/image.go">image.go</a>
+			</span>
+			</p>
+			<h2>type <a href="../../src/pkg/image/color.go#L10"><a id="L10"></a>Color</a></h2>
+			<p>
+All Colors can convert themselves, with a possible loss of precision, to 128-bit alpha-premultiplied RGBA.
+</p>
+
+			<p><pre><a id="L10"></a>type Color interface {
+    <a id="L11"></a>RGBA() (r, g, b, a uint32);
+<a id="L12"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/image/color.go#L105"><a id="L105"></a>ColorModel</a></h2>
+			<p>
+A ColorModel can convert foreign Colors, with a possible loss of precision, to a Color
+from its own color model.
+</p>
+
+			<p><pre><a id="L105"></a>type ColorModel interface {
+    <a id="L106"></a>Convert(c Color) Color;
+<a id="L107"></a>}</pre></p>
+				<p>
+The ColorModel associated with NRGBA64Color.
+</p>
+
+				<pre><a id="L189"></a>var NRGBA64ColorModel ColorModel = ColorModelFunc(toNRGBA64Color)</pre>
+				<p>
+The ColorModel associated with NRGBAColor.
+</p>
+
+				<pre><a id="L186"></a>var NRGBAColorModel ColorModel = ColorModelFunc(toNRGBAColor)</pre>
+				<p>
+The ColorModel associated with RGBA64Color.
+</p>
+
+				<pre><a id="L183"></a>var RGBA64ColorModel ColorModel = ColorModelFunc(toRGBA64Color)</pre>
+				<p>
+The ColorModel associated with RGBAColor.
+</p>
+
+				<pre><a id="L180"></a>var RGBAColorModel ColorModel = ColorModelFunc(toRGBAColor)</pre>
+			<h2>type <a href="../../src/pkg/image/color.go#L113"><a id="L113"></a>ColorModelFunc</a></h2>
+			<p>
+The ColorModelFunc type is an adapter to allow the use of an ordinary
+color conversion function as a ColorModel.  If f is such a function,
+ColorModelFunc(f) is a ColorModel object that invokes f to implement
+the conversion.
+</p>
+
+			<p><pre><a id="L113"></a>type ColorModelFunc func(Color) Color</pre></p>
+				<h3>func (<a id="L115"></a>ColorModelFunc) <a href="../../src/pkg/image/color.go#L115">Convert</a></h3>
+				<p><code><a id="L115"></a>func (f ColorModelFunc) Convert(c Color) Color</code></p>
+				
+			<h2>type <a href="../../src/pkg/image/image.go#L9"><a id="L9"></a>Image</a></h2>
+			<p>
+An Image is a rectangular grid of Colors drawn from a ColorModel.
+</p>
+
+			<p><pre><a id="L9"></a>type Image interface {
+    <a id="L10"></a>ColorModel() ColorModel;
+    <a id="L11"></a>Width() int;
+    <a id="L12"></a>Height() int;
+
+    <a id="L13"></a>// At(0, 0) returns the upper-left pixel of the grid.
+    <a id="L14"></a>// At(Width()-1, Height()-1) returns the lower-right pixel.
+    <a id="L15"></a>At(x, y int) Color;
+<a id="L16"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/image/image.go#L79"><a id="L79"></a>NRGBA</a></h2>
+			<p>
+A NRGBA is an in-memory image backed by a 2-D slice of NRGBAColor values.
+</p>
+
+			<p><pre><a id="L79"></a>type NRGBA struct {
+    <a id="L80"></a>// The Pixel field&#39;s indices are y first, then x, so that At(x, y) == Pixel[y][x].
+    <a id="L81"></a>Pixel [][]NRGBAColor;
+<a id="L82"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/image/image.go#L100">NewNRGBA</a></h3>
+				<p><code><a id="L100"></a>func NewNRGBA(w, h int) *NRGBA</code></p>
+				<p>
+NewNRGBA returns a new NRGBA with the given width and height.
+</p>
+
+				<h3>func (<a id="L95"></a>*NRGBA) <a href="../../src/pkg/image/image.go#L95">At</a></h3>
+				<p><code><a id="L95"></a>func (p *NRGBA) At(x, y int) Color</code></p>
+				
+				<h3>func (<a id="L84"></a>*NRGBA) <a href="../../src/pkg/image/image.go#L84">ColorModel</a></h3>
+				<p><code><a id="L84"></a>func (p *NRGBA) ColorModel() ColorModel</code></p>
+				
+				<h3>func (<a id="L93"></a>*NRGBA) <a href="../../src/pkg/image/image.go#L93">Height</a></h3>
+				<p><code><a id="L93"></a>func (p *NRGBA) Height() int</code></p>
+				
+				<h3>func (<a id="L97"></a>*NRGBA) <a href="../../src/pkg/image/image.go#L97">Set</a></h3>
+				<p><code><a id="L97"></a>func (p *NRGBA) Set(x, y int, c Color)</code></p>
+				
+				<h3>func (<a id="L86"></a>*NRGBA) <a href="../../src/pkg/image/image.go#L86">Width</a></h3>
+				<p><code><a id="L86"></a>func (p *NRGBA) Width() int</code></p>
+				
+			<h2>type <a href="../../src/pkg/image/image.go#L109"><a id="L109"></a>NRGBA64</a></h2>
+			<p>
+A NRGBA64 is an in-memory image backed by a 2-D slice of NRGBA64Color values.
+</p>
+
+			<p><pre><a id="L109"></a>type NRGBA64 struct {
+    <a id="L110"></a>// The Pixel field&#39;s indices are y first, then x, so that At(x, y) == Pixel[y][x].
+    <a id="L111"></a>Pixel [][]NRGBA64Color;
+<a id="L112"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/image/image.go#L130">NewNRGBA64</a></h3>
+				<p><code><a id="L130"></a>func NewNRGBA64(w, h int) *NRGBA64</code></p>
+				<p>
+NewNRGBA64 returns a new NRGBA64 with the given width and height.
+</p>
+
+				<h3>func (<a id="L125"></a>*NRGBA64) <a href="../../src/pkg/image/image.go#L125">At</a></h3>
+				<p><code><a id="L125"></a>func (p *NRGBA64) At(x, y int) Color</code></p>
+				
+				<h3>func (<a id="L114"></a>*NRGBA64) <a href="../../src/pkg/image/image.go#L114">ColorModel</a></h3>
+				<p><code><a id="L114"></a>func (p *NRGBA64) ColorModel() ColorModel</code></p>
+				
+				<h3>func (<a id="L123"></a>*NRGBA64) <a href="../../src/pkg/image/image.go#L123">Height</a></h3>
+				<p><code><a id="L123"></a>func (p *NRGBA64) Height() int</code></p>
+				
+				<h3>func (<a id="L127"></a>*NRGBA64) <a href="../../src/pkg/image/image.go#L127">Set</a></h3>
+				<p><code><a id="L127"></a>func (p *NRGBA64) Set(x, y int, c Color)</code></p>
+				
+				<h3>func (<a id="L116"></a>*NRGBA64) <a href="../../src/pkg/image/image.go#L116">Width</a></h3>
+				<p><code><a id="L116"></a>func (p *NRGBA64) Width() int</code></p>
+				
+			<h2>type <a href="../../src/pkg/image/color.go#L80"><a id="L80"></a>NRGBA64Color</a></h2>
+			<p>
+An NRGBA64Color represents a non-alpha-premultiplied 64-bit color, having 16 bits for each of red, green, blue and alpha.
+</p>
+
+			<p><pre><a id="L80"></a>type NRGBA64Color struct {
+    <a id="L81"></a>R, G, B, A uint16;
+<a id="L82"></a>}</pre></p>
+				<h3>func (<a id="L84"></a>NRGBA64Color) <a href="../../src/pkg/image/color.go#L84">RGBA</a></h3>
+				<p><code><a id="L84"></a>func (c NRGBA64Color) RGBA() (r, g, b, a uint32)</code></p>
+				
+			<h2>type <a href="../../src/pkg/image/color.go#L53"><a id="L53"></a>NRGBAColor</a></h2>
+			<p>
+An NRGBAColor represents a non-alpha-premultiplied 32-bit color.
+</p>
+
+			<p><pre><a id="L53"></a>type NRGBAColor struct {
+    <a id="L54"></a>R, G, B, A uint8;
+<a id="L55"></a>}</pre></p>
+				<h3>func (<a id="L57"></a>NRGBAColor) <a href="../../src/pkg/image/color.go#L57">RGBA</a></h3>
+				<p><code><a id="L57"></a>func (c NRGBAColor) RGBA() (r, g, b, a uint32)</code></p>
+				
+			<h2>type <a href="../../src/pkg/image/image.go#L179"><a id="L179"></a>Paletted</a></h2>
+			<p>
+A Paletted is an in-memory image backed by a 2-D slice of uint8 values and a PalettedColorModel.
+</p>
+
+			<p><pre><a id="L179"></a>type Paletted struct {
+    <a id="L180"></a>// The Pixel field&#39;s indices are y first, then x, so that At(x, y) == Palette[Pixel[y][x]].
+    <a id="L181"></a>Pixel   [][]uint8;
+    <a id="L182"></a>Palette PalettedColorModel;
+<a id="L183"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/image/image.go#L207">NewPaletted</a></h3>
+				<p><code><a id="L207"></a>func NewPaletted(w, h int, m PalettedColorModel) *Paletted</code></p>
+				<p>
+NewPaletted returns a new Paletted with the given width, height and palette.
+</p>
+
+				<h3>func (<a id="L196"></a>*Paletted) <a href="../../src/pkg/image/image.go#L196">At</a></h3>
+				<p><code><a id="L196"></a>func (p *Paletted) At(x, y int) Color</code></p>
+				
+				<h3>func (<a id="L198"></a>*Paletted) <a href="../../src/pkg/image/image.go#L198">ColorIndexAt</a></h3>
+				<p><code><a id="L198"></a>func (p *Paletted) ColorIndexAt(x, y int) uint8</code></p>
+				
+				<h3>func (<a id="L185"></a>*Paletted) <a href="../../src/pkg/image/image.go#L185">ColorModel</a></h3>
+				<p><code><a id="L185"></a>func (p *Paletted) ColorModel() ColorModel</code></p>
+				
+				<h3>func (<a id="L194"></a>*Paletted) <a href="../../src/pkg/image/image.go#L194">Height</a></h3>
+				<p><code><a id="L194"></a>func (p *Paletted) Height() int</code></p>
+				
+				<h3>func (<a id="L202"></a>*Paletted) <a href="../../src/pkg/image/image.go#L202">SetColorIndex</a></h3>
+				<p><code><a id="L202"></a>func (p *Paletted) SetColorIndex(x, y int, index uint8)</code></p>
+				
+				<h3>func (<a id="L187"></a>*Paletted) <a href="../../src/pkg/image/image.go#L187">Width</a></h3>
+				<p><code><a id="L187"></a>func (p *Paletted) Width() int</code></p>
+				
+			<h2>type <a href="../../src/pkg/image/image.go#L139"><a id="L139"></a>PalettedColorModel</a></h2>
+			<p>
+A PalettedColorModel represents a fixed palette of colors.
+</p>
+
+			<p><pre><a id="L139"></a>type PalettedColorModel []Color</pre></p>
+				<h3>func (<a id="L149"></a>PalettedColorModel) <a href="../../src/pkg/image/image.go#L149">Convert</a></h3>
+				<p><code><a id="L149"></a>func (p PalettedColorModel) Convert(c Color) Color</code></p>
+				<p>
+Convert returns the palette color closest to c in Euclidean R,G,B space.
+</p>
+
+			<h2>type <a href="../../src/pkg/image/image.go#L19"><a id="L19"></a>RGBA</a></h2>
+			<p>
+An RGBA is an in-memory image backed by a 2-D slice of RGBAColor values.
+</p>
+
+			<p><pre><a id="L19"></a>type RGBA struct {
+    <a id="L20"></a>// The Pixel field&#39;s indices are y first, then x, so that At(x, y) == Pixel[y][x].
+    <a id="L21"></a>Pixel [][]RGBAColor;
+<a id="L22"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/image/image.go#L40">NewRGBA</a></h3>
+				<p><code><a id="L40"></a>func NewRGBA(w, h int) *RGBA</code></p>
+				<p>
+NewRGBA returns a new RGBA with the given width and height.
+</p>
+
+				<h3>func (<a id="L35"></a>*RGBA) <a href="../../src/pkg/image/image.go#L35">At</a></h3>
+				<p><code><a id="L35"></a>func (p *RGBA) At(x, y int) Color</code></p>
+				
+				<h3>func (<a id="L24"></a>*RGBA) <a href="../../src/pkg/image/image.go#L24">ColorModel</a></h3>
+				<p><code><a id="L24"></a>func (p *RGBA) ColorModel() ColorModel</code></p>
+				
+				<h3>func (<a id="L33"></a>*RGBA) <a href="../../src/pkg/image/image.go#L33">Height</a></h3>
+				<p><code><a id="L33"></a>func (p *RGBA) Height() int</code></p>
+				
+				<h3>func (<a id="L37"></a>*RGBA) <a href="../../src/pkg/image/image.go#L37">Set</a></h3>
+				<p><code><a id="L37"></a>func (p *RGBA) Set(x, y int, c Color)</code></p>
+				
+				<h3>func (<a id="L26"></a>*RGBA) <a href="../../src/pkg/image/image.go#L26">Width</a></h3>
+				<p><code><a id="L26"></a>func (p *RGBA) Width() int</code></p>
+				
+			<h2>type <a href="../../src/pkg/image/image.go#L49"><a id="L49"></a>RGBA64</a></h2>
+			<p>
+An RGBA64 is an in-memory image backed by a 2-D slice of RGBA64Color values.
+</p>
+
+			<p><pre><a id="L49"></a>type RGBA64 struct {
+    <a id="L50"></a>// The Pixel field&#39;s indices are y first, then x, so that At(x, y) == Pixel[y][x].
+    <a id="L51"></a>Pixel [][]RGBA64Color;
+<a id="L52"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/image/image.go#L70">NewRGBA64</a></h3>
+				<p><code><a id="L70"></a>func NewRGBA64(w, h int) *RGBA64</code></p>
+				<p>
+NewRGBA64 returns a new RGBA64 with the given width and height.
+</p>
+
+				<h3>func (<a id="L65"></a>*RGBA64) <a href="../../src/pkg/image/image.go#L65">At</a></h3>
+				<p><code><a id="L65"></a>func (p *RGBA64) At(x, y int) Color</code></p>
+				
+				<h3>func (<a id="L54"></a>*RGBA64) <a href="../../src/pkg/image/image.go#L54">ColorModel</a></h3>
+				<p><code><a id="L54"></a>func (p *RGBA64) ColorModel() ColorModel</code></p>
+				
+				<h3>func (<a id="L63"></a>*RGBA64) <a href="../../src/pkg/image/image.go#L63">Height</a></h3>
+				<p><code><a id="L63"></a>func (p *RGBA64) Height() int</code></p>
+				
+				<h3>func (<a id="L67"></a>*RGBA64) <a href="../../src/pkg/image/image.go#L67">Set</a></h3>
+				<p><code><a id="L67"></a>func (p *RGBA64) Set(x, y int, c Color)</code></p>
+				
+				<h3>func (<a id="L56"></a>*RGBA64) <a href="../../src/pkg/image/image.go#L56">Width</a></h3>
+				<p><code><a id="L56"></a>func (p *RGBA64) Width() int</code></p>
+				
+			<h2>type <a href="../../src/pkg/image/color.go#L36"><a id="L36"></a>RGBA64Color</a></h2>
+			<p>
+An RGBA64Color represents a 64-bit alpha-premultiplied color, having 16 bits for each of red, green, blue and alpha.
+</p>
+
+			<p><pre><a id="L36"></a>type RGBA64Color struct {
+    <a id="L37"></a>R, G, B, A uint16;
+<a id="L38"></a>}</pre></p>
+				<h3>func (<a id="L40"></a>RGBA64Color) <a href="../../src/pkg/image/color.go#L40">RGBA</a></h3>
+				<p><code><a id="L40"></a>func (c RGBA64Color) RGBA() (r, g, b, a uint32)</code></p>
+				
+			<h2>type <a href="../../src/pkg/image/color.go#L15"><a id="L15"></a>RGBAColor</a></h2>
+			<p>
+An RGBAColor represents a traditional 32-bit alpha-premultiplied color, having 8 bits for each of red, green, blue and alpha.
+</p>
+
+			<p><pre><a id="L15"></a>type RGBAColor struct {
+    <a id="L16"></a>R, G, B, A uint8;
+<a id="L17"></a>}</pre></p>
+				<h3>func (<a id="L19"></a>RGBAColor) <a href="../../src/pkg/image/color.go#L19">RGBA</a></h3>
+				<p><code><a id="L19"></a>func (c RGBAColor) RGBA() (r, g, b, a uint32)</code></p>
+				
+	<h2>Subdirectories</h2>
+	<p>
+	<table class="layout">
+	<tr>
+	<th align="left" colspan="1">Name</th>
+	<td width="25">&nbsp;</td>
+	<th align="left">Synopsis</th>
+	</tr>
+	<tr>
+	<th align="left"><a href="../index.html">..<a></th>
+	</tr>
+		<tr>
+		
+		<td align="left" colspan="1"><a href="png/index.html">png<a></td>
+		<td></td>
+		<td align="left">The png package implements a PNG image decoder and encoder.</td>
+		</tr>
+	</table>
+	</p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

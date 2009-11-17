@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package tls</title>
+
+  <link rel="stylesheet" type="text/css" href="../../../doc/style.css">
+  <script type="text/javascript" src="../../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../../index.html"><img src="../../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../../doc/install.html">Install Go</a></li>
+    <li><a href="../../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../../index.html">Package documentation</a></li>
+    <li><a href="../../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:05 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package tls</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "crypto/tls"</code></p>
+	<p>
+This package partially implements the TLS 1.1 protocol, as specified in RFC 4346.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../../src/pkg/crypto/tls/alert.go">alert.go</a>
+				<a href="../../../src/pkg/crypto/tls/common.go">common.go</a>
+				<a href="../../../src/pkg/crypto/tls/handshake_messages.go">handshake_messages.go</a>
+				<a href="../../../src/pkg/crypto/tls/handshake_server.go">handshake_server.go</a>
+				<a href="../../../src/pkg/crypto/tls/prf.go">prf.go</a>
+				<a href="../../../src/pkg/crypto/tls/record_process.go">record_process.go</a>
+				<a href="../../../src/pkg/crypto/tls/record_read.go">record_read.go</a>
+				<a href="../../../src/pkg/crypto/tls/record_write.go">record_write.go</a>
+				<a href="../../../src/pkg/crypto/tls/tls.go">tls.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			<p>
+TLS cipher suites.
+</p>
+
+			<pre><a id="L44"></a>var (
+    <a id="L45"></a>TLS_RSA_WITH_RC4_128_SHA uint16 = 5;
+<a id="L46"></a>)</pre>
+			<h2>type <a href="../../../src/pkg/crypto/tls/common.go#L69"><a id="L69"></a>Certificate</a></h2>
+			
+			<p><pre><a id="L69"></a>type Certificate struct {
+    <a id="L70"></a>Certificate [][]byte;
+    <a id="L71"></a>PrivateKey  *rsa.PrivateKey;
+<a id="L72"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/crypto/tls/common.go#L61"><a id="L61"></a>Config</a></h2>
+			<p>
+A Config structure is used to configure a TLS client or server. After one
+has been passed to a TLS function it must not be modified.
+</p>
+
+			<p><pre><a id="L61"></a>type Config struct {
+    <a id="L62"></a>// Rand provides the source of entropy for nonces and RSA blinding.
+    <a id="L63"></a>Rand io.Reader;
+
+    <a id="L64"></a>// Time returns the current time as the number of seconds since the epoch.
+    <a id="L65"></a>Time         func() int64;
+    <a id="L66"></a>Certificates []Certificate;
+<a id="L67"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/crypto/tls/tls.go#L17"><a id="L17"></a>Conn</a></h2>
+			<p>
+A Conn represents a secure connection.
+</p>
+
+			<p><pre><a id="L17"></a>type Conn struct {
+    <a id="L18"></a>net.Conn;
+    // contains unexported fields
+<a id="L25"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/crypto/tls/tls.go#L118">Server</a></h3>
+				<p><code><a id="L118"></a>func Server(conn net.Conn, config *Config) *Conn</code></p>
+				<p>
+Server establishes a secure connection over the given connection and acts
+as a TLS server.
+</p>
+
+				<h3>func (<a id="L87"></a>*Conn) <a href="../../../src/pkg/crypto/tls/tls.go#L87">Close</a></h3>
+				<p><code><a id="L87"></a>func (tls *Conn) Close() os.Error</code></p>
+				
+				<h3>func (<a id="L110"></a>*Conn) <a href="../../../src/pkg/crypto/tls/tls.go#L110">GetConnectionState</a></h3>
+				<p><code><a id="L110"></a>func (tls *Conn) GetConnectionState() ConnectionState</code></p>
+				
+				<h3>func (<a id="L32"></a>*Conn) <a href="../../../src/pkg/crypto/tls/tls.go#L32">Read</a></h3>
+				<p><code><a id="L32"></a>func (tls *Conn) Read(p []byte) (int, os.Error)</code></p>
+				
+				<h3>func (<a id="L100"></a>*Conn) <a href="../../../src/pkg/crypto/tls/tls.go#L100">SetReadTimeout</a></h3>
+				<p><code><a id="L100"></a>func (tls *Conn) SetReadTimeout(nsec int64) os.Error</code></p>
+				
+				<h3>func (<a id="L94"></a>*Conn) <a href="../../../src/pkg/crypto/tls/tls.go#L94">SetTimeout</a></h3>
+				<p><code><a id="L94"></a>func (tls *Conn) SetTimeout(nsec int64) os.Error</code></p>
+				
+				<h3>func (<a id="L105"></a>*Conn) <a href="../../../src/pkg/crypto/tls/tls.go#L105">SetWriteTimeout</a></h3>
+				<p><code><a id="L105"></a>func (tls *Conn) SetWriteTimeout(nsec int64) os.Error</code></p>
+				
+				<h3>func (<a id="L67"></a>*Conn) <a href="../../../src/pkg/crypto/tls/tls.go#L67">Write</a></h3>
+				<p><code><a id="L67"></a>func (tls *Conn) Write(p []byte) (int, os.Error)</code></p>
+				
+			<h2>type <a href="../../../src/pkg/crypto/tls/common.go#L53"><a id="L53"></a>ConnectionState</a></h2>
+			
+			<p><pre><a id="L53"></a>type ConnectionState struct {
+    <a id="L54"></a>HandshakeComplete bool;
+    <a id="L55"></a>CipherSuite       string;
+    <a id="L56"></a>Error             alertType;
+<a id="L57"></a>}</pre></p>
+			<h2>type <a href="../../../src/pkg/crypto/tls/tls.go#L143"><a id="L143"></a>Listener</a></h2>
+			
+			<p><pre><a id="L143"></a>type Listener struct {
+    // contains unexported fields
+<a id="L146"></a>}</pre></p>
+				<h3>func <a href="../../../src/pkg/crypto/tls/tls.go#L164">NewListener</a></h3>
+				<p><code><a id="L164"></a>func NewListener(listener net.Listener, config *Config) (l Listener)</code></p>
+				<p>
+NewListener creates a Listener which accepts connections from an inner
+Listener and wraps each connection with Server.
+</p>
+
+				<h3>func (<a id="L148"></a>Listener) <a href="../../../src/pkg/crypto/tls/tls.go#L148">Accept</a></h3>
+				<p><code><a id="L148"></a>func (l Listener) Accept() (c net.Conn, err os.Error)</code></p>
+				
+				<h3>func (<a id="L160"></a>Listener) <a href="../../../src/pkg/crypto/tls/tls.go#L160">Addr</a></h3>
+				<p><code><a id="L160"></a>func (l Listener) Addr() net.Addr</code></p>
+				
+				<h3>func (<a id="L158"></a>Listener) <a href="../../../src/pkg/crypto/tls/tls.go#L158">Close</a></h3>
+				<p><code><a id="L158"></a>func (l Listener) Close() os.Error</code></p>
+				
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

@@ -1,0 +1,510 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package xml</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:49:51 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package xml</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "xml"</code></p>
+	<p>
+Package xml implements a simple XML 1.0 parser that
+understands XML name spaces.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/xml/read.go">read.go</a>
+				<a href="../../src/pkg/xml/xml.go">xml.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			<p>
+HTMLAutoClose is the set of HTML elements that
+should be considered to close automatically.
+</p>
+
+			<pre><a id="L1447"></a>var HTMLAutoClose = htmlAutoClose</pre>
+			<p>
+HTMLEntity is an entity map containing translations for the
+standard HTML entity characters.
+</p>
+
+			<pre><a id="L1180"></a>var HTMLEntity = htmlEntity</pre>
+			<h2>func <a href="../../src/pkg/xml/read.go#L114">Unmarshal</a></h2>
+			<p><code><a id="L114"></a>func Unmarshal(r io.Reader, val interface{}) os.Error</code></p>
+			<p>
+Unmarshal parses an XML element from r and uses the
+reflect library to fill in an arbitrary struct, slice, or string
+pointed at by val.  Well-formed data that does not fit
+into val is discarded.
+</p>
+<p>
+For example, given these definitions:
+</p>
+<pre>type Email struct {
+	Where string &#34;attr&#34;;
+	Addr string;
+}
+
+type Result struct {
+	XMLName xml.Name &#34;result&#34;;
+	Name string;
+	Phone string;
+	Email []Email;
+}
+
+var result = Result{ &#34;name&#34;, &#34;phone&#34;, nil }
+</pre>
+<p>
+unmarshalling the XML input
+</p>
+<pre>&lt;result&gt;
+	&lt;email where=&#34;home&#34;&gt;
+		&lt;addr&gt;gre@example.com&lt;/addr&gt;
+	&lt;/email&gt;
+	&lt;email where=&#39;work&#39;&gt;
+		&lt;addr&gt;gre@work.com&lt;/addr&gt;
+	&lt;/email&gt;
+	&lt;name&gt;Grace R. Emlin&lt;/name&gt;
+	&lt;address&gt;123 Main Street&lt;/address&gt;
+&lt;/result&gt;
+</pre>
+<p>
+via Unmarshal(r, &amp;result) is equivalent to assigning
+</p>
+<pre>r = Result{
+	xml.Name{&#34;&#34;, &#34;result&#34;},
+	&#34;Grace R. Emlin&#34;,	// name
+	&#34;phone&#34;,	// no phone given
+	[]Email{
+		Email{ &#34;home&#34;, &#34;gre@example.com&#34; },
+		Email{ &#34;work&#34;, &#34;gre@work.com&#34; }
+	}
+}
+</pre>
+<p>
+Note that the field r.Phone has not been modified and
+that the XML &lt;address&gt; element was discarded.
+</p>
+<p>
+Because Unmarshal uses the reflect package, it can only
+assign to upper case fields.  Unmarshal uses a case-insensitive
+comparison to match XML element names to struct field names.
+</p>
+<p>
+Unmarshal maps an XML element to a struct using the following rules:
+</p>
+<pre>* If the struct has a field named XMLName of type xml.Name,
+   Unmarshal records the element name in that field.
+
+* If the XMLName field has an associated tag string of the form
+   &#34;tag&#34; or &#34;namespace-URL tag&#34;, the XML element must have
+   the given tag (and, optionally, name space) or else Unmarshal
+   returns an error.
+
+* If the XML element has an attribute whose name matches a
+   struct field of type string with tag &#34;attr&#34;, Unmarshal records
+   the attribute value in that field.
+
+* If the XML element contains character data, that data is
+   accumulated in the first struct field that has tag &#34;chardata&#34;.
+   The struct field may have type []byte or string.
+   If there is no such field, the character data is discarded.
+
+* If the XML element contains a sub-element whose name
+   matches a struct field whose tag is neither &#34;attr&#34; nor &#34;chardata&#34;,
+   Unmarshal maps the sub-element to that struct field.
+   Otherwise, if the struct has a field named Any, unmarshal
+   maps the sub-element to that struct field.
+</pre>
+<p>
+Unmarshal maps an XML element to a string or []byte by saving the
+concatenation of that elements character data in the string or []byte.
+</p>
+<p>
+Unmarshal maps an XML element to a slice by extending the length
+of the slice and mapping the element to the newly created value.
+</p>
+<p>
+Unmarshal maps an XML element to a bool by setting the bool to true.
+</p>
+<p>
+Unmarshal maps an XML element to an xml.Name by recording the
+element name.
+</p>
+<p>
+Unmarshal maps an XML element to a pointer by setting the pointer
+to a freshly allocated value and then mapping the element to that value.
+</p>
+
+			<h2>type <a href="../../src/pkg/xml/xml.go#L43"><a id="L43"></a>Attr</a></h2>
+			<p>
+An Attr represents an attribute in an XML element (Name=Value).
+</p>
+
+			<p><pre><a id="L43"></a>type Attr struct {
+    <a id="L44"></a>Name  Name;
+    <a id="L45"></a>Value string;
+<a id="L46"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/xml/xml.go#L66"><a id="L66"></a>CharData</a></h2>
+			<p>
+A CharData represents XML character data (raw text),
+in which XML escape sequences have been replaced by
+the characters they represent.
+</p>
+
+			<p><pre><a id="L66"></a>type CharData []byte</pre></p>
+				<h3>func (<a id="L74"></a>CharData) <a href="../../src/pkg/xml/xml.go#L74">Copy</a></h3>
+				<p><code><a id="L74"></a>func (c CharData) Copy() CharData</code></p>
+				
+			<h2>type <a href="../../src/pkg/xml/xml.go#L78"><a id="L78"></a>Comment</a></h2>
+			<p>
+A Comment represents an XML comment of the form &lt;!--comment--&gt;.
+The bytes do not include the &lt;!-- and --&gt; comment markers.
+</p>
+
+			<p><pre><a id="L78"></a>type Comment []byte</pre></p>
+				<h3>func (<a id="L80"></a>Comment) <a href="../../src/pkg/xml/xml.go#L80">Copy</a></h3>
+				<p><code><a id="L80"></a>func (c Comment) Copy() Comment</code></p>
+				
+			<h2>type <a href="../../src/pkg/xml/xml.go#L95"><a id="L95"></a>Directive</a></h2>
+			<p>
+A Directive represents an XML directive of the form &lt;!text&gt;.
+The bytes do not include the &lt;! and &gt; markers.
+</p>
+
+			<p><pre><a id="L95"></a>type Directive []byte</pre></p>
+				<h3>func (<a id="L97"></a>Directive) <a href="../../src/pkg/xml/xml.go#L97">Copy</a></h3>
+				<p><code><a id="L97"></a>func (d Directive) Copy() Directive</code></p>
+				
+			<h2>type <a href="../../src/pkg/xml/xml.go#L59"><a id="L59"></a>EndElement</a></h2>
+			<p>
+An EndElement represents an XML end element.
+</p>
+
+			<p><pre><a id="L59"></a>type EndElement struct {
+    <a id="L60"></a>Name Name;
+<a id="L61"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/xml/xml.go#L38"><a id="L38"></a>Name</a></h2>
+			<p>
+A Name represents an XML name (Local) annotated
+with a name space identifier (Space).
+In tokens returned by Parser.Token, the Space identifier
+is given as a canonical URL, not the short prefix used
+in the document being parsed.
+</p>
+
+			<p><pre><a id="L38"></a>type Name struct {
+    <a id="L39"></a>Space, Local string;
+<a id="L40"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/xml/xml.go#L105"><a id="L105"></a>Parser</a></h2>
+			<p>
+A Parser represents an XML parser reading a particular input stream.
+The parser assumes that its input is encoded in UTF-8.
+</p>
+
+			<p><pre><a id="L105"></a>type Parser struct {
+    <a id="L106"></a>// Strict defaults to true, enforcing the requirements
+    <a id="L107"></a>// of the XML specification.
+    <a id="L108"></a>// If set to false, the parser allows input containing common
+    <a id="L109"></a>// mistakes:
+    <a id="L110"></a>//  * If an element is missing an end tag, the parser invents
+    <a id="L111"></a>//    end tags as necessary to keep the return values from Token
+    <a id="L112"></a>//    properly balanced.
+    <a id="L113"></a>//  * In attribute values and character data, unknown or malformed
+    <a id="L114"></a>//    character entities (sequences beginning with &amp;) are left alone.
+    <a id="L115"></a>//
+    <a id="L116"></a>// Setting:
+    <a id="L117"></a>//
+    <a id="L118"></a>//  p.Strict = false;
+    <a id="L119"></a>//  p.AutoClose = HTMLAutoClose;
+    <a id="L120"></a>//  p.Entity = HTMLEntity
+    <a id="L121"></a>//
+    <a id="L122"></a>// creates a parser that can handle typical HTML.
+    <a id="L123"></a>Strict bool;
+
+    <a id="L125"></a>// When Strict == false, AutoClose indicates a set of elements to
+    <a id="L126"></a>// consider closed immediately after they are opened, regardless
+    <a id="L127"></a>// of whether an end element is present.
+    <a id="L128"></a>AutoClose []string;
+
+    <a id="L130"></a>// Entity can be used to map non-standard entity names to string replacements.
+    <a id="L131"></a>// The parser behaves as if these standard mappings are present in the map,
+    <a id="L132"></a>// regardless of the actual map content:
+    <a id="L133"></a>//
+    <a id="L134"></a>//  &#34;lt&#34;: &#34;&lt;&#34;,
+    <a id="L135"></a>//  &#34;gt&#34;: &#34;&gt;&#34;,
+    <a id="L136"></a>//  &#34;amp&#34;: &#34;&amp;&#34;,
+    <a id="L137"></a>//  &#34;pos&#34;: &#34;&#39;&#34;,
+    <a id="L138"></a>//  &#34;quot&#34;: `&#34;`,
+    <a id="L139"></a>//
+    <a id="L140"></a>Entity map[string]string;
+    // contains unexported fields
+<a id="L154"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/xml/xml.go#L157">NewParser</a></h3>
+				<p><code><a id="L157"></a>func NewParser(r io.Reader) *Parser</code></p>
+				<p>
+NewParser creates a new XML parser reading from r.
+</p>
+
+				<h3>func (<a id="L385"></a>*Parser) <a href="../../src/pkg/xml/xml.go#L385">RawToken</a></h3>
+				<p><code><a id="L385"></a>func (p *Parser) RawToken() (Token, os.Error)</code></p>
+				<p>
+RawToken is like Token but does not verify that
+start and end elements match and does not translate
+name space prefixes to their corresponding URLs.
+</p>
+
+				<h3>func (<a id="L369"></a>*Parser) <a href="../../src/pkg/xml/read.go#L369">Skip</a></h3>
+				<p><code><a id="L369"></a>func (p *Parser) Skip() os.Error</code></p>
+				<p>
+Have already read a start element.
+Read tokens until we find the end element.
+Token is taking care of making sure the
+end element matches the start element we saw.
+</p>
+
+				<h3>func (<a id="L201"></a>*Parser) <a href="../../src/pkg/xml/xml.go#L201">Token</a></h3>
+				<p><code><a id="L201"></a>func (p *Parser) Token() (t Token, err os.Error)</code></p>
+				<p>
+Token returns the next XML token in the input stream.
+At the end of the input stream, Token returns nil, os.EOF.
+</p>
+<p>
+Slices of bytes in the returned token data refer to the
+parser&#39;s internal buffer and remain valid only until the next
+call to Token.  To acquire a copy of the bytes, call the token&#39;s
+Copy method.
+</p>
+<p>
+Token expands self-closing elements such as &lt;br/&gt;
+into separate start and end elements returned by successive calls.
+</p>
+<p>
+Token guarantees that the StartElement and EndElement
+tokens it returns are properly nested and matched:
+if Token encounters an unexpected end element,
+it will return an error.
+</p>
+<p>
+Token implements XML name spaces as described by
+http://www.w3.org/TR/REC-xml-names/.  Each of the
+Name structures contained in the Token has the Space
+set to the URL identifying its name space when known.
+If Token encounters an unrecognized name space prefix,
+it uses the prefix as the Space rather than report an error.
+</p>
+
+				<h3>func (<a id="L139"></a>*Parser) <a href="../../src/pkg/xml/read.go#L139">Unmarshal</a></h3>
+				<p><code><a id="L139"></a>func (p *Parser) Unmarshal(val interface{}, start *StartElement) os.Error</code></p>
+				<p>
+The Parser&#39;s Unmarshal method is like xml.Unmarshal
+except that it can be passed a pointer to the initial start element,
+useful when a client reads some raw XML tokens itself
+but also defers to Unmarshal for some elements.
+Passing a nil start element indicates that Unmarshal should
+read the token stream to find the start element.
+</p>
+
+			<h2>type <a href="../../src/pkg/xml/xml.go#L83"><a id="L83"></a>ProcInst</a></h2>
+			<p>
+A ProcInst represents an XML processing instruction of the form &lt;?target inst?&gt;
+</p>
+
+			<p><pre><a id="L83"></a>type ProcInst struct {
+    <a id="L84"></a>Target string;
+    <a id="L85"></a>Inst   []byte;
+<a id="L86"></a>}</pre></p>
+				<h3>func (<a id="L88"></a>ProcInst) <a href="../../src/pkg/xml/xml.go#L88">Copy</a></h3>
+				<p><code><a id="L88"></a>func (p ProcInst) Copy() ProcInst</code></p>
+				
+			<h2>type <a href="../../src/pkg/xml/xml.go#L53"><a id="L53"></a>StartElement</a></h2>
+			<p>
+A StartElement represents an XML start element.
+</p>
+
+			<p><pre><a id="L53"></a>type StartElement struct {
+    <a id="L54"></a>Name Name;
+    <a id="L55"></a>Attr []Attr;
+<a id="L56"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/xml/xml.go#L29"><a id="L29"></a>SyntaxError</a></h2>
+			<p>
+A SyntaxError represents a syntax error in the XML input stream.
+</p>
+
+			<p><pre><a id="L29"></a>type SyntaxError string</pre></p>
+				<h3>func (<a id="L31"></a>SyntaxError) <a href="../../src/pkg/xml/xml.go#L31">String</a></h3>
+				<p><code><a id="L31"></a>func (e SyntaxError) String() string</code></p>
+				
+			<h2>type <a href="../../src/pkg/xml/xml.go#L50"><a id="L50"></a>Token</a></h2>
+			<p>
+A Token is an interface holding one of the token types:
+StartElement, EndElement, CharData, Comment, ProcInst, or Directive.
+</p>
+
+			<p><pre><a id="L50"></a>type Token interface{}</pre></p>
+			<h2>type <a href="../../src/pkg/xml/read.go#L129"><a id="L129"></a>UnmarshalError</a></h2>
+			<p>
+An UnmarshalError represents an error in the unmarshalling process.
+</p>
+
+			<p><pre><a id="L129"></a>type UnmarshalError string</pre></p>
+				<h3>func (<a id="L131"></a>UnmarshalError) <a href="../../src/pkg/xml/read.go#L131">String</a></h3>
+				<p><code><a id="L131"></a>func (e UnmarshalError) String() string</code></p>
+				
+		<h2>Bugs</h2>
+		<p>
+Mapping between XML elements and data structures is inherently flawed:
+an XML element is an order-dependent collection of anonymous
+values, while a data structure is an order-independent collection
+of named values.
+See package json for a textual representation more suitable
+to data structures.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

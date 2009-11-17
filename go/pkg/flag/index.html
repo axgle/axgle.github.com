@@ -1,0 +1,420 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package flag</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package flag</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "flag"</code></p>
+	<p>
+The flag package implements command-line flag parsing.
+</p>
+<p>
+Usage:
+</p>
+<p>
+1) Define flags using flag.String(), Bool(), Int(), etc. Example:
+</p>
+<pre>import &#34;flag&#34;
+var ip *int = flag.Int(&#34;flagname&#34;, 1234, &#34;help message for flagname&#34;)
+</pre>
+<p>
+If you like, you can bind the flag to a variable using the Var() functions.
+</p>
+<pre>var flagvar int
+func init() {
+	flag.IntVar(&amp;flagvar, &#34;flagname&#34;, 1234, &#34;help message for flagname&#34;)
+}
+</pre>
+<p>
+2) After all flags are defined, call
+</p>
+<pre>flag.Parse()
+</pre>
+<p>
+to parse the command line into the defined flags.
+</p>
+<p>
+3) Flags may then be used directly. If you&#39;re using the flags themselves,
+they are all pointers; if you bind to variables, they&#39;re values.
+</p>
+<pre>fmt.Println(&#34;ip has value &#34;, *ip);
+fmt.Println(&#34;flagvar has value &#34;, flagvar);
+</pre>
+<p>
+4) After parsing, flag.Arg(i) is the i&#39;th argument after the flags.
+Args are indexed from 0 up to flag.NArg().
+</p>
+<p>
+Command line flag syntax:
+</p>
+<pre>-flag
+-flag=x
+-flag x
+</pre>
+<p>
+One or two minus signs may be used; they are equivalent.
+</p>
+<p>
+Flag parsing stops just before the first non-flag argument
+(&#34;-&#34; is a non-flag argument) or after the terminator &#34;--&#34;.
+</p>
+<p>
+Integer flags accept 1234, 0664, 0x1234 and may be negative.
+Boolean flags may be 1, 0, t, f, true, false, TRUE, FALSE, True, False.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/flag/flag.go">flag.go</a>
+			</span>
+			</p>
+		<h2>Variables</h2>
+			<p>
+Usage prints to standard error a default usage message documenting all defined flags.
+The function is a variable that may be changed to point to a custom function.
+</p>
+
+			<pre><a id="L280"></a>var Usage = func() {
+    <a id="L281"></a>fmt.Fprintf(os.Stderr, &#34;Usage of %s:\n&#34;, os.Args[0]);
+    <a id="L282"></a>PrintDefaults();
+<a id="L283"></a>}</pre>
+			<h2>func <a href="../../src/pkg/flag/flag.go#L289">Arg</a></h2>
+			<p><code><a id="L289"></a>func Arg(i int) string</code></p>
+			<p>
+Arg returns the i&#39;th command-line argument.  Arg(0) is the first remaining argument
+after flags have been processed.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L301">Args</a></h2>
+			<p><code><a id="L301"></a>func Args() []string</code></p>
+			<p>
+Args returns the non-flag command-line arguments.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L322">Bool</a></h2>
+			<p><code><a id="L322"></a>func Bool(name string, value bool, usage string) *bool</code></p>
+			<p>
+Bool defines a bool flag with specified name, default value, and usage string.
+The return value is the address of a bool variable that stores the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L316">BoolVar</a></h2>
+			<p><code><a id="L316"></a>func BoolVar(p *bool, name string, value bool, usage string)</code></p>
+			<p>
+BoolVar defines a bool flag with specified name, default value, and usage string.
+The argument p points to a bool variable in which to store the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L406">Float</a></h2>
+			<p><code><a id="L406"></a>func Float(name string, value float, usage string) *float</code></p>
+			<p>
+Float defines a float flag with specified name, default value, and usage string.
+The return value is the address of a float variable that stores the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L420">Float64</a></h2>
+			<p><code><a id="L420"></a>func Float64(name string, value float64, usage string) *float64</code></p>
+			<p>
+Float64 defines a float64 flag with specified name, default value, and usage string.
+The return value is the address of a float64 variable that stores the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L414">Float64Var</a></h2>
+			<p><code><a id="L414"></a>func Float64Var(p *float64, name string, value float64, usage string)</code></p>
+			<p>
+Float64Var defines a float64 flag with specified name, default value, and usage string.
+The argument p points to a float64 variable in which to store the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L400">FloatVar</a></h2>
+			<p><code><a id="L400"></a>func FloatVar(p *float, name string, value float, usage string)</code></p>
+			<p>
+FloatVar defines a float flag with specified name, default value, and usage string.
+The argument p points to a float variable in which to store the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L336">Int</a></h2>
+			<p><code><a id="L336"></a>func Int(name string, value int, usage string) *int</code></p>
+			<p>
+Int defines an int flag with specified name, default value, and usage string.
+The return value is the address of an int variable that stores the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L350">Int64</a></h2>
+			<p><code><a id="L350"></a>func Int64(name string, value int64, usage string) *int64</code></p>
+			<p>
+Int64 defines an int64 flag with specified name, default value, and usage string.
+The return value is the address of an int64 variable that stores the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L344">Int64Var</a></h2>
+			<p><code><a id="L344"></a>func Int64Var(p *int64, name string, value int64, usage string)</code></p>
+			<p>
+Int64Var defines an int64 flag with specified name, default value, and usage string.
+The argument p points to an int64 variable in which to store the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L330">IntVar</a></h2>
+			<p><code><a id="L330"></a>func IntVar(p *int, name string, value int, usage string)</code></p>
+			<p>
+IntVar defines an int flag with specified name, default value, and usage string.
+The argument p points to an int variable in which to store the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L298">NArg</a></h2>
+			<p><code><a id="L298"></a>func NArg() int</code></p>
+			<p>
+NArg is the number of arguments remaining after flags have been processed.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L285">NFlag</a></h2>
+			<p><code><a id="L285"></a>func NFlag() int</code></p>
+			
+			<h2>func <a href="../../src/pkg/flag/flag.go#L513">Parse</a></h2>
+			<p><code><a id="L513"></a>func Parse()</code></p>
+			<p>
+Parse parses the command-line flags.  Must be called after all flags are defined
+and before any are accessed by the program.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L267">PrintDefaults</a></h2>
+			<p><code><a id="L267"></a>func PrintDefaults()</code></p>
+			<p>
+PrintDefaults prints to standard error the default values of all defined flags.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L253">Set</a></h2>
+			<p><code><a id="L253"></a>func Set(name, value string) bool</code></p>
+			<p>
+Set sets the value of the named flag.  It returns true if the set succeeded; false if
+there is no such flag defined.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L392">String</a></h2>
+			<p><code><a id="L392"></a>func String(name, value string, usage string) *string</code></p>
+			<p>
+String defines a string flag with specified name, default value, and usage string.
+The return value is the address of a string variable that stores the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L386">StringVar</a></h2>
+			<p><code><a id="L386"></a>func StringVar(p *string, name, value string, usage string)</code></p>
+			<p>
+StringVar defines a string flag with specified name, default value, and usage string.
+The argument p points to a string variable in which to store the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L364">Uint</a></h2>
+			<p><code><a id="L364"></a>func Uint(name string, value uint, usage string) *uint</code></p>
+			<p>
+Uint defines a uint flag with specified name, default value, and usage string.
+The return value is the address of a uint variable that stores the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L378">Uint64</a></h2>
+			<p><code><a id="L378"></a>func Uint64(name string, value uint64, usage string) *uint64</code></p>
+			<p>
+Uint64 defines a uint64 flag with specified name, default value, and usage string.
+The return value is the address of a uint64 variable that stores the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L372">Uint64Var</a></h2>
+			<p><code><a id="L372"></a>func Uint64Var(p *uint64, name string, value uint64, usage string)</code></p>
+			<p>
+Uint64Var defines a uint64 flag with specified name, default value, and usage string.
+The argument p points to a uint64 variable in which to store the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L358">UintVar</a></h2>
+			<p><code><a id="L358"></a>func UintVar(p *uint, name string, value uint, usage string)</code></p>
+			<p>
+UintVar defines a uint flag with specified name, default value, and usage string.
+The argument p points to a uint variable in which to store the value of the flag.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L236">Visit</a></h2>
+			<p><code><a id="L236"></a>func Visit(fn func(*Flag))</code></p>
+			<p>
+Visit visits the flags, calling fn for each. It visits only those flags that have been set.
+</p>
+
+			<h2>func <a href="../../src/pkg/flag/flag.go#L229">VisitAll</a></h2>
+			<p><code><a id="L229"></a>func VisitAll(fn func(*Flag))</code></p>
+			<p>
+VisitAll visits the flags, calling fn for each. It visits all flags, even those not set.
+</p>
+
+			<h2>type <a href="../../src/pkg/flag/flag.go#L213"><a id="L213"></a>Flag</a></h2>
+			<p>
+A Flag represents the state of a flag.
+</p>
+
+			<p><pre><a id="L213"></a>type Flag struct {
+    <a id="L214"></a>Name     string;    // name as it appears on command line
+    <a id="L215"></a>Usage    string;    // help message
+    <a id="L216"></a>Value    FlagValue; // value as set
+    <a id="L217"></a>DefValue string;    // default value (as text); for usage message
+<a id="L218"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/flag/flag.go#L243">Lookup</a></h3>
+				<p><code><a id="L243"></a>func Lookup(name string) *Flag</code></p>
+				<p>
+Lookup returns the Flag structure of the named flag, returning nil if none exists.
+</p>
+
+			<h2>type <a href="../../src/pkg/flag/flag.go#L207"><a id="L207"></a>FlagValue</a></h2>
+			<p>
+FlagValue is the interface to the dynamic value stored in a flag.
+(The default value is represented as a string.)
+</p>
+
+			<p><pre><a id="L207"></a>type FlagValue interface {
+    <a id="L208"></a>String() string;
+    // contains unexported methods
+<a id="L210"></a>}</pre></p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

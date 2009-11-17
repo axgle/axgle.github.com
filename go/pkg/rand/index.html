@@ -1,0 +1,389 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package rand</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 16:01:31 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package rand</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "rand"</code></p>
+	<p>
+Package rand implements pseudo-random number generators.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/rand/exp.go">exp.go</a>
+				<a href="../../src/pkg/rand/normal.go">normal.go</a>
+				<a href="../../src/pkg/rand/rand.go">rand.go</a>
+				<a href="../../src/pkg/rand/rng.go">rng.go</a>
+			</span>
+			</p>
+			<h2>func <a href="../../src/pkg/rand/rand.go#L150">ExpFloat64</a></h2>
+			<p><code><a id="L150"></a>func ExpFloat64() float64</code></p>
+			<p>
+ExpFloat64 returns an exponentially distributed float64 in the range
+(0, +math.MaxFloat64] with an exponential distribution whose rate parameter
+(lambda) is 1 and whose mean is 1/lambda (1).
+To produce a distribution with a different rate parameter,
+callers can adjust the output using:
+</p>
+<pre>sample = ExpFloat64() / desiredRateParameter
+</pre>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L127">Float</a></h2>
+			<p><code><a id="L127"></a>func Float() float</code></p>
+			<p>
+Float returns, as a float, a pseudo-random number in [0.0,1.0).
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L124">Float32</a></h2>
+			<p><code><a id="L124"></a>func Float32() float32</code></p>
+			<p>
+Float32 returns, as a float32, a pseudo-random number in [0.0,1.0).
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L121">Float64</a></h2>
+			<p><code><a id="L121"></a>func Float64() float64</code></p>
+			<p>
+Float64 returns, as a float64, a pseudo-random number in [0.0,1.0).
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L109">Int</a></h2>
+			<p><code><a id="L109"></a>func Int() int</code></p>
+			<p>
+Int returns a non-negative pseudo-random int.
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L106">Int31</a></h2>
+			<p><code><a id="L106"></a>func Int31() int32</code></p>
+			<p>
+Int31 returns a non-negative pseudo-random 31-bit integer as an int32.
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L115">Int31n</a></h2>
+			<p><code><a id="L115"></a>func Int31n(n int32) int32</code></p>
+			<p>
+Int31n returns, as an int32, a non-negative pseudo-random number in [0,n).
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L100">Int63</a></h2>
+			<p><code><a id="L100"></a>func Int63() int64</code></p>
+			<p>
+Int63 returns a non-negative pseudo-random 63-bit integer as an int64.
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L112">Int63n</a></h2>
+			<p><code><a id="L112"></a>func Int63n(n int64) int64</code></p>
+			<p>
+Int63n returns, as an int64, a non-negative pseudo-random number in [0,n).
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L118">Intn</a></h2>
+			<p><code><a id="L118"></a>func Intn(n int) int</code></p>
+			<p>
+Intn returns, as an int, a non-negative pseudo-random number in [0,n).
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L140">NormFloat64</a></h2>
+			<p><code><a id="L140"></a>func NormFloat64() float64</code></p>
+			<p>
+NormFloat64 returns a normally distributed float64 in the range
+[-math.MaxFloat64, +math.MaxFloat64] with
+standard normal distribution (mean = 0, stddev = 1).
+To produce a different normal distribution, callers can
+adjust the output using:
+</p>
+<pre>sample = NormFloat64() * desiredStdDev + desiredMean
+</pre>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L130">Perm</a></h2>
+			<p><code><a id="L130"></a>func Perm(n int) []int</code></p>
+			<p>
+Perm returns, as a slice of n ints, a pseudo-random permutation of the integers [0,n).
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L97">Seed</a></h2>
+			<p><code><a id="L97"></a>func Seed(seed int64)</code></p>
+			<p>
+Seed uses the provided seed value to initialize the generator to a deterministic state.
+</p>
+
+			<h2>func <a href="../../src/pkg/rand/rand.go#L103">Uint32</a></h2>
+			<p><code><a id="L103"></a>func Uint32() uint32</code></p>
+			<p>
+Uint32 returns a pseudo-random 32-bit value as a uint32.
+</p>
+
+			<h2>type <a href="../../src/pkg/rand/rand.go#L23"><a id="L23"></a>Rand</a></h2>
+			<p>
+A Rand is a source of random numbers.
+</p>
+
+			<p><pre><a id="L23"></a>type Rand struct {
+    // contains unexported fields
+<a id="L25"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/rand/rand.go#L29">New</a></h3>
+				<p><code><a id="L29"></a>func New(src Source) *Rand</code></p>
+				<p>
+New returns a new Rand that uses random values from src
+to generate other random values.
+</p>
+
+				<h3>func (<a id="L31"></a>*Rand) <a href="../../src/pkg/rand/exp.go#L31">ExpFloat64</a></h3>
+				<p><code><a id="L31"></a>func (r *Rand) ExpFloat64() float64</code></p>
+				<p>
+ExpFloat64 returns an exponentially distributed float64 in the range
+(0, +math.MaxFloat64] with an exponential distribution whose rate parameter
+(lambda) is 1 and whose mean is 1/lambda (1).
+To produce a distribution with a different rate parameter,
+callers can adjust the output using:
+</p>
+<pre>sample = ExpFloat64() / desiredRateParameter
+</pre>
+
+				<h3>func (<a id="L75"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L75">Float</a></h3>
+				<p><code><a id="L75"></a>func (r *Rand) Float() float</code></p>
+				<p>
+Float returns, as a float, a pseudo-random number in [0.0,1.0).
+</p>
+
+				<h3>func (<a id="L72"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L72">Float32</a></h3>
+				<p><code><a id="L72"></a>func (r *Rand) Float32() float32</code></p>
+				<p>
+Float32 returns, as a float32, a pseudo-random number in [0.0,1.0).
+</p>
+
+				<h3>func (<a id="L69"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L69">Float64</a></h3>
+				<p><code><a id="L69"></a>func (r *Rand) Float64() float64</code></p>
+				<p>
+Float64 returns, as a float64, a pseudo-random number in [0.0,1.0).
+</p>
+
+				<h3>func (<a id="L44"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L44">Int</a></h3>
+				<p><code><a id="L44"></a>func (r *Rand) Int() int</code></p>
+				<p>
+Int returns a non-negative pseudo-random int.
+</p>
+
+				<h3>func (<a id="L41"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L41">Int31</a></h3>
+				<p><code><a id="L41"></a>func (r *Rand) Int31() int32</code></p>
+				<p>
+Int31 returns a non-negative pseudo-random 31-bit integer as an int32.
+</p>
+
+				<h3>func (<a id="L63"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L63">Int31n</a></h3>
+				<p><code><a id="L63"></a>func (r *Rand) Int31n(n int32) int32</code></p>
+				<p>
+Int31n returns, as an int32, a non-negative pseudo-random number in [0,n).
+</p>
+
+				<h3>func (<a id="L35"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L35">Int63</a></h3>
+				<p><code><a id="L35"></a>func (r *Rand) Int63() int64</code></p>
+				<p>
+Int63 returns a non-negative pseudo-random 63-bit integer as an int64.
+</p>
+
+				<h3>func (<a id="L50"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L50">Int63n</a></h3>
+				<p><code><a id="L50"></a>func (r *Rand) Int63n(n int64) int64</code></p>
+				<p>
+Int63n returns, as an int64, a non-negative pseudo-random number in [0,n).
+</p>
+
+				<h3>func (<a id="L66"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L66">Intn</a></h3>
+				<p><code><a id="L66"></a>func (r *Rand) Intn(n int) int</code></p>
+				<p>
+Intn returns, as an int, a non-negative pseudo-random number in [0,n).
+</p>
+
+				<h3>func (<a id="L38"></a>*Rand) <a href="../../src/pkg/rand/normal.go#L38">NormFloat64</a></h3>
+				<p><code><a id="L38"></a>func (r *Rand) NormFloat64() float64</code></p>
+				<p>
+NormFloat64 returns a normally distributed float64 in the range
+[-math.MaxFloat64, +math.MaxFloat64] with
+standard normal distribution (mean = 0, stddev = 1).
+To produce a different normal distribution, callers can
+adjust the output using:
+</p>
+<pre>sample = NormFloat64() * desiredStdDev + desiredMean
+</pre>
+
+				<h3>func (<a id="L78"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L78">Perm</a></h3>
+				<p><code><a id="L78"></a>func (r *Rand) Perm(n int) []int</code></p>
+				<p>
+Perm returns, as a slice of n ints, a pseudo-random permutation of the integers [0,n).
+</p>
+
+				<h3>func (<a id="L32"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L32">Seed</a></h3>
+				<p><code><a id="L32"></a>func (r *Rand) Seed(seed int64)</code></p>
+				<p>
+Seed uses the provided seed value to initialize the generator to a deterministic state.
+</p>
+
+				<h3>func (<a id="L38"></a>*Rand) <a href="../../src/pkg/rand/rand.go#L38">Uint32</a></h3>
+				<p><code><a id="L38"></a>func (r *Rand) Uint32() uint32</code></p>
+				<p>
+Uint32 returns a pseudo-random 32-bit value as a uint32.
+</p>
+
+			<h2>type <a href="../../src/pkg/rand/rand.go#L10"><a id="L10"></a>Source</a></h2>
+			<p>
+A Source represents a source of uniformly-distributed
+pseudo-random int64 values in the range [0, 1&lt;&lt;63).
+</p>
+
+			<p><pre><a id="L10"></a>type Source interface {
+    <a id="L11"></a>Int63() int64;
+    <a id="L12"></a>Seed(seed int64);
+<a id="L13"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/rand/rand.go#L16">NewSource</a></h3>
+				<p><code><a id="L16"></a>func NewSource(seed int64) Source</code></p>
+				<p>
+NewSource returns a new pseudo-random Source seeded with the given value.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

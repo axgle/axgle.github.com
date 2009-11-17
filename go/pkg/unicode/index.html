@@ -1,0 +1,609 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package unicode</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Sun Nov 15 20:28:13 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package unicode</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "unicode"</code></p>
+	<p>
+This package provides data and functions to test some properties of Unicode code points.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/unicode/digit.go">digit.go</a>
+				<a href="../../src/pkg/unicode/letter.go">letter.go</a>
+				<a href="../../src/pkg/unicode/tables.go">tables.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			
+			<pre><a id="L8"></a>const (
+    <a id="L9"></a>MaxRune         = 0x10FFFF; // Maximum valid Unicode code point.
+    <a id="L10"></a>ReplacementChar = 0xFFFD;   // Represents invalid code points.
+<a id="L11"></a>)</pre>
+			<p>
+Indices into the Delta arrays inside CaseRanges for case mapping.
+</p>
+
+			<pre><a id="L38"></a>const (
+    <a id="L39"></a>UpperCase = iota;
+    <a id="L40"></a>LowerCase;
+    <a id="L41"></a>TitleCase;
+    <a id="L42"></a>MaxCase;
+<a id="L43"></a>)</pre>
+			<p>
+If the Delta field of a CaseRange is UpperLower or LowerUpper, it means
+this CaseRange represents a sequence of the form (say)
+Upper Lower Upper Lower.
+</p>
+
+			<pre><a id="L50"></a>const (
+    <a id="L51"></a>UpperLower = MaxRune + 1; // (Cannot be a valid delta.)
+<a id="L52"></a>)</pre>
+			<p>
+Version is the Unicode edition from which the tables are derived.
+</p>
+
+			<pre><a id="L8"></a>const Version = &#34;5.1.0&#34;</pre>
+		<h2>Variables</h2>
+			
+			<pre><a id="L1763"></a>var (
+    <a id="L1764"></a>Cc     = _Cc;    // Cc is the set of Unicode characters in category Cc.
+    <a id="L1765"></a>Cf     = _Cf;    // Cf is the set of Unicode characters in category Cf.
+    <a id="L1766"></a>Co     = _Co;    // Co is the set of Unicode characters in category Co.
+    <a id="L1767"></a>Cs     = _Cs;    // Cs is the set of Unicode characters in category Cs.
+    <a id="L1768"></a>Digit  = _Nd;    // Digit is the set of Unicode characters with the &#34;decimal digit&#34; property.
+    <a id="L1769"></a>Nd     = _Nd;    // Nd is the set of Unicode characters in category Nd.
+    <a id="L1770"></a>Letter = letter; // Letter is the set of Unicode letters.
+    <a id="L1771"></a>Lm     = _Lm;    // Lm is the set of Unicode characters in category Lm.
+    <a id="L1772"></a>Lo     = _Lo;    // Lo is the set of Unicode characters in category Lo.
+    <a id="L1773"></a>Lower  = _Ll;    // Lower is the set of Unicode lower case letters.
+    <a id="L1774"></a>Ll     = _Ll;    // Ll is the set of Unicode characters in category Ll.
+    <a id="L1775"></a>Mc     = _Mc;    // Mc is the set of Unicode characters in category Mc.
+    <a id="L1776"></a>Me     = _Me;    // Me is the set of Unicode characters in category Me.
+    <a id="L1777"></a>Mn     = _Mn;    // Mn is the set of Unicode characters in category Mn.
+    <a id="L1778"></a>Nl     = _Nl;    // Nl is the set of Unicode characters in category Nl.
+    <a id="L1779"></a>No     = _No;    // No is the set of Unicode characters in category No.
+    <a id="L1780"></a>Pc     = _Pc;    // Pc is the set of Unicode characters in category Pc.
+    <a id="L1781"></a>Pd     = _Pd;    // Pd is the set of Unicode characters in category Pd.
+    <a id="L1782"></a>Pe     = _Pe;    // Pe is the set of Unicode characters in category Pe.
+    <a id="L1783"></a>Pf     = _Pf;    // Pf is the set of Unicode characters in category Pf.
+    <a id="L1784"></a>Pi     = _Pi;    // Pi is the set of Unicode characters in category Pi.
+    <a id="L1785"></a>Po     = _Po;    // Po is the set of Unicode characters in category Po.
+    <a id="L1786"></a>Ps     = _Ps;    // Ps is the set of Unicode characters in category Ps.
+    <a id="L1787"></a>Sc     = _Sc;    // Sc is the set of Unicode characters in category Sc.
+    <a id="L1788"></a>Sk     = _Sk;    // Sk is the set of Unicode characters in category Sk.
+    <a id="L1789"></a>Sm     = _Sm;    // Sm is the set of Unicode characters in category Sm.
+    <a id="L1790"></a>So     = _So;    // So is the set of Unicode characters in category So.
+    <a id="L1791"></a>Title  = _Lt;    // Title is the set of Unicode title case letters.
+    <a id="L1792"></a>Lt     = _Lt;    // Lt is the set of Unicode characters in category Lt.
+    <a id="L1793"></a>Upper  = _Lu;    // Upper is the set of Unicode upper case letters.
+    <a id="L1794"></a>Lu     = _Lu;    // Lu is the set of Unicode characters in category Lu.
+    <a id="L1795"></a>Zl     = _Zl;    // Zl is the set of Unicode characters in category Zl.
+    <a id="L1796"></a>Zp     = _Zp;    // Zp is the set of Unicode characters in category Zp.
+    <a id="L1797"></a>Zs     = _Zs;    // Zs is the set of Unicode characters in category Zs.
+<a id="L1798"></a>)</pre>
+			
+			<pre><a id="L2711"></a>var (
+    <a id="L2712"></a>Arabic              = _Arabic;              // Arabic is the set of Unicode characters in script Arabic.
+    <a id="L2713"></a>Armenian            = _Armenian;            // Armenian is the set of Unicode characters in script Armenian.
+    <a id="L2714"></a>Balinese            = _Balinese;            // Balinese is the set of Unicode characters in script Balinese.
+    <a id="L2715"></a>Bengali             = _Bengali;             // Bengali is the set of Unicode characters in script Bengali.
+    <a id="L2716"></a>Bopomofo            = _Bopomofo;            // Bopomofo is the set of Unicode characters in script Bopomofo.
+    <a id="L2717"></a>Braille             = _Braille;             // Braille is the set of Unicode characters in script Braille.
+    <a id="L2718"></a>Buginese            = _Buginese;            // Buginese is the set of Unicode characters in script Buginese.
+    <a id="L2719"></a>Buhid               = _Buhid;               // Buhid is the set of Unicode characters in script Buhid.
+    <a id="L2720"></a>Canadian_Aboriginal = _Canadian_Aboriginal; // Canadian_Aboriginal is the set of Unicode characters in script Canadian_Aboriginal.
+    <a id="L2721"></a>Carian              = _Carian;              // Carian is the set of Unicode characters in script Carian.
+    <a id="L2722"></a>Cham                = _Cham;                // Cham is the set of Unicode characters in script Cham.
+    <a id="L2723"></a>Cherokee            = _Cherokee;            // Cherokee is the set of Unicode characters in script Cherokee.
+    <a id="L2724"></a>Common              = _Common;              // Common is the set of Unicode characters in script Common.
+    <a id="L2725"></a>Coptic              = _Coptic;              // Coptic is the set of Unicode characters in script Coptic.
+    <a id="L2726"></a>Cuneiform           = _Cuneiform;           // Cuneiform is the set of Unicode characters in script Cuneiform.
+    <a id="L2727"></a>Cypriot             = _Cypriot;             // Cypriot is the set of Unicode characters in script Cypriot.
+    <a id="L2728"></a>Cyrillic            = _Cyrillic;            // Cyrillic is the set of Unicode characters in script Cyrillic.
+    <a id="L2729"></a>Deseret             = _Deseret;             // Deseret is the set of Unicode characters in script Deseret.
+    <a id="L2730"></a>Devanagari          = _Devanagari;          // Devanagari is the set of Unicode characters in script Devanagari.
+    <a id="L2731"></a>Ethiopic            = _Ethiopic;            // Ethiopic is the set of Unicode characters in script Ethiopic.
+    <a id="L2732"></a>Georgian            = _Georgian;            // Georgian is the set of Unicode characters in script Georgian.
+    <a id="L2733"></a>Glagolitic          = _Glagolitic;          // Glagolitic is the set of Unicode characters in script Glagolitic.
+    <a id="L2734"></a>Gothic              = _Gothic;              // Gothic is the set of Unicode characters in script Gothic.
+    <a id="L2735"></a>Greek               = _Greek;               // Greek is the set of Unicode characters in script Greek.
+    <a id="L2736"></a>Gujarati            = _Gujarati;            // Gujarati is the set of Unicode characters in script Gujarati.
+    <a id="L2737"></a>Gurmukhi            = _Gurmukhi;            // Gurmukhi is the set of Unicode characters in script Gurmukhi.
+    <a id="L2738"></a>Han                 = _Han;                 // Han is the set of Unicode characters in script Han.
+    <a id="L2739"></a>Hangul              = _Hangul;              // Hangul is the set of Unicode characters in script Hangul.
+    <a id="L2740"></a>Hanunoo             = _Hanunoo;             // Hanunoo is the set of Unicode characters in script Hanunoo.
+    <a id="L2741"></a>Hebrew              = _Hebrew;              // Hebrew is the set of Unicode characters in script Hebrew.
+    <a id="L2742"></a>Hiragana            = _Hiragana;            // Hiragana is the set of Unicode characters in script Hiragana.
+    <a id="L2743"></a>Inherited           = _Inherited;           // Inherited is the set of Unicode characters in script Inherited.
+    <a id="L2744"></a>Kannada             = _Kannada;             // Kannada is the set of Unicode characters in script Kannada.
+    <a id="L2745"></a>Katakana            = _Katakana;            // Katakana is the set of Unicode characters in script Katakana.
+    <a id="L2746"></a>Kayah_Li            = _Kayah_Li;            // Kayah_Li is the set of Unicode characters in script Kayah_Li.
+    <a id="L2747"></a>Kharoshthi          = _Kharoshthi;          // Kharoshthi is the set of Unicode characters in script Kharoshthi.
+    <a id="L2748"></a>Khmer               = _Khmer;               // Khmer is the set of Unicode characters in script Khmer.
+    <a id="L2749"></a>Lao                 = _Lao;                 // Lao is the set of Unicode characters in script Lao.
+    <a id="L2750"></a>Latin               = _Latin;               // Latin is the set of Unicode characters in script Latin.
+    <a id="L2751"></a>Lepcha              = _Lepcha;              // Lepcha is the set of Unicode characters in script Lepcha.
+    <a id="L2752"></a>Limbu               = _Limbu;               // Limbu is the set of Unicode characters in script Limbu.
+    <a id="L2753"></a>Linear_B            = _Linear_B;            // Linear_B is the set of Unicode characters in script Linear_B.
+    <a id="L2754"></a>Lycian              = _Lycian;              // Lycian is the set of Unicode characters in script Lycian.
+    <a id="L2755"></a>Lydian              = _Lydian;              // Lydian is the set of Unicode characters in script Lydian.
+    <a id="L2756"></a>Malayalam           = _Malayalam;           // Malayalam is the set of Unicode characters in script Malayalam.
+    <a id="L2757"></a>Mongolian           = _Mongolian;           // Mongolian is the set of Unicode characters in script Mongolian.
+    <a id="L2758"></a>Myanmar             = _Myanmar;             // Myanmar is the set of Unicode characters in script Myanmar.
+    <a id="L2759"></a>New_Tai_Lue         = _New_Tai_Lue;         // New_Tai_Lue is the set of Unicode characters in script New_Tai_Lue.
+    <a id="L2760"></a>Nko                 = _Nko;                 // Nko is the set of Unicode characters in script Nko.
+    <a id="L2761"></a>Ogham               = _Ogham;               // Ogham is the set of Unicode characters in script Ogham.
+    <a id="L2762"></a>Ol_Chiki            = _Ol_Chiki;            // Ol_Chiki is the set of Unicode characters in script Ol_Chiki.
+    <a id="L2763"></a>Old_Italic          = _Old_Italic;          // Old_Italic is the set of Unicode characters in script Old_Italic.
+    <a id="L2764"></a>Old_Persian         = _Old_Persian;         // Old_Persian is the set of Unicode characters in script Old_Persian.
+    <a id="L2765"></a>Oriya               = _Oriya;               // Oriya is the set of Unicode characters in script Oriya.
+    <a id="L2766"></a>Osmanya             = _Osmanya;             // Osmanya is the set of Unicode characters in script Osmanya.
+    <a id="L2767"></a>Phags_Pa            = _Phags_Pa;            // Phags_Pa is the set of Unicode characters in script Phags_Pa.
+    <a id="L2768"></a>Phoenician          = _Phoenician;          // Phoenician is the set of Unicode characters in script Phoenician.
+    <a id="L2769"></a>Rejang              = _Rejang;              // Rejang is the set of Unicode characters in script Rejang.
+    <a id="L2770"></a>Runic               = _Runic;               // Runic is the set of Unicode characters in script Runic.
+    <a id="L2771"></a>Saurashtra          = _Saurashtra;          // Saurashtra is the set of Unicode characters in script Saurashtra.
+    <a id="L2772"></a>Shavian             = _Shavian;             // Shavian is the set of Unicode characters in script Shavian.
+    <a id="L2773"></a>Sinhala             = _Sinhala;             // Sinhala is the set of Unicode characters in script Sinhala.
+    <a id="L2774"></a>Sundanese           = _Sundanese;           // Sundanese is the set of Unicode characters in script Sundanese.
+    <a id="L2775"></a>Syloti_Nagri        = _Syloti_Nagri;        // Syloti_Nagri is the set of Unicode characters in script Syloti_Nagri.
+    <a id="L2776"></a>Syriac              = _Syriac;              // Syriac is the set of Unicode characters in script Syriac.
+    <a id="L2777"></a>Tagalog             = _Tagalog;             // Tagalog is the set of Unicode characters in script Tagalog.
+    <a id="L2778"></a>Tagbanwa            = _Tagbanwa;            // Tagbanwa is the set of Unicode characters in script Tagbanwa.
+    <a id="L2779"></a>Tai_Le              = _Tai_Le;              // Tai_Le is the set of Unicode characters in script Tai_Le.
+    <a id="L2780"></a>Tamil               = _Tamil;               // Tamil is the set of Unicode characters in script Tamil.
+    <a id="L2781"></a>Telugu              = _Telugu;              // Telugu is the set of Unicode characters in script Telugu.
+    <a id="L2782"></a>Thaana              = _Thaana;              // Thaana is the set of Unicode characters in script Thaana.
+    <a id="L2783"></a>Thai                = _Thai;                // Thai is the set of Unicode characters in script Thai.
+    <a id="L2784"></a>Tibetan             = _Tibetan;             // Tibetan is the set of Unicode characters in script Tibetan.
+    <a id="L2785"></a>Tifinagh            = _Tifinagh;            // Tifinagh is the set of Unicode characters in script Tifinagh.
+    <a id="L2786"></a>Ugaritic            = _Ugaritic;            // Ugaritic is the set of Unicode characters in script Ugaritic.
+    <a id="L2787"></a>Vai                 = _Vai;                 // Vai is the set of Unicode characters in script Vai.
+    <a id="L2788"></a>Yi                  = _Yi;                  // Yi is the set of Unicode characters in script Yi.
+<a id="L2789"></a>)</pre>
+			
+			<pre><a id="L3587"></a>var (
+    <a id="L3588"></a>ASCII_Hex_Digit                    = _ASCII_Hex_Digit;                    // ASCII_Hex_Digit is the set of Unicode characters with property ASCII_Hex_Digit.
+    <a id="L3589"></a>Bidi_Control                       = _Bidi_Control;                       // Bidi_Control is the set of Unicode characters with property Bidi_Control.
+    <a id="L3590"></a>Dash                               = _Dash;                               // Dash is the set of Unicode characters with property Dash.
+    <a id="L3591"></a>Deprecated                         = _Deprecated;                         // Deprecated is the set of Unicode characters with property Deprecated.
+    <a id="L3592"></a>Diacritic                          = _Diacritic;                          // Diacritic is the set of Unicode characters with property Diacritic.
+    <a id="L3593"></a>Extender                           = _Extender;                           // Extender is the set of Unicode characters with property Extender.
+    <a id="L3594"></a>Hex_Digit                          = _Hex_Digit;                          // Hex_Digit is the set of Unicode characters with property Hex_Digit.
+    <a id="L3595"></a>Hyphen                             = _Hyphen;                             // Hyphen is the set of Unicode characters with property Hyphen.
+    <a id="L3596"></a>IDS_Binary_Operator                = _IDS_Binary_Operator;                // IDS_Binary_Operator is the set of Unicode characters with property IDS_Binary_Operator.
+    <a id="L3597"></a>IDS_Trinary_Operator               = _IDS_Trinary_Operator;               // IDS_Trinary_Operator is the set of Unicode characters with property IDS_Trinary_Operator.
+    <a id="L3598"></a>Ideographic                        = _Ideographic;                        // Ideographic is the set of Unicode characters with property Ideographic.
+    <a id="L3599"></a>Join_Control                       = _Join_Control;                       // Join_Control is the set of Unicode characters with property Join_Control.
+    <a id="L3600"></a>Logical_Order_Exception            = _Logical_Order_Exception;            // Logical_Order_Exception is the set of Unicode characters with property Logical_Order_Exception.
+    <a id="L3601"></a>Noncharacter_Code_Point            = _Noncharacter_Code_Point;            // Noncharacter_Code_Point is the set of Unicode characters with property Noncharacter_Code_Point.
+    <a id="L3602"></a>Other_Alphabetic                   = _Other_Alphabetic;                   // Other_Alphabetic is the set of Unicode characters with property Other_Alphabetic.
+    <a id="L3603"></a>Other_Default_Ignorable_Code_Point = _Other_Default_Ignorable_Code_Point; // Other_Default_Ignorable_Code_Point is the set of Unicode characters with property Other_Default_Ignorable_Code_Point.
+    <a id="L3604"></a>Other_Grapheme_Extend              = _Other_Grapheme_Extend;              // Other_Grapheme_Extend is the set of Unicode characters with property Other_Grapheme_Extend.
+    <a id="L3605"></a>Other_ID_Continue                  = _Other_ID_Continue;                  // Other_ID_Continue is the set of Unicode characters with property Other_ID_Continue.
+    <a id="L3606"></a>Other_ID_Start                     = _Other_ID_Start;                     // Other_ID_Start is the set of Unicode characters with property Other_ID_Start.
+    <a id="L3607"></a>Other_Lowercase                    = _Other_Lowercase;                    // Other_Lowercase is the set of Unicode characters with property Other_Lowercase.
+    <a id="L3608"></a>Other_Math                         = _Other_Math;                         // Other_Math is the set of Unicode characters with property Other_Math.
+    <a id="L3609"></a>Other_Uppercase                    = _Other_Uppercase;                    // Other_Uppercase is the set of Unicode characters with property Other_Uppercase.
+    <a id="L3610"></a>Pattern_Syntax                     = _Pattern_Syntax;                     // Pattern_Syntax is the set of Unicode characters with property Pattern_Syntax.
+    <a id="L3611"></a>Pattern_White_Space                = _Pattern_White_Space;                // Pattern_White_Space is the set of Unicode characters with property Pattern_White_Space.
+    <a id="L3612"></a>Quotation_Mark                     = _Quotation_Mark;                     // Quotation_Mark is the set of Unicode characters with property Quotation_Mark.
+    <a id="L3613"></a>Radical                            = _Radical;                            // Radical is the set of Unicode characters with property Radical.
+    <a id="L3614"></a>STerm                              = _STerm;                              // STerm is the set of Unicode characters with property STerm.
+    <a id="L3615"></a>Soft_Dotted                        = _Soft_Dotted;                        // Soft_Dotted is the set of Unicode characters with property Soft_Dotted.
+    <a id="L3616"></a>Terminal_Punctuation               = _Terminal_Punctuation;               // Terminal_Punctuation is the set of Unicode characters with property Terminal_Punctuation.
+    <a id="L3617"></a>Unified_Ideograph                  = _Unified_Ideograph;                  // Unified_Ideograph is the set of Unicode characters with property Unified_Ideograph.
+    <a id="L3618"></a>Variation_Selector                 = _Variation_Selector;                 // Variation_Selector is the set of Unicode characters with property Variation_Selector.
+    <a id="L3619"></a>White_Space                        = _White_Space;                        // White_Space is the set of Unicode characters with property White_Space.
+<a id="L3620"></a>)</pre>
+			<p>
+CaseRanges is the table describing case mappings for all letters with
+non-self mappings.
+</p>
+
+			<pre><a id="L3628"></a>var CaseRanges = _CaseRanges</pre>
+			<p>
+Categories is the set of Unicode data tables.
+</p>
+
+			<pre><a id="L11"></a>var Categories = map[string][]Range{
+    <a id="L12"></a>&#34;Lm&#34;: Lm,
+    <a id="L13"></a>&#34;Ll&#34;: Ll,
+    <a id="L14"></a>&#34;Me&#34;: Me,
+    <a id="L15"></a>&#34;Mc&#34;: Mc,
+    <a id="L16"></a>&#34;Mn&#34;: Mn,
+    <a id="L17"></a>&#34;Zl&#34;: Zl,
+    <a id="L18"></a>&#34;letter&#34;: letter,
+    <a id="L19"></a>&#34;Zp&#34;: Zp,
+    <a id="L20"></a>&#34;Zs&#34;: Zs,
+    <a id="L21"></a>&#34;Cs&#34;: Cs,
+    <a id="L22"></a>&#34;Co&#34;: Co,
+    <a id="L23"></a>&#34;Cf&#34;: Cf,
+    <a id="L24"></a>&#34;Cc&#34;: Cc,
+    <a id="L25"></a>&#34;Po&#34;: Po,
+    <a id="L26"></a>&#34;Pi&#34;: Pi,
+    <a id="L27"></a>&#34;Pf&#34;: Pf,
+    <a id="L28"></a>&#34;Pe&#34;: Pe,
+    <a id="L29"></a>&#34;Pd&#34;: Pd,
+    <a id="L30"></a>&#34;Pc&#34;: Pc,
+    <a id="L31"></a>&#34;Ps&#34;: Ps,
+    <a id="L32"></a>&#34;Nd&#34;: Nd,
+    <a id="L33"></a>&#34;Nl&#34;: Nl,
+    <a id="L34"></a>&#34;No&#34;: No,
+    <a id="L35"></a>&#34;So&#34;: So,
+    <a id="L36"></a>&#34;Sm&#34;: Sm,
+    <a id="L37"></a>&#34;Sk&#34;: Sk,
+    <a id="L38"></a>&#34;Sc&#34;: Sc,
+    <a id="L39"></a>&#34;Lu&#34;: Lu,
+    <a id="L40"></a>&#34;Lt&#34;: Lt,
+    <a id="L41"></a>&#34;Lo&#34;: Lo,
+<a id="L42"></a>}</pre>
+			<p>
+Properties is the set of Unicode property tables.
+</p>
+
+			<pre><a id="L2796"></a>var Properties = map[string][]Range{
+    <a id="L2797"></a>&#34;Pattern_Syntax&#34;: Pattern_Syntax,
+    <a id="L2798"></a>&#34;Other_ID_Start&#34;: Other_ID_Start,
+    <a id="L2799"></a>&#34;Pattern_White_Space&#34;: Pattern_White_Space,
+    <a id="L2800"></a>&#34;Other_Lowercase&#34;: Other_Lowercase,
+    <a id="L2801"></a>&#34;Soft_Dotted&#34;: Soft_Dotted,
+    <a id="L2802"></a>&#34;Hex_Digit&#34;: Hex_Digit,
+    <a id="L2803"></a>&#34;ASCII_Hex_Digit&#34;: ASCII_Hex_Digit,
+    <a id="L2804"></a>&#34;Deprecated&#34;: Deprecated,
+    <a id="L2805"></a>&#34;Terminal_Punctuation&#34;: Terminal_Punctuation,
+    <a id="L2806"></a>&#34;Quotation_Mark&#34;: Quotation_Mark,
+    <a id="L2807"></a>&#34;Other_ID_Continue&#34;: Other_ID_Continue,
+    <a id="L2808"></a>&#34;Bidi_Control&#34;: Bidi_Control,
+    <a id="L2809"></a>&#34;Variation_Selector&#34;: Variation_Selector,
+    <a id="L2810"></a>&#34;Noncharacter_Code_Point&#34;: Noncharacter_Code_Point,
+    <a id="L2811"></a>&#34;Other_Math&#34;: Other_Math,
+    <a id="L2812"></a>&#34;Unified_Ideograph&#34;: Unified_Ideograph,
+    <a id="L2813"></a>&#34;Hyphen&#34;: Hyphen,
+    <a id="L2814"></a>&#34;IDS_Binary_Operator&#34;: IDS_Binary_Operator,
+    <a id="L2815"></a>&#34;Logical_Order_Exception&#34;: Logical_Order_Exception,
+    <a id="L2816"></a>&#34;Radical&#34;: Radical,
+    <a id="L2817"></a>&#34;Other_Uppercase&#34;: Other_Uppercase,
+    <a id="L2818"></a>&#34;STerm&#34;: STerm,
+    <a id="L2819"></a>&#34;Other_Alphabetic&#34;: Other_Alphabetic,
+    <a id="L2820"></a>&#34;Diacritic&#34;: Diacritic,
+    <a id="L2821"></a>&#34;Extender&#34;: Extender,
+    <a id="L2822"></a>&#34;Join_Control&#34;: Join_Control,
+    <a id="L2823"></a>&#34;Ideographic&#34;: Ideographic,
+    <a id="L2824"></a>&#34;Dash&#34;: Dash,
+    <a id="L2825"></a>&#34;IDS_Trinary_Operator&#34;: IDS_Trinary_Operator,
+    <a id="L2826"></a>&#34;Other_Grapheme_Extend&#34;: Other_Grapheme_Extend,
+    <a id="L2827"></a>&#34;Other_Default_Ignorable_Code_Point&#34;: Other_Default_Ignorable_Code_Point,
+    <a id="L2828"></a>&#34;White_Space&#34;: White_Space,
+<a id="L2829"></a>}</pre>
+			<p>
+Scripts is the set of Unicode script tables.
+</p>
+
+			<pre><a id="L1805"></a>var Scripts = map[string][]Range{
+    <a id="L1806"></a>&#34;Katakana&#34;: Katakana,
+    <a id="L1807"></a>&#34;Malayalam&#34;: Malayalam,
+    <a id="L1808"></a>&#34;Phags_Pa&#34;: Phags_Pa,
+    <a id="L1809"></a>&#34;Latin&#34;: Latin,
+    <a id="L1810"></a>&#34;Osmanya&#34;: Osmanya,
+    <a id="L1811"></a>&#34;Khmer&#34;: Khmer,
+    <a id="L1812"></a>&#34;Inherited&#34;: Inherited,
+    <a id="L1813"></a>&#34;Telugu&#34;: Telugu,
+    <a id="L1814"></a>&#34;Bopomofo&#34;: Bopomofo,
+    <a id="L1815"></a>&#34;Kayah_Li&#34;: Kayah_Li,
+    <a id="L1816"></a>&#34;New_Tai_Lue&#34;: New_Tai_Lue,
+    <a id="L1817"></a>&#34;Tai_Le&#34;: Tai_Le,
+    <a id="L1818"></a>&#34;Kharoshthi&#34;: Kharoshthi,
+    <a id="L1819"></a>&#34;Common&#34;: Common,
+    <a id="L1820"></a>&#34;Kannada&#34;: Kannada,
+    <a id="L1821"></a>&#34;Tamil&#34;: Tamil,
+    <a id="L1822"></a>&#34;Tagalog&#34;: Tagalog,
+    <a id="L1823"></a>&#34;Arabic&#34;: Arabic,
+    <a id="L1824"></a>&#34;Tagbanwa&#34;: Tagbanwa,
+    <a id="L1825"></a>&#34;Canadian_Aboriginal&#34;: Canadian_Aboriginal,
+    <a id="L1826"></a>&#34;Tibetan&#34;: Tibetan,
+    <a id="L1827"></a>&#34;Coptic&#34;: Coptic,
+    <a id="L1828"></a>&#34;Hiragana&#34;: Hiragana,
+    <a id="L1829"></a>&#34;Limbu&#34;: Limbu,
+    <a id="L1830"></a>&#34;Myanmar&#34;: Myanmar,
+    <a id="L1831"></a>&#34;Armenian&#34;: Armenian,
+    <a id="L1832"></a>&#34;Sinhala&#34;: Sinhala,
+    <a id="L1833"></a>&#34;Bengali&#34;: Bengali,
+    <a id="L1834"></a>&#34;Greek&#34;: Greek,
+    <a id="L1835"></a>&#34;Cham&#34;: Cham,
+    <a id="L1836"></a>&#34;Hebrew&#34;: Hebrew,
+    <a id="L1837"></a>&#34;Saurashtra&#34;: Saurashtra,
+    <a id="L1838"></a>&#34;Hangul&#34;: Hangul,
+    <a id="L1839"></a>&#34;Runic&#34;: Runic,
+    <a id="L1840"></a>&#34;Deseret&#34;: Deseret,
+    <a id="L1841"></a>&#34;Sundanese&#34;: Sundanese,
+    <a id="L1842"></a>&#34;Glagolitic&#34;: Glagolitic,
+    <a id="L1843"></a>&#34;Oriya&#34;: Oriya,
+    <a id="L1844"></a>&#34;Buhid&#34;: Buhid,
+    <a id="L1845"></a>&#34;Ethiopic&#34;: Ethiopic,
+    <a id="L1846"></a>&#34;Syloti_Nagri&#34;: Syloti_Nagri,
+    <a id="L1847"></a>&#34;Vai&#34;: Vai,
+    <a id="L1848"></a>&#34;Cherokee&#34;: Cherokee,
+    <a id="L1849"></a>&#34;Ogham&#34;: Ogham,
+    <a id="L1850"></a>&#34;Syriac&#34;: Syriac,
+    <a id="L1851"></a>&#34;Gurmukhi&#34;: Gurmukhi,
+    <a id="L1852"></a>&#34;Ol_Chiki&#34;: Ol_Chiki,
+    <a id="L1853"></a>&#34;Mongolian&#34;: Mongolian,
+    <a id="L1854"></a>&#34;Hanunoo&#34;: Hanunoo,
+    <a id="L1855"></a>&#34;Cypriot&#34;: Cypriot,
+    <a id="L1856"></a>&#34;Buginese&#34;: Buginese,
+    <a id="L1857"></a>&#34;Lepcha&#34;: Lepcha,
+    <a id="L1858"></a>&#34;Thaana&#34;: Thaana,
+    <a id="L1859"></a>&#34;Old_Persian&#34;: Old_Persian,
+    <a id="L1860"></a>&#34;Cuneiform&#34;: Cuneiform,
+    <a id="L1861"></a>&#34;Rejang&#34;: Rejang,
+    <a id="L1862"></a>&#34;Georgian&#34;: Georgian,
+    <a id="L1863"></a>&#34;Shavian&#34;: Shavian,
+    <a id="L1864"></a>&#34;Lycian&#34;: Lycian,
+    <a id="L1865"></a>&#34;Nko&#34;: Nko,
+    <a id="L1866"></a>&#34;Yi&#34;: Yi,
+    <a id="L1867"></a>&#34;Lao&#34;: Lao,
+    <a id="L1868"></a>&#34;Linear_B&#34;: Linear_B,
+    <a id="L1869"></a>&#34;Old_Italic&#34;: Old_Italic,
+    <a id="L1870"></a>&#34;Devanagari&#34;: Devanagari,
+    <a id="L1871"></a>&#34;Lydian&#34;: Lydian,
+    <a id="L1872"></a>&#34;Tifinagh&#34;: Tifinagh,
+    <a id="L1873"></a>&#34;Ugaritic&#34;: Ugaritic,
+    <a id="L1874"></a>&#34;Thai&#34;: Thai,
+    <a id="L1875"></a>&#34;Cyrillic&#34;: Cyrillic,
+    <a id="L1876"></a>&#34;Gujarati&#34;: Gujarati,
+    <a id="L1877"></a>&#34;Carian&#34;: Carian,
+    <a id="L1878"></a>&#34;Phoenician&#34;: Phoenician,
+    <a id="L1879"></a>&#34;Balinese&#34;: Balinese,
+    <a id="L1880"></a>&#34;Braille&#34;: Braille,
+    <a id="L1881"></a>&#34;Han&#34;: Han,
+    <a id="L1882"></a>&#34;Gothic&#34;: Gothic,
+<a id="L1883"></a>}</pre>
+			<h2>func <a href="../../src/pkg/unicode/letter.go#L55">Is</a></h2>
+			<p><code><a id="L55"></a>func Is(ranges []Range, rune int) bool</code></p>
+			<p>
+Is tests whether rune is in the specified table of ranges.
+</p>
+
+			<h2>func <a href="../../src/pkg/unicode/digit.go#L8">IsDigit</a></h2>
+			<p><code><a id="L8"></a>func IsDigit(rune int) bool</code></p>
+			<p>
+IsDigit reports whether the rune is a decimal digit.
+</p>
+
+			<h2>func <a href="../../src/pkg/unicode/letter.go#L113">IsLetter</a></h2>
+			<p><code><a id="L113"></a>func IsLetter(rune int) bool</code></p>
+			<p>
+IsLetter reports whether the rune is a letter.
+</p>
+
+			<h2>func <a href="../../src/pkg/unicode/letter.go#L97">IsLower</a></h2>
+			<p><code><a id="L97"></a>func IsLower(rune int) bool</code></p>
+			<p>
+IsLower reports whether the rune is a lower case letter.
+</p>
+
+			<h2>func <a href="../../src/pkg/unicode/letter.go#L122">IsSpace</a></h2>
+			<p><code><a id="L122"></a>func IsSpace(rune int) bool</code></p>
+			<p>
+IsSpace reports whether the rune is a white space character.
+</p>
+
+			<h2>func <a href="../../src/pkg/unicode/letter.go#L105">IsTitle</a></h2>
+			<p><code><a id="L105"></a>func IsTitle(rune int) bool</code></p>
+			<p>
+IsTitle reports whether the rune is a title case letter.
+</p>
+
+			<h2>func <a href="../../src/pkg/unicode/letter.go#L89">IsUpper</a></h2>
+			<p><code><a id="L89"></a>func IsUpper(rune int) bool</code></p>
+			<p>
+IsUpper reports whether the rune is an upper case letter.
+</p>
+
+			<h2>func <a href="../../src/pkg/unicode/letter.go#L134">To</a></h2>
+			<p><code><a id="L134"></a>func To(_case int, rune int) int</code></p>
+			<p>
+To maps the rune to the specified case: UpperCase, LowerCase, or TitleCase
+</p>
+
+			<h2>func <a href="../../src/pkg/unicode/letter.go#L182">ToLower</a></h2>
+			<p><code><a id="L182"></a>func ToLower(rune int) int</code></p>
+			<p>
+ToLower maps the rune to lower case
+</p>
+
+			<h2>func <a href="../../src/pkg/unicode/letter.go#L193">ToTitle</a></h2>
+			<p><code><a id="L193"></a>func ToTitle(rune int) int</code></p>
+			<p>
+ToTitle maps the rune to title case
+</p>
+
+			<h2>func <a href="../../src/pkg/unicode/letter.go#L171">ToUpper</a></h2>
+			<p><code><a id="L171"></a>func ToUpper(rune int) int</code></p>
+			<p>
+ToUpper maps the rune to upper case
+</p>
+
+			<h2>type <a href="../../src/pkg/unicode/letter.go#L31"><a id="L31"></a>CaseRange</a></h2>
+			<p>
+The representation of a range of Unicode code points for case conversion.
+The range runs from Lo to Hi inclusive, with a fixed stride of 1.  Deltas
+are the number to add to the code point to reach the code point for a
+different case for that character.  They may be negative.  If zero, it
+means the character is in the corresponding case. There is a special
+case representing sequences of alternating corresponding Upper and Lower
+pairs.  It appears with a fixed Delta of
+</p>
+<pre>{UpperLower, UpperLower, UpperLower}
+</pre>
+<p>
+The constant UpperLower has an otherwise impossible delta value.
+</p>
+
+			<p><pre><a id="L31"></a>type CaseRange struct {
+    <a id="L32"></a>Lo    int;
+    <a id="L33"></a>Hi    int;
+    <a id="L34"></a>Delta d;
+<a id="L35"></a>}</pre></p>
+			<h2>type <a href="../../src/pkg/unicode/letter.go#L16"><a id="L16"></a>Range</a></h2>
+			<p>
+The representation of a range of Unicode code points.  The range runs from Lo to Hi
+inclusive and has the specified stride.
+</p>
+
+			<p><pre><a id="L16"></a>type Range struct {
+    <a id="L17"></a>Lo     int;
+    <a id="L18"></a>Hi     int;
+    <a id="L19"></a>Stride int;
+<a id="L20"></a>}</pre></p>
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->

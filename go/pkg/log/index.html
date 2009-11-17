@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Package log</title>
+
+  <link rel="stylesheet" type="text/css" href="../../doc/style.css">
+  <script type="text/javascript" src="../../doc/godocs.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+    // Catch 'enter' key down events and trigger the search form submission.
+    function codesearchKeyDown(event) {
+      if (event.which == 13) {
+        var form = document.getElementById('codesearch');
+        var query = document.getElementById('codesearchQuery');
+        form.q.value = "lang:go package:go.googlecode.com " + query.value;
+        document.getElementById('codesearch').submit();
+}      return true;
+}
+    // Capture the submission event and construct the query parameter.
+    function codeSearchSubmit() {
+      var query = document.getElementById('codesearchQuery');
+      var form = document.getElementById('codesearch');
+      form.q.value = "lang:go package:go.googlecode.com " + query.value;
+      return true;
+}  </script>
+
+<div id="topnav">
+  <table summary="">
+    <tr>
+      <td id="headerImage">
+        <a href="../../index.html"><img src="../../doc/logo-153x55.png" height="55" width="153" alt="Go Home Page" style="border:0" /></a>
+      </td>
+      <td>
+        <div id="headerDocSetTitle">The Go Programming Language</div>
+      </td>
+      <td>
+        <!-- <table>
+          <tr>
+            <td>
+              <! The input box is outside of the form because we want to add
+              a couple of restricts to the query before submitting. If we just
+              add the restricts to the text box before submitting, then they
+              appear in the box when the user presses 'back'. Thus we use a
+              hidden field in the form. However, there's no way to stop the
+              non-hidden text box from also submitting a value unless we move
+              it outside of the form
+              <input type="search" id="codesearchQuery" value="" size="30" onkeydown="return codesearchKeyDown(event);"/>
+              <form method="GET" action="http://www.google.com/codesearch" id="codesearch" class="search" onsubmit="return codeSearchSubmit();" style="display:inline;">
+                <input type="hidden" name="q" value=""/>
+                <input type="submit" value="Code search" />
+                <span style="color: red">(TODO: remove for now?)</span>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color: gray;">(e.g. &ldquo;pem&rdquo; or &ldquo;xml&rdquo;)</span>
+            </td>
+          </tr>
+        </table> -->
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="linkList">
+  <ul>
+    <li class="navhead"><a href="../../index.html">Home</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Documents</li>
+    <li><a href="../../doc/go_tutorial.html">Tutorial</a></li>
+    <li><a href="../../doc/effective_go.html">Effective Go</a></li>
+    <li><a href="../../doc/go_faq.html">FAQ</a></li>
+    <li><a href="../../doc/go_lang_faq.html">Language Design FAQ</a></li>
+    <li><a href="http://www.youtube.com/watch?v=rKnDgT73v8s">Tech talk (1 hour)</a> (<a href="../../doc/go_talk-20091030.pdf">PDF</a>)</li>
+    <li><a href="../../doc/go_spec.html">Language Specification</a></li>
+    <li><a href="../../doc/go_mem.html">Memory Model</a></li>
+    <li><a href="../../doc/go_for_cpp_programmers.html">Go for C++ Programmers</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">How To</li>
+    <li><a href="../../doc/install.html">Install Go</a></li>
+    <li><a href="../../doc/contribute.html">Contribute code</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Programming</li>
+    <li><a href="../../cmd/index.html">Command documentation</a></li>
+    <li><a href="../index.html">Package documentation</a></li>
+    <li><a href="../../src/index.html">Source files</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Help</li>
+    <li>#go-nuts on irc.freenode.net</li>
+    <li><a href="http://groups.google.com/group/golang-nuts">Go Nuts mailing list</a></li>
+    <li><a href="http://code.google.com/p/go/issues/list">Issue tracker</a></li>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Go code search</li>
+    <form method="GET" action="http://golang.org/search" class="search">
+    <input type="search" name="q" value="" size="25" style="width:80%; max-width:200px" />
+    <input type="submit" value="Go" />
+    </form>
+
+    <li class="blank">&nbsp;</li>
+    <li class="navhead">Last update</li>
+	<li>Thu Nov 12 15:48:37 PST 2009</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h1 id="generatedHeader">Package log</h1>
+
+  <!-- The Table of Contents is automatically inserted in this <div>.
+       Do not delete this <div>. -->
+  <div id="nav"></div>
+
+  <!-- Content is HTML-escaped elsewhere -->
+  <!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+
+	<!-- PackageName is printed as title by the top-level template -->
+		<p><code>import "log"</code></p>
+	<p>
+Rudimentary logging package. Defines a type, Logger, with simple
+methods for formatting output to one or two destinations. Also has
+predefined Loggers accessible through helper functions Stdout[f],
+Stderr[f], Exit[f], and Crash[f], which are easier to use than creating
+a Logger manually.
+Exit exits when written to.
+Crash causes a crash when written to.
+</p>
+
+			<p>
+			<h4>Package files</h4>
+			<span style="font-size:90%">
+				<a href="../../src/pkg/log/log.go">log.go</a>
+			</span>
+			</p>
+		<h2>Constants</h2>
+			<p>
+These flags define the properties of the Logger and the output they produce.
+</p>
+
+			<pre><a id="L23"></a>const (
+    <a id="L24"></a>// Flags
+    <a id="L25"></a>Lok     = iota;
+    <a id="L26"></a>Lexit;  // terminate execution when written
+    <a id="L27"></a>Lcrash; // crash (panic) when written
+    <a id="L28"></a>// Bits or&#39;ed together to control what&#39;s printed. There is no control over the
+    <a id="L29"></a>// order they appear (the order listed here) or the format they present (as
+    <a id="L30"></a>// described in the comments).  A colon appears after these items:
+    <a id="L31"></a>//             2009/0123 01:23:23.123123 /a/b/c/d.go:23: message
+    <a id="L32"></a>Ldate          = 1 &lt;&lt; iota; // the date: 2009/0123
+    <a id="L33"></a>Ltime;                      // the time: 01:23:23
+    <a id="L34"></a>Lmicroseconds;              // microsecond resolution: 01:23:23.123123.  assumes Ltime.
+    <a id="L35"></a>Llongfile;                  // full file name and line number: /a/b/c/d.go:23
+    <a id="L36"></a>Lshortfile;                 // final file name element and line number: d.go:23. overrides Llongfile
+<a id="L38"></a>)</pre>
+			<h2>func <a href="../../src/pkg/log/log.go#L172">Crash</a></h2>
+			<p><code><a id="L172"></a>func Crash(v ...)</code></p>
+			<p>
+Crash is equivalent to Stderr() followed by a call to panic().
+</p>
+
+			<h2>func <a href="../../src/pkg/log/log.go#L175">Crashf</a></h2>
+			<p><code><a id="L175"></a>func Crashf(format string, v ...)</code></p>
+			<p>
+Crashf is equivalent to Stderrf() followed by a call to panic().
+</p>
+
+			<h2>func <a href="../../src/pkg/log/log.go#L166">Exit</a></h2>
+			<p><code><a id="L166"></a>func Exit(v ...)</code></p>
+			<p>
+Exit is equivalent to Stderr() followed by a call to os.Exit(1).
+</p>
+
+			<h2>func <a href="../../src/pkg/log/log.go#L169">Exitf</a></h2>
+			<p><code><a id="L169"></a>func Exitf(format string, v ...)</code></p>
+			<p>
+Exitf is equivalent to Stderrf() followed by a call to os.Exit(1).
+</p>
+
+			<h2>func <a href="../../src/pkg/log/log.go#L157">Stderr</a></h2>
+			<p><code><a id="L157"></a>func Stderr(v ...)</code></p>
+			<p>
+Stderr is a helper function for easy logging to stderr. It is analogous to Fprint(os.Stderr).
+</p>
+
+			<h2>func <a href="../../src/pkg/log/log.go#L163">Stderrf</a></h2>
+			<p><code><a id="L163"></a>func Stderrf(format string, v ...)</code></p>
+			<p>
+Stderrf is a helper function for easy formatted logging to stderr. It is analogous to Fprintf(os.Stderr).
+</p>
+
+			<h2>func <a href="../../src/pkg/log/log.go#L154">Stdout</a></h2>
+			<p><code><a id="L154"></a>func Stdout(v ...)</code></p>
+			<p>
+Stdout is a helper function for easy logging to stdout. It is analogous to Print().
+</p>
+
+			<h2>func <a href="../../src/pkg/log/log.go#L160">Stdoutf</a></h2>
+			<p><code><a id="L160"></a>func Stdoutf(format string, v ...)</code></p>
+			<p>
+Stdoutf is a helper functions for easy formatted logging to stdout. It is analogous to Printf().
+</p>
+
+			<h2>type <a href="../../src/pkg/log/log.go#L41"><a id="L41"></a>Logger</a></h2>
+			<p>
+Logger represents an active logging object.
+</p>
+
+			<p><pre><a id="L41"></a>type Logger struct {
+    // contains unexported fields
+<a id="L46"></a>}</pre></p>
+				<h3>func <a href="../../src/pkg/log/log.go#L52">New</a></h3>
+				<p><code><a id="L52"></a>func New(out0, out1 io.Writer, prefix string, flag int) *Logger</code></p>
+				<p>
+New creates a new Logger.   The out0 and out1 variables set the
+destinations to which log data will be written; out1 may be nil.
+The prefix appears at the beginning of each generated log line.
+The flag argument defines the logging properties.
+</p>
+
+				<h3>func (<a id="L151"></a>*Logger) <a href="../../src/pkg/log/log.go#L151">Log</a></h3>
+				<p><code><a id="L151"></a>func (l *Logger) Log(v ...)</code></p>
+				<p>
+Log is analogous to Print() for a Logger.
+</p>
+
+				<h3>func (<a id="L148"></a>*Logger) <a href="../../src/pkg/log/log.go#L148">Logf</a></h3>
+				<p><code><a id="L148"></a>func (l *Logger) Logf(format string, v ...)</code></p>
+				<p>
+Logf is analogous to Printf() for a Logger.
+</p>
+
+				<h3>func (<a id="L128"></a>*Logger) <a href="../../src/pkg/log/log.go#L128">Output</a></h3>
+				<p><code><a id="L128"></a>func (l *Logger) Output(calldepth int, s string)</code></p>
+				<p>
+Output writes the output for a logging event.  The string s contains the text to print after
+the time stamp;  calldepth is used to recover the PC.  It is provided for generality, although
+at the moment on all pre-defined paths it will be 2.
+</p>
+
+
+</div>
+
+<div id="footer">
+<p>Except as noted, this content is
+   licensed under <a href="http://creativecommons.org/licenses/by/3.0/">
+   Creative Commons Attribution 3.0</a>.
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-11222381-2");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+<!-- generated at Thu Nov 12 15:42:51 PST 2009 -->
